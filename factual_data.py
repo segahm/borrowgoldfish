@@ -6,9 +6,13 @@ import csv
 import copy
 import json
 
+#must not exceed 10,000 (daily limitation)
 LIMIT_ENTRIES = 100
+# burst limit for Factual requests
+LIMIT_BURST_MINUTE = 500    # not implemented currently
+
 REGIONS_INPUT = 'regions.txt'
-OUT_DATA_FILE = 'out2.csv'
+OUT_DATA_FILE = 'out.csv'
 
 KEY = 'K23H6A5NTelYGN496SMLbikTcwyp71hoboh3rLv3'
 SECRET = 'CNomvaXPlvgCDrIpb3FqPhIhZGwWIusGiCpn6Dzp'
@@ -26,9 +30,9 @@ write_keys = ['name',
     'rating',
     'category_labels',
     'category_ids',
-    'cuisine',
+#   'cuisine',
     'price',
-    'reservations',
+#    'reservations',
     'founded',
     'meal_breakfast',
     'meal_lunch',
@@ -60,7 +64,6 @@ def findTwitter(factual_business_id):
             result = data[0]['namespace_id']
     except Exception as e:
         print "findTwitter error: %s" % (e)
-        print data
     return result
 
 #loads zip codes for target counties
@@ -76,6 +79,21 @@ def loadZipcodes():
                 #for col in range(0,len(row)-1,2):
     return zip_codes
 
+def parseYelpEntry(values,keys):
+    entries = []
+    for key in keys:
+        if key == 'category_ids':
+            v = values.get(key,[''])[0]
+        elif key == 'category_labels':
+            v = ','.join(values.get(key,[['']])[0])
+        elif key == 'hours' and values.get('hours',False):
+            hours_days = json.loads(values['hours'])
+            v = len(hours_days.keys()) #number of days open per week
+        else:
+            v = values.get(key,'')
+        entries.append(v)
+    return entries
+
 def main():
     #load zip codes for target areas
     zip_codes = loadZipcodes()
@@ -86,7 +104,7 @@ def main():
     with open(OUT_DATA_FILE, 'wb') as f:
         writer = csv.writer(f,write_keys)
         header = copy.copy(write_keys)
-        header += ['county','Yelp review','Yelp # of reviews','Yelp categories','Yelp # of matches','Yelp is closed','Twitter']
+        header += ['county','Yelp review','Yelp # of reviews','Yelp categories','Yelp # of matches','Yelp is closed']#,'Twitter']
         writer.writerow(header)
         total = 0
         offset = -1
@@ -94,7 +112,14 @@ def main():
             if offset == -1:
                 offset = 0  #first entry
             #pull page data
-            q1 = query.filters({'postcode': {'$includes_any':zip_codes.keys()}}).select(','.join(write_keys)).include_count(True).offset(offset).limit(50)  #grab maximum allowed per page
+            # categories to exclude (edge cases):
+            # ["social","bars","wine bars"]   1,037 entries
+            # ["social","food and dining","breweries"]    830 entries
+            # ["social","bars","hotel lounges"]   335 entries
+            # ["social","food and dining","restaurants","vegan and vegetarian"]   324 entries
+            # ["social","food and dining","restaurants","buffets"]    45 entries
+            # ["social","food and dining","internet cafes"]   3 entries
+            q1 = query.filters({'category_ids': {'$excludes_any': [316,341,313,368,350,345]},'postcode': {'$includes_any':zip_codes.keys()}}).select(','.join(write_keys)).include_count(True).offset(offset).limit(50)  #grab maximum allowed per page
             
             if total == 0:
                 total = q1.total_row_count()
@@ -105,9 +130,7 @@ def main():
             options = {'limit': 20, 'sort': 1}
             #loop through all businesses on the page
             for b in data:
-                row = []
-                for key in write_keys:
-                    row.append(b.get(key,''))
+                row = parseYelpEntry(b,write_keys)
                 options['term'] = b['name']
                 row.append(zip_codes[b['postcode']])
                 try:
@@ -144,9 +167,9 @@ def main():
                             response['total'],
                             response['businesses'][0]['is_closed']
                             ]
-                        twitter_id = findTwitter(b['factual_id'])
-                        if twitter_id:
-                            row.append(twitter_id)
+                        # twitter_id = findTwitter(b['factual_id'])
+                        # if twitter_id:
+                        #     row.append(twitter_id)
                     else:
                         row += ['','','',-1,'']
                     
@@ -157,6 +180,3 @@ def main():
   
 if __name__ == '__main__':
   main()
-
-  #[{u'status': u'1', u'category_labels': [[u'Social', u'Food and Dining', u'Restaurants', u'Mexican']], u'website': u'http://www.delias.com', u'alcohol': True, u'locality': u'Edinburg', u'price': 1, u'founded': u'1997', u'region': u'TX', u'name': u"Delia's"}, {u'status': u'1', u'category_labels': [[u'Social', u'Food andDining', u'Restaurants', u'Fast Food']], u'region': u'TX', u'name': u"R B's Fast Food", u'locality': u'Roma'}, {u'status': u'1', u'category_labels': [[u'Social', u'Food and Dining', u'Restaurants', u'Mexican']], u'region': u'TX', u'name': u'Exquisita Tortillas', u'locality': u'Edinburg'}]
-  #'category_ids':{'$includes_any':[150,314,338,339,340,342,343,344,346,353,354,355,458]},
