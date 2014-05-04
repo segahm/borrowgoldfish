@@ -135,9 +135,11 @@ class YSearch:
         response['total'] = len(new_businesses)
         #merge businesses into one
     except urllib2.HTTPError, error:
-      response = json.loads(error.read())
+      print "http error yelping: %s" % (json.loads(error.read()))
+      response = {'total': 0}
     except Exception as e:
-      print "error yelping/merging entries: %s" % (e)
+      print "error yelping: %s" % (e)
+      response = {'total': 0}
 
-    return {'response':response,'url': signed_url}
+    return response
 

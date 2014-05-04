@@ -1,0 +1,131 @@
+i.fa:hover {
+    color: gray;
+}
+.social {
+    float:  right;
+    margin-top: 20px;
+    size: 10px;
+}
+span.fa:hover {
+    color: gray;
+}
+span.fa-stack.fa-lg {}
+.fa {
+    color: rgb(116, 155, 192);
+}
+
+p.tooltip {
+    border: 1px solid #CCC;      padding: 4px 8px;      color: #7B8CA6;      font-size: 92.3%;      font-style: italic;      font-weight: 500;      margin-left: 25px;      background: none repeat scroll 0% 0% #FFF;      margin-top: 12px;      position: relative;      width: 178px;
+}
+span.tooltip {
+      position: absolute;
+      float: left;
+      width: 100px;
+      height: 20px;
+      line-height: 20px;
+      padding: 10px;
+      /* font-size: 14px; */
+      text-align: center;
+      color: #fff;
+      background: #27679F;
+      border: 4px solid #27679F;
+      border-radius: 5px;
+      text-shadow: rgba(0, 0, 0, 0.1) 1px 1px 1px;
+      box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 2px 0px;
+}
+
+span.tooltip:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent #27679F transparent transparent;
+      top: -35px;
+      left: -70px;
+}
+
+
+#statistics {
+    padding: 20px 10px 8px 20px;
+}
+.grey-border-panel {
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    background: none repeat scroll 0% 0% #FFF;
+    padding: 20px;
+}
+
+#investment-details {
+    color: #444;
+    font-size: 131%;
+}
+#home-investment {
+    font-weight: 200;
+}
+#master_content {
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+#statistics .loans-box {
+    font: 13px/1.231 helvetica,arial,clean,sans-serif;
+    width: 163px;
+    border: 2px solid #9ECF96;
+    border-radius: 5px;
+    color: #2F9B1B;
+    margin-right: 12px;
+    cursor: pointer;
+}
+#statistics .loans-box:hover {
+    background-color: #75B869;
+    color: #ffffff;
+}
+
+#statistics .interest-box {
+    font: 13px/1.231 helvetica,arial,clean,sans-serif;
+    width: 520px;
+    border: 2px solid #95AFDA;
+    border-radius: 5px;
+    color: #2B60B6;
+    padding-right: 0px;
+    cursor: pointer;
+}
+#statistics .stats-box {
+    
+    display: inline-block;
+    text-align: left;
+    padding: 5px 12px 6px;
+}
+#statistics .interest-box:hover {
+    background-color: #5583AC;
+    color: #ffffff;
+}
+#statistics p{
+ font-weight: bold;
+}
+#statistics .stats-date {
+    width: 50%;
+    margin-top: 5px;
+    color: #777;
+    font-weight: 100;
+    font-size: 62.3%;
+}
+#statistics a {
+    float: right;
+    font-size: 76.9%;
+    font-weight: 500;
+    margin-top: 7px;
+    margin-right: 18px;
+}
+.triangle-link {
+    color: #2A5F96;
+    text-decoration: none;
+    vertical-align: top;
+    position: relative;
+    padding-right: 5px;
+}
+a {
+    color: #206DD6;
+    text-decoration: none;
+}
