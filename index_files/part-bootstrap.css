@@ -330,7 +330,7 @@ div.bootstrap h3, div.bootstrap .h3 {
   font-size: 24px;
 }
 div.bootstrap h4, div.bootstrap .h4 {
-  font-size: 18px;
+  font-size: 17px;
 }
 div.bootstrap h5, div.bootstrap .h5 {
   font-size: 14px;
@@ -3787,8 +3787,9 @@ div.bootstrap .thumbnail .caption {
   color: #333;
 }
 div.bootstrap .alert {
-  padding: 15px;
+  padding: 5px;
   margin-bottom: 20px;
+  margin-top: 10px;
   border: 1px solid transparent;
   border-radius: 4px;
 }
