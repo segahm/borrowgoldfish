@@ -1,78 +1,72 @@
 'use strict';
 
-var express         = require('express');
-var app = express();
+var express     = require('express'),
+	cluster     = require('cluster'),
+	cons = require('consolidate');
 
-GLOBAL.EMAIL_BODY = null;
-//ignore static file requests
-app.use('/static',express.static(__dirname+'/static'));
-app.use('/favicon.ico',express.static(__dirname+'/favicon.ico'));
+var CompanyProvider = require('./company');
 
-app.use(express.bodyParser());
-var yelp = require('yelp').createClient({
-    consumer_key: 'HnrWS3JCE4g4wbaCrVC0wg',
-    consumer_secret: 'XQfhrgq1yJoYnJjxFIOlDut-C44',
-    token: '6pCeJihtCBUdcLZu9uSm1eRij20a-sYH',
-    token_secret: 'FcNRGSLGxAWa-O8JWv4MPFPn0hs'
-  });
+//  configLoader  = require('./core/config-loader.js'),
+ // errors        = require('./core/error-handling');
+
+// If no env is set, default to development
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+function startServer() {
+	var app = express();
+	app.engine('html', cons.templayed);
+	// set .html as the default extension 
+	app.set('view engine', 'html');
+	app.set('views', __dirname + '/views');
+
+	//ignore static file requests
+	app.use('/index_files',express.static(__dirname+'/index_files'));
+	app.use('/static',express.static(__dirname+'/static'));
+	app.use('/favicon.ico',express.static(__dirname+'/favicon.ico'));
+
+	app.use(express.bodyParser());
+	app.configure('development', function(){
+	  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+	});
+
+	app.configure('production', function(){
+	  app.use(express.errorHandler());
+	});
+
+	//var companyProvider = new CompanyProvider();
 
 
-var total = 0;
-var count = 0;
-var buffer = [];
-
-//!!!!!!!!!!!!!SET WEB SERVER LISTENER!!!!!!!!!!!!!!!!!!!
-app.use(function(req, res){
-    function recursive(error,data){
-      console.log(typeof(error));
-      console.log(typeof(data));
-      if (typeof(error) !== 'undefined' && typeof(data) !== 'undefined'){
-        console.log(error);
-        total = data.total;
-        console.log('total:'+total);
-        if (data !== null && data.businesses !== null){
-          buffer = buffer.concat(data.businesses);
-          console.log('businesses:'+ data.businesses.length);
-          count += data.businesses.length;
-        }
-      }
-      if (count < total || total === 0){
-        console.log(count);
-        yelp.search({limit: 20,offset: count, location: 'Zavala County, TX'}, recursive);
-      }else{
-        res.send(buffer);
-      }
-    }
-    console.log('%s %s', req.method, req.url);
-    var action = req.url.match(/\/([a-z]+)/)[1];
-    switch(action){
-    case 'list':
-      recursive();
-      break;
-    case 'bus':
-      var company = req.url.match(/\/[^\/]+\/[^\/]+\/([a-z\-]+)/)[1];
-      console.log('company:'+company);
-      yelp.business(company, function(error, data) {
-        console.log(error);
-        res.send(data);
-        console.log(data);
-      });
-    }
-    // See http://www.yelp.com/developers/documentation/v2/search_api
-    /*
-
-Maverick County, TX
-Zavala County, TX
-Starr County, TX
-Webb County, TX
-Hidalgo County, TX
-Zapata County, TX
-
-*/
-  });
-
-var port = 8888;
-if (typeof process.env.PORT !== 'undefined'){
-    port = process.env.PORT;
+	app.use(function(req, res, next){
+		console.log('%s %s', req.method, req.url);
+		res.set('Content-Type', 'text/html');
+		if (req.url.match(/^\/(es\/)?([a-z\-]+)$/)){
+			res.render('company', {
+				title: 'My Texas Restaurant'
+			});
+		}else{
+			res.send(200,'<h2>Service Temporarily Unavailable</h2><div>The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</div>');
+		}
+	});
+	app.listen(17912);
+  /*http.createServer(function(request, response) {
+	  response.writeHead(200, {'Content-Type': 'text/html'});
+	  response.write('<h2>Service Temporarily Unavailable</h2><div>The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</div>');
+	  response.end();
+	}).listen(17912);*/
 }
-app.listen(port);
+
+/*if (cluster.isMaster && !process.env.NO_CLUSTER) {
+  // Create workers for each cpu
+  var cpuCount = require('os').cpus().length;
+  for (var i = 0; i < cpuCount; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', function(worker) {
+    console.log('Worker ' + worker.id + ' died. Respawning');
+    cluster.fork();
+  });
+} else {
+  startServer();
+}*/
+startServer();

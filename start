@@ -1,0 +1,14 @@
+#!/bin/sh
+mkdir -p /home/caura/webapps/hack/run
+pid=$(/sbin/pidof /home/caura/webapps/hack/bin/node)
+if echo "$pid" | grep -q " "; then
+  pid=""
+fi
+if [ -n "$pid" ]; then
+  user=$(ps -p $pid -o user | tail -n 1)
+  if [ $user = "caura" ]; then
+    exit 0
+  fi
+fi
+nohup /home/caura/webapps/hack/bin/node /home/caura/webapps/hack/server.js > /dev/null 2>&1 &
+/sbin/pidof /home/caura/webapps/hack/bin/node > /home/caura/webapps/hack/run/node.pid

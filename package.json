@@ -16,7 +16,9 @@
     "sendgrid": "0.4.4",
     "express": "3.4.8",
     "jade": "1.1.5",
-    "yelp": "0.1.1"
+    "yelp": "0.1.1",
+    "consolidate": "0.10.0",
+    "templayed": "0.2.3"
   },
   "devDependencies": {
     "jshint": "~2.4.x"
