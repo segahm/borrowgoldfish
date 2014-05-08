@@ -2,10 +2,28 @@
 
 var express     = require('express'),
 	cluster     = require('cluster'),
+	Knex = require('knex'),
 	cons = require('consolidate');
 
-var CompanyProvider = require('./company');
+var CompanyProvider = require('./CompanyProvider');
 
+Knex.knex = Knex.initialize({
+  client: 'pg',
+  connection: {
+    host     : '127.0.0.1',
+    user     : 'caura',
+    password : '46uxrEb3ZExf',
+    database : 'goldfish',
+    charset  : 'utf8',
+    port: 5432   //3306 - mysql
+  }
+});
+
+var knex = require('knex').knex;
+function test(res){
+	console.log(res);
+}
+knex('companies').select().exec(test);
 //  configLoader  = require('./core/config-loader.js'),
  // errors        = require('./core/error-handling');
 
@@ -17,7 +35,7 @@ function startServer() {
 	app.engine('html', cons.templayed);
 	// set .html as the default extension 
 	app.set('view engine', 'html');
-	app.set('views', __dirname + '/views');
+	app.set('views', __dirname);
 
 	//ignore static file requests
 	app.use('/index_files',express.static(__dirname+'/index_files'));
@@ -39,8 +57,9 @@ function startServer() {
 	app.use(function(req, res, next){
 		console.log('%s %s', req.method, req.url);
 		res.set('Content-Type', 'text/html');
+		//spanish
 		if (req.url.match(/^\/(es\/)?([a-z\-]+)$/)){
-			res.render('company', {
+			res.render('index', {
 				title: 'My Texas Restaurant'
 			});
 		}else{
