@@ -1,71 +1,56 @@
 'use strict';
 
 var Q = require('q');
+var _ = require('lodash');
 var articleCounter = 1;
 
 var CompanyProvider = function(){
 };
 
-var dummyData = [{
+var dummyData = {'My-Texas-Restaurant-Santa-Francisco-TX': {
   title: 'My Texas Restaurant 1',
   state: 'TX',
   county: 'maverick',
   city: 'San Jose',
-  valuation: 300000,
-  company_id:'My-Texas-Restaurant-Santa-Francisco-TX',
+  valuation: 100000,
   description_short_text: 'fds'
-},{
+},'My-Texas-Restaurant-Santa-Clara-TX': {
   title: 'My Texas Restaurant 2',
-  state: 'TX',
+  state: 'AZ',
   county: 'zavala',
   city: 'San Jose',
   valuation: 300000,
-  company_id:'My-Texas-Restaurant-Santa-Clara-TX',
   description_short_text: 'fds'
-},{
+},'My-Texas-Restaurant-San-Jose-TX': {
   title: 'My Texas Restaurant 3',
   state: 'TX',
   county: 'starr',
   city: 'San Jose',
-  valuation: 300000,
-  company_id:'My-Texas-Restaurant-San-Jose-TX',
+  valuation: 500000,
   description_short_text: 'fds'
-}];
-
-CompanyProvider.prototype.findByState = function(state) {
-  console.log('findByState');
-  return Q.fcall(function(){
-    return dummyData;
-  });
-};
-
-CompanyProvider.prototype.findByCity = function(state,city) {
-  console.log('findByCity');
-  return Q.fcall(function(){
-    return dummyData;
-  });
-};
-
-CompanyProvider.prototype.findByCounty = function(state,county) {
-  console.log('findByCounty');
-  return Q.fcall(function(){
-    return dummyData;
-  });
-};
+}};
 
 CompanyProvider.prototype.findById = function(id) {
   console.log('findById');
   return Q.fcall(function(){
-    console.log(dummyData);
     var result = null;
-    for(var i =0;i<dummyData.length;i++) {
-      if( dummyData[i].company_id === id ) {
-        result = dummyData[i];
-        break;
-      }else{
-        console.log('no match');
-      }
+    if (typeof(dummyData[id]) !== 'undefined'){
+      result = dummyData[id];
     }
+    return result;
+  });
+};
+
+CompanyProvider.prototype.findByRegion = function(state,county,city) {
+  console.log('findByRegion');
+  return Q.fcall(function(){
+    var result = null;
+    _(dummyData).forIn(function(v,id){
+      if (v.state.toLowerCase() === state.toLowerCase().replace('-',' ') && (typeof(county) === 'undefined' || v.county.toLowerCase() === county.toLowerCase().replace('-',' ')) && (typeof(city) === 'undefined' || v.city.toLowerCase() === city.toLowerCase().replace('-',' ')) ){
+        result = v;
+        return result;
+      }
+    });
     return result;
   });
 };

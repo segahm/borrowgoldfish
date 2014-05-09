@@ -8,10 +8,13 @@ lib-cov
 *.gz
 *.bak
 *.exe
-*.csv
 *.pdf
 *.PNG
 *.pyc
+*.lnk
+*.db
+*.txt
+
 
 pids
 logs
