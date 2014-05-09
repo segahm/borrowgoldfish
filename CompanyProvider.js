@@ -3,34 +3,67 @@
 var Q = require('q');
 var articleCounter = 1;
 
-var CompanyProvider = function(){};
-CompanyProvider.prototype.dummyData = [];
+var CompanyProvider = function(){
+};
+
+var dummyData = [{
+  title: 'My Texas Restaurant 1',
+  state: 'TX',
+  county: 'maverick',
+  city: 'San Jose',
+  valuation: 300000,
+  company_id:'My-Texas-Restaurant-Santa-Francisco-TX',
+  description_short_text: 'fds'
+},{
+  title: 'My Texas Restaurant 2',
+  state: 'TX',
+  county: 'zavala',
+  city: 'San Jose',
+  valuation: 300000,
+  company_id:'My-Texas-Restaurant-Santa-Clara-TX',
+  description_short_text: 'fds'
+},{
+  title: 'My Texas Restaurant 3',
+  state: 'TX',
+  county: 'starr',
+  city: 'San Jose',
+  valuation: 300000,
+  company_id:'My-Texas-Restaurant-San-Jose-TX',
+  description_short_text: 'fds'
+}];
 
 CompanyProvider.prototype.findByState = function(state) {
+  console.log('findByState');
   return Q.fcall(function(){
-    return this.dummyData;
+    return dummyData;
   });
 };
 
 CompanyProvider.prototype.findByCity = function(state,city) {
+  console.log('findByCity');
   return Q.fcall(function(){
-    return this.dummyData;
+    return dummyData;
   });
 };
 
 CompanyProvider.prototype.findByCounty = function(state,county) {
+  console.log('findByCounty');
   return Q.fcall(function(){
-    return this.dummyData;
+    return dummyData;
   });
 };
 
 CompanyProvider.prototype.findById = function(id) {
+  console.log('findById');
   return Q.fcall(function(){
+    console.log(dummyData);
     var result = null;
-    for(var i =0;i<this.dummyData.length;i++) {
-      if( this.dummyData[i]._id === id ) {
-        result = this.dummyData[i];
+    for(var i =0;i<dummyData.length;i++) {
+      if( dummyData[i].company_id === id ) {
+        result = dummyData[i];
         break;
+      }else{
+        console.log('no match');
       }
     }
     return result;
@@ -48,14 +81,8 @@ CompanyProvider.prototype.save = function(companies) {
     company._id = articleCounter++;
     company.created_at = new Date();
 
-    this.dummyData[this.dummyData.length]= company;
+    dummyData[dummyData.length]= company;
   }
 };
-
-/* Lets bootstrap with dummy data */
-new CompanyProvider().save([
-  {title: 'gfdgdf gfdgd',state: 'TX',county: 'Santa Clara', city: 'San Jose',valuation: 300000}
-
-]);
 
 module.exports = CompanyProvider;

@@ -10,5 +10,5 @@ if [ -n "$pid" ]; then
     exit 0
   fi
 fi
-nohup /home/caura/webapps/hack/bin/node /home/caura/webapps/hack/server.js > /dev/null 2>&1 &
+nohup /home/caura/webapps/hack/bin/node /home/caura/webapps/hack/hello-world.js > /dev/null 2>&1 &
 /sbin/pidof /home/caura/webapps/hack/bin/node > /home/caura/webapps/hack/run/node.pid
