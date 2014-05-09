@@ -12,8 +12,10 @@ var Company = require('./CompanyProvider');
 
 var STATES = {'TX': 'Texas','FL': 'Florida','NM': 'New Mexico','CA': 'California','AZ': 'Arizona'};
 
+//define functions
+var homePage;
 
-Knex.knex = Knex.initialize({
+/*Knex.knex = Knex.initialize({
   client: 'pg',
   connection: {
 	host     : '127.0.0.1',
@@ -27,7 +29,7 @@ Knex.knex = Knex.initialize({
   }
 });
 
-/*var knex = require('knex').knex;
+var knex = require('knex').knex;
 function test(res){
 	console.log(res);
 }
@@ -79,7 +81,7 @@ function startServer() {
 		var resultPromise = Q.fcall(function(){
 			return page;
 		});
-		//if specifies words only after the first /
+		//if specifies words only after the first "/"
 		if (matches && typeof(matches[2]) !== 'undefined'){
 			console.log('company page');
 			//company page
@@ -94,51 +96,33 @@ function startServer() {
 						);
 					page = 'index';
 					console.log('found data');
+				}else{
+					page = '404';
 				}
 				return page;
 			});
-		//if at least has state in it
-		}else if ((matches = req.url.match(/^\/(es\/)?([a-z]{2,2})\/?([a-z\-]{3,})?\/?([a-z\-]{3,})?/i)) && typeof(matches[2]) !== 'undefined'){
-			console.log('directory page');
-			var state = STATES[matches[2].toUpperCase()];
-			var county = (typeof(matches[3]) !== 'undefined')?matches[3]:null;
-			var city = (typeof(matches[4]) !== 'undefined')?matches[4]:null;
-			resultPromise = Company.prototype.findByRegion(matches[2],matches[3],matches[4]).then(function(data){
-				
-				if (data){
-					var breadcrumb = [state];
-					if (county){
-						breadcrumb.push(county);
-						if (city){
-							breadcrumb.push(city);
-						}
-					}
-					template_data = _.merge(
-						template_data,
-						data,
-						{
-							breadcrumb: breadcrumb
-						}
-					);
-					page = 'directory';
-				}
-				return page;
-			});
-			//home/directory page
-			/*Company.prototype.findByState
-			Company.prototype.findByCity
-			Company.prototype.findByCounty*/
 		}else if (typeof(req.query.q) !== 'undefined'){
 			//search page
 			console.log('search page');
 			page = 'searchresults';
 		}
 		resultPromise.then(function(mypage){
-			console.log('rendering page: '+mypage);
-			if (mypage === 'home' && typeof(template_data.breadcrumb) === 'undefined'){
-				template_data.breadcrumb = ['Texas'];
+			//either default or no records, forcing to show a home page
+			if (mypage === 'home' || mypage === '404'){
+				return homePage(req,template_data
+					).then(function(status){
+						return (status !== 'home')?status:mypage;
+					});
 			}
+			return mypage;
+		}).then(function(mypage){
+			console.log('rendering page: '+mypage);
 			console.log(template_data);
+			if (mypage === '404'){
+				console.log('404');
+				res = res.status(404);
+				mypage = 'home';
+			}
 			res.render((is_spanish)?mypage+'-es':mypage, template_data);
 		}).catch(function (error) {
 			console.log(error);
@@ -169,5 +153,84 @@ function startServer() {
 } else {
   startServer();
 }*/
+function toTitleCase(str){
+	return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+function itemToUrl(req,v){
+	var url;
+	if (typeof(v.company_id) !== 'undefined'){
+		url = '/'+v.company_id;
+	}else{
+		url = req.path+'/'+v.title.toLowerCase().replace(' ','-');
+		url = url.replace('//','/');
+	}
+	return url;
+}
 
+
+homePage = function(req,template_data){
+	var matches = req.url.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z\-]{3,})?\/?(\/[a-z\-]{3,})?$/i);
+	console.log('home page');
+	var abrev = (matches && typeof(matches[2]) !== 'undefined')?matches[2].toUpperCase():'TX';
+	var county = (matches && typeof(matches[3]) !== 'undefined')?toTitleCase(matches[3].slice(1)):null;
+	var city = (matches && typeof(matches[4]) !== 'undefined')?toTitleCase(matches[4].slice(1)):null;
+	var state = STATES[abrev];
+	//guard against bad states by showing default home page, rather than no results
+	if (typeof(STATES[abrev]) === 'undefined'){
+		state = STATES.TX;
+		county = null;
+		city = null;
+	}
+	var breadcrumb = [{name: state}];
+	template_data.other_states = [];
+	_(STATES).forIn(function(name,abbr){
+		if (abbr !== abrev){
+			template_data.other_states.push({
+				name: name,
+				abbr: abbr
+			});
+		}
+	});
+	return Company.prototype.findByRegion(abrev,county,city)
+	.then(function(data){
+		if (data){
+			if (county){
+				breadcrumb.push({name: county});
+				template_data.region = 'Restaurants in Cities';
+				if (city){
+					breadcrumb.push({name: city});
+					template_data.region = 'Restaurants';
+				}
+			}else{
+				template_data.region = 'Restaurants in Counties';
+			}
+			_(data.items).forIn(function(v,k){
+				data.items[k].url = itemToUrl(req,v);
+			});
+
+			template_data = _.merge(
+				template_data,
+				data
+			);
+		}
+		for (var i=0;i<breadcrumb.length-1;i++){
+			breadcrumb[i].category = true;
+			breadcrumb[i].url = '/'+matches.slice(2,3+i).join('');
+		}
+		breadcrumb[breadcrumb.length-1].last = true;
+		//fake items
+		/*template_data.items = [
+			{row: true,list:[{title: 'aaaa',url: '/aaa'},{title: 'bbbb',url: '/bbb'}]},
+			{row: true,list:[{title: 'cccc',url: '/ccc'},{title: 'ddd',url: '/ddd'}]}
+			];*/
+		//end fake items
+		template_data = _.merge(
+			template_data,
+			{
+				breadcrumb: breadcrumb
+			}
+		);
+		return 'home';
+	});
+};
 startServer();

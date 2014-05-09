@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="/index_files/normalize.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/index_files/osrc.css" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="/index_files/caura.css" type="text/css" media="screen" charset="utf-8">
-  
+  <link href="/index_files/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
   <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href="/index_files/part-bootstrap.css" rel="stylesheet">
   <!-- linkedin/facebook card begin -->
@@ -67,10 +67,28 @@
 
 <div id="sitemap" class="container  bootstrap">   
   <div class="row"><ol class="breadcrumb">
-      {{#breadcrumb}}<li class="active">{{.}}{{foo}}</li>{{/breadcrumb}}
-  </ol></div><div class="row">Restaurants in Counties:</div>
 
+      {{#breadcrumb}}
+      {{#category}}<li><a href="{{url}}">{{name}}</a></li>{{/category}}
+      {{#last}}<li class="active">{{name}}</li>{{/last}}
+      {{/breadcrumb}}
+  </ol></div><div class="row">{{region}}:</div>
+
+  <div class="row" id="directory">
+    <div class="row-fluid">
+{{#items}}<div class="col-md-2"><a href="{{url}}">{{title}}</a></div>{{/items}}
+</div>
+
+<!--
  <div class="row" id="directory">
+  {{#items}}
+  {{#row}}
+    <div class="row-fluid">
+{{#list}}<div class="col-md-2"><a href="{{url}}">{{name}}</a></div>{{/list}}
+</div>
+{{/row}}
+{{/items}}-->
+  <!--
   <div class="row-fluid">
 <div class="col-md-2"><a href="file:///C:/TX/Maverick">Maverick</a></div>
 <div class="col-md-2"><a href="file:///C:/TX/Zavala">Zavala</a></div>
@@ -103,15 +121,23 @@
 <div class="col-md-2"><a href="file:///C:/TX/Guadalupe">Guadalupe</a></div>
 <div class="col-md-2"><a href="file:///C:/TX/Osceola">Osceola</a></div>
 </div>
-
+-->
   
 </div>
-  
+
+ <div class="row">Other States:</div>
+      <div class="row" id="directory">
+      <div class="row-fluid">
+{{#other_states}}<div class="col-md-2"><a href="/{{abbr}}">{{name}}</a></div>{{/other_states}}
+
+</div>
+      </div>
+      </div> 
   
 </div>
 <div class="container">
         <div id="footer">
             The valuation of small businesses has been estimated and built by 
-  <a href="http://twitter.com/nesovok">Segah Meer</a> based on data 3rd party social, census, and economic analysis data. It is only an estimate. No data provider should be held responsible. </div>
+  <a href="http://twitter.com/nesovok">Segah Meer</a> based on 3rd party social, census, and economic analysis data. It is only an estimate. No data provider should be held responsible. </div>
     </div>
 </body></html>
