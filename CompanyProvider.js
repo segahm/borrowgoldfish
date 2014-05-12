@@ -28,12 +28,12 @@ CompanyProvider.prototype.findByRegion = function(state,county,city) {
   return Q.fcall(function(){
     var result = [];
     _(dummyData).forIn(function(v,id){
-      if (v.state.toLowerCase() === state.toLowerCase().replace('-',' ') && (!county || v.county.toLowerCase() === county.toLowerCase().replace('-',' ')) && (!city || v.city.toLowerCase() === city.toLowerCase().replace('-',' ')) ){
+      if (v.state.toLowerCase() === state.toLowerCase() && (!county || v.county.toLowerCase() === county.toLowerCase()) && (!city || v.city.toLowerCase() === city.toLowerCase()) ){
         if (city){
           v.company_id = id;
           result.push({
             company_id: id,
-            title: v.name
+            title: v.title
           });
         }else if(county){
           result.push({
@@ -47,8 +47,10 @@ CompanyProvider.prototype.findByRegion = function(state,county,city) {
       }
     });
     if (result.length){
-      result = {items: result};
+      //what kind of output - categories or lists
+      result = (typeof(result[0].company_id) !== 'undefined')?{companies: result}:{items: result};
     }
+    console.log(result);
     return result;
   });
 };
@@ -119,17 +121,10 @@ dummyData = {'My-Texas-Restaurant-Santa-Francisco-TX': {
   city: 'San Jose',
   valuation: 500000,
   description_short_text: 'fds'
-},'fakeid4': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'starr',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
 },'fakeid5': {
   title: 'fake restaurant',
   state: 'TX',
-  county: 'Verde',
+  county: 'Val Verde',
   city: 'San Jose',
   valuation: 500000,
   description_short_text: 'fds'
