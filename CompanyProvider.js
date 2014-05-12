@@ -7,15 +7,28 @@ var articleCounter = 1;
 var CompanyProvider = function(){
 };
 
-var dummyData;
-
+//var dummyData;
+CompanyProvider.prototype.regionalStats = function(state,county,category){
+  console.log('regionalStats');
+  var knex = require('knex').knex;
+  //first find out how many in this county
+  var request = knex('companies')
+    .where('state',state.toUpperCase()).count('id');
+  return request.andWhere('county','ilike',county).then(function(data){
+    
+  }).then(function(data){
+  });
+};
 CompanyProvider.prototype.findById = function(id) {
   console.log('findById');
-  return Q.fcall(function(){
-    var result = null;
-    if (typeof(dummyData[id]) !== 'undefined'){
+  var knex = require('knex').knex;
+  var request = knex('companies').where('id',id).limit(1).select();
+  return request.then(function(data){
+    console.log(data);
+    var result = data[0];
+    /*if (typeof(dummyData[id]) !== 'undefined'){
       result = dummyData[id];
-    }
+    }*/
     return result;
   });
 };
@@ -25,53 +38,36 @@ CompanyProvider.prototype.findById = function(id) {
  */
 CompanyProvider.prototype.findByRegion = function(state,county,city) {
   console.log('findByRegion: '+state+','+county+','+city);
-  return Q.fcall(function(){
-    var result = [];
-    _(dummyData).forIn(function(v,id){
-      if (v.state.toLowerCase() === state.toLowerCase() && (!county || v.county.toLowerCase() === county.toLowerCase()) && (!city || v.city.toLowerCase() === city.toLowerCase()) ){
-        if (city){
-          v.company_id = id;
-          result.push({
-            company_id: id,
-            title: v.title
-          });
-        }else if(county){
-          result.push({
-            title: v.city
-          });
-        }else{
-          result.push({
-            title: v.county
-          });
-        }
-      }
-    });
-    if (result.length){
-      //what kind of output - categories or lists
-      result = (typeof(result[0].company_id) !== 'undefined')?{companies: result}:{items: result};
+  var knex = require('knex').knex;
+  var request = knex('companies');
+  request.where('state',state.toUpperCase());
+  if (city){
+    request.column('id','title').andWhere('county','ilike',county).andWhere('city','ilike',city);
+  }else if(county){
+    request.column('city').andWhere('county','ilike',county).distinct('city');
+  }else{
+    request.column('county').distinct('county');
+  }
+  return request.limit(10).select().then(function(data){
+    if (data){
+
     }
-    console.log(result);
-    return result;
+    if (!city){
+      _(data).forEach(function(company){
+        company.title = county?company.city:company.county;
+      });
+      data = {items: data};
+    }else{
+      _(data).forEach(function(company){
+        company.company_id = company.id;
+      });
+      data = {companies: data};
+    }
+    return data;
   });
 };
 
-CompanyProvider.prototype.save = function(companies) {
-  var company = null;
-
-  if( typeof(companies.length) === 'undefined'){
-    companies = [companies];
-  }
-  for( var i =0;i< companies.length;i++ ) {
-    company = companies[i];
-    company._id = articleCounter++;
-    company.created_at = new Date();
-
-    dummyData[dummyData.length]= company;
-  }
-};
-
-
-
+/*
 dummyData = {'My-Texas-Restaurant-Santa-Francisco-TX': {
   title: 'My Texas Restaurant 1',
   state: 'TX',
@@ -227,5 +223,5 @@ dummyData = {'My-Texas-Restaurant-Santa-Francisco-TX': {
   valuation: 500000,
   description_short_text: 'fds'
 }};
-
+*/
 module.exports = CompanyProvider;

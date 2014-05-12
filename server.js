@@ -17,25 +17,19 @@ var directoryPage,
 	homePage,
 	companyPage;
 
-/*Knex.knex = Knex.initialize({
-  client: 'pg',
-  connection: {
-	host     : '127.0.0.1',
-	user: 'postgres',
-	password: 'kristina',
-	//user     : 'caura',
-	//password : '46uxrEb3ZExf',
-	database : 'goldfish',
-	charset  : 'utf8',
-	port: 5432   //3306 - mysql
-  }
+Knex.knex = Knex.initialize({
+	client: 'pg',
+	connection: {
+		host     : '127.0.0.1',
+		user: 'postgres',
+		password: 'kristina',
+		//user     : 'caura',
+		//password : '46uxrEb3ZExf',
+		database : 'goldfish',
+		charset  : 'utf8',
+		port: 5432   //3306 - mysql
+	}
 });
-
-var knex = require('knex').knex;
-function test(res){
-	console.log(res);
-}
-knex('companies').select().exec(test);*/
 //  configLoader  = require('./core/config-loader.js'),
  // errors        = require('./core/error-handling');
 
