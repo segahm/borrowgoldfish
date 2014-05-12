@@ -2,7 +2,7 @@
 
 var Q = require('q');
 var _ = require('lodash');
-var articleCounter = 1;
+//var articleCounter = 1;
 
 var CompanyProvider = function(){
 };
@@ -11,12 +11,26 @@ var CompanyProvider = function(){
 CompanyProvider.prototype.regionalStats = function(state,county,category){
   console.log('regionalStats');
   var knex = require('knex').knex;
-  //first find out how many in this county
-  var request = knex('companies')
-    .where('state',state.toUpperCase()).count('id');
-  return request.andWhere('county','ilike',county).then(function(data){
-    
+  //first find out how many in each county within a state
+  var request = knex('regions')
+    .where('state',state.toUpperCase()).orderBy('restaurants','desc');
+  var result = {};
+  return request.column('county','people','restaurants').then(function(data){
+    console.log('regionalStats returned 1');
+    console.log(data);
+    request = knex('companies')
+      .where('state',state.toUpperCase()).groupBy('county').count('id');
+    return request.column('county').andWhere('category','ilike',category);
   }).then(function(data){
+    console.log('regionalStats returned 2');
+    console.log(data);
+    return knex('companies')
+      .where('state',state.toUpperCase()).groupBy('category').orderBy('count','desc').count('id')
+      .column('category').andWhere('county','ilike',county).limit(6);
+  }).then(function(data){
+    console.log('regionalStats returned 3');
+    console.log(data);
+    return result;
   });
 };
 CompanyProvider.prototype.findById = function(id) {
@@ -26,9 +40,6 @@ CompanyProvider.prototype.findById = function(id) {
   return request.then(function(data){
     console.log(data);
     var result = data[0];
-    /*if (typeof(dummyData[id]) !== 'undefined'){
-      result = dummyData[id];
-    }*/
     return result;
   });
 };

@@ -172,6 +172,9 @@ companyPage = function(template_data,company_id,template){
 	var page;
 	return Company.prototype.findById(company_id
 	).then(function(data){
+		var result = {state: null,
+			county: null,
+			category: null};
 		if (data){
 			//similar companies:
 
@@ -188,11 +191,25 @@ companyPage = function(template_data,company_id,template){
 			);
 			page = 'index';
 			console.log('found data');
+			result = {state: data.state,
+					county: data.county,
+					category: data.category};
 		}else{
 			page = '404';
 		}
+		return result;
+	}).then(function(v){
+		//stats about this company:
+		return Company.prototype.regionalStats(v.state,v.county,v.category);
+	}).then(function(data){
 		return page;
 	});
+
+	/*.then(function(v){
+		//stats about this company:
+		return Company.prototype.regionalStats(v.state,v.county,v.category);
+	})
+*/
 };
 homePage = function(req,template_data){
 	var page = 'home';
