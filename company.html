@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<!-- saved from url=(0056)file:///C:/Users/segah/Desktop/borrowgoldfish/index.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
 
     <title>{{title}} - How much is my business worth?</title>
 
-    <link rel="stylesheet" href="./index_files/normalize.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="./index_files/osrc.css" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="./index_files/caura.css" type="text/css" media="screen" charset="utf-8">
-   <link href="/index_files/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <link rel="stylesheet" href="/index_files/normalize.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/index_files/osrc.css" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="/index_files/caura.css" type="text/css" media="screen" charset="utf-8">
+   <link href="/index_files/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
   <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="file:///C:/Users/segah/Desktop/borrowgoldfish/index_files/part-bootstrap.css" rel="stylesheet">
+    <link href="/index_files/part-bootstrap.css" rel="stylesheet">
   <!-- linkedin/facebook card begin -->
   <meta property="og:title" content="{{title}} - Small Business Finances &amp; Valuation">
 <meta property="og:type" content="article">
-<meta property="og:url" content="{{url_path}}{{company_id}}">
+<meta property="og:url" content="{{url_path}}{{id}}">
 <meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
 <meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="BorrowGoldfish"><meta property="article:publisher" content="NeSovok">
 <meta property="og:locale" content="en_US">
@@ -32,9 +31,9 @@
 </head><body class="" style="zoom: 1;" data-twttr-rendered="true">
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script id="twitter-wjs" src="./index_files/widgets.js"></script><script src="./index_files/jquery.min.js"></script>
+    <script id="twitter-wjs" src="/index_files/widgets.js"></script><script src="/index_files/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="./index_files/bootstrap.min.js"></script>
+    <script src="/index_files/bootstrap.js"></script>
 
 
 
@@ -52,18 +51,18 @@
     </div>
 
     <div class="header">
-        <a class="header-title" href="file:///C:/Users/segah/Desktop/borrowgoldfish/%7B%7Burl_path%7D%7D">Small Business<br>Finances<br>&amp; Valuation</a><div class="social"> <a onclick="window.open(this.href, &#39;mywin&#39;,
-&#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_share_text}}"><span class="fa-stack fa-lg">
+        <a class="header-title" href="{{url_path}}">Small Business<br>Finances<br>&amp; Valuation</a><div class="social"> <a onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_share_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
   </span></a>
-  <a onclick="window.open(this.href, &#39;mywin&#39;,
-&#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{title}}&summary={{description_short_text}}&source=Borrow%20Goldfish"><span class="fa-stack fa-lg">
+  <a onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{encoded_title}}&summary={{encoded_description_short_text}}&source=Borrow%20Goldfish"><span class="fa-stack fa-lg">
   
   <i class="fa fa-linkedin"> </i>
   </span></a>
-  <a onclick="window.open(this.href, &#39;mywin&#39;,
-&#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
+  <a onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
   
   <i class="fa fa-facebook"> </i>
   </span></a>
@@ -80,7 +79,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h4 class="modal-title" id="myModalLabel">Valuation methodology</h4>
       </div>
-      <div class="modal-body"><img src="./index_files/table-restaurant0110.png"><br>
+      <div class="modal-body"><img src="/index_files/table-restaurant0110.png"><br>
 <div class="alert alert-danger fade in">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
       
@@ -104,20 +103,22 @@
       <div class="modal-body">
 <div class="bs-callout bs-callout-info">
     <h4>Confirm yourself using "social"</h4>
-    <p>To identify you as an owner, we use social media. Please tweet to us using a <b>#hashtag</b> for the name of your business from your company's official account. </p><pre>Ex: @nesovok #{{company_id}}</pre><p></p>
+    <p>To identify you as an owner, we use social media. Please tweet to us using a <b>#hashtag</b> for the name of your business from your company's official account. </p><pre>Ex: @nesovok #{{id}}</pre><p></p>
   
 </div>
 
-  <blockquote>You do NOT need to login/register or go through other hurdles, but it currently can take us a few days to confirm the validity of your claim.</blockquote>
+  <blockquote>You do NOT need to login/register or go through other 
+hurdles, but it currently can take us a few days to confirm the validity
+ of your claim.</blockquote>
 
-	
+  
 </div>
       <div class="modal-footer">
-  email to <a href="mailto:segahm+grow@gmail.com?subject=Business%20Claim:Texas">segahm+grow@gmail.com</a><span> OR </span>    
+  email to <a href="mailto:segahm+grow@gmail.com?subject=Business%20Claim:{{id}}">segahm+grow@gmail.com</a><span> OR </span>    
 
     
-  <a onclick="window.open(this.href, &#39;mywin&#39;,
-&#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="https://twitter.com/intent/tweet?button_hashtag={{company_id}}&screen_name=nesovok" class="btn btn-primary" data-lang="en"><span class="fa fa-twitter"></span> Tweet to @nesovok</a>
+  <a onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="https://twitter.com/intent/tweet?button_hashtag={{id}}&amp;screen_name=nesovok" class="btn btn-primary" data-lang="en"><span class="fa fa-twitter"></span> Tweet to @nesovok</a>
 
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   
@@ -134,23 +135,23 @@
   
   <span>What is the value of my company?</span>
 <div id="investment-details" class="master_clearfix">
-					<div id="investment-statistics">
-						
+          <div id="investment-statistics">
+            
 
-						<div id="statistics" class="grey-border-panel master_clearfix">
-							<div class="stats-box loans-box" id="valuation-box">
-								<p>Business valuation:</p>
-		                    	<span>${{valuation}}</span>
-		                    </div>
-		                    <div class="stats-box interest-box" id="interest-box">
+            <div id="statistics" class="grey-border-panel master_clearfix">
+              <div class="stats-box loans-box" id="valuation-box">
+                <p>Business valuation:</p>
+                          <span>${{valuation}}</span>
+                        </div>
+                        <div class="stats-box interest-box" id="interest-box">
   <p>Claim this business:</p><span>Review detailed business valuation analysis and learn how your company is valued.</span>
-			                    
-		                    </div>
-		                    <div class="stats-date">* Statistics as of 03/31/14</div>
-		                    <a href="file:///C:/Users/segah/Desktop/borrowgoldfish/index.html#details-statistics" class="triangle-link">View more statistics</a>
-						</div>
+                          
+                        </div>
+                        <div class="stats-date">* Statistics as of 03/31/14</div>
+                        <a href="#details-statistics" class="triangle-link">View more statistics</a>
+            </div>
 
-					</div>
+          </div>
   <script>
   $( '#valuation-box' ).mousedown(function() {
 $('#valuationmodal').modal('toggle');
@@ -160,7 +161,7 @@ $('#valuationmodal').modal('toggle');
 
 });
 </script>
-				</div>
+        </div>
   
 </div>
 
@@ -171,64 +172,49 @@ $('#valuationmodal').modal('toggle');
     <div class="profile-badge clearfix">
         <a href="https://github.com/segahm" target="_blank">
             
-            <span class="profile-name">Texas Restaurant Daira</span>
+            <span class="profile-name">{{title}}</span>
         </a>
     </div>
     <div id="description">
 
         <p>
-          <a id="details-statistics">Texas Restaurant Daira in San Jose</a> is a trend setting/lucrative/</p>
+          <a id="details-statistics" href="{{url_path}}{{id}}">{{title}}</a> is 
+{{#praise[0]}}a lucrative{{/praise[0]}}{{#praise[1]}}an 
+amazing{{/praise[1]}}{{#praise[2]}}a highly 
+entrepreneurial{{/praise[2]}}{{#praise[3]}}trend 
+setting{{/praise[3]}} restaurant {{#loc[0]}}situated 
+in{{/loc[0]}}{{#loc[1]}}located in{{/loc[1]}} {{county}} 
+county.</p>
 
         
         <p>
-        Segah's developer personality is very similar to
-        <a href="http://osrc.dfm.io/hariharsubramanyam">hariharsubramanyam</a>'s
-        but
-        
-        hariharsubramanyam
-        
-        is more of a JavaScript aficionado.
-        
-        There is also an uncanny similarity between Segah's
-        activity stream and those of
-        
-        <a href="http://osrc.dfm.io/twmht">Ming-Hsuan-Tu</a>,
-        
-        <a href="http://osrc.dfm.io/lzh9102">Timothy Lin</a>,
-        
-        <a href="http://osrc.dfm.io/triplem">Markus M. May</a>,
-        
-        
-        and
-        
-        <a href="http://osrc.dfm.io/jj">Juan Julián Merelo Guervós</a>.
-        
-        </p>
+    The company’s business focus is very similar to <a href="{{company1.id}}">{{company1.title}}</a>'s
+
+        but {{company1.title}} {{#company1.price.p}}charges more per 
+plate{{/company1.price.p}}{{#company1.price.n}}charges less per 
+plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}keeps the 
+doors open more often{{/company1.doors.p}}{{#company1.doors.n}}keeps the
+ doors open less 
+often{{/company1.doors.n}}{{join[1]}}{{#company1.morning}}caters more to
+ “early rise and shine 
+customers"{{/company1.morning}}{{#company1.evening}}caters predominantly
+ to evening customers{{/company1.evening}}{{join[2]}}
+{{#company1.day.p}}keeps its doors open throughout the 
+day{{/company1.day.p}}{{join[3]}}{{#company1.day.n}}does not keep its doorts open as much throughout the day{{/company1.day.n}}{{join[4]}}
+{{#company1.alcohol}}turns around some extra bucks from booze 
+sales{{/company1.alcohol}}{{join[5]}}
+{{#company1.cater}}cater{{/company1.cater}}{{join[6]}}
+{{#company1.deliver}}deliver{{/company1.deliver}}{{join[7]}}
+{{#company1.takeout}}takeout{{/company1.takeout}}. 
+    </p>
         
 
         
         <p>
-        It seems like Segah is—or should be—friends with
-        <a href="http://osrc.dfm.io/braintreeps">Braintree Open Source</a>.
-        With this in mind, it's worth noting that
-        
-        Braintree
-        
-        has a more consistent weekly schedule.
-        
-        There is also an obvious connection between Segah and
-        
-        <a href="http://osrc.dfm.io/bob2827">Bob Sherbert</a>,
-        
-        <a href="http://osrc.dfm.io/xmlsdk">Simon Chow</a>,
-        
-        <a href="http://osrc.dfm.io/agfor">Adam Forsyth</a>,
-        
-        
-        and
-        
-        <a href="http://osrc.dfm.io/zzztimbo">zzztimbo</a>.
-        
+        It seems like {{title}} is also somewhat similar to <a href="/{{company2.id}}">{{company2.title}}</a>.
+ That said, it's worth noting that {{company2.title}} {{company2.fact}}. 
+With this in mind, both aforementioned companies could make for franchise
+ partners based on ideal regional coverage: <a href="{{company1.map}}">Google map of {{company1.title}}</a>, <a href="{{company2.map}}">map of {{company2.title}}</a>.
         </p>
         
 
@@ -344,7 +330,10 @@ $('#valuationmodal').modal('toggle');
 <div class="container">
         <div id="footer">
             The valuation of small businesses has been estimated and built by 
-  <a href="http://twitter.com/nesovok">Segah Meer</a> based on 3rd party social, census, and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the data providers we are required to acknowledge:<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="./index_files/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a></div>
+  <a href="http://twitter.com/nesovok">Segah Meer</a> based on 3rd party
+ social, census, and economic analysis data. It is only an estimate. No 
+data provider should be held responsible. The following are some of the 
+data providers we are required to acknowledge:<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/index_files/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a></div>
     </div>
 
     <script>
@@ -370,8 +359,8 @@ $('#valuationmodal').modal('toggle');
     </script>
     
 
-<script src="./index_files/d3.js"></script>
-<script src="./index_files/plot.js"></script>
+<script src="/index_files/d3.js"></script>
+<script src="/index_files/plot.js"></script>
 <script>
 
 (function () {
@@ -396,41 +385,4 @@ $('#valuationmodal').modal('toggle');
           .call(week_hist);
 
         var day_hist = window.histogram().width(400)
-                        .labels(["", "3am","","","6am","","","9am","","","noon",
-                                 "","","3pm","","","6pm","","","9pm","","","12am",""]);
-        var day_data = [[2, 2, 0, 2, 1, 0, 2, 1, 4, 3, 2, 0, 0, 1, 4, 4, 1, 1, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 1, 3, 8, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]];
-        d3.select("#day")
-          .datum(day_data[0].map(function (d, i) {
-              return day_data.map(function (d) { return d[(i+2)%24]; });
-          }))
-          .call(day_hist);
-
-        // Languages.
-        var event_pie = window.piechart().dim(200);
-        var event_data = [31, 16, 4];
-        d3.select("#event-chart").datum(event_data).call(event_pie);
-
-        // Languages.
-        var lang_pie = window.piechart().dim(200);
-        var lang_data = [14, 5, 3, 2];
-        d3.select("#lang-chart").datum(lang_data).call(lang_pie);
-
-    });
-
-})();
-
-
-</script>
-
-    
-    
-    
-
-    
-    
-    
-
-    
-
-
-</body></html>
+                        .labels(["", "3am","","","6am",

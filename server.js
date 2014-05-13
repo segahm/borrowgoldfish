@@ -87,7 +87,8 @@ function startServer() {
 		template_data.url_path = is_spanish?'http://'+req.host+'/es/':'http://'+req.host+'/';
 		template_data.encoded_url = encodeURIComponent(req.originalUrl);
 
-		var page = 'home';	//default page
+
+		var page = 'index';	//default page
 		var resultPromise = Q.fcall(function(){ return page;});
 
 		var dir_match = req.url.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z_\-]{3,})?\/?(\/[a-z_\-]{3,})?$/i);
@@ -121,11 +122,11 @@ function startServer() {
 			console.log(2);
 			console.log('second-pass:'+mypage);
 			//either default or no records, forcing to show a HOME page
-			if (mypage === 'home' || mypage === '404'){
+			if (mypage === 'index' || mypage === '404'){
 				return homePage(req,template_data
 					).then(function(status){
 						//make sure to send the original status if successfully executed
-						return (status !== 'home')?status:mypage;
+						return (status !== 'index')?status:mypage;
 					});
 			}else{
 				return mypage;	//skip homepage process altogethere
@@ -137,7 +138,7 @@ function startServer() {
 			if (mypage === '404'){
 				console.log('404');
 				res = res.status(404);
-				mypage = 'home';	//404 alias
+				mypage = 'index';	//404 alias
 			}
 			res.render(mypage, template_data);
 		}).catch(function (error) {
@@ -175,19 +176,22 @@ companyPage = function(template_data,company_id,template){
 	return Company.prototype.findById(company_id
 	).then(function(data){
 		var regional_info = null;
-		if (data && data.length){
+		if (data){
 			//similar companies:
 			var writeUp = new Writeup();
 			var bitmap = writeUp.write(data.similar,data.company);
+			template_data.description_short_text = 'hello change this description_short_text';
 			template_data = _.merge(
 				template_data,	//sets general variables
 				data.company,	//sets company variables
 				{
 					twitter_share_text: encodeURIComponent(template.twitter_company_share),
+					encoded_title: encodeURIComponent(data.company.title),
+					encoded_description_short_text: encodeURIComponent(template_data.description_short_text)
 				},
 				bitmap
 			);
-			page = 'index';
+			page = 'company';
 			console.log('found data');
 			regional_info = {state: data.company.state,
 					county: data.company.county,
@@ -213,7 +217,7 @@ companyPage = function(template_data,company_id,template){
 */
 };
 homePage = function(req,template_data){
-	var page = 'home';
+	var page = 'index';
 	return Q.fcall(function(){ return page;});
 };
 directoryPage = function(region,template_data,dir_match){

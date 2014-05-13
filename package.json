@@ -20,7 +20,8 @@
     "jade": "1.1.5",
     "yelp": "0.1.1",
     "consolidate": "0.10.0",
-    "templayed": "0.2.3"
+    "templayed": "0.2.3",
+    "seedrandom": "2.3.5"
   },
   "devDependencies": {
     "jshint": "~2.4.x"
