@@ -7,39 +7,88 @@ var _ = require('lodash');
 var CompanyProvider = function(){
 };
 
+function findSimilar(id,category,postcode,county,valuation){
+  console.log('findSimilar');
+  var knex = require('knex').knex;
+  var request = knex('companies').select(knex.raw('id,title,price,meal_breakfast,meal_lunch,meal_dinner,meal_deliver,meal_takeout,meal_cater,alcohol,days_open,abs(valuation-'+valuation+') as dev'))
+    .where('category',category).andWhere('postcode','<>',postcode).andWhere('county',county)
+    .orderBy('dev','asc').limit(6);
+  return request.then(function(data){
+    return data;
+  });
+}
+
+function top3Counties(data,county){
+  var top3_counties = [];
+  var this_county;
+  var lcounty = county.toLowerCase();
+  /*** get top 3 counties by ***/
+  _(data).forEach(function(row){
+    var lowerc = row.county.toLowerCase();
+    var item = [row.county,row.density,row.people];
+    if (lcounty === lowerc){
+      this_county = item;
+    }else{
+      top3_counties.push(item);
+    }
+  });
+  top3_counties.sort(function(a,b){return b[1]-a[1];});
+  top3_counties.splice(2);
+  top3_counties.push(this_county);
+  var items = {};
+  _(top3_counties).forEach(function(v){
+    items[v[0]] = {density: v[1],people: v[2]};
+  });
+  return items;
+}
 //var dummyData;
 CompanyProvider.prototype.regionalStats = function(state,county,category){
   console.log('regionalStats');
   var knex = require('knex').knex;
-  //first find out how many in each county within a state
-  var request = knex('regions')
-    .where('state',state.toUpperCase()).orderBy('restaurants','desc');
-  var result = {};
-  return request.column('county','people','restaurants').then(function(data){
-    console.log('regionalStats returned 1');
-    console.log(data);
+
+  var top3ByDensity;
+  //first find out how many people/county in each county within a state
+  var request = knex('regions').column('county','people','density')
+    .where('state',state.toUpperCase()).orderBy('density','desc');  //need at least 2 != to this county
+  return request.then(function(data){
+    top3ByDensity = top3Counties(data,county);
     request = knex('companies')
-      .where('state',state.toUpperCase()).groupBy('county').count('id');
-    return request.column('county').andWhere('category','ilike',category);
+      .where('state',state.toUpperCase()).groupBy('county').count('id')
+      .column('county').andWhere('category','ilike',category)
+      .whereIn('county',Object.keys(top3ByDensity));
+    return request;
   }).then(function(data){
-    console.log('regionalStats returned 2');
-    console.log(data);
+    //assign category density to existing top 3
+    _(data).forEach(function(v){
+      top3ByDensity[v.county].catDensity = top3ByDensity[v.county].people/v.count;
+    });
     return knex('companies')
       .where('state',state.toUpperCase()).groupBy('category').orderBy('count','desc').count('id')
       .column('category').andWhere('county','ilike',county).limit(6);
   }).then(function(data){
-    console.log('regionalStats returned 3');
-    console.log(data);
-    return result;
+    return {
+      top_counties: top3ByDensity,
+      top_cats: data
+    };
   });
 };
+
 CompanyProvider.prototype.findById = function(id) {
   console.log('findById');
   var knex = require('knex').knex;
   var request = knex('companies').where('id',id).limit(1).select();
+  var result = null;
   return request.then(function(data){
-    console.log(data);
-    var result = data[0];
+    if (data && data.length){
+      result = {company: data[0]};
+      return findSimilar(id,data[0].category,data[0].postcode,data[0].county,data[0].valuation);
+    }else{
+      return null;
+    }
+  }).then(function(similar){
+    if (similar && similar.length){
+      result.similar = similar;
+    }
     return result;
   });
 };
@@ -55,15 +104,14 @@ CompanyProvider.prototype.findByRegion = function(state,county,city) {
   if (city){
     request.column('id','title').andWhere('county','ilike',county).andWhere('city','ilike',city);
   }else if(county){
-    request.column('city').andWhere('county','ilike',county).distinct('city');
+    request.andWhere('county','ilike',county).distinct('city');
   }else{
-    request.column('county').distinct('county');
+    request.distinct('county');
   }
   return request.limit(10).select().then(function(data){
-    if (data){
-
-    }
-    if (!city){
+    if (!data || !data.length){
+      data = null;
+    }else if (!city){
       _(data).forEach(function(company){
         company.title = county?company.city:company.county;
       });
@@ -86,153 +134,5 @@ dummyData = {'My-Texas-Restaurant-Santa-Francisco-TX': {
   city: 'San Jose',
   valuation: 100000,
   description_short_text: 'fds'
-},'My-Texas-Restaurant-Santa-Clara-TX': {
-  title: 'My Texas Restaurant 2',
-  state: 'TX',
-  county: 'Zavala',
-  city: 'San Jose',
-  valuation: 300000,
-  description_short_text: 'fds'
-},'My-Texas-Restaurant-San-Jose-TX': {
-  title: 'My Texas Restaurant 3',
-  state: 'TX',
-  county: 'Starr',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Webb',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid1': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Hidalgo',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid2': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Zapata',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid3': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Cameron',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid5': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Val Verde',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid6': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'El Paso',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid7': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Duval',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid8': {
-  title: 'fake restaurant',
-  state: 'FL',
-  county: 'Miami-Dade',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid9': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Willacy',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid10': {
-  title: 'fake restaurant',
-  state: 'NM',
-  county: 'San Miguel',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid11': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Frio',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid12': {
-  title: 'fake restaurant',
-  state: 'CA',
-  county: 'Imperial',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid13': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Uvalde',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid14': {
-  title: 'fake restaurant',
-  state: 'AZ',
-  county: 'Santa Cruz',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid15': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Kleberg',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid16': {
-  title: 'fake restaurant',
-  state: 'TX',
-  county: 'Reeves',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid17': {
-  title: 'fake restaurant',
-  state: 'NM',
-  county: 'Dona Ana',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid18': {
-  title: 'fake restaurant',
-  state: 'NM',
-  county: 'Guadalupe',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-},'fakeid19': {
-  title: 'fake restaurant',
-  state: 'FL',
-  county: 'Osceola',
-  city: 'San Jose',
-  valuation: 500000,
-  description_short_text: 'fds'
-}};
-*/
+}*/
 module.exports = CompanyProvider;

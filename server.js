@@ -10,6 +10,8 @@ var express     = require('express'),
 
 var Company = require('./CompanyProvider');
 
+var Writeup = require('./writeup');
+
 var STATES = {'TX': 'Texas','FL': 'Florida','NM': 'New Mexico','CA': 'California','AZ': 'Arizona'};
 
 //define page function
@@ -172,36 +174,35 @@ companyPage = function(template_data,company_id,template){
 	var page;
 	return Company.prototype.findById(company_id
 	).then(function(data){
-		var result = {state: null,
-			county: null,
-			category: null};
-		if (data){
+		var regional_info = null;
+		if (data && data.length){
 			//similar companies:
-
+			var writeUp = new Writeup();
+			var bitmap = writeUp.write(data.similar,data.company);
 			template_data = _.merge(
-			template_data,	//sets general variables
-				data,	//sets company variables
-				{twitter_share_text: encodeURIComponent(template.twitter_company_share),
-					praise: [true],
-					loc: [true],
-					join: [true],
-					company1: {price: {}, doors: {}},
-					company2: {}
-				}
+				template_data,	//sets general variables
+				data.company,	//sets company variables
+				{
+					twitter_share_text: encodeURIComponent(template.twitter_company_share),
+				},
+				bitmap
 			);
 			page = 'index';
 			console.log('found data');
-			result = {state: data.state,
-					county: data.county,
-					category: data.category};
+			regional_info = {state: data.company.state,
+					county: data.company.county,
+					category: data.company.category};
 		}else{
 			page = '404';
 		}
-		return result;
+		return regional_info;
 	}).then(function(v){
-		//stats about this company:
-		return Company.prototype.regionalStats(v.state,v.county,v.category);
+		return v?Company.prototype.regionalStats(v.state,v.county,v.category):null;
 	}).then(function(data){
+		//append regional stats about this company:
+		if (data){
+
+		}
 		return page;
 	});
 
