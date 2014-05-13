@@ -8,7 +8,6 @@ var CompanyProvider = function(){
 };
 
 function findSimilar(id,category,postcode,county,valuation){
-  console.log('findSimilar');
   var knex = require('knex').knex;
   var request = knex('companies').select(knex.raw('id,title,price,meal_breakfast,meal_lunch,meal_dinner,meal_deliver,meal_takeout,meal_cater,alcohol,days_open,abs(valuation-'+valuation+') as dev'))
     .where('category',category).andWhere('postcode','<>',postcode).andWhere('county',county)
@@ -43,7 +42,6 @@ function top3Counties(data,county){
 }
 //var dummyData;
 CompanyProvider.prototype.regionalStats = function(state,county,category){
-  console.log('regionalStats');
   var knex = require('knex').knex;
 
   var top3ByDensity;
@@ -74,7 +72,6 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
 };
 
 CompanyProvider.prototype.findById = function(id) {
-  console.log('findById');
   var knex = require('knex').knex;
   var request = knex('companies').where('id',id).limit(1).select();
   var result = null;
@@ -97,7 +94,6 @@ CompanyProvider.prototype.findById = function(id) {
  * or null if nothing is found under this search
  */
 CompanyProvider.prototype.findByRegion = function(state,county,city) {
-  console.log('findByRegion: '+state+','+county+','+city);
   var knex = require('knex').knex;
   var request = knex('companies');
   request.where('state',state.toUpperCase());

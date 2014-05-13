@@ -23,7 +23,6 @@ function CompanyWriter(){
   };
   this.countVariety = function(row1,row2){
     var variety_elements = 0;
-    console.log(row1);
     _(this.naming_keys).forEach(function(key){
       if (row1[key] !== null && row1[key] !== row2[key]){
         variety_elements++;
@@ -73,6 +72,10 @@ function CompanyWriter(){
     'days_open',
 */
   this.writeTemplate = function(similar,own_bus){
+    console.log('!!!!!!!!!!!!!similar!!!!!!!!!!!!!!');
+    console.log(similar);
+    console.log('!!!!!!!!!!own_bus!!!!!!!!!!!');
+    console.log(own_bus);
     var rng = seedrandom(own_bus.id,{ global: false });
     function genAr(i){
       var rand = Math.round(rng()*i);

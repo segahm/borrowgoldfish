@@ -1,5 +1,6 @@
 #!/bin/sh
 mkdir -p /home/caura/webapps/hack/run
+export NODE_ENV=production
 pid=$(/sbin/pidof /home/caura/webapps/hack/bin/node)
 if echo "$pid" | grep -q " "; then
   pid=""
@@ -10,5 +11,5 @@ if [ -n "$pid" ]; then
     exit 0
   fi
 fi
-nohup /home/caura/webapps/hack/bin/node /home/caura/webapps/hack/hello-world.js > /dev/null 2>&1 &
+nohup /home/caura/webapps/hack/bin/node /home/caura/webapps/hack/server.js > /dev/null 2>&1 &
 /sbin/pidof /home/caura/webapps/hack/bin/node > /home/caura/webapps/hack/run/node.pid

@@ -8,6 +8,9 @@ var express     = require('express'),
 	cons        = require('consolidate'),
 	templates   = require('./templates');
 
+// If no env is set, default to development
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 var Company = require('./CompanyProvider');
 
 var Writeup = require('./writeup');
@@ -18,25 +21,30 @@ var STATES = {'TX': 'Texas','FL': 'Florida','NM': 'New Mexico','CA': 'California
 var directoryPage,
 	homePage,
 	companyPage;
+var knex_connection = {
+	host     : '127.0.0.1',
+	database : 'goldfish',
+	charset  : 'utf8',
+	port: 5432   //3306 - mysql
+};
+
+if (process.env.NODE_ENV === 'development'){
+	knex_connection.user ='postgres';
+	knex_connection.password = 'kristina';
+	
+}else if (process.env.NODE_ENV === 'production'){
+	knex_connection.user ='caura';
+	knex_connection.password = '46uxrEb3ZExf';
+}
 
 Knex.knex = Knex.initialize({
 	client: 'pg',
-	connection: {
-		host     : '127.0.0.1',
-		user: 'postgres',
-		password: 'kristina',
-		//user     : 'caura',
-		//password : '46uxrEb3ZExf',
-		database : 'goldfish',
-		charset  : 'utf8',
-		port: 5432   //3306 - mysql
-	}
+	connection: knex_connection
 });
+
+
 //  configLoader  = require('./core/config-loader.js'),
  // errors        = require('./core/error-handling');
-
-// If no env is set, default to development
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 function toTitleCase(str){
 	return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}).replace(/_/g,' ');
@@ -62,16 +70,12 @@ function startServer() {
 	app.use('/favicon.ico',express.static(__dirname+'/index_files/favicon.ico'));
 	app.use('/favicon.ico/',express.static(__dirname+'/index_files/favicon.ico'));
 
-	app.use(express.bodyParser());
-	app.configure('development', function(){
-	  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-	});
 
-/*	app.configure('production', function(){
-	  app.use(express.errorHandler());
-	});*/
-
-	//var companyProvider = new CompanyProvider();
+	if (process.env.NODE_ENV === 'development'){
+		//app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+	}else if (process.env.NODE_ENV === 'production'){
+		//app.use(express.errorHandler());
+	}
 
 
 	app.use(function(req, res, next){
@@ -85,7 +89,8 @@ function startServer() {
 		template_data.es = is_spanish;	//whether to turn-on spanish language
 
 		template_data.url_path = is_spanish?'http://'+req.host+'/es/':'http://'+req.host+'/';
-		template_data.encoded_url = encodeURIComponent(req.originalUrl);
+		template_data.encoded_url = encodeURIComponent(
+			'http://'+req.host+(is_spanish?'/es':'')+req.originalUrl);
 
 
 		var page = 'index';	//default page
@@ -97,12 +102,10 @@ function startServer() {
 		 */
 		 //COMPANY
 		if (matches && typeof(matches[2]) !== 'undefined'){
-			console.log('company page');
 			var company_id = matches[2];
 			resultPromise = companyPage(template_data,company_id,template);
 		//DIRECTORY
 		}else if (dir_match && typeof(dir_match[2]) !== 'undefined'){
-			console.log('directory page');
 			var region = {
 				state_abrev: dir_match[2].toUpperCase(),
 				county: (dir_match && typeof(dir_match[3]) !== 'undefined')?toTitleCase(dir_match[3].slice(1)):null,
@@ -119,8 +122,6 @@ function startServer() {
 		 */
 
 		resultPromise.then(function(mypage){
-			console.log(2);
-			console.log('second-pass:'+mypage);
 			//either default or no records, forcing to show a HOME page
 			if (mypage === 'index' || mypage === '404'){
 				return homePage(req,template_data
@@ -132,11 +133,9 @@ function startServer() {
 				return mypage;	//skip homepage process altogethere
 			}
 		}).then(function(mypage){
-			console.log('result');
 			console.log('rendering page: '+mypage);
 			console.log(template_data);
 			if (mypage === '404'){
-				console.log('404');
 				res = res.status(404);
 				mypage = 'index';	//404 alias
 			}
@@ -156,20 +155,6 @@ function startServer() {
 	}).listen(17912);*/
 }
 
-/*if (cluster.isMaster && !process.env.NO_CLUSTER) {
-  // Create workers for each cpu
-  var cpuCount = require('os').cpus().length;
-  for (var i = 0; i < cpuCount; i++) {
-	cluster.fork();
-  }
-
-  cluster.on('exit', function(worker) {
-	console.log('Worker ' + worker.id + ' died. Respawning');
-	cluster.fork();
-  });
-} else {
-  startServer();
-}*/
 
 companyPage = function(template_data,company_id,template){
 	var page;
@@ -192,7 +177,6 @@ companyPage = function(template_data,company_id,template){
 				bitmap
 			);
 			page = 'company';
-			console.log('found data');
 			regional_info = {state: data.company.state,
 					county: data.company.county,
 					category: data.company.category};
@@ -287,4 +271,17 @@ directoryPage = function(region,template_data,dir_match){
 		return page;
 	});
 };
-startServer();
+if (process.env.NODE_ENV === 'production' && cluster.isMaster && !process.env.NO_CLUSTER) {
+	// Create workers for each cpu
+	var cpuCount = require('os').cpus().length;
+	for (var i = 0; i < cpuCount; i++) {
+		cluster.fork();
+	}
+
+	cluster.on('exit', function(worker) {
+		console.log('Worker ' + worker.id + ' died. Respawning');
+		cluster.fork();
+	});
+} else {
+	startServer();
+}

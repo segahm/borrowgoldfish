@@ -173,7 +173,11 @@ $('#valuationmodal').modal('toggle');
         <a href="https://github.com/segahm" target="_blank">
             
             <span class="profile-name">{{title}}</span>
-        </a>
+        </a><br/>
+        <p id="address">
+  {{address}},<br>
+  {{city}}, {{state}} {{postcode}}
+      </p>
     </div>
     <div id="description">
 
@@ -385,4 +389,41 @@ data providers we are required to acknowledge:<a style="padding-left:10px" href=
           .call(week_hist);
 
         var day_hist = window.histogram().width(400)
-                        .labels(["", "3am","","","6am",
+                        .labels(["", "3am","","","6am","","","9am","","","noon",
+                                 "","","3pm","","","6pm","","","9pm","","","12am",""]);
+        var day_data = [[2, 2, 0, 2, 1, 0, 2, 1, 4, 3, 2, 0, 0, 1, 4, 4, 1, 1, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 1, 3, 8, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]];
+        d3.select("#day")
+          .datum(day_data[0].map(function (d, i) {
+              return day_data.map(function (d) { return d[(i+2)%24]; });
+          }))
+          .call(day_hist);
+
+        // Languages.
+        var event_pie = window.piechart().dim(200);
+        var event_data = [31, 16, 4];
+        d3.select("#event-chart").datum(event_data).call(event_pie);
+
+        // Languages.
+        var lang_pie = window.piechart().dim(200);
+        var lang_data = [14, 5, 3, 2];
+        d3.select("#lang-chart").datum(lang_data).call(lang_pie);
+
+    });
+
+})();
+
+
+</script>
+
+    
+    
+    
+
+    
+    
+    
+
+    
+
+
+</body></html>

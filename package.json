@@ -16,12 +16,13 @@
     "string": "~1.6.1",
     "lodash": "~2.2.1",
     "sendgrid": "0.4.4",
-    "express": "3.4.8",
+    "express": "~4.2.0",
     "jade": "1.1.5",
     "yelp": "0.1.1",
     "consolidate": "0.10.0",
     "templayed": "0.2.3",
-    "seedrandom": "2.3.5"
+    "seedrandom": "2.3.5",
+    "minimist": "~0.0.9"
   },
   "devDependencies": {
     "jshint": "~2.4.x"

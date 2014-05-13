@@ -200,3 +200,8 @@ padding-left: 10px;
 div#directory ul {
   list-style-type: none;
 }
+
+p#address {
+float: left;
+font-size: 14px;
+}
