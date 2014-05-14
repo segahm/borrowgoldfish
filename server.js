@@ -188,20 +188,20 @@ companyPage = function(template_data,company_id,template){
 		}
 		return regional_info;
 	}).then(function(v){
+		//return {top_counties: [{density: , people: ,catDensity: [category: , count: ]}],top_cats:}
 		return v?Company.prototype.regionalStats(v.state,v.county,v.category):null;
 	}).then(function(data){
 		//append regional stats about this company:
 		if (data){
-
+			template_data = _.merge(
+				template_data,
+				{
+					svg: JSON.stringify(data) 
+				});
+			//handle counties
 		}
 		return page;
 	});
-
-	/*.then(function(v){
-		//stats about this company:
-		return Company.prototype.regionalStats(v.state,v.county,v.category);
-	})
-*/
 };
 homePage = function(req,template_data){
 	var page = 'index';
