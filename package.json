@@ -22,7 +22,8 @@
     "consolidate": "0.10.0",
     "templayed": "0.2.3",
     "seedrandom": "2.3.5",
-    "minimist": "~0.0.9"
+    "minimist": "~0.0.9",
+    "errorhandler": "~1.0.1"
   },
   "devDependencies": {
     "jshint": "~2.4.x"

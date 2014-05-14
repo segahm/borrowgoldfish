@@ -4,17 +4,26 @@ var Q = require('q');
 var _ = require('lodash');
 //var articleCounter = 1;
 
+var similar_fields = ['price','meal_breakfast','meal_lunch','meal_dinner','meal_deliver','meal_takeout','meal_cater','alcohol','days_open'];
+
+var sum_of_nulls = [];
+_(similar_fields).forEach(function(field_name){
+  sum_of_nulls.push('(CASE WHEN '+field_name+' IS NULL THEN 1 ELSE 0 END)');
+});
+sum_of_nulls = '('+sum_of_nulls.join(' + ')+') AS sum_of_nulls';
+
 var CompanyProvider = function(){
 };
 
 function findSimilar(id,category,postcode,county,valuation){
   var knex = require('knex').knex;
-  var request = knex('companies').select(knex.raw('id,title,price,meal_breakfast,meal_lunch,meal_dinner,meal_deliver,meal_takeout,meal_cater,alcohol,days_open,abs(valuation-'+valuation+') as dev'))
+  var request = knex('companies')
     .where('category',category).andWhere('postcode','<>',postcode).andWhere('county',county)
-    .orderBy('dev','asc').limit(6);
-  return request.then(function(data){
-    return data;
-  });
+    .orderBy('is_greater','desc')
+    .orderBy('sum_of_nulls','asc')
+    .orderBy('dev','asc').limit(6).select(
+    knex.raw(sum_of_nulls+','+similar_fields+',id,title,abs(valuation-'+valuation+') as dev, (CASE WHEN valuation > '+valuation+' THEN 1 ELSE 0 END) as is_greater'));
+  return request;
 }
 
 function top3Counties(data,county){
@@ -104,7 +113,7 @@ CompanyProvider.prototype.findByRegion = function(state,county,city) {
   }else{
     request.distinct('county');
   }
-  return request.limit(10).select().then(function(data){
+  return request.select().then(function(data){
     if (!data || !data.length){
       data = null;
     }else if (!city){

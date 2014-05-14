@@ -77,40 +77,101 @@ function CompanyWriter(){
     console.log('!!!!!!!!!!own_bus!!!!!!!!!!!');
     console.log(own_bus);
     var rng = seedrandom(own_bus.id,{ global: false });
+
     function genAr(i){
       var rand = Math.round(rng()*i);
       var ar = new Array(rand+1);
       ar[rand] = true;
       return ar;
     }
-    return {
+    function setBitMapsForCompany(i){
+      return {
+        id: similar[i].id,
+        title: similar[i].title,
+        price: {
+          p: ((similar[i].price && own_bus.price && similar[i].price > own_bus.price) || (!own_bus.price && similar[i].price > 1))?true:false,
+          n: ((similar[i].price && own_bus.price && similar[i].price < own_bus.price) || (!similar[i].price && own_bus.price > 1))?true:false
+        },
+        doors: {
+          p: (similar[i].days_open && (!own_bus.days_open || similar[i].days_open > own_bus.days_open))?true:false,
+          n: (own_bus.days_open && (!similar[i].days_open || similar[i].days_open < own_bus.days_open))?true:false
+        },
+        morning: {
+          p: ((1*similar[i].meal_breakfast + 1*similar[i].meal_lunch) > (1*own_bus.meal_breakfast + 1*own_bus.meal_lunch))?true:false,
+          n: ((1*similar[i].meal_breakfast + 1*similar[i].meal_lunch) < (1*own_bus.meal_breakfast + 1*own_bus.meal_lunch))?true:false
+        },
+        evening: (similar[i].meal_dinner && !own_bus.meal_dinner)?true:false,
+        day: {
+          p: ((similar[i].meal_breakfast*1 + similar[i].meal_lunch*1 + similar[i].meal_dinner*1) > (own_bus.meal_dinner*1 + own_bus.meal_breakfast*1 + own_bus.meal_lunch*1))?true:false,
+          n: ((similar[i].meal_breakfast*1 + similar[i].meal_lunch*1 + similar[i].meal_dinner*1) < (own_bus.meal_dinner*1 + own_bus.meal_breakfast*1 + own_bus.meal_lunch*1))?true:false,
+        },
+        alcohol: {
+          p: (similar[i].alcohol && !own_bus.alcohol)?true:false,
+          n: (!similar[i].alcohol && own_bus.alcohol)?true:false,
+        },
+        cater: {
+          p: (similar[i].cater && !own_bus.cater)?true:false,
+          n: (!similar[i].cater && own_bus.cater)?true:false,
+        },
+        deliver: {
+          p: (similar[i].deliver && !own_bus.deliver)?true:false,
+          n: (!similar[i].deliver && own_bus.deliver)?true:false,
+        }
+      };
+    }
+    var result = {
       praise: genAr(3),
       loc: genAr(1),
       join: [],
       company1: {
-        id: similar[0].id,
-        title: similar[0].title,
-        price: {
-          p: ((similar[0].price && own_bus.price && similar[0].price > own_bus.price) || (!own_bus.price && similar[0].price > 1))?true:false,
-          n: (similar[0].price && own_bus.price && similar[0].price < own_bus.price)?true:false
-        },
-        doors: {
-          p: (similar[0].days_open && (!own_bus.days_open || similar[0].days_open > own_bus.days_open))?true:false,
-          n: (similar[0].days_open && own_bus.days_open && similar[0].days_open < own_bus.days_open)?true:false
-        },
-        morning: ((similar[0].meal_breakfast || similar[0].meal_lunch) && !(own_bus.meal_breakfast || own_bus.meal_lunch))?true:false,
-        evening: (similar[0].meal_dinner && !own_bus.meal_dinner)?true:false,
-        day: {
-          p: ((similar[0].meal_breakfast*1 + similar[0].meal_lunch*1 + similar[0].meal_dinner*1) > (own_bus.meal_dinner*1 + own_bus.meal_breakfast*1 + own_bus.meal_lunch*1))?true:false,
-          n: ((similar[0].meal_breakfast*1 + similar[0].meal_lunch*1 + similar[0].meal_dinner*1) < (own_bus.meal_dinner*1 + own_bus.meal_breakfast*1 + own_bus.meal_lunch*1))?true:false,
-        },
-        alcohol: (similar[0].alcohol && !own_bus.alcohol)?true:false,
-        cater: (similar[0].cater && !own_bus.cater)?true:false,
-        deliver: (similar[0].deliver && !own_bus.deliver)?true:false,
-        takeout: (similar[0].takeout && !own_bus.takeout)?true:false,
+        price: {},
+        doors: {},
+        morning: {},
+        day: {},
+        alcohol: {},
+        cater: {},
+        deliver: {}
       },
       company2: {}
     };
+    if (similar.length > 0){
+      result.company1 = setBitMapsForCompany(0);
+      var ordered_fields = ['price','doors','morning','evening','day','alcohol','cater','deliver'];
+      var stack = -1;
+      var last = -1;
+      _(ordered_fields).forIn(function(field,index){
+        if (field === 'evening' || result.company1[field] === true || (typeof(result.company1[field].p) !== 'undefined' && result.company1[field].p === true) || (typeof(result.company1[field].n) !== 'undefined' && result.company1[field].n === true)){
+          if (stack !== -1){
+            result.join[stack] = ', ';
+            last = stack;
+          }
+          stack = index;
+        }
+      });
+      if (last !== -1){
+        result.join[last] = ', and ';
+      }
+    }
+    if (similar.length > 1){
+      var bitmap = setBitMapsForCompany(1);
+      result.company2 = {
+        id: similar[1].id,
+        title: similar[1].title,
+      };
+      if (bitmap.price.p || bitmap.alcohol.p || bitmap.cater.p){
+        result.company2.fact = 'is likely generating higher margins per customer';
+      }else if (bitmap.deliver.p || bitmap.day.p || bitmap.doors.p){
+        result.company2.fact = 'is potentially running higher costs to increase convenience';
+      }else if (bitmap.morning.p || bitmap.evening){
+        result.company2.fact = 'is open when '+own_bus.title +' tends to be closed';
+      }else if (bitmap.price.n || bitmap.alcohol.n || bitmap.cater.n){
+        result.company2.fact = 'is likely generating lower margins per customer';
+      }else if (bitmap.deliver.n || bitmap.day.n || bitmap.doors.n){
+        result.company2.fact = 'is possibly optimizing its costs by foregoing convenience';
+      }
+    }
+    
+    return result;
   };
 }
 

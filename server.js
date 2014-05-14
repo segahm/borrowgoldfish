@@ -6,6 +6,7 @@ var express     = require('express'),
 	Knex 		= require('knex'),
 	_ 			= require('lodash'),
 	cons        = require('consolidate'),
+	errorhandler = require('errorhandler'),
 	templates   = require('./templates');
 
 // If no env is set, default to development
@@ -72,9 +73,7 @@ function startServer() {
 
 
 	if (process.env.NODE_ENV === 'development'){
-		//app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-	}else if (process.env.NODE_ENV === 'production'){
-		//app.use(express.errorHandler());
+		app.use(errorhandler());
 	}
 
 
@@ -141,7 +140,11 @@ function startServer() {
 			}
 			res.render(mypage, template_data);
 		}).catch(function (error) {
+			if (process.env.NODE_ENV === 'development'){
+				res.send(500, error);
+			}
 			console.log(error);
+			throw error;
 		}).done();
 		/*}else{
 			res.send(200,'<h2>Service Temporarily Unavailable</h2><div>The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</div>');
