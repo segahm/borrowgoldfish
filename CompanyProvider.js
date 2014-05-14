@@ -52,30 +52,64 @@ function top3Counties(data,county){
 //var dummyData;
 CompanyProvider.prototype.regionalStats = function(state,county,category){
   var knex = require('knex').knex;
-
-  var top3ByDensity;
+  var state = state.toUpperCase();
+  var top3ByDensity,
+      hourly_density;
   //first find out how many people/county in each county within a state
   var request = knex('regions').column('county','people','density')
-    .where('state',state.toUpperCase()).orderBy('density','desc');  //need at least 2 != to this county
+    .where('state',state).orderBy('density','desc');  //need at least 2 != to this county
   return request.then(function(data){
     top3ByDensity = top3Counties(data,county);
-    request = knex('companies')
+    request = knex('companies').select(knex.raw('county,\'m\' as period')).whereIn('county',Object.keys(top3ByDensity))
+      .where('state',state).groupBy('county').count('id').where('meal_breakfast',true)
+      .union(function(){
+        this.select(knex.raw('county,\'a\' as period')).from('companies').where('state',state).groupBy('county').count('id')
+        .whereIn('county',Object.keys(top3ByDensity)).where('meal_lunch',true).union(function() {
+          this.select(knex.raw('county,\'d\' as period')).from('companies').where('state',state).groupBy('county').count('id')
+          .whereIn('county',Object.keys(top3ByDensity)).where('meal_dinner',true);
+        });
+      });
+/*    request = knex('companies')
       .where('state',state.toUpperCase()).groupBy('county').count('id')
       .column('county').andWhere('category','ilike',category)
-      .whereIn('county',Object.keys(top3ByDensity));
+      .whereIn('county',Object.keys(top3ByDensity));*/
     return request;
   }).then(function(data){
+    if (data){
+      hourly_density = {};
+      _(data).forEach(function(v){
+        if (typeof(hourly_density[v.county]) === 'undefined'){
+          hourly_density[v.county] = {};
+        }
+        hourly_density[v.county][v.period] = v.count;
+      });
+    }
     //assign category density to existing top 3
-    _(data).forEach(function(v){
+    /*_(data).forEach(function(v){
       top3ByDensity[v.county].catDensity = top3ByDensity[v.county].people/v.count;
-    });
+    });*/
     return knex('companies')
-      .where('state',state.toUpperCase()).groupBy('category').orderBy('count','desc').count('id')
-      .column('category').andWhere('county','ilike',county).limit(6);
+      .where('state',state).groupBy('category').orderBy('count','desc').count('id')
+      .column('category').andWhere('county','ilike',county)
+      .andWhere('category','<>','Food and Dining,Restaurants');
   }).then(function(data){
+    var result = {};
+    var total_restaurants = 0;
+    var how_many_cats = 0;
+    if (data){
+      _(data).forEach(function(cat){
+        if (how_many_cats < 4){
+          result[cat.category.replace(/Food and Dining\,(Restaurants\,)?/,'')] = cat.count;
+          how_many_cats++;
+        }
+        total_restaurants += parseInt(cat.count,10);
+      });
+    }
     return {
+      hourly_density: hourly_density,
       top_counties: top3ByDensity,
-      top_cats: data
+      top_cats: result,
+      total_restaurants: total_restaurants
     };
   });
 };

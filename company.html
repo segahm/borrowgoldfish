@@ -194,7 +194,7 @@ county.</p>
         <p>
     The company’s business focus is very similar to <a href="{{company1.id}}">{{company1.title}}</a>'s
 
-but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}keeps the doors open more often{{/company1.doors.p}}{{#company1.doors.n}}keeps the doors open less often{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening}}tends to attract customers in the evening{{/company1.evening}}{{^company1.evening}}actually closes much earlier{{/company1.evening}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}turns around some extra bucks from booze sales{{/company1.alcohol.p}}{{#company1.alcohol.p}}does not have alcohol sales to boost those high margins{{/company1.alcohol.p}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}. 
+but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}keeps the doors open more often{{/company1.doors.p}}{{#company1.doors.n}}keeps the doors open less often{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening}}tends to attract customers in the evening{{/company1.evening}}{{^company1.evening}}actually closes much earlier{{/company1.evening}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}turns around some extra bucks from booze sales{{/company1.alcohol.p}}{{#company1.alcohol.n}}does not have alcohol sales to boost those high margins{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}. 
     </p>
         
 
@@ -215,76 +215,31 @@ With this in mind, both aforementioned companies could make for franchise
 
     <div id="schedule-text">
 
+         <p id="events">
+        The following analysis has been made for {{county}} as a whole. While a greater number of any type of cuisine simply speaks to the local demand, it can also shine some light on the level of competition. We have sampled these stats based on <strong>{{total_restaurants}}</strong> restaurants. The colors in the pie chart stand for the most popular types of cuisine (i.e. greatest number of restaurants):
+        <span style="color: rgb(31, 119, 180);" class="evttype" data-ind="0">{{categories[0]}}</span>,
+        <span style="color: rgb(255, 127, 14);" class="evttype" data-ind="1">{{categories[1]}}</span>,
+        <span style="color: rgb(44, 160, 44);" class="evttype" data-ind="2">{{categories[2]}}</span>, and
+        <span style="color: #DD5152;" class="evttype" data-ind="3">{{categories[3]}}</span> in {{county}} county.
+        </p>
+        <div class="hist-block">
+            <div id="rest-by-cat-chart"></div>
+        </div>
+
+
         <p id="schedule">
-        The two following graphs show Segah Meer's average weekly and daily
-        schedules. These charts give significant insight into Segah's
-        character as a developer.
-        The colors in the charts indicate the fraction of events that are
-        <span style="color: rgb(31, 119, 180);" class="evttype" data-ind="0">pushes</span>,
-        <span style="color: rgb(255, 127, 14);" class="evttype" data-ind="1">new repos or branches</span>, and
-        <span style="color: rgb(44, 160, 44);" class="evttype" data-ind="2">forking</span>.
+        
+        Next are some stats about {{county}} county in comparison to nearby counties:
+        <span style="color: rgb(31, 119, 180);" class="evttype" data-ind="0">{{counties[0]}}</span>,
+        <span style="color: rgb(255, 127, 14);" class="evttype" data-ind="1">{{counties[1]}}</span>, and
+        <span style="color: rgb(44, 160, 44);" class="evttype" data-ind="2">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening).
         </p>
 
         <div class="hist-block">
             <div id="week" class="hist"></div>
             <div id="day" class="hist"></div>
         </div>
-
-        <p>
-        <strong>Note</strong>: an attempt has been made to show these plots in
-        in the correct timezone (based on Segah's location listed
-        on <a href="https://github.com/segahm">their GitHub profile</a>)
-        but this procedure is imperfect at best.
-        </p>
-
-        
-        <p id="events">
-        We already know that Segah
-        loves pushing code
-        but the following chart sheds some light onto what Segah
-        does with their open source time. In the full event stream analyzed for
-        this report, there are a total of <strong>51</strong> events recorded for
-        Segah.
-        The colors in the pie chart below indicate the number of events that are
-        <span style="color: rgb(31, 119, 180);" class="evttype" data-ind="0">pushes</span>,
-        <span style="color: rgb(255, 127, 14);" class="evttype" data-ind="1">new repos or branches</span>, and
-        <span style="color: rgb(44, 160, 44);" class="evttype" data-ind="2">forking</span>.
-        </p>
-        <div class="hist-block">
-            <div id="event-chart"></div>
-        </div>
-        
-
-        
-        <p id="languages">
-        Segah has contributed to repositories in 4
-        languages. In particular, Segah seems to be a pretty serious
-        <strong>JavaScript</strong> expert.
-        The following chart shows the number of contributions Segah made to
-        repositories mainly written in
-        <span style="color: rgb(31, 119, 180);" class="evttype" data-ind="0">JavaScript</span>,
-        <span style="color: rgb(255, 127, 14);" class="evttype" data-ind="1">Python</span>,
-        <span style="color: rgb(44, 160, 44);" class="evttype" data-ind="2">PHP</span>, and
-        <span style="color: rgb(214, 39, 40);" class="evttype" data-ind="3">Java</span>.
-        </p>
-        <div class="hist-block">
-            <div id="lang-chart"></div>
-        </div>
-        
-
-        <p>
-        <strong>Note</strong>: like stats? Of course you do. Did you know that you
-        can get access to <a href="http://osrc.dfm.io/segahm.json">the
-        raw data that was used to generate this page in JSON format</a>?
-        </p>
-
-        <p>
-        Is this page about you? You don't like the things that it's saying?
-        I'm very sorry about that! Remember that it is just meant to be a toy
-        and not meant to be taken seriously but if you must, you're welcome to
-        <a href="http://osrc.dfm.io/opt-out/segahm">opt-out at any
-        time</a>.
-        </p>
+    
 
     </div>
 
@@ -353,15 +308,19 @@ var svg = {{{svg}}};
             el.css("color", cb(+el.data("ind")));
         });
         var labels = [];
-        var densities = [[],[]];
+        var densities = [];
         var cat_densities = [[],[]];
+        var col = 0;
+
         for (var county in svg.top_counties){
-          labels.push(county);
-          densities[0].push(svg.top_counties[county].density);
-          cat_densities[1].push((typeof(svg.top_counties[county].catDensity) !== 'undefined')?svg.top_counties[county].catDensity:0);
+          labels.push(county[0]);
+          densities.push(Array.apply(null, new Array(3)).map(Number.prototype.valueOf,0));
+          densities[col][col] = svg.top_counties[county].density;
+          //cat_densities[1].push((typeof(svg.top_counties[county].catDensity) !== 'undefined')?svg.top_counties[county].catDensity:0);
+          col++;
         }
         // Schedule histograms.
-        var week_hist = window.histogram().width(200)
+        var week_hist = window.histogram().width(100)
                                         .labels(labels);
         var week_data = densities;
         d3.select("#week")
@@ -371,23 +330,36 @@ var svg = {{{svg}}};
           .call(week_hist);
 
         var day_hist = window.histogram().width(400)
-                        .labels(labels);
-        var day_data = cat_densities;
+                        .labels(['8:00-10:00','','','12-3pm','','','5pm -','','']);
+        var day_data = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]];
+        console.log(svg.hourly_density);
+        if (svg.hourly_density['{{counties[0]}}']){
+          day_data[0] = [svg.hourly_density['{{counties[0]}}'].m,0,0,
+          svg.hourly_density['{{counties[0]}}'].a,0,0,
+          svg.hourly_density['{{counties[0]}}'].d,0,0];
+        }
+        if (svg.hourly_density['{{counties[1]}}']){
+          day_data[1] = [svg.hourly_density['{{counties[1]}}'].m,0,0,
+          svg.hourly_density['{{counties[1]}}'].a,0,0,
+          svg.hourly_density['{{counties[1]}}'].d,0,0];
+        }
+        if (svg.hourly_density['{{counties[2]}}']){
+          day_data[2] = [svg.hourly_density['{{counties[2]}}'].m,0,0,
+          svg.hourly_density['{{counties[2]}}'].a,0,0,
+          svg.hourly_density['{{counties[2]}}'].d,0,0];
+        }
+        //var day_data = [[3,0,0,3,0,0,3,0,0],[3,0,0,3,0,0,3,0,0],[4,0,0,5,0,0,6,0,0]];
         d3.select("#day")
           .datum(day_data[0].map(function (d, i) {
-              return day_data.map(function (d) { return d[(i+2)%24]; });
+              return day_data.map(function (d) { return d[(i)]; });
           }))
           .call(day_hist);
 
         // Languages.
         var event_pie = window.piechart().dim(200);
-        var event_data = [31, 16, 4];
-        d3.select("#event-chart").datum(event_data).call(event_pie);
+        var event_data = d3.values(svg.top_cats);  //[31, 16, 4];
+        d3.select("#rest-by-cat-chart").datum(event_data).call(event_pie);
 
-        // Languages.
-        var lang_pie = window.piechart().dim(200);
-        var lang_data = [14, 5, 3, 2];
-        d3.select("#lang-chart").datum(lang_data).call(lang_pie);
 
     });
 

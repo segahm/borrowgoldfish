@@ -72,10 +72,10 @@ function CompanyWriter(){
     'days_open',
 */
   this.writeTemplate = function(similar,own_bus){
-    console.log('!!!!!!!!!!!!!similar!!!!!!!!!!!!!!');
+    /*console.log('!!!!!!!!!!!!!similar!!!!!!!!!!!!!!');
     console.log(similar);
     console.log('!!!!!!!!!!own_bus!!!!!!!!!!!');
-    console.log(own_bus);
+    console.log(own_bus);*/
     var rng = seedrandom(own_bus.id,{ global: false });
 
     function genAr(i){

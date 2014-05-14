@@ -132,8 +132,7 @@ function startServer() {
 				return mypage;	//skip homepage process altogethere
 			}
 		}).then(function(mypage){
-			console.log('rendering page: '+mypage);
-			console.log(template_data);
+			//console.log(template_data);
 			if (mypage === '404'){
 				res = res.status(404);
 				mypage = 'index';	//404 alias
@@ -141,7 +140,9 @@ function startServer() {
 			res.render(mypage, template_data);
 		}).catch(function (error) {
 			if (process.env.NODE_ENV === 'development'){
-				res.send(500, error);
+				res.send(500, error.message);
+			}else{
+				res.send(500,'<h2>An error has occured</h2><div>The server is temporarily unable to service your request. The issue has been reported and we are likely resolving it already. Please try again later.</div>');
 			}
 			console.log(error);
 			throw error;
@@ -196,7 +197,10 @@ companyPage = function(template_data,company_id,template){
 			template_data = _.merge(
 				template_data,
 				{
-					svg: JSON.stringify(data) 
+					categories: Object.keys(data.top_cats),
+					counties: Object.keys(data.top_counties),
+					svg: JSON.stringify(data),
+					total_restaurants: data.total_restaurants
 				});
 			//handle counties
 		}
