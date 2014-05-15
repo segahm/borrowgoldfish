@@ -15,11 +15,16 @@ sum_of_nulls = '('+sum_of_nulls.join(' + ')+') AS sum_of_nulls';
 var CompanyProvider = function(){
 };
 
-function findSimilar(id,category,postcode,county,valuation){
+function findSimilar(id,category,postcode,state,county,valuation,less_restrictive){
   var knex = require('knex').knex;
   var request = knex('companies')
-    .where('category',category).andWhere('postcode','<>',postcode).andWhere('county',county)
-    .orderBy('is_greater','desc')
+    .where('category',category)
+    .andWhere('postcode','<>',postcode)
+    .andWhere('state',state);
+  if (typeof(less_restrictive) === 'undefined' || !less_restrictive){
+    request.andWhere('county',county);
+  }
+  request.orderBy('is_greater','desc')
     .orderBy('sum_of_nulls','asc')
     .orderBy('dev','asc').limit(6).select(
     knex.raw(sum_of_nulls+','+similar_fields+',id,title,abs(valuation-'+valuation+') as dev, (CASE WHEN valuation > '+valuation+' THEN 1 ELSE 0 END) as is_greater'));
@@ -118,16 +123,26 @@ CompanyProvider.prototype.findById = function(id) {
   var request = knex('companies').where('id',id).limit(1).select();
   var result = null;
   return request.then(function(data){
-    if (data && data.length){
+    if (data && data.length > 0){
       result = {company: data[0]};
-      return findSimilar(id,data[0].category,data[0].postcode,data[0].county,data[0].valuation);
+      return findSimilar(id,data[0].category,data[0].postcode,data[0].state,data[0].county,data[0].valuation);
     }else{
       return null;
     }
   }).then(function(similar){
-    if (similar && similar.length){
-      result.similar = similar;
+    if (similar && similar.length === 0){
+      //do a less restrictive search
+      var company = result.company;
+      request = findSimilar(id,company.category,company.postcode,company.state,company.county,company.valuation,true);
+      return request;
+    }else{
+      return similar;
     }
+  }).then(function(similar){
+    if (!similar || similar.length === 0){
+      similar  = [];
+    }
+    result.similar = similar;
     return result;
   });
 };

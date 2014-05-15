@@ -190,23 +190,23 @@ setting{{/praise[3]}} restaurant {{#loc[0]}}situated
 in{{/loc[0]}}{{#loc[1]}}located in{{/loc[1]}} {{county}} 
 county.</p>
 
-        
+ {{#company1.found}}       
         <p>
     The company’s business focus is very similar to <a href="{{company1.id}}">{{company1.title}}</a>'s
 
-but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}keeps the doors open more often{{/company1.doors.p}}{{#company1.doors.n}}keeps the doors open less often{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}tends to attract customers in the evening{{/company1.evening.p}}{{#company1.evening.n}}actually closes much earlier{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}turns around some extra bucks from booze sales{{/company1.alcohol.p}}{{#company1.alcohol.n}}does not have alcohol sales to boost those high margins{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}. 
+but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}keeps the doors open more often{{/company1.doors.p}}{{#company1.doors.n}}keeps the doors open less often{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}tends to attract customers in the evening{{/company1.evening.p}}{{#company1.evening.n}}actually closes much earlier{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}turns around some extra bucks from booze sales{{/company1.alcohol.p}}{{#company1.alcohol.n}}does not have alcohol sales to boost those high margins{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}.
+        
     </p>
-        
-
-        
+{{/company1.found}}    
+{{#company2.found}}        
         <p>
         It seems like {{title}} is also somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
  That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}. 
 With this in mind, both aforementioned companies could make for franchise
  partners based on ideal regional coverage: <a href="{{company1.map}}">Google map of {{company1.title}}</a>, <a href="{{company2.map}}">map of {{company2.title}}</a>.
-        </p>
-        
-
+        </p>    
+{{/company2.found}}   
+{{^company1.found}}{{^company2.found}}<p>We will keep looking, but it appears that this is quite a unique business - there really is not anything like it anywhere in the neighborhood.</p>{{/company2.found}}{{/company1.found}}
         
 
     </div>
@@ -263,8 +263,7 @@ With this in mind, both aforementioned companies could make for franchise
 <div class="container">
         <div id="footer">
             The valuation of small businesses has been estimated and built by 
-  <a href="http://twitter.com/nesovok">Segah Meer</a> based on 3rd party
- social, census, and economic analysis data. It is only an estimate. No 
+  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No 
 data provider should be held responsible. The following are some of the 
 data providers we are required to acknowledge:<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/index_files/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a>
 <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es/{{url}}">spanish</a>{{/es}} | {{#es}}<a href="/{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
@@ -373,12 +372,12 @@ var svg = {{{svg}}};
 
 (function(){
     var cb = d3.scale.category10();
-    var margin = {top: 0, bottom: 0, left:150, right: 0};
+    var margin = {top: 0, bottom: 0, left:70   , right: 0};
     var width = 300 - margin.left - margin.right;
-    var height = 150 - margin.top - margin.bottom;
+    var height = 170 - margin.top - margin.bottom;
 
     var xScale = d3.scale.linear().range([0, width]);
-    var yScale = d3.scale.ordinal().rangeRoundBands([0, height], 0.4,0);
+    var yScale = d3.scale.ordinal().rangeRoundBands([0, height], 0.2,0);
 
     var numTicks = 3;
     var xAxis = d3.svg.axis().scale(xScale)

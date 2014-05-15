@@ -57,7 +57,7 @@ function CompanyWriter(){
       return this.writeTemplate(new_data,this_bus_data);
     }catch(e){
       console.log(e);
-      console.log('possibly, no data found on similar businesses for:'+this_bus_data[0][1]);
+      console.log('possibly, no data found on similar businesses for:'+this_bus_data);
     }
   };
 /*
@@ -142,6 +142,7 @@ function CompanyWriter(){
     };
     if (similar.length > 0){
       result.company1 = setBitMapsForCompany(0);
+      result.company1.found = true;
       //TEMPORARY
       if (DEBUG){
         result.company1 = {
@@ -177,6 +178,7 @@ function CompanyWriter(){
         id: similar[1].id,
         title: similar[1].title,
       };
+      result.company2.found = true;
       result.company2.fact = [false,false,false,false,false];
       if (bitmap.price.p || bitmap.alcohol.p || bitmap.cater.p){
         result.company2.fact[0] = true;
@@ -192,6 +194,9 @@ function CompanyWriter(){
       if (DEBUG){
         result.company2.fact = [true,true,true,true,true];
       }
+    }
+    if (result.join.length > 0){
+      result.company1.found = true;
     }
     return result;
   };
