@@ -201,7 +201,7 @@ but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.pr
         
         <p>
         It seems like {{title}} is also somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
- That said, it's worth noting that {{company2.title}} {{company2.fact}}. 
+ That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}. 
 With this in mind, both aforementioned companies could make for franchise
  partners based on ideal regional coverage: <a href="{{company1.map}}">Google map of {{company1.title}}</a>, <a href="{{company2.map}}">map of {{company2.title}}</a>.
         </p>
@@ -217,10 +217,10 @@ With this in mind, both aforementioned companies could make for franchise
 
          <p id="events">
         The following analysis has been made for {{county}} as a whole. While a greater number of any type of cuisine simply speaks to the local demand, it can also shine some light on the level of competition. We have sampled these stats based on <strong>{{total_restaurants}}</strong> restaurants. The colors in the pie chart stand for the most popular types of cuisine (i.e. greatest number of restaurants):
-        <span style="color: rgb(31, 119, 180);" class="evttype" data-ind="0">{{categories[0]}}</span>,
-        <span style="color: rgb(255, 127, 14);" class="evttype" data-ind="1">{{categories[1]}}</span>,
-        <span style="color: rgb(44, 160, 44);" class="evttype" data-ind="2">{{categories[2]}}</span>, and
-        <span style="color: #DD5152;" class="evttype" data-ind="3">{{categories[3]}}</span> in {{county}} county.
+        <span class="evttype" data-ind="0">{{categories[0]}}</span>,
+        <span class="evttype" data-ind="1">{{categories[1]}}</span>,
+        <span class="evttype" data-ind="2">{{categories[2]}}</span>, and
+        <span class="evttype" data-ind="3">{{categories[3]}}</span> in {{county}} county.
         </p>
         <div class="hist-block">
             <div id="rest-by-cat-chart"></div>
@@ -230,14 +230,15 @@ With this in mind, both aforementioned companies could make for franchise
         <p id="schedule">
         
         Next are some stats about {{county}} county in comparison to nearby counties:
-        <span style="color: rgb(31, 119, 180);" class="evttype" data-ind="0">{{counties[0]}}</span>,
-        <span style="color: rgb(255, 127, 14);" class="evttype" data-ind="1">{{counties[1]}}</span>, and
-        <span style="color: rgb(44, 160, 44);" class="evttype" data-ind="2">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening).
+        <span class="evttype" data-ind="0">{{counties[0]}}</span>,
+        <span class="evttype" data-ind="1">{{counties[1]}}</span>, and
+        <span class="evttype" data-ind="2">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening).
         </p>
 
         <div class="hist-block">
-            <div id="week" class="hist"></div>
-            <div id="day" class="hist"></div>
+            <div id="density" class="hist"><h6>Restaurant Density by County</h6>
+            </div>
+            <div id="day" class="hist"><h6>Number of open restaurants by time of the day, county</h6></div>
         </div>
     
 
@@ -309,32 +310,31 @@ var svg = {{{svg}}};
             var el = $(this);
             el.css("color", cb(+el.data("ind")));
         });
-        var labels = [];
+        /*var labels = [];
         var densities = [];
         var cat_densities = [[],[]];
         var col = 0;
 
         for (var county in svg.top_counties){
-          labels.push(county[0]);
-          densities.push(Array.apply(null, new Array(3)).map(Number.prototype.valueOf,0));
-          densities[col][col] = svg.top_counties[county].density;
+          //labels.push(county[0]);
+          //densities.push(Array.apply(null, new Array(3)).map(Number.prototype.valueOf,0));
+          //densities[col][col] = svg.top_counties[county].density;
           //cat_densities[1].push((typeof(svg.top_counties[county].catDensity) !== 'undefined')?svg.top_counties[county].catDensity:0);
           col++;
-        }
-        // Schedule histograms.
-        var week_hist = window.histogram().width(100)
+        }*/
+        //  Histogram #1
+        /*var density_hist = window.histogram().width(100)
                                         .labels(labels);
-        var week_data = densities;
-        d3.select("#week")
-          .datum(week_data[0].map(function (d, i) {
-              return week_data.map(function (d) { return d[i]; });
+        var density_data = densities;
+        d3.select("#density")
+          .datum(density_data[0].map(function (d, i) {
+              return density_data.map(function (d) { return d[i]; });
           }))
-          .call(week_hist);
-
-        var day_hist = window.histogram().width(400)
+          .call(density_hist);*/
+        //  Histogram #2
+        var day_hist = window.histogram().width(300)
                         .labels(['8:00-10:00','','','12-3pm','','','5pm -','','']);
         var day_data = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]];
-        console.log(svg.hourly_density);
         if (svg.hourly_density['{{counties[0]}}']){
           day_data[0] = [svg.hourly_density['{{counties[0]}}'].m,0,0,
           svg.hourly_density['{{counties[0]}}'].a,0,0,
@@ -369,8 +369,101 @@ var svg = {{{svg}}};
 
 
 </script>
-    
-    
+ <script type="text/javascript">
+
+(function(){
+    var cb = d3.scale.category10();
+    var margin = {top: 0, bottom: 0, left:150, right: 0};
+    var width = 300 - margin.left - margin.right;
+    var height = 150 - margin.top - margin.bottom;
+
+    var xScale = d3.scale.linear().range([0, width]);
+    var yScale = d3.scale.ordinal().rangeRoundBands([0, height], 0.4,0);
+
+    var numTicks = 3;
+    var xAxis = d3.svg.axis().scale(xScale)
+                    .orient("top")
+                    .tickSize((-height))
+                    .ticks(numTicks);
+    var barSvg = d3.select("#density").append("svg")
+                .attr("width", width+margin.left+margin.right)
+                .attr("height", height+margin.top+margin.bottom)
+                .append("g")
+                .attr("transform", "translate("+margin.left+","+margin.top+")")
+
+    var x = barSvg.append("g")
+            .attr("class", "x-axis");
+
+    var data = [];
+    for (var county in svg.top_counties){
+      data.push({
+        hlabel: county+', '+svg.top_counties[county].state,
+        density: svg.top_counties[county].density
+      });
+    }
+    function draw(data) {
+
+        var xMax = d3.max(data, function(d) { return d.density; } );
+        var xMin = 0;
+        xScale.domain([xMin, xMax]);
+        yScale.domain(data.map(function(d) { return d.hlabel; }));
+
+
+        var groups = barSvg.append("g").attr("class", "labels")
+                    .selectAll("text")
+                    .data(data)
+                    .enter()
+                    .append("g");
+
+        groups.append("text")
+                .attr("x", "0")
+                .attr("y", function(d) { return yScale(d.hlabel); })
+                .text(function(d) { return d.hlabel; })
+                .attr("text-anchor", "end")
+                .attr("dy", ".9em")
+                .attr("dx", "-.32em")
+                .attr("id", function(d,i) { return "label"+i; });
+
+        var bars = groups
+                    .attr("class", "bars")
+                    .append("rect")
+                    .attr("data-ind",function(d,i) { return i;})
+                    .style("fill", function (d) {
+                      var ind = d3.select(this).attr("data-ind");
+                      return cb(ind);
+                    })
+                    .attr("width", function(d) { return xScale(d.density); })
+                    .attr("height", height/7)
+                    .attr("x", xScale(xMin))
+                    .attr("y", function(d) { return yScale(d.hlabel); });
+
+
+        groups.append("text")
+                .attr("x", function(d) { return xScale(d.density); })
+                .attr("y", function(d) { return yScale(d.hlabel); })
+                .text(function(d) { return d.density; })
+                .attr("text-anchor", "end")
+                .attr("dy", "1.2em")
+                .attr("dx", "-.32em")
+                .attr("id", "precise-value");
+
+        x.call(xAxis);
+        var grid = xScale.ticks(numTicks);
+        barSvg.append("g").attr("class", "grid")
+            .selectAll("line")
+            .data(grid, function(d) { return d; })
+            .enter().append("line")
+                .attr("y1", 0)
+                .attr("y2", height+margin.bottom)
+                .attr("x1", function(d) { return xScale(d); })
+                .attr("x2", function(d) { return xScale(d); })
+                .attr("stroke", "white");
+
+    }
+    draw(data);
+
+})();   
+</script>
 
     
     

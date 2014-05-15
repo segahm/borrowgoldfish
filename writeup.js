@@ -138,7 +138,7 @@ function CompanyWriter(){
         cater: {},
         deliver: {}
       },
-      company2: {}
+      company2: {fact: []}
     };
     if (similar.length > 0){
       result.company1 = setBitMapsForCompany(0);
@@ -177,19 +177,22 @@ function CompanyWriter(){
         id: similar[1].id,
         title: similar[1].title,
       };
+      result.company2.fact = [false,false,false,false,false];
       if (bitmap.price.p || bitmap.alcohol.p || bitmap.cater.p){
-        result.company2.fact = 'is likely generating higher margins per customer';
+        result.company2.fact[0] = true;
       }else if (bitmap.deliver.p || bitmap.day.p || bitmap.doors.p){
-        result.company2.fact = 'is potentially running higher costs to increase convenience';
+        result.company2.fact[1] = true;
       }else if (bitmap.morning.p || bitmap.evening){
-        result.company2.fact = 'is open when '+own_bus.title +' tends to be closed';
+        result.company2.fact[2]= true;
       }else if (bitmap.price.n || bitmap.alcohol.n || bitmap.cater.n){
-        result.company2.fact = 'is likely generating lower margins per customer';
+        result.company2.fact[3] = true;
       }else if (bitmap.deliver.n || bitmap.day.n || bitmap.doors.n){
-        result.company2.fact = 'is possibly optimizing its costs by foregoing convenience';
+        result.company2.fact[4] = true;
+      }
+      if (DEBUG){
+        result.company2.fact = [true,true,true,true,true];
       }
     }
-    
     return result;
   };
 }

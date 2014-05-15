@@ -27,27 +27,24 @@ function findSimilar(id,category,postcode,county,valuation){
 }
 
 function top3Counties(data,county){
-  var top3_counties = [];
-  var this_county;
-  var lcounty = county.toLowerCase();
-  /*** get top 3 counties by ***/
+  var lcounty = county.toLowerCase(),
+      counties = {};
+
+  var count = 0;
+  var found_this_county = false;
   _(data).forEach(function(row){
-    var lowerc = row.county.toLowerCase();
-    var item = [row.county,row.density,row.people];
-    if (lcounty === lowerc){
-      this_county = item;
-    }else{
-      top3_counties.push(item);
+    if (!found_this_county && lcounty === row.county.toLowerCase()){
+      counties[row.county] = row;
+      found_this_county = true;
+    }else if (count < 2){ //other than our county, add two more
+      counties[row.county] = row;
+      count++;
+    }
+    if (found_this_county && count === 2 ){
+      return false;
     }
   });
-  top3_counties.sort(function(a,b){return b[1]-a[1];});
-  top3_counties.splice(2);
-  top3_counties.push(this_county);
-  var items = {};
-  _(top3_counties).forEach(function(v){
-    items[v[0]] = {density: v[1],people: v[2]};
-  });
-  return items;
+  return counties;
 }
 //var dummyData;
 CompanyProvider.prototype.regionalStats = function(state,county,category){
@@ -56,8 +53,10 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
   var top3ByDensity,
       hourly_density;
   //first find out how many people/county in each county within a state
-  var request = knex('regions').column('county','people','density')
-    .where('state',state).orderBy('density','desc');  //need at least 2 != to this county
+  var request = knex('regions')
+    .select(knex.raw('county,people,density,state,(CASE WHEN state=\''+state+'\' THEN 1 ELSE 0 END) as orderstate'))
+    .orderBy('orderstate','desc')
+    .orderBy('density','desc');  //need at least 2 != to this county
   return request.then(function(data){
     top3ByDensity = top3Counties(data,county);
     request = knex('companies').select(knex.raw('county,\'m\' as period')).whereIn('county',Object.keys(top3ByDensity))
