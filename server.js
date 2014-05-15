@@ -81,7 +81,7 @@ function startServer() {
 		console.log('%s %s', req.method, req.url);
 		res.set('Content-Type', 'text/html');
 		//spanish
-		var matches = req.url.match(/^\/(es\/)?([a-z0-9\-]{3,})$/i); // "/es/non-state-string"
+		var matches = req.url.match(/^\/(es\/)?([a-z0-9\-]{3,})?$/i); // "/es/non-state-string"
 		var is_spanish = (matches && typeof(matches[1]) !== 'undefined')?true:false;
 		var template_data = {};
 		var template = is_spanish?templates.spanish:templates.english;
@@ -89,8 +89,8 @@ function startServer() {
 
 		template_data.url_path = is_spanish?'http://'+req.host+'/es/':'http://'+req.host+'/';
 		template_data.encoded_url = encodeURIComponent(
-			'http://'+req.host+(is_spanish?'/es':'')+req.originalUrl);
-
+			'http://'+req.host+req.originalUrl);
+		template_data.url = req.url.replace(/^\/es\/?/i,'/');
 
 		var page = 'index';	//default page
 		var resultPromise = Q.fcall(function(){ return page;});
@@ -101,10 +101,11 @@ function startServer() {
 		 */
 		 //COMPANY
 		if (matches && typeof(matches[2]) !== 'undefined'){
+			console.log('company');
 			var company_id = matches[2];
 			resultPromise = companyPage(template_data,company_id,template);
 		//DIRECTORY
-		}else if (dir_match && typeof(dir_match[2]) !== 'undefined'){
+		}else if (dir_match && typeof(dir_match[2]) !== 'undefined' && dir_match[2].toLowerCase() !== 'es'){
 			var region = {
 				state_abrev: dir_match[2].toUpperCase(),
 				county: (dir_match && typeof(dir_match[3]) !== 'undefined')?toTitleCase(dir_match[3].slice(1)):null,
@@ -113,6 +114,7 @@ function startServer() {
 			region.state = STATES[region.state_abrev];
 			resultPromise = directoryPage(region,template_data,dir_match);
 		}else if (typeof(req.query.q) !== 'undefined'){
+			console.log('query');
 			page = '404';
 		}
 
@@ -169,7 +171,7 @@ companyPage = function(template_data,company_id,template){
 			//similar companies:
 			var writeUp = new Writeup();
 			var bitmap = writeUp.write(data.similar,data.company);
-			template_data.description_short_text = 'hello change this description_short_text';
+			template_data.description_short_text = 'How much exactly is '+data.company.title+' restaurant worth? We estimate it at $'+data.company.valuation+'. Starting with market analysis of '+data.company.county+' county we use company-specific data to narrow down the competitive advantages of every Small Business in America.';
 			template_data = _.merge(
 				template_data,	//sets general variables
 				data.company,	//sets company variables

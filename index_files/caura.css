@@ -205,3 +205,7 @@ p#address {
 float: left;
 font-size: 14px;
 }
+
+div#languages {
+float: right;
+}

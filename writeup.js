@@ -2,6 +2,8 @@
 var _ = require('lodash');
 var seedrandom = require('seedrandom');
 
+var DEBUG = false;
+
 function CompanyWriter(){
   this.naming_keys = [
     'price',
@@ -100,7 +102,10 @@ function CompanyWriter(){
           p: ((1*similar[i].meal_breakfast + 1*similar[i].meal_lunch) > (1*own_bus.meal_breakfast + 1*own_bus.meal_lunch))?true:false,
           n: ((1*similar[i].meal_breakfast + 1*similar[i].meal_lunch) < (1*own_bus.meal_breakfast + 1*own_bus.meal_lunch))?true:false
         },
-        evening: (similar[i].meal_dinner && !own_bus.meal_dinner)?true:false,
+        evening: {
+          p: (similar[i].meal_dinner && !own_bus.meal_dinner)?true:false,
+          n: (!similar[i].meal_dinner && own_bus.meal_dinner)?true:false
+        },
         day: {
           p: ((similar[i].meal_breakfast*1 + similar[i].meal_lunch*1 + similar[i].meal_dinner*1) > (own_bus.meal_dinner*1 + own_bus.meal_breakfast*1 + own_bus.meal_lunch*1))?true:false,
           n: ((similar[i].meal_breakfast*1 + similar[i].meal_lunch*1 + similar[i].meal_dinner*1) < (own_bus.meal_dinner*1 + own_bus.meal_breakfast*1 + own_bus.meal_lunch*1))?true:false,
@@ -127,6 +132,7 @@ function CompanyWriter(){
         price: {},
         doors: {},
         morning: {},
+        evening: {},
         day: {},
         alcohol: {},
         cater: {},
@@ -136,11 +142,24 @@ function CompanyWriter(){
     };
     if (similar.length > 0){
       result.company1 = setBitMapsForCompany(0);
+      //TEMPORARY
+      if (DEBUG){
+        result.company1 = {
+          price: {p: true, n: true},
+          doors: {p: true, n: true},
+          morning: {p: true,n: true},
+          day: {p: true,n: true},
+          evening: {p: true, n: true},
+          alcohol: {p: true,n: true},
+          cater: {p: true,n: true},
+          deliver: {p: true,n: true}
+        };
+      }
       var ordered_fields = ['price','doors','morning','evening','day','alcohol','cater','deliver'];
       var stack = -1;
       var last = -1;
       _(ordered_fields).forIn(function(field,index){
-        if (field === 'evening' || result.company1[field] === true || (typeof(result.company1[field].p) !== 'undefined' && result.company1[field].p === true) || (typeof(result.company1[field].n) !== 'undefined' && result.company1[field].n === true)){
+        if (result.company1[field] === true || (typeof(result.company1[field].p) !== 'undefined' && result.company1[field].p === true) || (typeof(result.company1[field].n) !== 'undefined' && result.company1[field].n === true)){
           if (stack !== -1){
             result.join[stack] = ', ';
             last = stack;
