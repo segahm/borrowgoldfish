@@ -61,9 +61,10 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
   var request = knex('regions')
     .select(knex.raw('county,people,density,state,(CASE WHEN state=\''+state+'\' THEN 1 ELSE 0 END) as orderstate'))
     .orderBy('orderstate','desc')
-    .orderBy('density','desc');  //need at least 2 != to this county
+    .orderBy(knex.raw('random()'));  //need at least 2 != to this county
   return request.then(function(data){
     top3ByDensity = top3Counties(data,county);
+    //then find stats for open restaurants by time of the day
     request = knex('companies').select(knex.raw('county,\'m\' as period')).whereIn('county',Object.keys(top3ByDensity))
       .where('state',state).groupBy('county').count('id').where('meal_breakfast',true)
       .union(function(){
@@ -73,10 +74,6 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
           .whereIn('county',Object.keys(top3ByDensity)).where('meal_dinner',true);
         });
       });
-/*    request = knex('companies')
-      .where('state',state.toUpperCase()).groupBy('county').count('id')
-      .column('county').andWhere('category','ilike',category)
-      .whereIn('county',Object.keys(top3ByDensity));*/
     return request;
   }).then(function(data){
     if (data){
@@ -85,7 +82,7 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
         if (typeof(hourly_density[v.county]) === 'undefined'){
           hourly_density[v.county] = {};
         }
-        hourly_density[v.county][v.period] = v.count;
+        hourly_density[v.county][v.period] = parseFloat(v.count);
       });
     }
     //assign category density to existing top 3

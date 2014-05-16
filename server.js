@@ -7,7 +7,7 @@ var express     = require('express'),
 	_ 			= require('lodash'),
 	cons        = require('consolidate'),
 	errorhandler = require('errorhandler'),
-	templates   = require('./templates');;
+	templates   = require('./templates');
 
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -32,7 +32,6 @@ var knex_connection = {
 if (process.env.NODE_ENV === 'development'){
 	knex_connection.user ='postgres';
 	knex_connection.password = 'kristina';
-	
 }else if (process.env.NODE_ENV === 'production'){
 	knex_connection.user ='caura';
 	knex_connection.password = '46uxrEb3ZExf';
@@ -56,6 +55,14 @@ function join(array,key,with_el){
 		str += v[key]+with_el;
 	});
 	return str.slice(0,str.length-with_el.length);
+}
+
+function formatValuation(valuation){
+	if (valuation){
+		valuation = Math.round(valuation/100)*100;
+		valuation = valuation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+	return valuation;
 }
 
 function startServer() {
@@ -160,13 +167,12 @@ function startServer() {
 
 			res.render(mypage, template_data);
 		}).catch(function (error) {
-			if (process.env.NODE_ENV === 'development'){
+			//if (process.env.NODE_ENV === 'development'){
 				res.send(500, error.message);
-			}else{
+			/*}else{
 				res.send(500,'<h2>An error has occured</h2><div>The server is temporarily unable to service your request. The issue has been reported and we are likely resolving it already. Please try again later.</div>');
-			}
+			}*/
 			console.log(error);
-			throw error;
 		}).done();
 		/*}else{
 			res.send(200,'<h2>Service Temporarily Unavailable</h2><div>The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</div>');
@@ -187,6 +193,7 @@ companyPage = function(template_data,company_id,template){
 	).then(function(data){
 		var regional_info = null;
 		if (data){
+			data.company.valuation = formatValuation(data.company.valuation);
 			//similar companies:
 			var writeUp = new Writeup();
 			var bitmap = writeUp.write(data.similar,data.company);
@@ -299,17 +306,21 @@ directoryPage = function(region,template_data,dir_match,template){
 		return page;
 	});
 };
-if (process.env.NODE_ENV === 'production' && cluster.isMaster && !process.env.NO_CLUSTER) {
+if (process.env.NODE_ENV === 'production') {
 	// Create workers for each cpu
-	var cpuCount = require('os').cpus().length;
-	for (var i = 0; i < cpuCount; i++) {
-		cluster.fork();
-	}
+	if (cluster.isMaster && !process.env.NO_CLUSTER){
+		var cpuCount = require('os').cpus().length;
+		for (var i = 0; i < cpuCount; i++) {
+			cluster.fork();
+		}
 
-	cluster.on('exit', function(worker) {
-		console.log('Worker ' + worker.id + ' died. Respawning');
-		cluster.fork();
-	});
+		cluster.on('exit', function(worker) {
+			console.log('Worker ' + worker.id + ' died. Respawning');
+			cluster.fork();
+		});
+	}else{
+		startServer();
+	}
 } else {
 	startServer();
 }

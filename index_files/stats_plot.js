@@ -38,8 +38,8 @@
 
 (function(){
     var cb = d3.scale.category10();
-    var margin = {top: 0, bottom: 0, left:70   , right: 0};
-    var width = 300 - margin.left - margin.right;
+    var margin = {top: 0, bottom: 0, left:100   , right: 0};
+    var width = 330 - margin.left - margin.right;
     var height = 170 - margin.top - margin.bottom;
 
     var xScale = d3.scale.linear().range([0, width]);

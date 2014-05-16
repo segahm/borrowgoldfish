@@ -199,7 +199,7 @@ $('#valuationmodal').modal('toggle');
             <span class="profile-name">{{title}}</span>
         </a><br/>
         <p id="address">
-  {{address}},<br>
+  {{address}}<br>
   {{city}}, {{state}} {{postcode}}
       </p>
     </div>
@@ -227,7 +227,7 @@ but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.pr
         It seems like {{title}} is also somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
  That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}. 
 With this in mind, both aforementioned companies could make for franchise
- partners based on ideal regional coverage: <a href="{{company1.map}}">Google map of {{company1.title}}</a>, <a href="{{company2.map}}">map of {{company2.title}}</a>.
+ partners based on ideal regional coverage: <a target="_blank" href="{{company1.map}}">google map of {{company1.title}}</a>, <a target="_blank"  href="{{company2.map}}">map of {{company2.title}}</a>.
         </p>    
 {{/company2.found}}   
 {{^company1.found}}{{^company2.found}}<p>We will keep looking, but it appears that this is quite a unique business - there really is not anything like it anywhere in the neighborhood.</p>{{/company2.found}}{{/company1.found}}
