@@ -236,7 +236,7 @@ companyPage = function(template_data,company_id,template){
 		return page;
 	});
 };
-homePage = function(req,template_data){
+homePage = function(){
 	var page = 'index';
 	return Q.fcall(function(){ return page;});
 };
@@ -307,7 +307,7 @@ directoryPage = function(region,template_data,dir_match,template){
 		return page;
 	});
 };
-if (process.env.NODE_ENV === 'production') {
+/*if (process.env.NODE_ENV === 'production') {
 	// Create workers for each cpu
 	if (cluster.isMaster && !process.env.NO_CLUSTER){
 		var cpuCount = require('os').cpus().length;
@@ -322,6 +322,6 @@ if (process.env.NODE_ENV === 'production') {
 	}else{
 		startServer();
 	}
-} else {
+} else {*/
 	startServer();
-}
+//}

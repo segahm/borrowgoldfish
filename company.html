@@ -3,6 +3,7 @@
     
 
     <title>{{title}} - {{page_title}}</title>
+    {{^es}}<link rel="alternate" hreflang="es-US" href="/es{{url}}">{{/es}}
 
     <link rel="stylesheet" href="/index_files/normalize.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/index_files/osrc.css" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="/index_files/caura.css" type="text/css" media="screen" charset="utf-8">
@@ -147,7 +148,7 @@ hurdles, but it currently can take us a few days to confirm the validity
   <a onclick="window.open(this.href, 'mywin',
 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="https://twitter.com/intent/tweet?button_hashtag={{id}}&amp;screen_name=nesovok" class="btn btn-primary" data-lang="en"><span class="fa fa-twitter"></span> Tweet to @nesovok</a>
 
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   
   
     </div>
@@ -197,7 +198,7 @@ hurdles, but it currently can take us a few days to confirm the validity
             </div>
 {{/es}}
           </div>
-  <script>
+  <script type="text/javascript">
   $( '#valuation-box' ).mousedown(function() {
     if (!$('#valuationmodal').hasClass('in')){
           analytics.page({
@@ -399,7 +400,7 @@ Es solo una estimación. No haría que responsabilizar proveedor de datos ya que
 </div>
     </div>
 
-    <script>
+    <script type="text/javascript">
 
         function hide_banner () {
             $("#banner").hide();
