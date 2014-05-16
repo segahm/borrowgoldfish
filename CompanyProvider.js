@@ -151,7 +151,9 @@ CompanyProvider.prototype.findById = function(id) {
     if (!similar || similar.length === 0){
       similar  = [];
     }
-    result.similar = similar;
+    if (result){
+      result.similar = similar;
+    }
     return result;
   });
 };

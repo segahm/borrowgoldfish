@@ -3,7 +3,7 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
 
-    <title>Small Business Finances and Valuation in {{title_region}}</title>
+    <title>{{page_title}} {{title_region}}</title>
 
     <link rel="stylesheet" href="/index_files/normalize.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/index_files/osrc.css" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="/index_files/caura.css" type="text/css" media="screen" charset="utf-8">
@@ -11,11 +11,11 @@
   <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href="/index_files/part-bootstrap.css" rel="stylesheet">
   <!-- linkedin/facebook card begin -->
-  <meta property="og:title" content="{{title}} - Small Business Finances &amp; Valuation">
+  <meta property="og:title" content="{{page_title}} {{title_region}}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="{{url_path}}{{company_id}}">
 <meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
-<meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="BorrowGoldfish"><meta property="article:publisher" content="NeSovok">
+<meta property="og:description" content="{{meta_description}}"><meta property="og:site_name" content="BorrowGoldfish"><meta property="article:publisher" content="NeSovok">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
 
@@ -24,15 +24,23 @@
   <!-- twitter card begin -->
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:title" content="{{title}} - valuation and finances">
-<meta name="twitter:description" content="{{description_short_text}}">
+<meta name="twitter:title" content="{{page_title}} {{title_region}}">
+<meta name="twitter:description" content="{{meta_description}}">
 <meta name="twitter:creator" content="@nesovok">
 <meta name="twitter:image:src" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
   <!-- twitter card end -->
-<style type="text/css"></style><style type="text/css"></style></head><body class="" style="zoom: 1;" data-twttr-rendered="true">
+  <!-- analytics -->
+<script type="text/javascript">
+window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+window.analytics.load("rucaagoxlx");
+window.analytics.page();
+</script>
+<!-- analytics -->
+</head><body class="" style="zoom: 1;" data-twttr-rendered="true">
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script id="twitter-wjs" src="/index_files/widgets.js"></script><script src="/index_files/jquery.min.js"></script>
+    <script id="twitter-wjs" src="/index_files/widgets.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/index_files/bootstrap.min.js"></script>
 
@@ -49,7 +57,7 @@
   <i class="fa fa-twitter"> </i>
   </span></a>
   <a onclick="window.open(this.href, &#39;mywin&#39;,
-&#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{title}}&summary={{description_short_text}}&source=Borrow%20Goldfish"><span class="fa-stack fa-lg">
+&#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{title}}&summary={{twitter_share_text}}&source=Borrow%20Goldfish"><span class="fa-stack fa-lg">
   
   <i class="fa fa-linkedin"> </i>
   </span></a>
@@ -72,7 +80,7 @@
       {{#category}}<li><a href="{{url}}">{{name}}</a></li>{{/category}}
       {{#last}}<li class="active">{{name}}</li>{{/last}}
       {{/breadcrumb}}
-  </ol></div><div class="row">{{^es}}{{region.en}}{{/es}}{{#es}}{{region.es}}{{/es}}:</div>
+  </ol></div><div class="row">{{region}}:</div>
 
   <div class="row" id="directory">
     <div class="row-fluid">
@@ -101,4 +109,7 @@
             The valuation of small businesses has been estimated and built by 
   <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div></div>
     </div>
+<script type="text/javascript">
+analytics.page();
+</script>
 </body></html>

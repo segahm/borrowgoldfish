@@ -7,7 +7,7 @@ var express     = require('express'),
 	_ 			= require('lodash'),
 	cons        = require('consolidate'),
 	errorhandler = require('errorhandler'),
-	templates   = require('./templates');
+	templates   = require('./templates');;
 
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -68,9 +68,7 @@ function startServer() {
 	//ignore static file requests
 	app.use('/index_files',express.static(__dirname+'/index_files'));
 	app.use('/static',express.static(__dirname+'/index_files'));
-	app.use('/favicon.ico',express.static(__dirname+'/index_files/favicon.ico'));
-	app.use('/favicon.ico/',express.static(__dirname+'/index_files/favicon.ico'));
-
+	app.use('favicon.ico',express.static(__dirname+'/index_files/favicon.ico'));
 
 	if (process.env.NODE_ENV === 'development'){
 		app.use(errorhandler());
@@ -81,9 +79,9 @@ function startServer() {
 		console.log('%s %s', req.method, req.url);
 		res.set('Content-Type', 'text/html');
 		//spanish
-		var matches = req.url.match(/^\/(es\/)?([a-z0-9\-]{3,})?/i); // "/es/non-state-string"
-		var is_spanish = (matches && typeof(matches[1]) !== 'undefined')?true:false;
-		console.log(matches);
+		var matches = req.url.match(/^\/(es)[\/]?/i);
+		var is_spanish = (matches)?true:false;
+		matches = req.url.match(/^\/(es\/)?([a-z0-9\-]{3,})$/i); // "/es/non-state-string"
 		var template_data = {};
 		var template = is_spanish?templates.spanish:templates.english;
 		template_data.es = is_spanish;	//whether to turn-on spanish language
@@ -92,6 +90,7 @@ function startServer() {
 		template_data.encoded_url = encodeURIComponent(
 			'http://'+req.host+req.originalUrl);
 		template_data.url = req.url.replace(/^\/es\/?/i,'/');
+		template_data.full_url = (is_spanish?'http://'+req.host+'/es':'http://'+req.host)+template_data.url;
 
 		var page = 'index';	//default page
 		var resultPromise = Q.fcall(function(){ return page;});
@@ -113,7 +112,7 @@ function startServer() {
 				city: (dir_match && typeof(dir_match[4]) !== 'undefined')?toTitleCase(dir_match[4].slice(1)):null
 			};
 			region.state = STATES[region.state_abrev];
-			resultPromise = directoryPage(region,template_data,dir_match);
+			resultPromise = directoryPage(region,template_data,dir_match,template);
 		}else if (typeof(req.query.q) !== 'undefined'){
 			console.log('query');
 			page = '404';
@@ -140,6 +139,25 @@ function startServer() {
 				res = res.status(404);
 				mypage = 'index';	//404 alias
 			}
+			var page_template;
+			switch(mypage){
+			case 'index':
+				page_template = template.page.index;
+				break;
+			case 'directory':
+				page_template = template.page.directory;
+				break;
+			case 'company':
+				page_template = template.page.company;
+				break;
+			}
+			template_data = _.merge(
+				template_data,
+				page_template,
+				template.all_pages
+			);
+
+
 			res.render(mypage, template_data);
 		}).catch(function (error) {
 			if (process.env.NODE_ENV === 'development'){
@@ -172,12 +190,11 @@ companyPage = function(template_data,company_id,template){
 			//similar companies:
 			var writeUp = new Writeup();
 			var bitmap = writeUp.write(data.similar,data.company);
-			template_data.description_short_text = 'How much exactly is '+data.company.title+' restaurant worth? We estimate it at $'+data.company.valuation+'. Starting with market analysis of '+data.company.county+' county we use company-specific data to narrow down the competitive advantages of every Small Business in America.';
+			template_data.description_short_text = template.shortDescription(data.company.title,data.company.valuation,data.company.county);
 			template_data = _.merge(
 				template_data,	//sets general variables
 				data.company,	//sets company variables
 				{
-					twitter_share_text: encodeURIComponent(template.twitter_company_share),
 					encoded_title: encodeURIComponent(data.company.title),
 					encoded_description_short_text: encodeURIComponent(template_data.description_short_text)
 				},
@@ -215,7 +232,7 @@ homePage = function(req,template_data){
 	var page = 'index';
 	return Q.fcall(function(){ return page;});
 };
-directoryPage = function(region,template_data,dir_match){
+directoryPage = function(region,template_data,dir_match,template){
 	//guard against bad states by showing default directory page, rather than no results
 	/*if (typeof(STATES[state_abrev]) === 'undefined'){
 		state = STATES.TX;
@@ -232,15 +249,15 @@ directoryPage = function(region,template_data,dir_match){
 			if (region.county){
 				breadcrumb.push({name: region.county});
 				url_path.push(region.county);
-				template_data.region = {en: 'Restaurants, Cities', es: 'Los restaurantes, Ciudades'};
+				template_data.region = template.cities_home;
 				if (region.city){
 					breadcrumb.push({name: region.city});
 					url_path.push(region.city);
-					template_data.region = {en: 'Restaurants', es: 'Los restaurantes'};
+					template_data.region = template.restaurants;
 					template_data.show_other_states = false;
 				}
 			}else{
-				template_data.region = {en: 'Restaurants, Counties', es: 'Los restaurantes, Condados'};
+				template_data.region = template.counties_home;
 			}
 			//Parse links for non-city listings
 			_(data.items).forIn(function(v,k){
