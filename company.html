@@ -12,7 +12,7 @@
   <!-- linkedin/facebook card begin -->
   <meta property="og:title" content="{{title}} - {{page_title}}">
 <meta property="og:type" content="article">
-<meta property="og:url" content="{{url_path}}{{id}}">
+<meta property="og:url" content="{{full_url}}">
 <meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
 <meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="BorrowGoldfish"><meta property="article:publisher" content="NeSovok">
 <meta property="og:locale" content="en_US">
@@ -53,13 +53,21 @@ window.analytics.page();
  <!-- everything in here should have the Bootstrap CSS applied -->
  
 </div>
+{{^es}}
             <strong>Dear Bankers:</strong>While you read this, make sure that you remember that these stats only provide a biased and one-sided view.<br> Don't take it too seriously! 
             <span class="promise">OK. I promise!</span>
+            {{/es}}
+            {{#es}}
+            <strong>Estimados banqueros:</strong>mientras leen eso, asegúrense que ustedes se recuerden que esas
+ 
+estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No se lo tomen tan en serio!
+            <span class="promise">¡Bien lo prometo !</span>
+            {{/es}}
         </div>
     </div>
 
     <div class="header">
-        <a class="header-title" href="{{url_path}}">Small Business<br>Finances<br>&amp; Valuation</a><div class="social"> <a onclick="window.open(this.href, 'mywin',
+        <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a><div class="social"> <a onclick="window.open(this.href, 'mywin',
 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_share_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
@@ -85,7 +93,7 @@ window.analytics.page();
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel">Valuation methodology</h4>
+        <h4 class="modal-title" id="myModalLabel">{{^es}}Valuation methodology{{/es}}{{#es}}Valuation methodology{{/es}}</h4>
       </div>
       <div class="modal-body"><img src="/index_files/table-restaurant0110.png"><br>
 <div class="alert alert-danger fade in">
@@ -93,7 +101,7 @@ window.analytics.page();
       
       <p style="
     /* text-align: left; */
-">Only the owner of this business can see the details. If you are the owner, please claim this business to proceed.</p>
+">{{^es}}Only the owner of this business can see the details. If you are the owner, please claim this business to proceed.{{/es}}{{#es}}Only the owner of this business can see the details. If you are the owner, please claim this business to proceed.{{/es}}</p>
   </div>
       </div>
 
@@ -106,10 +114,11 @@ window.analytics.page();
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel2">Claim your business</h4>
+        <h4 class="modal-title" id="myModalLabel2">{{^es}}Claim your business{{/es}}{{#es}}Claim your business{{/es}}</h4>
       </div>
       <div class="modal-body">
 <div class="bs-callout bs-callout-info">
+    {{^es}}
     <h4>Confirm yourself using "social"</h4>
     <p>To identify you as an owner, we use social media. Please tweet to us using a <b>#hashtag</b> for the name of your business from your company's official account. </p><pre>Ex: @nesovok #{{id}}</pre><p></p>
   
@@ -119,7 +128,17 @@ window.analytics.page();
 hurdles, but it currently can take us a few days to confirm the validity
  of your claim.</blockquote>
 
+  {{/es}}{{#es}}
+    <h4>Confirm yourself using "social"</h4>
+    <p>To identify you as an owner, we use social media. Please tweet to us using a <b>#hashtag</b> for the name of your business from your company's official account. </p><pre>Ex: @nesovok #{{id}}</pre><p></p>
   
+</div>
+
+  <blockquote>You do NOT need to login/register or go through other 
+hurdles, but it currently can take us a few days to confirm the validity
+ of your claim.</blockquote>
+
+  {{/es}}
 </div>
       <div class="modal-footer">
   email to <a href="mailto:segahm+grow@gmail.com?subject=Business%20Claim:{{id}}">segahm+grow@gmail.com</a><span> OR </span>    
@@ -140,7 +159,7 @@ hurdles, but it currently can take us a few days to confirm the validity
   </div>
 
 
-  
+  {{^es}}
   <span>What is the value of my company?</span>
 <div id="investment-details" class="master_clearfix">
           <div id="investment-statistics">
@@ -158,7 +177,25 @@ hurdles, but it currently can take us a few days to confirm the validity
                         <div class="stats-date">* Statistics as of 03/31/14</div>
                         <a href="#details-statistics" class="triangle-link">View more statistics</a>
             </div>
+{{/es}}{{#es}}
+  <span>¿Cuál es el valor de mi empresa?</span>
+<div id="investment-details" class="master_clearfix">
+          <div id="investment-statistics">
+            
 
+            <div id="statistics" class="grey-border-panel master_clearfix">
+              <div class="stats-box loans-box" id="valuation-box">
+                <p>Valoración de empresas:</p>
+                          <span>${{valuation}}</span>
+                        </div>
+                        <div class="stats-box interest-box" id="interest-box">
+  <p>Afirme su empresa:</p><span>Revisión detallada del análisis de la valoración  de empresas y descubren como se valora su empresa e.</span>
+                          
+                        </div>
+                        <div class="stats-date">* Estadísticas  del 03/31/14</div>
+                        <a href="#details-statistics" class="triangle-link">Ver mas estadísticas</a>
+            </div>
+{{/es}}
           </div>
   <script>
   $( '#valuation-box' ).mousedown(function() {
@@ -204,7 +241,7 @@ $('#valuationmodal').modal('toggle');
       </p>
     </div>
     <div id="description">
-
+{{^es}}
         <p>
           <a id="details-statistics" href="{{id}}">{{title}}</a> is 
 {{#praise[0]}}a lucrative{{/praise[0]}}{{#praise[1]}}an 
@@ -232,15 +269,44 @@ With this in mind, both aforementioned companies could make for franchise
 {{/company2.found}}   
 {{^company1.found}}{{^company2.found}}<p>We will keep looking, but it appears that this is quite a unique business - there really is not anything like it anywhere in the neighborhood.</p>{{/company2.found}}{{/company1.found}}
         
+{{/es}}
+{{#es}}
+        <p>
+          <a id="details-statistics" href="{{id}}">{{title}}</a> is 
+{{#praise[0]}}a lucrative{{/praise[0]}}{{#praise[1]}}an 
+amazing{{/praise[1]}}{{#praise[2]}}a highly 
+entrepreneurial{{/praise[2]}}{{#praise[3]}}trend 
+setting{{/praise[3]}} restaurant {{#loc[0]}}situated 
+in{{/loc[0]}}{{#loc[1]}}located in{{/loc[1]}} {{county}} 
+county.</p>
 
+ {{#company1.found}}       
+        <p>
+    The company’s business focus is very similar to <a href="{{company1.id}}">{{company1.title}}</a>'s
+
+but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}keeps the doors open more often{{/company1.doors.p}}{{#company1.doors.n}}keeps the doors open less often{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}tends to attract customers in the evening{{/company1.evening.p}}{{#company1.evening.n}}actually closes much earlier{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}turns around some extra bucks from booze sales{{/company1.alcohol.p}}{{#company1.alcohol.n}}does not have alcohol sales to boost those high margins{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}.
+        
+    </p>
+{{/company1.found}}    
+{{#company2.found}}        
+        <p>
+        It seems like {{title}} is also somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
+ That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}. 
+With this in mind, both aforementioned companies could make for franchise
+ partners based on ideal regional coverage: <a target="_blank" href="{{company1.map}}">google map of {{company1.title}}</a>, <a target="_blank"  href="{{company2.map}}">map of {{company2.title}}</a>.
+        </p>    
+{{/company2.found}}   
+{{^company1.found}}{{^company2.found}}<p>We will keep looking, but it appears that this is quite a unique business - there really is not anything like it anywhere in the neighborhood.</p>{{/company2.found}}{{/company1.found}}
+        
+{{/es}}
     </div>
-
+{{^es}}
     <h1 id="stats">Statistics</h1>
 
     <div id="schedule-text">
 
          <p id="events">
-        The following analysis has been made for {{county}} as a whole. While a greater number of any type of cuisine simply speaks to the local demand, it can also shine some light on the level of competition. We have sampled these stats based on <strong>{{total_restaurants}}</strong> restaurants. The colors in the pie chart stand for the most popular types of cuisine (i.e. greatest number of restaurants):
+        The following analysis has been made for {{county}} county as a whole. While a greater number of any type of cuisine simply speaks to the local demand, it can also shine some light on the level of competition. We have sampled these stats based on <strong>{{total_restaurants}}</strong> restaurants. The colors in the pie chart stand for the most popular types of cuisine (i.e. greatest number of restaurants):
         <span class="evttype" data-ind="0">{{categories[0]}}</span>,
         <span class="evttype" data-ind="1">{{categories[1]}}</span>,
         <span class="evttype" data-ind="2">{{categories[2]}}</span>, and
@@ -269,6 +335,43 @@ With this in mind, both aforementioned companies could make for franchise
     </div>
 
 </div>
+{{/es}}
+{{#es}}
+    <h1 id="stats">ESTADÍSTICAS</h1>
+
+    <div id="schedule-text">
+
+         <p id="events">
+        El siguiente análisis fue realizado para {{county}} condado en conjunto. Mientras que un número mayor de cualquier tipo de cocina simplemente corresponde a la demanda local, sino que también  puede aclarar en el nivel de la competencia. Hemos probado esas estadísticas a partir de <strong>{{total_restaurants}}</strong> restaurantes. Los colores del gráfico circular representan los más populares tipos de cocina (i.e. el mayor número de restaurantes) :
+        <span class="evttype" data-ind="0">{{categories[0]}}</span>,
+        <span class="evttype" data-ind="1">{{categories[1]}}</span>,
+        <span class="evttype" data-ind="2">{{categories[2]}}</span> y
+        <span class="evttype" data-ind="3">{{categories[3]}}</span> en el condado de {{county}}.
+        </p>
+        <div class="hist-block">
+            <div id="rest-by-cat-chart"></div>
+        </div>
+
+
+        <p id="schedule">
+        
+        Lo siguiente son algunas estadísticas del condado de Cameron en comparación con cercanos condados:
+        <span class="evttype" data-ind="0">{{counties[0]}}</span>,
+        <span class="evttype" data-ind="1">{{counties[1]}}</span> y
+        <span class="evttype" data-ind="2">{{counties[2]}}</span>. El grafico a la izquierda indica la concentración medida de restaurantes por el <strong>#de clientes/#de restaurantes</strong>. El grafico a la derecha muestra el relativo número de restaurantes  abiertos durante diferentes partes del día (mañana / tarde / noche).
+        </p>
+
+        <div class="hist-block">
+            <div id="density" class="hist"><h6>Restaurant Density by County</h6>
+            </div>
+            <div id="day" class="hist"><h6>Number of open restaurants by time of the day, county</h6></div>
+        </div>
+    
+
+    </div>
+
+</div>
+{{/es}}
 {{#disable}}
 <div class="front-splash">
     <div class="splash-text">
@@ -286,10 +389,12 @@ With this in mind, both aforementioned companies could make for franchise
 
 <div class="container">
         <div id="footer">
-            The valuation of small businesses has been estimated and built by 
-  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No 
-data provider should be held responsible. The following are some of the 
-data providers we are required to acknowledge:<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/index_files/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a>
+ {{^es}}           The valuation of small businesses has been estimated and built by 
+  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the 
+data providers we are required to acknowledge:{{/es}}
+{{#es}}           La valuación de las pequeñas empresas fue estimada y construida por 
+  <a href="http://twitter.com/nesovok">Segah Meer</a> en un tercero de datos sociales, además con  datos de censo y análisis económico.
+Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/index_files/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a>
 <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
 </div>
     </div>
@@ -329,4 +434,5 @@ var counties = {{{json_counties}}};
 <script type="text/javascript">
 analytics.page();
 </script>
+<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
 </body></html>

@@ -13,7 +13,7 @@
   <!-- linkedin/facebook card begin -->
   <meta property="og:title" content="{{page_title}} {{title_region}}">
 <meta property="og:type" content="article">
-<meta property="og:url" content="{{url_path}}{{company_id}}">
+<meta property="og:url" content="{{full_url}}">
 <meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
 <meta property="og:description" content="{{meta_description}}"><meta property="og:site_name" content="BorrowGoldfish"><meta property="article:publisher" content="NeSovok">
 <meta property="og:locale" content="en_US">
@@ -51,7 +51,7 @@ window.analytics.page();
     
 
     <div class="header">
-        <a class="header-title" href="/%7B%7Burl_path%7D%7D">Small Business<br>Finances<br>&amp; Valuation</a><div class="social"> <a onclick="window.open(this.href, &#39;mywin&#39;,
+        <a class="header-title" href="/%7B%7Burl_path%7D%7D">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a><div class="social"> <a onclick="window.open(this.href, &#39;mywin&#39;,
 &#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_share_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
@@ -106,10 +106,14 @@ window.analytics.page();
 </div>
 <div class="container">
         <div id="footer">
-            The valuation of small businesses has been estimated and built by 
-  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div></div>
+{{^es}}           The valuation of small businesses has been estimated and built by 
+  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. {{/es}}
+{{#es}}           La valuación de las pequeñas empresas fue estimada y construida por 
+  <a href="http://twitter.com/nesovok">Segah Meer</a> en un tercero de datos sociales, además con  datos de censo y análisis económico.
+Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. {{/es}}<div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div></div>
     </div>
 <script type="text/javascript">
 analytics.page();
 </script>
+<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
 </body></html>

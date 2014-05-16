@@ -13,7 +13,7 @@
   <!-- linkedin/facebook card begin -->
   <meta property="og:title" content="{{page_title}}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{{url_path}}">
+<meta property="og:url" content="{{full_url}}">
 <meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
 <meta property="og:description" content="{{meta_description}}"><meta property="og:site_name" content="BorrowGoldfish">
 <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <meta name="twitter:title" content="{{page_title}}">
-<meta name="twitter:description" content="{{meta_description}}"><meta property="og:site_name" content="BorrowGoldfish">
+<meta name="twitter:description" content="{{meta_description}}">
 <meta name="twitter:creator" content="@nesovok">
 <meta name="twitter:image:src" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
   <!-- twitter card end -->
@@ -51,7 +51,7 @@ window.analytics.page();
     
 
     <div class="header">
-        <a class="header-title" href="{{url_path}}">Small Business<br>Finances<br>&amp; Valuation</a><div class="social"> <a onclick="window.open(this.href, &#39;mywin&#39;,
+        <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a><div class="social"> <a onclick="window.open(this.href, &#39;mywin&#39;,
 &#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_share_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
@@ -70,7 +70,7 @@ window.analytics.page();
 
 </div></div>
 
-
+{{^es}}
     <div class="container">
 
 <div id="profile">
@@ -105,7 +105,7 @@ Yet, what makes today different from, say, 10 years ago is that there is all kin
 
         
         <p>This and other thoughts about small business arena have been with me for a long time. Already when I held a job at the World Bank, I was surprised that small businesses weren’t getting lending capital despite having Returns on Capital of over 28%. During my subsequent start-up, I have also encountered business lenders that commonly evaluated revenue potential of web-only stores using premise assessment. Even then I knew I could get at <a href="http://www.quora.com/Financial-Modeling/Where-can-web-startups-learn-about-financial-modeling-that-accounts-for-the-important-metrics-and-costs" target="_blank">a better revenue estimate</a> by looking at a company’s web pricing, ad spending, and conversion rates.
-</p><p>This project is in its early stages, but it is my bet that I can do a much better job at quantifying achievements of small businesses, and hopefully help small businesses as a result. For now I'm focused only on restaurants since the competitive nature of the industry makes it easy to arrive at uniform cost calculations for each category and type of dinning experience. I've decided to summarize all the calculations in one number: "how much the company is worth." This is surely not an ideal representation since the number I end up calculating is comprised of fundamentals and does not take into account the effect of <a target="_blank" href="http://aswathdamodaran.blogspot.com/2014/02/facebook-buys-whatsapp-for-19-billion.html" title="facebook buys whatsapp for 19 billion by Aswath Damodaran">&lt;&lt;The Trader (Pricing) View&gt;&gt;</a>. But it seems like it is still many times better than the next best approach out there.</p><p>So I just went ahead and built it.</p>
+</p><p>This project is in its early stages, but it is my bet that I can do a much better job at quantifying achievements of small businesses, and hopefully help small businesses as a result. For now I'm focused only on restaurants since the competitive nature of the industry makes it easy to arrive at uniform cost calculations for each category and type of dinning experience. I've decided to summarize all the calculations in one number: "how much the company is worth." This is surely not an ideal representation since the number I end up calculating is comprised of fundamentals and does not take into account the effect of <a target="_blank" href="http://aswathdamodaran.blogspot.com/2014/02/facebook-buys-whatsapp-for-19-billion.html" title="facebook buys whatsapp for 19 billion by Aswath Damodaran">&ldquo;The Trader (Pricing) View&rdquo;</a>. But it seems like it is still many times better than the next best approach out there.</p><p>So I just went ahead and built it.</p>
   <p style="font-size:12px">(p.s. if you are still interested to know the details about my choice for the site's name, feel free to tweet to me <a href="http://twitter.com/nesovok" target="_blank">@nesovok</a>.</p>     
 
         
@@ -120,17 +120,71 @@ Yet, what makes today different from, say, 10 years ago is that there is all kin
 
 
 </div>
+{{/es}}
+{{#es}}
+   <div class="container">
 
+<div id="profile">
+  
+    <div class="profile-badge clearfix">
+            <span class="profile-name">¿Por qué "Borrow Goldfish"?</span>
+    </div>
+    <div id="description">
+  <p>
+Ya hoy en <a href="http://borrowgoldfish.com/es/" title="BorrowGoldfish español">BorrowGoldfish</a> usted puede encontrar una estimación de la valoración de cuánto vale cualquier restaurante dentro de varios condados en Texas, Florida y nuevo México. Mi esperanza es construir un motor de predicción para cuantificar todos las pequeñas empresas en los Estados Unidos. Supongo que si Yelp lograron encontrar consumidores, personas reales, para cuantificar la calidad del servicio a las pequeñas empresas, definitivamente puedo encontrar datos que <a href="https://www.yelp.com/academic_dataset" target="_blank">cuantifiquen</a> las finanzas de estas mismas pequeñas empresas. Estos son algunos de ellos:
+  </p>
+<div id="sitemap" class="container  bootstrap">   
+  <div class="row">
+    <div class="row-fluid">
+    <div class="col-md-1"></div>
+    
+<div class="col-md-5"><a href="/es/rolies-restaurant-and-seafood-palmview-tx">Rolies Restaurant & Seafood</a></div><div class="col-md-2"><a href="/es/pizza-time-canutillo-tx">Pizza Time</a></div><div class="col-md-2"><a href="/es/texas-cafe-harlingen-tx">Texas Cafe</a></div><div class="col-md-2"></div>
+</div>
+
+  
+</div>
+
+      </div>
+        <p>"Pequeñas empresas emplean la mayoría de población activa los E.E.U.U", "pequeñas empresas es la repuesta para salgar el país de la recesión” esas o otras <a href="http://www.forbes.com/sites/rebeccabagley/2012/05/15/small-businesses-big-impact" target="_blank">citaciones</a> estamos acostumbrados <a href="http://www.whitehouse.gov/economy/business/small-business" target="_blank">oírlos</a>. Por lo tanto tradicionalmente ha sido poco hecho por el sector financiero para llamar la atención en <a href="http://www.nydailynews.com/new-york/loan-groan-spite-improving-economy-nyc-small-businesses-bank-loans-article-1.1788874" target="_blank">el financiamiento de las pequeñas empresas</a>.  
+</p>
+
+        
+        <p>
+ Sin embargo, lo que hace hoy diferente de, digamos, hace 10 años, es que hay todo tipo de datos disponibles en las PYMES. Además de los datos económicos y censo tradicionales, ahora hay lugares de datos con los cuales es posible predecir el éxito en los negocios y los ingresos por la exposición de cada empresa en la audiencia web y el trafico local. 
+    </p>
+        
+
+        
+        <p>Esto y otros pensamientos sobre la arena de pequeños negocios han estado conmigo durante mucho tiempo. Ya cuando tuve un trabajo en el Banco Mundial, no obtuvieron préstamo de capital a pesar de que  tenian rendimientos del capital mas de 28%. Durante mi posterior start-up también he encontrado a prestamistas comerciales que comúnmente evalúan el potencial de ingresos de tiendas en línea usando la evaluación de la premisa. Incluso entonces, supe que podía recibir ata <a href="http://www.quora.com/Financial-Modeling/Where-can-web-startups-learn-about-financial-modeling-that-accounts-for-the-important-metrics-and-costs" target="_blank">una mejor estimación</a> de los ingresos por el precio de la compañía, los gastos de los anuncios, y los índices de conversión.
+</p><p>Este proyecto esta en sus etapas iniciales, pero apuesto que puedo hacer un mejor trabajo en la cuantificación de logros de las pequeñas empresas y espero ayudar a pequeñas empresas como resultado. Por ahora estoy concentrado soló en los restaurantes ya que la naturaleza competitiva de la industria hace que sea mas fácil de llegar  a cálculos de costo uniforme para cada categoría y tipo de cocina. He decido resumir todos los cálculos en un numero : “ ¿Cual es el valor de la compañía.” Seguramente no es una representación ideal puesto que el número se compone de fundamentos y no toma en cuenta el efecto de la opinión del comerciante <a target="_blank" href="http://aswathdamodaran.blogspot.com/2014/02/facebook-buys-whatsapp-for-19-billion.html" title="facebook buys whatsapp for 19 billion by Aswath Damodaran">&ldquo;The Trader (Pricing) View&rdquo;</a>. Pero se parece que todavía es muchas veces mejor que el mejor enfoque.</p><p>Así que seguí adelante y lo construí.</p>
+  <p style="font-size:12px">(p.s si usted todavía está interesado en conocer los detalles sobre  mi elección para el nombre del sitio, no dude en enviarme un tweet <a href="http://twitter.com/nesovok" target="_blank">@nesovok</a>.</p>     
+
+        
+
+    </div>
+
+    
+
+    
+
+</div>
+
+
+</div>
+{{/es}}
 <div class="container">
         <div id="footer">
-            The valuation of small businesses has been estimated and built by 
-  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No 
-data provider should be held responsible. The following are some of the 
-data providers we are required to acknowledge:<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/index_files/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a>
+{{^es}}           The valuation of small businesses has been estimated and built by 
+  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the 
+data providers we are required to acknowledge:{{/es}}
+{{#es}}           La valuación de las pequeñas empresas fue estimada y construida por 
+  <a href="http://twitter.com/nesovok">Segah Meer</a> en un tercero de datos sociales, además con  datos de censo y análisis económico.
+Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/index_files/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a>
 <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
 </div>
     </div>
 <script type="text/javascript">
 analytics.page();
 </script>
+<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
 </body></html>

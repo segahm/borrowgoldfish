@@ -83,12 +83,12 @@ function startServer() {
 
 
 	app.use(function(req, res, next){
-		console.log('%s %s', req.method, req.url);
 		res.set('Content-Type', 'text/html');
 		//spanish
-		var matches = req.url.match(/^\/(es)[\/]?/i);
-		var is_spanish = (matches)?true:false;
-		matches = req.url.match(/^\/(es\/)?([a-z0-9\-]{3,})$/i); // "/es/non-state-string"
+		var matches = req.path.match(/^\/(es)[\/]?/i);
+		var is_spanish = (matches || (typeof(req.query.fb_locale) !== 'undefined' && req.query.fb_locale === 'es_ES'))?true:false;
+
+		matches = req.path.match(/^\/(es\/)?([a-z0-9\-]{3,})$/i); // "/es/non-state-string"
 		var template_data = {};
 		var template = is_spanish?templates.spanish:templates.english;
 		template_data.es = is_spanish;	//whether to turn-on spanish language
@@ -96,19 +96,18 @@ function startServer() {
 		template_data.url_path = is_spanish?'http://'+req.host+'/es/':'http://'+req.host+'/';
 		template_data.encoded_url = encodeURIComponent(
 			'http://'+req.host+req.originalUrl);
-		template_data.url = req.url.replace(/^\/es\/?/i,'/');
-		template_data.full_url = (is_spanish?'http://'+req.host+'/es':'http://'+req.host)+template_data.url;
+		template_data.url = req.path.replace(/^\/es\/?/i,'/');
+		template_data.full_url = (is_spanish?'http://'+req.host+'/es':'http://'+req.host)+req.url.replace(/^\/es\/?/i,'/');
 
 		var page = 'index';	//default page
 		var resultPromise = Q.fcall(function(){ return page;});
 
-		var dir_match = req.url.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z_\-]{3,})?\/?(\/[a-z_\-]{3,})?$/i);
+		var dir_match = req.path.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z_\-]{3,})?\/?(\/[a-z_\-]{3,})?$/i);
 		/**
 		 *FIRST-pass page check
 		 */
 		 //COMPANY
 		if (matches && typeof(matches[2]) !== 'undefined'){
-			console.log('company');
 			var company_id = matches[2];
 			resultPromise = companyPage(template_data,company_id,template);
 		//DIRECTORY
@@ -144,6 +143,7 @@ function startServer() {
 			//console.log(template_data);
 			if (mypage === '404'){
 				res = res.status(404);
+				console.log('%s %s', req.method, req.url);
 				mypage = 'index';	//404 alias
 			}
 			var page_template;
@@ -167,11 +167,12 @@ function startServer() {
 
 			res.render(mypage, template_data);
 		}).catch(function (error) {
-			//if (process.env.NODE_ENV === 'development'){
+			if (process.env.NODE_ENV === 'development'){
 				res.send(500, error.message);
-			/*}else{
+			}else{
 				res.send(500,'<h2>An error has occured</h2><div>The server is temporarily unable to service your request. The issue has been reported and we are likely resolving it already. Please try again later.</div>');
-			}*/
+			}
+			console.log('%s %s', req.method, req.url);
 			console.log(error);
 		}).done();
 		/*}else{
