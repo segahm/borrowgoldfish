@@ -266,7 +266,7 @@ With this in mind, both aforementioned companies could make for franchise
   <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No 
 data provider should be held responsible. The following are some of the 
 data providers we are required to acknowledge:<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/index_files/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a>
-<div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es/{{url}}">spanish</a>{{/es}} | {{#es}}<a href="/{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
+<div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
 </div>
     </div>
 
@@ -298,172 +298,10 @@ data providers we are required to acknowledge:<a style="padding-left:10px" href=
 
 <script>
 {{#disable}}//{top_counties: {"county": {density: , people: ,catDensity: [category: , count: ]}],top_cats:}{{/disable}}
-var svg = {{{svg}}};
-(function () {
-
-    "use strict";
-
-    $(function () {
-        var cb = d3.scale.category10();
-        $(".evttype").each(function () {
-            var el = $(this);
-            el.css("color", cb(+el.data("ind")));
-        });
-        /*var labels = [];
-        var densities = [];
-        var cat_densities = [[],[]];
-        var col = 0;
-
-        for (var county in svg.top_counties){
-          //labels.push(county[0]);
-          //densities.push(Array.apply(null, new Array(3)).map(Number.prototype.valueOf,0));
-          //densities[col][col] = svg.top_counties[county].density;
-          //cat_densities[1].push((typeof(svg.top_counties[county].catDensity) !== 'undefined')?svg.top_counties[county].catDensity:0);
-          col++;
-        }*/
-        //  Histogram #1
-        /*var density_hist = window.histogram().width(100)
-                                        .labels(labels);
-        var density_data = densities;
-        d3.select("#density")
-          .datum(density_data[0].map(function (d, i) {
-              return density_data.map(function (d) { return d[i]; });
-          }))
-          .call(density_hist);*/
-        //  Histogram #2
-        var day_hist = window.histogram().width(300)
-                        .labels(['8:00-10:00','','','12-3pm','','','5pm -','','']);
-        var day_data = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]];
-        if (svg.hourly_density['{{counties[0]}}']){
-          day_data[0] = [svg.hourly_density['{{counties[0]}}'].m,0,0,
-          svg.hourly_density['{{counties[0]}}'].a,0,0,
-          svg.hourly_density['{{counties[0]}}'].d,0,0];
-        }
-        if (svg.hourly_density['{{counties[1]}}']){
-          day_data[1] = [svg.hourly_density['{{counties[1]}}'].m,0,0,
-          svg.hourly_density['{{counties[1]}}'].a,0,0,
-          svg.hourly_density['{{counties[1]}}'].d,0,0];
-        }
-        if (svg.hourly_density['{{counties[2]}}']){
-          day_data[2] = [svg.hourly_density['{{counties[2]}}'].m,0,0,
-          svg.hourly_density['{{counties[2]}}'].a,0,0,
-          svg.hourly_density['{{counties[2]}}'].d,0,0];
-        }
-        //var day_data = [[3,0,0,3,0,0,3,0,0],[3,0,0,3,0,0,3,0,0],[4,0,0,5,0,0,6,0,0]];
-        d3.select("#day")
-          .datum(day_data[0].map(function (d, i) {
-              return day_data.map(function (d) { return d[(i)]; });
-          }))
-          .call(day_hist);
-
-        // Languages.
-        var event_pie = window.piechart().dim(200);
-        var event_data = d3.values(svg.top_cats);  //[31, 16, 4];
-        d3.select("#rest-by-cat-chart").datum(event_data).call(event_pie);
-
-
-    });
-
-})();
-
-
+var svg = {{{svg}}};  
+var counties = {{{json_counties}}}; 
 </script>
- <script type="text/javascript">
-
-(function(){
-    var cb = d3.scale.category10();
-    var margin = {top: 0, bottom: 0, left:70   , right: 0};
-    var width = 300 - margin.left - margin.right;
-    var height = 170 - margin.top - margin.bottom;
-
-    var xScale = d3.scale.linear().range([0, width]);
-    var yScale = d3.scale.ordinal().rangeRoundBands([0, height], 0.2,0);
-
-    var numTicks = 3;
-    var xAxis = d3.svg.axis().scale(xScale)
-                    .orient("top")
-                    .tickSize((-height))
-                    .ticks(numTicks);
-    var barSvg = d3.select("#density").append("svg")
-                .attr("width", width+margin.left+margin.right)
-                .attr("height", height+margin.top+margin.bottom)
-                .append("g")
-                .attr("transform", "translate("+margin.left+","+margin.top+")")
-
-    var x = barSvg.append("g")
-            .attr("class", "x-axis");
-
-    var data = [];
-    for (var county in svg.top_counties){
-      data.push({
-        hlabel: county+', '+svg.top_counties[county].state,
-        density: svg.top_counties[county].density
-      });
-    }
-    function draw(data) {
-
-        var xMax = d3.max(data, function(d) { return d.density; } );
-        var xMin = 0;
-        xScale.domain([xMin, xMax]);
-        yScale.domain(data.map(function(d) { return d.hlabel; }));
-
-
-        var groups = barSvg.append("g").attr("class", "labels")
-                    .selectAll("text")
-                    .data(data)
-                    .enter()
-                    .append("g");
-
-        groups.append("text")
-                .attr("x", "0")
-                .attr("y", function(d) { return yScale(d.hlabel); })
-                .text(function(d) { return d.hlabel; })
-                .attr("text-anchor", "end")
-                .attr("dy", ".9em")
-                .attr("dx", "-.32em")
-                .attr("id", function(d,i) { return "label"+i; });
-
-        var bars = groups
-                    .attr("class", "bars")
-                    .append("rect")
-                    .attr("data-ind",function(d,i) { return i;})
-                    .style("fill", function (d) {
-                      var ind = d3.select(this).attr("data-ind");
-                      return cb(ind);
-                    })
-                    .attr("width", function(d) { return xScale(d.density); })
-                    .attr("height", height/7)
-                    .attr("x", xScale(xMin))
-                    .attr("y", function(d) { return yScale(d.hlabel); });
-
-
-        groups.append("text")
-                .attr("x", function(d) { return xScale(d.density); })
-                .attr("y", function(d) { return yScale(d.hlabel); })
-                .text(function(d) { return d.density; })
-                .attr("text-anchor", "end")
-                .attr("dy", "1.2em")
-                .attr("dx", "-.32em")
-                .attr("id", "precise-value");
-
-        x.call(xAxis);
-        var grid = xScale.ticks(numTicks);
-        barSvg.append("g").attr("class", "grid")
-            .selectAll("line")
-            .data(grid, function(d) { return d; })
-            .enter().append("line")
-                .attr("y1", 0)
-                .attr("y2", height+margin.bottom)
-                .attr("x1", function(d) { return xScale(d); })
-                .attr("x2", function(d) { return xScale(d); })
-                .attr("stroke", "white");
-
-    }
-    draw(data);
-
-})();   
-</script>
-
+<script src="/index_files/stats_plot.js"></script>
     
     
     

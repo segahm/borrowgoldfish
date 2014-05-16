@@ -16,13 +16,6 @@ function CompanyWriter(){
     'alcohol',
     'days_open',
   ];
-  this.array_to_object = function(elements){
-    var obj = {};
-    for (var col_i=0;col_i<elements.length;col_i++){
-      obj[this.naming_keys[col_i]] = elements[col_i];
-    }
-    return obj;
-  };
   this.countVariety = function(row1,row2){
     var variety_elements = 0;
     _(this.naming_keys).forEach(function(key){
@@ -143,6 +136,7 @@ function CompanyWriter(){
     if (similar.length > 0){
       result.company1 = setBitMapsForCompany(0);
       result.company1.found = true;
+      result.company1.map = 'http://maps.google.com/?q='+encodeURIComponent(similar[0].address+', '+similar[0].city+', '+similar[0].state)+'&output=classic';
       //TEMPORARY
       if (DEBUG){
         result.company1 = {
@@ -177,6 +171,7 @@ function CompanyWriter(){
       result.company2 = {
         id: similar[1].id,
         title: similar[1].title,
+        map: 'http://maps.google.com/?q='+encodeURIComponent(similar[1].address+', '+similar[1].city+', '+similar[1].state)+'&output=classic'
       };
       result.company2.found = true;
       result.company2.fact = [false,false,false,false,false];

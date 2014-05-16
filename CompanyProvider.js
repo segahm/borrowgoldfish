@@ -27,7 +27,7 @@ function findSimilar(id,category,postcode,state,county,valuation,less_restrictiv
   request.orderBy('is_greater','desc')
     .orderBy('sum_of_nulls','asc')
     .orderBy('dev','asc').limit(6).select(
-    knex.raw(sum_of_nulls+','+similar_fields+',id,title,abs(valuation-'+valuation+') as dev, (CASE WHEN valuation > '+valuation+' THEN 1 ELSE 0 END) as is_greater'));
+    knex.raw(sum_of_nulls+','+similar_fields+',address,city,state,id,title,abs(valuation-'+valuation+') as dev, (CASE WHEN valuation > '+valuation+' THEN 1 ELSE 0 END) as is_greater'));
   return request;
 }
 
@@ -101,10 +101,19 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
     var total_restaurants = 0;
     var how_many_cats = 0;
     if (data){
+      var found_my_cat = false;
+      var last_cat;
       _(data).forEach(function(cat){
         if (how_many_cats < 4){
-          result[cat.category.replace(/Food and Dining\,(Restaurants\,)?/,'')] = cat.count;
+          last_cat = cat.category.replace(/Food and Dining\,(Restaurants\,)?/,'');
+          result[last_cat] = cat.count;
           how_many_cats++;
+        }
+
+        if(!found_my_cat && how_many_cats > 3 && cat.category === category){
+          result[cat.category.replace(/Food and Dining\,(Restaurants\,)?/,'')] = cat.count;
+          delete result[last_cat];
+          found_my_cat = true;
         }
         total_restaurants += parseInt(cat.count,10);
       });

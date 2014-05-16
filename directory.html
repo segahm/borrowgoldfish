@@ -72,7 +72,7 @@
       {{#category}}<li><a href="{{url}}">{{name}}</a></li>{{/category}}
       {{#last}}<li class="active">{{name}}</li>{{/last}}
       {{/breadcrumb}}
-  </ol></div><div class="row">{{region}}:</div>
+  </ol></div><div class="row">{{^es}}{{region.en}}{{/es}}{{#es}}{{region.es}}{{/es}}:</div>
 
   <div class="row" id="directory">
     <div class="row-fluid">
@@ -86,20 +86,19 @@
   
 </div>
 {{#show_other_states}}
- <div class="row">Other States:</div>
+ <div class="row">{{^es}}Other states:{{/es}}{{#es}}Otros estados:{{/es}}</div>
       <div class="row" id="directory">
       <div class="row-fluid">
-{{#other_states}}<div class="col-md-2"><a href="/{{abbr}}">{{name}}</a></div>{{/other_states}}
-
+{{^es}}{{#other_states}}<div class="col-md-2"><a href="/{{abbr}}">{{name}}</a></div>{{/other_states}}{{/es}}
+{{#es}}{{#other_states}}<div class="col-md-2"><a href="/es/{{abbr}}">{{name}}</a></div>{{/other_states}}{{/es}}
 </div>
       </div>
       {{/show_other_states}}
       </div> 
-  
 </div>
 <div class="container">
         <div id="footer">
             The valuation of small businesses has been estimated and built by 
-  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. </div>
+  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div></div>
     </div>
 </body></html>

@@ -81,8 +81,9 @@ function startServer() {
 		console.log('%s %s', req.method, req.url);
 		res.set('Content-Type', 'text/html');
 		//spanish
-		var matches = req.url.match(/^\/(es\/)?([a-z0-9\-]{3,})?$/i); // "/es/non-state-string"
+		var matches = req.url.match(/^\/(es\/)?([a-z0-9\-]{3,})?/i); // "/es/non-state-string"
 		var is_spanish = (matches && typeof(matches[1]) !== 'undefined')?true:false;
+		console.log(matches);
 		var template_data = {};
 		var template = is_spanish?templates.spanish:templates.english;
 		template_data.es = is_spanish;	//whether to turn-on spanish language
@@ -201,6 +202,7 @@ companyPage = function(template_data,company_id,template){
 				{
 					categories: Object.keys(data.top_cats),
 					counties: Object.keys(data.top_counties),
+					json_counties: JSON.stringify(Object.keys(data.top_counties)),
 					svg: JSON.stringify(data),
 					total_restaurants: data.total_restaurants
 				});
@@ -221,7 +223,7 @@ directoryPage = function(region,template_data,dir_match){
 		city = null;
 	}*/
 	var breadcrumb = [{name: region.state}];
-	var url_path = [region.state_abrev];
+	var url_path = template_data.es?['es',region.state_abrev]:[region.state_abrev];
 	return Company.prototype.findByRegion(region.state_abrev,region.county,region.city)
 	.then(function(data){
 		var page = '404';	//if bad/non-existent category
@@ -230,15 +232,15 @@ directoryPage = function(region,template_data,dir_match){
 			if (region.county){
 				breadcrumb.push({name: region.county});
 				url_path.push(region.county);
-				template_data.region = 'Restaurants, Cities';
+				template_data.region = {en: 'Restaurants, Cities', es: 'Los restaurantes, Ciudades'};
 				if (region.city){
 					breadcrumb.push({name: region.city});
 					url_path.push(region.city);
-					template_data.region = 'Restaurants';
+					template_data.region = {en: 'Restaurants', es: 'Los restaurantes'};
 					template_data.show_other_states = false;
 				}
 			}else{
-				template_data.region = 'Restaurants, Counties';
+				template_data.region = {en: 'Restaurants, Counties', es: 'Los restaurantes, Condados'};
 			}
 			//Parse links for non-city listings
 			_(data.items).forIn(function(v,k){
@@ -246,7 +248,7 @@ directoryPage = function(region,template_data,dir_match){
 			});
 			//FOR CITY-SPECIFIC pages, print companies
 			_(data.companies).forIn(function(v,k){
-				data.companies[k].url = '/'+v.company_id;
+				data.companies[k].url = (template_data.es?'/es/':'/')+v.company_id;
 			});
 			//CATEGORY LINKS TO OTHER STATES
 			var other_states = [];
@@ -264,7 +266,7 @@ directoryPage = function(region,template_data,dir_match){
 			//links for NAVBAR
 			for (var i=0;i<breadcrumb.length-1;i++){
 				breadcrumb[i].category = true;
-				breadcrumb[i].url = '/'+dir_match.slice(2,3+i).join('');
+				breadcrumb[i].url = (template_data.es?'/es/':'/')+dir_match.slice(2,3+i).join('');
 			}
 			breadcrumb[breadcrumb.length-1].last = true;
 
