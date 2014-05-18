@@ -4,12 +4,13 @@
 
     <title>{{title}} - {{page_title}}</title>
     {{^es}}<link rel="alternate" hreflang="es-US" href="/es{{url}}">{{/es}}
-
-    <link rel="stylesheet" href="/index_files/normalize.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="/index_files/osrc.css" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="/index_files/caura.css" type="text/css" media="screen" charset="utf-8">
-   <link href="/index_files/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/normalize.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/static/osrc.css" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="/static/caura.css" type="text/css" media="screen" charset="utf-8">
+   <link href="/static/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
   <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="/index_files/part-bootstrap.css" rel="stylesheet">
+    <link href="/static/part-bootstrap.css" rel="stylesheet">
   <!-- linkedin/facebook card begin -->
   <meta property="og:title" content="{{title}} - {{page_title}}">
 <meta property="og:type" content="article">
@@ -30,6 +31,7 @@
 <meta name="twitter:image:src" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
   <!-- twitter card end -->
   <!-- analytics -->
+
 <script type="text/javascript">
 window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
 window.analytics.load("rucaagoxlx");
@@ -37,12 +39,6 @@ window.analytics.page();
 </script>
 <!-- analytics -->
 </head><body class="" style="zoom: 1;" data-twttr-rendered="true">
-
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script id="twitter-wjs" src="/index_files/widgets.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/index_files/bootstrap.js"></script>
 
 
 
@@ -96,7 +92,7 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h4 class="modal-title" id="myModalLabel">{{^es}}Valuation methodology{{/es}}{{#es}}Valuation methodology{{/es}}</h4>
       </div>
-      <div class="modal-body"><img src="/index_files/table-restaurant0110.png"><br>
+      <div class="modal-body"><img src="/static/table-restaurant0110.png"><br>
 <div class="alert alert-danger fade in">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
       
@@ -147,8 +143,8 @@ hurdles, but it currently can take us a few days to confirm the validity
     
   <a onclick="window.open(this.href, 'mywin',
 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="https://twitter.com/intent/tweet?button_hashtag={{id}}&amp;screen_name=nesovok" class="btn btn-primary" data-lang="en"><span class="fa fa-twitter"></span> Tweet to @nesovok</a>
-
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<!--
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
   
   
     </div>
@@ -165,7 +161,6 @@ hurdles, but it currently can take us a few days to confirm the validity
 <div id="investment-details" class="master_clearfix">
           <div id="investment-statistics">
             
-
             <div id="statistics" class="grey-border-panel master_clearfix">
               <div class="stats-box loans-box" id="valuation-box">
                 <p>Business valuation:</p>
@@ -265,7 +260,7 @@ but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.pr
         It seems like {{title}} is also somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
  That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}. 
 With this in mind, both aforementioned companies could make for franchise
- partners based on ideal regional coverage: <a target="_blank" href="{{company1.map}}">google map of {{company1.title}}</a>, <a target="_blank"  href="{{company2.map}}">map of {{company2.title}}</a>.
+ partners based on ideal regional coverage: <a target="_blank" href="{{company1.map}}">{{company1.title}}</a>, <a target="_blank"  href="{{company2.map}}">{{company2.title}}</a> (Google maps).
         </p>    
 {{/company2.found}}   
 {{^company1.found}}{{^company2.found}}<p>We will keep looking, but it appears that this is quite a unique business - there really is not anything like it anywhere in the neighborhood.</p>{{/company2.found}}{{/company1.found}}
@@ -291,10 +286,10 @@ but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.pr
 {{/company1.found}}    
 {{#company2.found}}        
         <p>
-        It seems like {{title}} is also somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
+      It seems like {{title}} is also somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
  That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}. 
 With this in mind, both aforementioned companies could make for franchise
- partners based on ideal regional coverage: <a target="_blank" href="{{company1.map}}">google map of {{company1.title}}</a>, <a target="_blank"  href="{{company2.map}}">map of {{company2.title}}</a>.
+ partners based on ideal regional coverage: <a target="_blank" href="{{company1.map}}">{{company1.title}}</a>, <a target="_blank"  href="{{company2.map}}">{{company2.title}}</a> (los mapas de Google).
         </p>    
 {{/company2.found}}   
 {{^company1.found}}{{^company2.found}}<p>We will keep looking, but it appears that this is quite a unique business - there really is not anything like it anywhere in the neighborhood.</p>{{/company2.found}}{{/company1.found}}
@@ -320,16 +315,14 @@ With this in mind, both aforementioned companies could make for franchise
 
         <p id="schedule">
         
-        Next are some stats about {{county}} county in comparison to nearby counties:
-        <span class="evttype" data-ind="0">{{counties[0]}}</span>,
-        <span class="evttype" data-ind="1">{{counties[1]}}</span>, and
-        <span class="evttype" data-ind="2">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening).
+        Next are some stats about <span class="evttype" data-ind="0">{{counties[0]}}</span> county in comparison to nearby counties:
+        <span class="evttype" data-ind="1">{{counties[1]}}</span> and <span class="evttype" data-ind="2">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening). If we combine the two charts, we get a first glimpse at how competitive the restaurant industry is in {{county}} county relative to that of another region.
         </p>
 
         <div class="hist-block">
             <div id="density" class="hist"><h6>Restaurant Density by County</h6>
             </div>
-            <div id="day" class="hist"><h6>Number of open restaurants by time of the day, county</h6></div>
+            <div id="day" class="hist"><h6>Share of open restaurants by time of the day, county</h6></div>
         </div>
     
 
@@ -356,16 +349,14 @@ With this in mind, both aforementioned companies could make for franchise
 
         <p id="schedule">
         
-        Lo siguiente son algunas estadísticas del condado de Cameron en comparación con cercanos condados:
-        <span class="evttype" data-ind="0">{{counties[0]}}</span>,
-        <span class="evttype" data-ind="1">{{counties[1]}}</span> y
-        <span class="evttype" data-ind="2">{{counties[2]}}</span>. El grafico a la izquierda indica la concentración medida de restaurantes por el <strong>#de clientes/#de restaurantes</strong>. El grafico a la derecha muestra el relativo número de restaurantes  abiertos durante diferentes partes del día (mañana / tarde / noche).
+        Lo siguiente son algunas estadísticas del condado de <span class="evttype" data-ind="0">{{counties[0]}}</span> en comparación con cercanos condados:
+        <span class="evttype" data-ind="1">{{counties[1]}}</span> y <span class="evttype" data-ind="2">{{counties[2]}}</span>. El grafico a la izquierda indica la concentración medida de restaurantes por el <strong>#de clientes/#de restaurantes</strong>. El grafico a la derecha muestra el relativo número de restaurantes  abiertos durante diferentes partes del día (mañana / tarde / noche).
         </p>
 
         <div class="hist-block">
             <div id="density" class="hist"><h6>Restaurant Density by County</h6>
             </div>
-            <div id="day" class="hist"><h6>Number of open restaurants by time of the day, county</h6></div>
+            <div id="day" class="hist"><h6>Share of open restaurants by time of the day, county</h6></div>
         </div>
     
 
@@ -395,7 +386,7 @@ With this in mind, both aforementioned companies could make for franchise
 data providers we are required to acknowledge:{{/es}}
 {{#es}}           La valuación de las pequeñas empresas fue estimada y construida por 
   <a href="http://twitter.com/nesovok">Segah Meer</a> en un tercero de datos sociales, además con  datos de censo y análisis económico.
-Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/index_files/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a>
+Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/static/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a>
 <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
 </div>
     </div>
@@ -423,17 +414,16 @@ Es solo una estimación. No haría que responsabilizar proveedor de datos ya que
     </script>
     
 
-<script src="/index_files/d3.js"></script>
-<script src="/index_files/plot.js"></script>
-
+<script src="/static/d3.js"></script>
+<script src="/static/plot.js"></script>
+<script src="/static/bootstrap.js"></script>
 <script>
 {{#disable}}//{top_counties: {"county": {density: , people: ,catDensity: [category: , count: ]}],top_cats:}{{/disable}}
 var svg = {{{svg}}};  
 var counties = {{{json_counties}}}; 
 </script>
-<script src="/index_files/stats_plot.js"></script>
+<script src="/static/stats_plot.js"></script>
 <script type="text/javascript">
 analytics.page();
 </script>
-<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
 </body></html>

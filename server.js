@@ -73,9 +73,9 @@ function startServer() {
 	app.set('views', __dirname);
 
 	//ignore static file requests
-	app.use('/index_files',express.static(__dirname+'/index_files'));
-	app.use('/static',express.static(__dirname+'/index_files'));
-	app.use('favicon.ico',express.static(__dirname+'/index_files/favicon.ico'));
+	app.use('/static',express.static(__dirname+'/static'));
+	app.use('favicon.ico',express.static(__dirname+'/static/favicon.ico'));
+	app.use('robots.txt',express.static(__dirname+'/static/robots.txt'));
 
 	if (process.env.NODE_ENV === 'development'){
 		app.use(errorhandler());
@@ -226,12 +226,17 @@ companyPage = function(template_data,company_id,template){
 				template_data,
 				{
 					categories: Object.keys(data.top_cats),
-					counties: Object.keys(data.top_counties),
-					json_counties: JSON.stringify(Object.keys(data.top_counties)),
+					//sort compared counties, keeping the page's county first
+					counties: Object.keys(data.top_counties).reduce(function(p,c,i,ar){
+						if (ar[i] !== p[0]){
+							p.push(ar[i]);
+						}
+						return p;
+					},[template_data.county]),
 					svg: JSON.stringify(data),
 					total_restaurants: data.total_restaurants
 				});
-			//handle counties
+			template_data.json_counties = JSON.stringify(template_data.counties);
 		}
 		return page;
 	});

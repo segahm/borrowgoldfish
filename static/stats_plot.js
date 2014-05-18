@@ -12,11 +12,15 @@
         var day_hist = window.histogram().width(300)
                         .labels(['8:00-10:00','','','12-3pm','','','5pm -','','']);
         var day_data = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]];
+        var hdens = svg.hourly_density;
+        var r = svg.top_counties;
         for (var i=0;i<counties.length;i++){
-            if (typeof(svg.hourly_density[counties[i]]) !== 'undefined'){
-                day_data[i] = [svg.hourly_density[counties[i]].m,0,0,
-                              svg.hourly_density[counties[i]].a,0,0,
-                              svg.hourly_density[counties[i]].d,0,0];
+            var c = counties[i];
+            var tot = r[c].people/r[c].density;
+            if (typeof(hdens[c]) !== 'undefined'){
+                day_data[i] = [hdens[c].m/tot,0,0,
+                              hdens[c].a/tot,0,0,
+                              hdens[c].d/tot,0,0];
             }
         }
         //var day_data = [[3,0,0,3,0,0,3,0,0],[3,0,0,3,0,0,3,0,0],[4,0,0,5,0,0,6,0,0]];
@@ -60,10 +64,11 @@
             .attr("class", "x-axis");
 
     var data = [];
-    for (var county in svg.top_counties){
+    for (var i=0;i<counties.length;i++){
+      var c = counties[i];
       data.push({
-        hlabel: county+', '+svg.top_counties[county].state,
-        density: svg.top_counties[county].density
+        hlabel: c+', '+svg.top_counties[c].state,
+        density: svg.top_counties[c].density
       });
     }
     function draw(data) {

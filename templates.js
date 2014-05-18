@@ -30,9 +30,9 @@ var config = {
 		},
 		//!!!!!!! TO BE CORRECTED
 		page: {
-			company: {page_title: 'How much is my business worth?'},
-			directory: {page_title: 'Small Business Finances and Valuation in'},
-			index: {page_title: 'Borrow Goldfish: small business finances and valuation'}
+			company: {page_title: '¿Cuál es el valor de mi empresa?'},
+			directory: {page_title: 'Finanzas para pequeñas empresas y de valoración en'},
+			index: {page_title: 'Borrow Goldfish: las finanzas de pequeñas empresas y la valoración'}
 		},
 		all_pages: {
 			twitter_share_text: encodeURIComponent('I might be running a #smallbiz, but my numbers speak for themselves'),
