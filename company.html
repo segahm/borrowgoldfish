@@ -8,7 +8,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/static/normalize.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/static/osrc.css" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="/static/caura.css" type="text/css" media="screen" charset="utf-8">
-   <link href="/static/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+   <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
   <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href="/static/part-bootstrap.css" rel="stylesheet">
   <!-- linkedin/facebook card begin -->
@@ -227,7 +227,7 @@ $('#valuationmodal').modal('toggle');
 <div id="profile">
   
     <div class="profile-badge clearfix"><div itemscope itemtype="http://schema.org/Organization"> 
-        <a href="https://github.com/segahm" target="_blank">
+        <a href="{{full_url}}" target="_blank">
             
             <span class="profile-name" itemprop="name">{{title}}</span>
             <span itemprop="telephone" content="{{phone}}"></span>
@@ -387,7 +387,7 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
 data providers we are required to acknowledge:{{/es}}
 {{#es}}           La valuación de las pequeñas empresas fue estimada y construida por 
   <a href="http://twitter.com/nesovok">Segah Meer</a> en un tercero de datos sociales, además con  datos de censo y análisis económico.
-Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="/static/Powered_By_Yelp_White.png" alt="Powered by Yelp, white" height="25" width="115"></a>
+Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="http://s3-media3.ak.yelpcdn.com/assets/2/www/img/9c9b10dc7226/developers/reviewsFromYelpWHT.gif" alt="Powered by Yelp, white" height="25" width="115"></a>
 <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
 </div>
     </div>

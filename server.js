@@ -84,6 +84,7 @@ function startServer() {
 
 	app.use(function(req, res, next){
 		res.set('Content-Type', 'text/html');
+		//console.log(req.url);
 		//spanish
 		var matches = req.path.match(/^\/(es)[\/]?/i);
 		var is_spanish = (matches || (typeof(req.query.fb_locale) !== 'undefined' && req.query.fb_locale === 'es_ES'))?true:false;
