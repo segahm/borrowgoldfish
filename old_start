@@ -11,4 +11,5 @@ if [ -n "$pid" ]; then
     exit 0
   fi
 fi
-/home/caura/webapps/hack/bin/node /home/caura/webapps/hack/node_modules/forever/bin/forever start server.js -oel /home/caura/webapps/hack/run/server.log -p /home/caura/webapps/hack/run/ -a --pidFile /home/caura/webapps/hack/run/node.pid
+nohup /home/caura/webapps/hack/bin/node /home/caura/webapps/hack/server.js >& /home/caura/webapps/hack/run/server.log &
+/sbin/pidof /home/caura/webapps/hack/bin/node > /home/caura/webapps/hack/run/node.pid

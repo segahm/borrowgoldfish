@@ -205,7 +205,8 @@ companyPage = function(template_data,company_id,template){
 				data.company,	//sets company variables
 				{
 					encoded_title: encodeURIComponent(data.company.title),
-					encoded_description_short_text: encodeURIComponent(template_data.description_short_text)
+					encoded_description_short_text: encodeURIComponent(template_data.description_short_text),
+					twitter_company_specific_text: encodeURIComponent(template.twitter(data.company.title,data.company.valuation,data.company.county))
 				},
 				bitmap
 			);
@@ -313,21 +314,53 @@ directoryPage = function(region,template_data,dir_match,template){
 		return page;
 	});
 };
-/*if (process.env.NODE_ENV === 'production') {
+
+/*function exitHandler(options, err) {
+	if (options.cleanup){
+		cluster.disconnect(exitHandler.bind(null, {exit:true}))
+	}
+	if (err){
+		console.log(err.stack);
+	}
+	if (options.exit){
+		process.exit();
+	}
+}*/
+
+
+
+var workes = 0;
+if (process.env.NODE_ENV === 'production') {
 	// Create workers for each cpu
 	if (cluster.isMaster && !process.env.NO_CLUSTER){
+		console.log('is master');
+		//handle graceful exiting
+		/*process.stdin.resume();//so the program will not close instantly
+		process.on('exit', exitHandler.bind(null,{cleanup:true}));
+		process.on('uncaughtException', exitHandler.bind(null, {cleanup:true}));
+		process.on('SIGINT', exitHandler.bind(null, {cleanup:true}));*/
+
 		var cpuCount = require('os').cpus().length;
 		for (var i = 0; i < cpuCount; i++) {
+			console.log('cluster process');
 			cluster.fork();
+			workes++;
 		}
 
 		cluster.on('exit', function(worker) {
 			console.log('Worker ' + worker.id + ' died. Respawning');
-			cluster.fork();
+			if (workes < 100){
+				cluster.fork();
+				workes++;
+			}else{
+				console.log('something is wrong: too many workers');
+			}
 		});
 	}else{
+		console.log('starting worker');
 		startServer();
 	}
-} else {*/
+} else {
+	console.log('starting dev mode process');
 	startServer();
-//}
+}

@@ -15,7 +15,7 @@
   <meta property="og:title" content="{{page_title}} {{title_region}}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="{{full_url}}">
-<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">
 <meta property="og:description" content="{{meta_description}}"><meta property="og:site_name" content="BorrowGoldfish"><meta property="article:publisher" content="NeSovok">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
@@ -28,7 +28,7 @@
 <meta name="twitter:title" content="{{page_title}} {{title_region}}">
 <meta name="twitter:description" content="{{meta_description}}">
 <meta name="twitter:creator" content="@nesovok">
-<meta name="twitter:image:src" content="http://www.borrowgoldfish.com/static/organization-image.png">
+<meta name="twitter:image:src" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">
   <!-- twitter card end -->
   <!-- analytics -->
 <script type="text/javascript">
@@ -37,20 +37,26 @@ window.analytics.load("rucaagoxlx");
 window.analytics.page();
 </script>
 <!-- analytics -->
+<script type="text/javascript">
+function share(el){
+  analytics.track('Engaged', {
+    category: 'Shared',
+    label: el.id
+  });
+  window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
+}
+</script>
 </head><body class="" style="zoom: 1;" data-twttr-rendered="true">
     <div class="header">
-        <a class="header-title" href="/%7B%7Burl_path%7D%7D">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a><div class="social"> <a onclick="window.open(this.href, &#39;mywin&#39;,
-&#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_share_text}}"><span class="fa-stack fa-lg">
+        <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a><div class="social"> <a onclick="share(this);return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_share_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
   </span></a>
-  <a onclick="window.open(this.href, &#39;mywin&#39;,
-&#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{title}}&summary={{twitter_share_text}}&source=Borrow%20Goldfish"><span class="fa-stack fa-lg">
+  <a onclick="share(this);return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{title}}&summary={{encoded_meta_description}}&source=BorrowGoldfish"><span class="fa-stack fa-lg">
   
   <i class="fa fa-linkedin"> </i>
   </span></a>
-  <a onclick="window.open(this.href, &#39;mywin&#39;,
-&#39;left=20,top=20,width=500,height=500,toolbar=1,resizable=0&#39;); return false;" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
+  <a onclick="share(this);return false;" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
   
   <i class="fa fa-facebook"> </i>
   </span></a>

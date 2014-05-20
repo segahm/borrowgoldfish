@@ -2,7 +2,7 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
 
-    <title>{{title}} - {{page_title}}</title>
+    <title>{{title}} for ${{valuation}} - {{page_title}}</title>
     {{^es}}<link rel="alternate" hreflang="es-US" href="/es{{url}}">{{/es}}
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -15,7 +15,7 @@
   <meta property="og:title" content="{{title}} - {{page_title}}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="{{full_url}}">
-<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/borrowgoldfish.jpg">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">
 <meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="BorrowGoldfish"><meta property="article:publisher" content="NeSovok">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
@@ -38,6 +38,15 @@ window.analytics.load("rucaagoxlx");
 window.analytics.page();
 </script>
 <!-- analytics -->
+<script type="text/javascript">
+function share(el){
+  analytics.track('Engaged', {
+    category: 'Shared',
+    label: el.id
+  });
+  window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
+}
+</script>
 </head><body class="" style="zoom: 1;" data-twttr-rendered="true">
 
 
@@ -64,18 +73,15 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
     </div>
 
     <div class="header">
-        <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a><div class="social"> <a onclick="window.open(this.href, 'mywin',
-'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_share_text}}"><span class="fa-stack fa-lg">
+        <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a><div class="social"> <a onclick="share(this);return false;" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
   </span></a>
-  <a onclick="window.open(this.href, 'mywin',
-'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{encoded_title}}&summary={{encoded_description_short_text}}&source=Borrow%20Goldfish"><span class="fa-stack fa-lg">
+  <a onclick="share(this);return false;" id="Linkedin-share" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{encoded_title}}&summary={{encoded_description_short_text}}&source=BorrowGoldfish"><span class="fa-stack fa-lg">
   
   <i class="fa fa-linkedin"> </i>
   </span></a>
-  <a onclick="window.open(this.href, 'mywin',
-'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
+  <a onclick="share(this);return false;" id="Facebook-share" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
   
   <i class="fa fa-facebook"> </i>
   </span></a>
@@ -90,7 +96,7 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel">{{^es}}Valuation methodology{{/es}}{{#es}}Valuation methodology{{/es}}</h4>
+        <h4 class="modal-title" id="myModalLabel">{{^es}}Valuation methodology{{/es}}{{#es}}Metodología de valoración{{/es}}</h4>
       </div>
       <div class="modal-body"><img src="/static/table-restaurant0110.png"><br>
 <div class="alert alert-danger fade in">
@@ -98,7 +104,7 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
       
       <p style="
     /* text-align: left; */
-">{{^es}}Only the owner of this business can see the details. If you are the owner, please claim this business to proceed.{{/es}}{{#es}}Only the owner of this business can see the details. If you are the owner, please claim this business to proceed.{{/es}}</p>
+">{{^es}}Only the owner of this business can see the details. If you are the owner, please claim this business to proceed.{{/es}}{{#es}}Sólo el propietario de este negocio puede ver los detalles. Si usted es el propietario, por favor reclamar este negocio para proceder.{{/es}}</p>
   </div>
       </div>
 
@@ -111,7 +117,8 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel2">{{^es}}Claim your business{{/es}}{{#es}}Claim your business{{/es}}</h4>
+        <h4 class="modal-title" id="myModalLabel2">{{^es}}Claim your business{{/es}}{{#es}}
+Añade tu negocio{{/es}}</h4>
       </div>
       <div class="modal-body">
 <div class="bs-callout bs-callout-info">
@@ -126,14 +133,12 @@ hurdles, but it currently can take us a few days to confirm the validity
  of your claim.</blockquote>
 
   {{/es}}{{#es}}
-    <h4>Confirm yourself using "social"</h4>
-    <p>To identify you as an owner, we use social media. Please tweet to us using a <b>#hashtag</b> for the name of your business from your company's official account. </p><pre>Ex: @nesovok #{{id}}</pre><p></p>
+    <h4>Confirme usted mismo usando "social"</h4>
+    <p>Para identificarlo como un propietario, utilizamos los medios de comunicación sociales. Por favor, twittear con nosotros usando un <b>#hashtag</b> para el nombre de su negocio desde la cuenta oficial de la empresa. </p><pre>Ex: @nesovok #{{id}}</pre><p></p>
   
 </div>
 
-  <blockquote>You do NOT need to login/register or go through other 
-hurdles, but it currently can take us a few days to confirm the validity
- of your claim.</blockquote>
+  <blockquote>NO es necesario hacer login / register o ir a través de otros obstáculos, pero en este momento nos puede tomar unos días para confirmar la validez de su reclamo.</blockquote>
 
   {{/es}}
 </div>
@@ -397,6 +402,10 @@ Es solo una estimación. No haría que responsabilizar proveedor de datos ya que
         function hide_banner () {
             $("#banner").hide();
             document.cookie = "bgf_promise=true";
+            analytics.track('Engaged', {
+              category: 'Nonshared',
+              label: 'Banner'
+            });
             return false;
         }
 

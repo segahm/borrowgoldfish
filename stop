@@ -1,3 +1,4 @@
+#!/bin/sh
 mkdir -p /home/caura/webapps/hack/run
 pid=$(/sbin/pidof /home/caura/webapps/hack/bin/node)
 if echo "$pid" | grep -q " "; then
