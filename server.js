@@ -330,15 +330,15 @@ directoryPage = function(region,template_data,dir_match,template){
 
 
 var workes = 0;
-if (process.env.NODE_ENV === 'production') {
+/*if (process.env.NODE_ENV === 'production') {
 	// Create workers for each cpu
 	if (cluster.isMaster && !process.env.NO_CLUSTER){
 		console.log('is master');
 		//handle graceful exiting
-		/*process.stdin.resume();//so the program will not close instantly
-		process.on('exit', exitHandler.bind(null,{cleanup:true}));
-		process.on('uncaughtException', exitHandler.bind(null, {cleanup:true}));
-		process.on('SIGINT', exitHandler.bind(null, {cleanup:true}));*/
+		// process.stdin.resume();//so the program will not close instantly
+		// process.on('exit', exitHandler.bind(null,{cleanup:true}));
+		// process.on('uncaughtException', exitHandler.bind(null, {cleanup:true}));
+		// process.on('SIGINT', exitHandler.bind(null, {cleanup:true}));
 
 		var cpuCount = require('os').cpus().length;
 		for (var i = 0; i < cpuCount; i++) {
@@ -360,7 +360,6 @@ if (process.env.NODE_ENV === 'production') {
 		console.log('starting worker');
 		startServer();
 	}
-} else {
-	console.log('starting dev mode process');
+} else {*/
 	startServer();
-}
+//}
