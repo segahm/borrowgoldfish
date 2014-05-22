@@ -7,12 +7,14 @@ var express     = require('express'),
 	_ 			= require('lodash'),
 	cons        = require('consolidate'),
 	errorhandler = require('errorhandler'),
-	templates   = require('./templates');
+	templates   = require('./templates'),
+	sitemap = require('sitemap');
 
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var Company = require('./CompanyProvider');
+var Utility = require('./utils');
 
 var Writeup = require('./writeup');
 
@@ -67,6 +69,15 @@ function formatValuation(valuation){
 
 function startServer() {
 	var app = express();
+	
+
+	if (process.env.NODE_ENV === 'production'){
+		var forceDomain = require('node-force-domain');
+		app.use(forceDomain({
+		  hostname: 'www.borrowgoldfish.com',
+		  type: 'permanent'
+		}));
+	}
 	app.engine('html', cons.templayed);
 	// set .html as the default extension 
 	app.set('view engine', 'html');
@@ -80,11 +91,23 @@ function startServer() {
 	if (process.env.NODE_ENV === 'development'){
 		app.use(errorhandler());
 	}
-
+	app.get('/sitemap.xml', function(req, res) {
+		Utility.prototype.listPages().then(function(urls){
+			var sm = sitemap.createSitemap ({
+				hostname: 'http://www.borrowgoldfish.com',
+				cacheTime: 600000,        // 6000 sec - cache purge period
+				urls: urls
+			});
+			sm.toXML( function (xml) {
+				res.header('Content-Type', 'application/xml');
+				res.send( xml );
+			});
+		});
+	});
 
 	app.use(function(req, res, next){
 		res.set('Content-Type', 'text/html');
-		//console.log(req.url);
+		console.log(req.url);
 		//spanish
 		var matches = req.path.match(/^\/(es)[\/]?/i);
 		var is_spanish = (matches || (typeof(req.query.fb_locale) !== 'undefined' && req.query.fb_locale === 'es_ES'))?true:false;
