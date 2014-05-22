@@ -28,63 +28,38 @@ var EightyApp = function() {
 		object.emailList = emailList;
 
 		// Get twitter accounts
-		var twitterList = [];
+		var twitteHandles = {};
 		//add meta twitter handle
 		$html.filter('meta').each(function(i, obj) {
-			console.log($(this).attr('name'));
 			if ($(this).attr('name') === 'twitter:creator'){
-				twitterList.push($(this).attr('content').slice(1));
+				twitteHandles[$(this).attr('content').slice(1)] = 1;
 			}
 		});
 
-		if (twitterList.length === 0){
+		if (Object.keys(twitteHandles).length === 0){
 			//links to a twitter page
 			var temp = html.match(/(https?:)?\/\/(www\.)?twitter.com\/(#!\/)?[^"> ]+/ig);	//grab all twitter links
+			temp = temp?temp:[];
 			var handle;
-			temp.every(function(obj,i) {
-				console.log('match: '+obj);
+			temp.forEach(function(obj,i) {
 				obj = obj.toLowerCase();
 				if (obj.indexOf('/home') > 0){
-					console.log('home: ');
 					//ignore
 				}else if (obj.indexOf('/share') > 0){
-					console.log('share: ');
 					handle = obj.match(/via=([a-z_0-9]+)/);
 					if (handle){
-						twitterList.push(handle[1]);
+						twitteHandles[handle[1]] = 1;
 					}
 				}else{
-					console.log('link: ');
 					handle = obj.match(/.com\/([^"\/ ]+)/);
 					if (handle){
-						twitterList.push(handle[1]);
+						twitteHandles[handle[1]] = 1;
 					}
 				}
 			});
-			/*twitterList = twitterList?twitterList:[];
-			twitterList.every(function(obj,i) {
-				twitterList[i] = obj.replace(/^.+\.com\//ig,'');
-				//twitterList[i] = twitterList[i].match(/home|share/i)
-			});
-			//share buttons
-			twitterList = html.match(/https:\/\/twitter.com\/share.+via=([a-z_0-9]+)/ig);
-			twitterList = twitterList?twitterList:[];
-			twitterList.every(function(obj,i) {
-				twitterList[i] = obj.replace(/^.+\.com\//ig,'');
-			});*/
 		}
-
-
-		/*if (twitterList){
-			for (var i=0;i<twitterList.length;i++){
-				if (twitterList[i][1]){
-					twitterList[i] = twitterList[i][1];
-				}
-			}
-		}*/
-		object.twitterList = twitterList;
+		object.twitterList = Object.keys(twitteHandles);
 		// Get facebook accounts
-
 		return JSON.stringify(object);
 	};
 
@@ -92,7 +67,7 @@ var EightyApp = function() {
 		var app = this;
 		var $ = jQuery;
 		var $html = app.parseHtml(html, $);
-		var links = [];
+		var links = {};
 
 		function getDomain(link){
 			var matches = link.match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i);
@@ -111,23 +86,27 @@ var EightyApp = function() {
 			return true;
 		}
 		var domain = getDomain(url).toLowerCase();
-
 		if (!url.match(/facebook|myspace/i)){
 			// gets all links in the html document
 			$html.find('a').each(function(i, obj) {
 				var link = app.makeLink(url, $(this).attr('href'));
-				if(link !== null && getDomain(link).toLowerCase() === domain && isValidExtension(link)) {
+				if(link && getDomain(link).toLowerCase() === domain && isValidExtension(link) && link !== url) {
 					if (link.match(/contact|info/i)){
-						links.unshift(link);
+						links[link] = 1;
 					}else{
-						links.push(link);
+						links[link] = 0;
 					}
 				}
 			});
 		}
+		var links_list = Object.keys(links);
+		//put contact links forward
+		links_list.sort(function(a,b){
+			return (links[b] - links[a]);
+		});
 
-		links.splice(5);	//no more than 5 links per page
-		return links;
+		links_list.splice(5);	//no more than 5 links per page
+		return links_list;
 	};
 };
 
