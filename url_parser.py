@@ -1,23 +1,47 @@
 #!/usr/bin/python -tt
 import csv
 import json
+from urlparse import urlparse
 
-ID_DATA_FILE = './Crawler/file2.txt'
-OUT_DATA_FILE = './Crawler/social_ids.csv'
+#ID_DATA_FILE = './Crawler/file2.txt'
+#OUT_DATA_FILE = './Crawler/social_ids.csv'
+IN_DATA_FILE = './Crawler/datafinity-in2.txt'
+OUT_DATA_FILE = './Crawler/datafinity-out.csv'
+
 
 def main():
+	results = {}
 	with open(OUT_DATA_FILE, 'wb') as outfile:
 		writer = csv.writer(outfile)
-		header = ['link','twitter','emails']
+		header = ['domain','twitter','email']
 		writer.writerow(header)
 
-		with open(ID_DATA_FILE) as infile:
+		with open(IN_DATA_FILE) as infile:
 			elements = json.load(infile)
 			for el in elements:
-				emails = 1 #el['emailList']
-				twitters = 1 #el['twitterList']
-				row = [el['url'],twitters,emails]
-				writer.writerow(row)
+				domain = urlparse(el['url']).netloc
+				if domain:
+					row = results.get(domain,{'urls': [],'email': {},'twitter': {}})
+					emails = el['result']['emailList']
+					twitters = el['result']['twitterList']
+					if (emails):
+						for email in emails:
+							row['email'][email] = 1
+					if (twitters):
+						for handle in twitters:
+							row['twitter'][handle] = 1
+					row['urls'].append(el['url'])
+					results[domain] = row
+		for domain in results:
+			vals = results[domain]
+			row = [domain]
+			for url in vals['urls']:
+				row.append(url)
+			for handle in vals['twitter']:
+				row.append(handle)
+			for email in vals['email']:
+				row.append(email)	
+			writer.writerow(row)
   
 if __name__ == '__main__':
   main()
