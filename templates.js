@@ -9,8 +9,13 @@ var config = {
 		shortDescription: function(title,valuation,county){
 			return 'How much exactly is '+(title.match(/Restaurant|restaurante/i)?title:title+' restaurant')+' worth? We estimate it at $'+valuation+'. Starting with market analysis of '+county+' county we use company-specific data to narrow down the competitive advantages of every restaurant in America.';
 		},
-		twitter: function(title,valuation,county){
-			return (title.match(/Resta/i)?title:title+' restaurant')+' from '+county+' county for $'+valuation+' - find out more...';
+		twitter: function(title,valuation,county,handle){
+			if (typeof(handle) !== 'undefined'){
+				return '@'+handle+' estimated at $'+valuation;
+			}else{
+				return 'Restaurant estimates';
+				//(title.match(/Resta/i)?title:title+' restaurant')+' from '+county+' county at $'+valuation;
+			}
 		},
 		page: {
 			company: {page_title: 'How much is my business worth?'},
@@ -30,8 +35,13 @@ var config = {
 		shortDescription: function(title,valuation,county){
 			return '¿Cuánto exactamente '+(title.match(/Restaurant|restaurante/i)?title:title+' restaurante')+'? Lo estimamos a $'+valuation+'. A partir de analisis del mercado '+county+'  condado utilizamos datos especificos de las empresas para restringir las ventajas competitivas de cada restaurante en los Estados Unidos.';
 		},
-		twitter: function(title,valuation,county){
-			return '¿Cuánto exactamente '+(title.match(/Restaurant|restaurante/i)?title:title+' restaurante')+'? Lo estimamos a $'+valuation;
+		twitter: function(title,valuation,county,handle){
+			if (typeof(handle) !== 'undefined'){
+				return '@'+handle+' Lo estimamos a $'+valuation;
+			}else{
+				return 'Estimamos el restaurante';
+				//'¿Cuánto exactamente '+(title.match(/Restaurant|restaurante/i)?title:title+' restaurante')+'? Lo estimamos a $'+valuation;
+			}
 		},
 		page: {
 			company: {page_title: '¿Cuánto exactamente vale mi empresa?'},

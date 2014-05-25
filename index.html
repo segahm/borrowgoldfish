@@ -89,13 +89,16 @@ function clickedLink(el){
   <p>
 Already today on <a href="http://borrowgoldfish.com/">BorrowGoldfish</a> you can find a valuation estimate for thousands of restaurants within several counties in Texas, Florida, and New Mexico. My hope is to build a prediction engine to quantify every small business in the United States. I figure, if Yelp managed to find consumers, real people, to quantify service quality at Small Businesses, I can definitely find data to quantify the financials at these same Small Businesses. Here are some examples:
   </p>
-<div id="sitemap" class="container  bootstrap">   
+<div id="sitemap" class="container-fluid  bootstrap">   
   <div class="row">
-    <div class="row-fluid">
-    <div class="col-md-1"></div>
-    
+    <div class="hidden-sm col-sm-1"></div>
+    <!-- 
 <div class="col-md-5"><a href="/rolies-restaurant-and-seafood-palmview-tx">Rolies Restaurant & Seafood</a></div><div class="col-md-2"><a href="/pizza-time-canutillo-tx">Pizza Time</a></div><div class="col-md-2"><a href="/texas-cafe-harlingen-tx">Texas Cafe</a></div><div class="col-md-2"></div>
-</div>
+-->
+
+    {{#showcaseRestaurants}}
+<div class="col-sm-3"><a href="/{{id}}">{{name}}</a></div>
+{{/showcaseRestaurants}}
 
   
 </div>
@@ -130,12 +133,11 @@ Ya hoy en <a href="http://borrowgoldfish.com/es/" title="BorrowGoldfish español
   </p>
 <div id="sitemap" class="container  bootstrap">   
   <div class="row">
-    <div class="row-fluid">
     <div class="col-md-1"></div>
     
-<div class="col-md-5"><a href="/es/rolies-restaurant-and-seafood-palmview-tx">Rolies Restaurant & Seafood</a></div><div class="col-md-2"><a href="/es/pizza-time-canutillo-tx">Pizza Time</a></div><div class="col-md-2"><a href="/es/texas-cafe-harlingen-tx">Texas Cafe</a></div><div class="col-md-2"></div>
-</div>
-
+    {{#showcaseRestaurants}}
+<div class="col-sm-3"><a href="/es/{{id}}">{{name}}</a></div>
+{{/showcaseRestaurants}}
   
 </div>
 

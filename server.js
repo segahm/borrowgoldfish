@@ -10,6 +10,13 @@ var express     = require('express'),
 	templates   = require('./templates'),
 	sitemap = require('sitemap');
 
+var HOME_PAGE_IDS = require('./sample_ids');
+var HOME_PAGE_IDS_LENGTH = Object.keys(HOME_PAGE_IDS).length;
+var HOME_PAGE_KEYS = {};
+_(HOME_PAGE_IDS).forEach(function(restaurant){
+	HOME_PAGE_KEYS[restaurant.id] = restaurant.twitter;
+});
+
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -65,6 +72,22 @@ function formatValuation(valuation){
 		valuation = valuation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	}
 	return valuation;
+}
+
+function getRandomRestaurants(howMany){
+	var entries = [];
+	var old_r = {};
+	var new_r = -1;
+	var i=0;
+	while (i<howMany){
+		new_r = Math.round(Math.random()*(HOME_PAGE_IDS_LENGTH-1));
+		if (typeof(old_r[new_r]) === 'undefined'){
+			entries.push(HOME_PAGE_IDS[new_r]);
+			old_r[new_r] = 1;
+			i++;
+		}
+	}
+	return entries;
 }
 
 function startServer() {
@@ -229,7 +252,7 @@ companyPage = function(template_data,company_id,template){
 				{
 					encoded_title: encodeURIComponent(data.company.title),
 					encoded_description_short_text: encodeURIComponent(template_data.description_short_text),
-					twitter_company_specific_text: encodeURIComponent(template.twitter(data.company.title,data.company.valuation,data.company.county))
+					twitter_company_specific_text: template.twitter(data.company.title,data.company.valuation,data.company.county)
 				},
 				bitmap
 			);
@@ -237,6 +260,12 @@ companyPage = function(template_data,company_id,template){
 			regional_info = {state: data.company.state,
 					county: data.company.county,
 					category: data.company.category};
+			//temporary hack to show twitter handles for some businesses
+			if (typeof(HOME_PAGE_KEYS[company_id]) !== 'undefined'){
+				var twitter_handle = HOME_PAGE_KEYS[company_id];
+				template_data.twitter_company_specific_text = template.twitter(data.company.title,data.company.valuation,data.company.county,twitter_handle);
+			}
+			template_data.twitter_company_specific_text = encodeURIComponent(template_data.twitter_company_specific_text);
 		}else{
 			page = '404';
 		}
@@ -266,8 +295,9 @@ companyPage = function(template_data,company_id,template){
 		return page;
 	});
 };
-homePage = function(){
+homePage = function(req,template_data){
 	var page = 'index';
+	template_data.showcaseRestaurants = getRandomRestaurants(3);
 	return Q.fcall(function(){ return page;});
 };
 directoryPage = function(region,template_data,dir_match,template){

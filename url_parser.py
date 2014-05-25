@@ -6,7 +6,7 @@ from urlparse import urlparse
 #ID_DATA_FILE = './Crawler/file2.txt'
 #OUT_DATA_FILE = './Crawler/social_ids.csv'
 IN_DATA_FILE = './Crawler/datafinity-in2.txt'
-OUT_DATA_FILE = './Crawler/datafinity-out.csv'
+OUT_DATA_FILE = './Crawler/full_emails.csv'
 
 
 def main():
@@ -30,13 +30,16 @@ def main():
 					if (twitters):
 						for handle in twitters:
 							row['twitter'][handle] = 1
-					row['urls'].append(el['url'])
+					if (emails or twitters):
+						row['urls'].append(el['url'])
 					results[domain] = row
 		for domain in results:
 			vals = results[domain]
 			row = [domain]
+			str_url = ''
 			for url in vals['urls']:
-				row.append(url)
+				str_url += url+';'
+			row.append(str_url)
 			for handle in vals['twitter']:
 				row.append(handle)
 			for email in vals['email']:
