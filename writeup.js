@@ -135,7 +135,16 @@ function CompanyWriter(){
     };
     if (similar.length > 0){
       result.company1 = setBitMapsForCompany(0);
-      result.company1.found = true;
+      var set = false;
+      _(result.company1).forIn(function(val){
+        //if this is a boolean range
+        if (typeof(val.p) !== 'undefined' && typeof(val.n) !== 'undefined'){
+          if (val.p || val.n){
+            set = true;
+          }
+        }
+      });
+      result.company1.found = set;
       result.company1.map = 'http://maps.google.com/?q='+encodeURIComponent(((similar[0].address)?similar[0].address+', ':'')+similar[0].city+', '+similar[0].state)+'&output=classic';
       //TEMPORARY
       if (DEBUG){
@@ -185,14 +194,16 @@ function CompanyWriter(){
         result.company2.fact[3] = true;
       }else if (bitmap.deliver.n || bitmap.day.n || bitmap.doors.n){
         result.company2.fact[4] = true;
+      }else{
+        result.company2.found = false;
       }
       if (DEBUG){
         result.company2.fact = [true,true,true,true,true];
       }
     }
-    if (result.join.length > 0){
+    /*if (result.join.length > 0){
       result.company1.found = true;
-    }
+    }*/
     return result;
   };
 }

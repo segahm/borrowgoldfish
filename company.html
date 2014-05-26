@@ -39,12 +39,14 @@ window.analytics.page();
 </script>
 <!-- analytics -->
 <script type="text/javascript">
-function share(el){
+function share(el,should_open){
   analytics.track('Engaged', {
     category: 'Shared',
     label: el.id
   });
-  window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
+  if (typeof(should_open) === 'undefined'){
+    window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
+  }
 }
 </script>
 </head><body class="" style="zoom: 1;" data-twttr-rendered="true">
@@ -73,7 +75,11 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
     </div>
 
     <div class="header">
-        <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a><div class="social"> <a onclick="share(this);return false;" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
+       <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a>
+
+  <div class="social">
+  {{#is_b}} 
+  <a onclick="share(this);return false;" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
   </span></a>
@@ -85,6 +91,10 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
   
   <i class="fa fa-facebook"> </i>
   </span></a>
+   {{/is_b}} 
+  {{#is_a}}
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{full_url}}" data-text="{{unencoded_twitter_company_specific_text}}" data-via="nesovok" data-size="large" data-count="none" data-dnt="true"></a>
+{{/is_a}}
 <br>
 
 </div></div>
@@ -250,7 +260,7 @@ $('#valuationmodal').modal('toggle');
           <a id="details-statistics" href="{{id}}">{{title}}</a> is 
 {{#praise[0]}}a lucrative{{/praise[0]}}{{#praise[1]}}an 
 amazing{{/praise[1]}}{{#praise[2]}}a highly 
-entrepreneurial{{/praise[2]}}{{#praise[3]}}trend 
+entrepreneurial{{/praise[2]}}{{#praise[3]}}a trend 
 setting{{/praise[3]}} restaurant {{#loc[0]}}situated 
 in{{/loc[0]}}{{#loc[1]}}located in{{/loc[1]}} {{county}} 
 county.</p>
@@ -265,7 +275,7 @@ but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.pr
 {{/company1.found}}    
 {{#company2.found}}        
         <p>
-        It seems like {{title}} is also somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
+        It seems like {{title}} is {{#company1.found}}also {{/company1.found}}somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
  That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}. 
 With this in mind, both aforementioned companies could make for franchise
  partners based on ideal regional coverage: <a target="_blank" href="{{company1.map}}">{{company1.title}}</a>, <a target="_blank"  href="{{company2.map}}">{{company2.title}}</a> (Google maps).
@@ -290,7 +300,7 @@ pero {{company1.title}} {{#company1.price.p}}tiene mas gastos por plato{{/compan
 {{/company1.found}}    
 {{#company2.found}}        
         <p>
-      Parece que {{title}} también es algo similar a
+      Parece que {{title}} {{#company1.found}}también {{/company1.found}}es algo similar a
  <a href="{{company2.id}}">{{company2.title}}</a>.
  Sin embargo, es importante destacar que {{company2.title}} {{#company2.fact[0]}}es probable el que genera mayores márgenes por cliente{{/company2.fact[0]}}{{#company2.fact[1]}} que está ejecutando potencialmente mayores costos para aumentar la comodidad
  {{/company2.fact[1]}}{{#company2.fact[2]}}que está abierto cuando {{title}} tiende a cerrar{{/company2.fact[2]}}{{#company2.fact[3]}}Es probable que genera menores márgenes por cliente{{/company2.fact[3]}}{{#company2.fact[4]}}posiblemente está optimizando sus costos por conveniencia anterior{{/company2.fact[4]}}. 
@@ -432,4 +442,33 @@ var svg = {{{svg}}};
 var counties = {{{json_counties}}}; 
 </script>
 <script src="/static/stats_plot.js"></script>
+<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+{{#is_a}}
+<!-- twitter -->
+    <script>window.twttr = (function (d, s, id) {
+      var t, js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id; js.src= "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+    }(document, "script", "twitter-wjs"));
+twttr.ready(function (twttr) {
+  twttr.events.bind('click', function (ev) { share({id:'Twitter-share-orig'},false) });
+  twttr.events.bind('tweet', function (event) {
+    analytics.track('Tweet', {
+      category: event.type,
+      label: 'Twitter-share-orig'
+    });
+  });
+  twttr.events.bind('follow', function (event) {
+    analytics.track('Follow', {
+      category: 'company',
+      label: event.data.screen_name
+    });
+  });
+});
+
+    </script>
+    <!-- twitter -->
+    {{/is_a}}
 </body></html>

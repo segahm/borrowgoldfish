@@ -8,6 +8,8 @@ var express     = require('express'),
 	cons        = require('consolidate'),
 	errorhandler = require('errorhandler'),
 	templates   = require('./templates'),
+	seedrandom	= require('seedrandom'),
+	cookieParser = require('cookie-parser'),
 	sitemap = require('sitemap');
 
 var HOME_PAGE_IDS = require('./sample_ids');
@@ -89,7 +91,6 @@ function getRandomRestaurants(howMany){
 	}
 	return entries;
 }
-
 function startServer() {
 	var app = express();
 	
@@ -108,8 +109,8 @@ function startServer() {
 
 	//ignore static file requests
 	app.use('/static',express.static(__dirname+'/static'));
-	app.use('favicon.ico',express.static(__dirname+'/static/favicon.ico'));
-	app.use('robots.txt',express.static(__dirname+'/static/robots.txt'));
+	app.use('/favicon.ico',express.static(__dirname+'/static/favicon.ico'));
+	app.use('/robots.txt',express.static(__dirname+'/static/robots.txt'));
 
 	if (process.env.NODE_ENV === 'development'){
 		app.use(errorhandler());
@@ -128,9 +129,26 @@ function startServer() {
 		});
 	});
 
+	app.use(cookieParser());
+
 	app.use(function(req, res, next){
 		res.set('Content-Type', 'text/html');
-		console.log(req.url);
+		if (process.env.NODE_ENV === 'development'){
+			console.log(req.url);
+		}
+		var user_id;
+		//user identification piece
+		if (typeof(req.cookies.user) !== 'undefined'){
+		    user_id = req.cookies.user;
+		}else{
+			user_id = Utility.prototype.hashCode(Math.random()+'');
+			//set a new cookie
+			res.cookie('user', user_id, { maxAge: 1000}); //172800000});
+		}
+		//user-specific random
+		var rng = seedrandom(user_id,{ global: false });
+		var A_B_Split = Math.round(rng());
+		
 		//spanish
 		var matches = req.path.match(/^\/(es)[\/]?/i);
 		var is_spanish = (matches || (typeof(req.query.fb_locale) !== 'undefined' && req.query.fb_locale === 'es_ES'))?true:false;
@@ -139,6 +157,9 @@ function startServer() {
 		var template_data = {};
 		var template = is_spanish?templates.spanish:templates.english;
 		template_data.es = is_spanish;	//whether to turn-on spanish language
+
+		template_data.is_a = (A_B_Split === 0)?true:false;
+		template_data.is_b = (A_B_Split === 1)?true:false;
 
 		template_data.url_path = is_spanish?'http://'+req.host+'/es/':'http://'+req.host+'/';
 		template_data.encoded_url = encodeURIComponent(
@@ -265,6 +286,8 @@ companyPage = function(template_data,company_id,template){
 				var twitter_handle = HOME_PAGE_KEYS[company_id];
 				template_data.twitter_company_specific_text = template.twitter(data.company.title,data.company.valuation,data.company.county,twitter_handle);
 			}
+			template_data.unencoded_twitter_company_specific_text = template_data.twitter_company_specific_text;
+			
 			template_data.twitter_company_specific_text = encodeURIComponent(template_data.twitter_company_specific_text);
 		}else{
 			page = '404';

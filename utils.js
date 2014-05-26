@@ -7,6 +7,15 @@ var _ = require('lodash');
 var Utility = function(){
 };
 
+Utility.prototype.hashCode = function(str){
+  /* jshint bitwise: false */
+  var hash = 5381, char;
+  for (var i = 0; i < str.length; i++) {
+    char = str.charCodeAt(i);
+    hash = ((hash << 5) + hash) + char; /* hash * 33 + c */
+  }
+  return Math.abs(hash).toString();
+};
 Utility.prototype.listPages = function(){
  /* return  [
         { url: '/page-1/',  changefreq: 'daily', priority: 0.3 },
