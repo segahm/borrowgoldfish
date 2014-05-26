@@ -139,11 +139,11 @@ function startServer() {
 		var user_id;
 		//user identification piece
 		if (typeof(req.cookies.user) !== 'undefined'){
-		    user_id = req.cookies.user;
+			user_id = req.cookies.user;
 		}else{
 			user_id = Utility.prototype.hashCode(Math.random()+'');
 			//set a new cookie
-			res.cookie('user', user_id, { maxAge: 1000}); //172800000});
+			res.cookie('user', user_id, { maxAge: 172800000});
 		}
 		//user-specific random
 		var rng = seedrandom(user_id,{ global: false });
