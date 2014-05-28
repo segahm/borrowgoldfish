@@ -320,7 +320,12 @@ companyPage = function(template_data,company_id,template){
 };
 homePage = function(req,template_data){
 	var page = 'index';
-	template_data.showcaseRestaurants = getRandomRestaurants(3);
+	var showcaseRestaurants = getRandomRestaurants(3);
+	//make sure the restaurant with the longest name is the first one
+	showcaseRestaurants.sort(function(a,b){
+		return b.name.length - a.name.length;
+	});
+	template_data.showcaseRestaurants = showcaseRestaurants;
 	return Q.fcall(function(){ return page;});
 };
 directoryPage = function(region,template_data,dir_match,template){

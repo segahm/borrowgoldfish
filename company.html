@@ -460,12 +460,6 @@ twttr.ready(function (twttr) {
       label: 'Twitter-share-orig'
     });
   });
-  twttr.events.bind('follow', function (event) {
-    analytics.track('Follow', {
-      category: 'company',
-      label: event.data.screen_name
-    });
-  });
 });
 
     </script>
