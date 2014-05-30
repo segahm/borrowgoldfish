@@ -18,7 +18,14 @@ var config = {
 			}
 		},
 		page: {
-			company: {page_title: 'How much is my business worth?'},
+			company: {page_title: 'How much is my business worth?',
+						analysis: ['Perform competitor analysis',
+						'Review available data',
+						'Explore immediate opportunities'],
+						detail_analysis: 'Detailed Business Analysis',
+						claim: 'Claim your business',
+						review: 'Review available financing'
+					},
 			directory: {page_title: 'Small Business Finances and Valuation in'},
 			index: {page_title: 'BorrowGoldfish: small business finances and valuation'}
 		},
@@ -44,7 +51,14 @@ var config = {
 			}
 		},
 		page: {
-			company: {page_title: '¿Cuánto exactamente vale mi empresa?'},
+			company: {page_title: '¿Cuánto exactamente vale mi empresa?',
+						analysis: ['Realizar análisis de la competencia',
+						'Artículos disponibles datos',
+						'Explorar las oportunidades inmediatas'],
+						detail_analysis: 'Análisis de Negocios detallado',
+						claim: 'Añade tu negocio',
+						review: 'Artículos disponibles de financiamiento'
+			},
 			directory: {page_title: 'Finanzas de las pequeñas empresas y la valoración en'},
 			index: {page_title: 'BorrowGoldfish: Finanzas de las pequeñas empresas y la valoración'}
 		},
