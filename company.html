@@ -3,7 +3,7 @@
 <!--<script src="//cdn.optimizely.com/js/385010028.js"></script>-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{title}} for ${{valuation}} - {{page_title}}</title>
     {{^es}}<link rel="alternate" hreflang="es-US" href="/es{{url}}">{{/es}}
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -90,7 +90,6 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
        <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a>
 
   <div class="social">
-  {{^is_a}} 
   <a onclick="share(this);return false;" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
@@ -103,10 +102,6 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
   
   <i class="fa fa-facebook"> </i>
   </span></a>
-   {{/is_a}} 
-  {{#is_a}}
-    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{full_url}}" data-text="{{unencoded_twitter_company_specific_text}}" data-via="nesovok" data-size="large" data-count="none" data-dnt="true"></a>
-{{/is_a}}
 <br>
 
 </div></div>
@@ -211,7 +206,7 @@ hurdles, but it currently can take us a few days to confirm the validity
   {{/es}}
 </div>
       <div class="modal-footer">
-  email to <a href="mailto:segahm+grow@gmail.com?subject=Business%20Claim:{{id}}">segahm+grow@gmail.com</a><span> OR </span>    
+  email to <a href="mailto:grow@borrowgoldfish.com?subject=Business%20Claim:{{id}}">grow@borrowgoldfish.com</a><span> OR </span>    
 
     
   <a onclick="share(this);return false;" href="https://twitter.com/intent/tweet?button_hashtag={{id}}&amp;screen_name=nesovok" class="btn btn-primary" data-lang="en"><span class="fa fa-twitter"></span> Tweet to @nesovok</a>
@@ -238,15 +233,18 @@ hurdles, but it currently can take us a few days to confirm the validity
                 <p>Business valuation:</p>
                           <span>${{valuation}}</span>
                         </div>
+                        {{#is_a}}
                         <div class="stats-box interest-box" id="lending-box">
   <p>Review available financing:</p><span>Review best available growth financing options for this business.</span>
                           
                         </div>
-                        <!--
+                        {{/is_a}}
+                        {{^is_a}}
                         <div class="stats-box interest-box" id="claim-box">
-  <p>Review available financing:</p><span>Review best available growth financing options for this business.</span>
+<p>Claim this business:</p><span>Review detailed business valuation analysis and learn how your company is valued.</span>
                           
-                        </div>-->
+                        </div>
+                         {{/is_a}}
                         <div class="stats-date">* Statistics as of 05/27/14<br/><span style="font-size:13px">** this calculation does not reflect current real estate prices</span></div>
                         <a href="#details-statistics" class="triangle-link">View more statistics</a>
             </div>
@@ -261,16 +259,18 @@ hurdles, but it currently can take us a few days to confirm the validity
                 <p>Valoración de empresas:</p>
                           <span>${{valuation}}</span>
                         </div>
+                        {{#is_a}}
                         <div class="stats-box interest-box" id="lending-box">
   <p>Artículos disponibles de financiamiento:</p><span>Opciones de financiamiento Artículos disponibles para el crecimiento de este negocio.</span>
                           
                         </div>
-                        <!--
+                        {{/is_a}}
+                        {{^is_a}}
                         <div class="stats-box interest-box" id="claim-box">
   <p>Afirme su empresa:</p><span>Revisión detallada del análisis de la valoración  de empresas y descubren como se valora su empresa e.</span>
                           
                         </div>
-                      -->
+                        {{/is_a}}
                         <div class="stats-date">* Estadísticas  del 05/27/14</div>
                         <a href="#details-statistics" class="triangle-link">Ver mas estadísticas</a>
             </div>
@@ -415,17 +415,9 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
   
   <i class="fa fa-twitter"> </i>
   </span></a>
-  <a onclick="share(this);return false;" id="Linkedin-share-lower" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{encoded_title}}&summary={{encoded_description_short_text}}&source=BorrowGoldfish"><span class="fa-stack fa-lg">
-  
-  <i class="fa fa-linkedin"> </i>
-  </span></a>
-  <a onclick="share(this);return false;" id="Facebook-share-lower" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
-  
-  <i class="fa fa-facebook"> </i>
-  </span></a>
    {{/is_a}} 
   {{#is_a}}
-    <a href="https://twitter.com/share" class="twitter-share-button-lower" data-url="{{full_url}}" data-text="{{unencoded_twitter_company_specific_text}}" data-via="nesovok" data-size="large" data-count="none" data-dnt="true"></a>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{full_url}}" data-text="{{unencoded_twitter_company_specific_text}}" data-via="nesovok" data-size="large" data-count="none" data-dnt="true"></a>
 {{/is_a}}
 
 </div>

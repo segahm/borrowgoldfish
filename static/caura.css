@@ -269,7 +269,9 @@ background-color: rgb(116, 155, 192);
 color: #ffffff;
 text-decoration: none;
 }
-
+.bs-callout.bs-callout-info {
+padding-top: 0px;
+}
 /** side links */
 
 /******************************/

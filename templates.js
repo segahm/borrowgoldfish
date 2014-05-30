@@ -24,7 +24,7 @@ var config = {
 						'Explore immediate opportunities'],
 						detail_analysis: 'Detailed Business Analysis',
 						claim: 'Claim your business',
-						review: 'Review available financing'
+						review: 'Review Available Financing'
 					},
 			directory: {page_title: 'Small Business Finances and Valuation in'},
 			index: {page_title: 'BorrowGoldfish: small business finances and valuation'}
