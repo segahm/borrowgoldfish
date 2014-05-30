@@ -150,8 +150,8 @@ function startServer() {
 		var A_B_Split = Math.round(rng());
 		
 		//spanish
-		var matches = req.path.match(/^\/(es)[\/]?/i);
-		var is_spanish = (matches || (typeof(req.query.fb_locale) !== 'undefined' && req.query.fb_locale === 'es_ES'))?true:false;
+		var matches = req.path.match(/^\/(es)/i);
+		var is_spanish = ((matches && (req.path.length > 3 && req.path[3] === '/')) || (typeof(req.query.fb_locale) !== 'undefined' && req.query.fb_locale === 'es_ES'))?true:false;
 
 		matches = req.path.match(/^\/(es\/)?([a-z0-9\-]{3,})$/i); // "/es/non-state-string"
 		var template_data = {};
@@ -164,8 +164,8 @@ function startServer() {
 		template_data.url_path = is_spanish?'http://'+req.host+'/es/':'http://'+req.host+'/';
 		template_data.encoded_url = encodeURIComponent(
 			'http://'+req.host+req.originalUrl);
-		template_data.url = req.path.replace(/^\/es\/?/i,'/');
-		template_data.full_url = (is_spanish?'http://'+req.host+'/es':'http://'+req.host)+req.url.replace(/^\/es\/?/i,'/');
+		template_data.url = req.path.replace(/^\/es\//i,'/').replace(/^\/es$/i,'/');
+		template_data.full_url = (is_spanish?'http://'+req.host+'/es':'http://'+req.host)+req.url.replace(/^\/es\//i,'/').replace(/^\/es$/i,'/');
 
 		var page = 'index';	//default page
 		var resultPromise = Q.fcall(function(){ return page;});

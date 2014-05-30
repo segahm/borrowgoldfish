@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html><head>
+<!--<script src="//cdn.optimizely.com/js/385010028.js"></script>-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
 
     <title>{{title}} for ${{valuation}} - {{page_title}}</title>
@@ -9,7 +11,7 @@
     <link rel="stylesheet" href="/static/normalize.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/static/osrc.css" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="/static/caura.css" type="text/css" media="screen" charset="utf-8">
    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
-  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/static/part-bootstrap.css" rel="stylesheet">
   <!-- linkedin/facebook card begin -->
   <meta property="og:title" content="{{title}} - {{page_title}}">
@@ -78,7 +80,7 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
        <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a>
 
   <div class="social">
-  {{#is_b}} 
+  {{^is_a}} 
   <a onclick="share(this);return false;" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
@@ -91,7 +93,7 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
   
   <i class="fa fa-facebook"> </i>
   </span></a>
-   {{/is_b}} 
+   {{/is_a}} 
   {{#is_a}}
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{full_url}}" data-text="{{unencoded_twitter_company_specific_text}}" data-via="nesovok" data-size="large" data-count="none" data-dnt="true"></a>
 {{/is_a}}
@@ -106,9 +108,10 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel">{{^es}}Valuation methodology{{/es}}{{#es}}Metodología de valoración{{/es}}</h4>
+        <h4 class="modal-title" id="myModalLabel">{{^es}}Detailed Business Analysis{{/es}}{{#es}}Metodología de valoración{{/es}}</h4>
       </div>
-      <div class="modal-body"><img src="/static/table-restaurant0110.png"><br>
+      <div class="modal-body"><img src="/static/table-restaurant0110.png">
+        <br>
 <div class="alert alert-danger fade in">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
       
@@ -122,6 +125,33 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
 
   </div>
 </div>
+<!-- -->
+  <div class="modal fade" id="lending_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel3">{{^es}}Review available financing{{/es}}{{#es}}{{/es}}</h4>
+      </div>
+      <div class="modal-body">
+         <div class="bs-callout bs-callout-info"> <h4>Looking for financing?</h4>
+          <p>There is no need to fill out lengthy forms. We already know about your business. Once you verify yourself as the legitimate owner of this business, we will help you explore best available options. We will never ask you to compare apples to oranges.</p>
+
+<div>
+                     
+   <a class="btn btn-primary btn-md" role="button"><i class="fa fa-angle-down fa-4" style="color:#fff"></i> Claim you business</a>                  
+
+                     
+
+                     
+
+      </div></div>
+
+    </div>
+
+  </div>
+</div>
+<!-- -->
   <div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true" style="display: none;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -181,7 +211,7 @@ hurdles, but it currently can take us a few days to confirm the validity
                           <span>${{valuation}}</span>
                         </div>
                         <div class="stats-box interest-box" id="interest-box">
-  <p>Claim this business:</p><span>Review detailed business valuation analysis and learn how your company is valued.</span>
+  <p>Review available financing:</p><span>Review best available growth financing options for this business.</span>
                           
                         </div>
                         <div class="stats-date">* Statistics as of 04/21/14<br/><span style="font-size:13px">** this calculation does not reflect current real estate prices</span></div>
@@ -220,15 +250,15 @@ hurdles, but it currently can take us a few days to confirm the validity
 $('#valuationmodal').modal('toggle');
 });
     $( "#interest-box" ).mousedown(function() {
-         if (!$('#loginmodal').hasClass('in')){
+         if (!$('#lending_modal').hasClass('in')){
           analytics.page({
-            title: 'Claim Business',
-            url: '{{full_url}}#claim',
-            path: '{{#es}}/es{{/es}}{{url}}/#claim',
+            title: 'Apply for a Loan',
+            url: '{{full_url}}#loan',
+            path: '{{#es}}/es{{/es}}{{url}}/#loan',
             referrer: '{{full_url}}'
           });
         }
-  $('#loginmodal').modal('toggle');
+  $('#lending_modal').modal('toggle');
 
 });
 </script>
@@ -237,7 +267,12 @@ $('#valuationmodal').modal('toggle');
 </div>
 
     <div class="container">
-
+<div class="hidden-md">
+{{#company2.found}}<a href="{{company2.id}}" class="bt-pag next fixed" rel="prev">PREV</a>{{/company2.found}}
+</div>
+<div class="hidden-md">
+{{#company1.found}}<a href="{{company1.id}}" class="bt-pag prev fixed" rel="next">NEXT</a>{{/company1.found}}
+</div>
 <div id="profile">
   
     <div class="profile-badge clearfix"><div itemscope itemtype="http://schema.org/Organization"> 
@@ -257,7 +292,7 @@ $('#valuationmodal').modal('toggle');
     <div id="description">
 {{^es}}
         <p>
-          <a id="details-statistics" href="{{id}}">{{title}}</a> is 
+          {{title}} is 
 {{#praise[0]}}a lucrative{{/praise[0]}}{{#praise[1]}}an 
 amazing{{/praise[1]}}{{#praise[2]}}a highly 
 entrepreneurial{{/praise[2]}}{{#praise[3]}}a trend 
@@ -286,7 +321,7 @@ With this in mind, both aforementioned companies could make for franchise
 {{/es}}
 {{#es}}
         <p>
-          <a id="details-statistics" href="{{id}}">{{title}}</a> 
+          {{title}}
 {{#praise[0]}}es un restaurante lucrativo{{/praise[0]}}{{#praise[1]}}es un increíble restaurante{{/praise[1]}}{{#praise[2]}}es un entrepreneurial{{/praise[2]}}{{#praise[3]}}es una configuración de restaurante de tendencia{{/praise[3]}} {{#loc[0]}}situado en{{/loc[0]}}{{#loc[1]}}situado en{{/loc[1]}} {{county}} condado.</p>
 
  {{#company1.found}}       
@@ -312,8 +347,29 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
 {{/es}}
     </div>
 {{^es}}
-    <h1 id="stats">Statistics</h1>
+    <div>
+<div class="social">
+  {{^is_a}} 
+  <a onclick="share(this);return false;" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
+  
+  <i class="fa fa-twitter"> </i>
+  </span></a>
+  <a onclick="share(this);return false;" id="Linkedin-share" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{encoded_title}}&summary={{encoded_description_short_text}}&source=BorrowGoldfish"><span class="fa-stack fa-lg">
+  
+  <i class="fa fa-linkedin"> </i>
+  </span></a>
+  <a onclick="share(this);return false;" id="Facebook-share" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
+  
+  <i class="fa fa-facebook"> </i>
+  </span></a>
+   {{/is_a}} 
+  {{#is_a}}
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{full_url}}" data-text="{{unencoded_twitter_company_specific_text}}" data-via="nesovok" data-size="large" data-count="none" data-dnt="true"></a>
+{{/is_a}}
 
+</div>
+      <h1 id="details-statistics">Statistics</h1>
+</div>
     <div id="schedule-text">
 
          <p id="events">
