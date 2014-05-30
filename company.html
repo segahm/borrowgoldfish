@@ -50,6 +50,16 @@ function share(el,should_open){
     window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
   }
 }
+function claim(el){
+  $('#valuationmodal').modal('toggle');
+  $('#loginmodal').modal('toggle');
+   analytics.page({
+            title: 'Claim Business',
+            url: '{{full_url}}#claim-from-valuation',
+            path: '{{#es}}/es{{/es}}{{url}}/#claim-from-valuation',
+            referrer: '{{full_url}}'
+          });
+}
 </script>
 </head><body class="" style="zoom: 1;" data-twttr-rendered="true">
 
@@ -110,14 +120,25 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h4 class="modal-title" id="myModalLabel">{{^es}}Detailed Business Analysis{{/es}}{{#es}}Metodología de valoración{{/es}}</h4>
       </div>
-      <div class="modal-body"><img src="/static/table-restaurant0110.png">
+      <div class="modal-body">
+<ul class="fa-ul">
+  <li><i class="fa-li fa 
+fa-users"></i>Perform competitor analysis</li>
+  <li><i class="fa-li fa fa-check-square"></i>Review available data</li>
+  <li><i class="fa-li fa fa-money"></i>Explore immediate opportunities</li>
+  
+</ul>
+
+
+
+         <center><a onclick="claim(this);return false;" href="#">Claim Your Business</a></center>
         <br>
 <div class="alert alert-danger fade in">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
       
       <p style="
     /* text-align: left; */
-">{{^es}}Only the owner of this business can see the details. If you are the owner, please claim this business to proceed.{{/es}}{{#es}}Sólo el propietario de este negocio puede ver los detalles. Si usted es el propietario, por favor reclamar este negocio para proceder.{{/es}}</p>
+">Only the owner of this business can see the details. If you are the owner, please <a onclick="claim(this);return false;" href="#">claim</a> this business to proceed.</p>
   </div>
       </div>
 
@@ -139,7 +160,7 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
 
 <div>
                      
-   <a class="btn btn-primary btn-md" role="button"><i class="fa fa-angle-down fa-4" style="color:#fff"></i> Claim you business</a>                  
+   <a class="btn btn-primary btn-md" id="claim-from-loan" role="button"><i class="fa fa-angle-down fa-4" style="color:#fff"></i> Claim you business</a>                  
 
                      
 
@@ -150,6 +171,7 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
     </div>
 
   </div>
+</div>
 </div>
 <!-- -->
   <div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true" style="display: none;">
@@ -210,10 +232,15 @@ hurdles, but it currently can take us a few days to confirm the validity
                 <p>Business valuation:</p>
                           <span>${{valuation}}</span>
                         </div>
-                        <div class="stats-box interest-box" id="interest-box">
+                        <div class="stats-box interest-box" id="lending-box">
   <p>Review available financing:</p><span>Review best available growth financing options for this business.</span>
                           
                         </div>
+                        <!--
+                        <div class="stats-box interest-box" id="claim-box">
+  <p>Review available financing:</p><span>Review best available growth financing options for this business.</span>
+                          
+                        </div>-->
                         <div class="stats-date">* Statistics as of 04/21/14<br/><span style="font-size:13px">** this calculation does not reflect current real estate prices</span></div>
                         <a href="#details-statistics" class="triangle-link">View more statistics</a>
             </div>
@@ -228,10 +255,16 @@ hurdles, but it currently can take us a few days to confirm the validity
                 <p>Valoración de empresas:</p>
                           <span>${{valuation}}</span>
                         </div>
-                        <div class="stats-box interest-box" id="interest-box">
+                        <div class="stats-box interest-box" id="lending-box">
   <p>Afirme su empresa:</p><span>Revisión detallada del análisis de la valoración  de empresas y descubren como se valora su empresa e.</span>
                           
                         </div>
+                        <!--
+                        <div class="stats-box interest-box" id="claim-box">
+  <p>Afirme su empresa:</p><span>Revisión detallada del análisis de la valoración  de empresas y descubren como se valora su empresa e.</span>
+                          
+                        </div>
+                      -->
                         <div class="stats-date">* Estadísticas  del 03/31/14</div>
                         <a href="#details-statistics" class="triangle-link">Ver mas estadísticas</a>
             </div>
@@ -249,7 +282,8 @@ hurdles, but it currently can take us a few days to confirm the validity
         }
 $('#valuationmodal').modal('toggle');
 });
-    $( "#interest-box" ).mousedown(function() {
+
+$( "#lending-box" ).mousedown(function() {
          if (!$('#lending_modal').hasClass('in')){
           analytics.page({
             title: 'Apply for a Loan',
@@ -259,7 +293,28 @@ $('#valuationmodal').modal('toggle');
           });
         }
   $('#lending_modal').modal('toggle');
+});
+$( "#claim-box" ).mousedown(function() {
+         if (!$('#loginmodal').hasClass('in')){
+          analytics.page({
+            title: 'Claim Business',
+            url: '{{full_url}}#claim',
+            path: '{{#es}}/es{{/es}}{{url}}/#claim',
+            referrer: '{{full_url}}'
+          });
+        }
+  $('#loginmodal').modal('toggle');
+});
 
+$( "#claim-from-loan" ).mousedown(function() {
+  $('#lending_modal').modal('toggle');
+  $('#loginmodal').modal('toggle');
+  analytics.page({
+            title: 'Apply for a Loan',
+            url: '{{full_url}}#claim-from-loan',
+            path: '{{#es}}/es{{/es}}{{url}}/#claim-from-loan',
+            referrer: '{{full_url}}'
+          });
 });
 </script>
         </div>
