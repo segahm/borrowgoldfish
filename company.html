@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">
 <meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="BorrowGoldfish"><meta property="article:publisher" content="NeSovok">
 <meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="es_US">
 
   <!-- linkedin/facebook card end -->
   
@@ -69,9 +69,8 @@ function claim(el){
 
     <div id="banner">
         <div class="container">
+          <!--googleoff: all -->
   <div class="bootstrap">
- <!-- everything in here should have the Bootstrap CSS applied -->
- 
 </div>
 {{^es}}
             <strong>Dear Bankers:</strong>While you read this, make sure that you remember that these stats only provide a biased and one-sided view.<br> Don't take it too seriously! 
@@ -83,6 +82,7 @@ function claim(el){
 estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No se lo tomen tan en serio!
             <span class="promise">¡Bien lo prometo !</span>
             {{/es}}
+            <!--googleon: all -->
         </div>
     </div>
 
@@ -90,18 +90,18 @@ estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No
        <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a>
 
   <div class="social">
-  <a onclick="share(this);return false;" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
+  <a onclick="share(this);return false;" title="tweet to this business" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
   </span></a>
-  <a onclick="share(this);return false;" id="Linkedin-share" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{encoded_title}}&summary={{encoded_description_short_text}}&source=BorrowGoldfish"><span class="fa-stack fa-lg">
+  <!--<a onclick="share(this);return false;" id="Linkedin-share" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{encoded_title}}&summary={{encoded_description_short_text}}&source=BorrowGoldfish"><span class="fa-stack fa-lg">
   
   <i class="fa fa-linkedin"> </i>
   </span></a>
   <a onclick="share(this);return false;" id="Facebook-share" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
   
   <i class="fa fa-facebook"> </i>
-  </span></a>
+  </span></a>-->
 <br>
 
 </div></div>
@@ -233,6 +233,7 @@ hurdles, but it currently can take us a few days to confirm the validity
                 <p>Business valuation:</p>
                           <span>${{valuation}}</span>
                         </div>
+                        <!--
                         {{#is_a}}
                         <div class="stats-box interest-box" id="lending-box">
   <p>Review available financing:</p><span>Review best available growth financing options for this business.</span>
@@ -245,6 +246,12 @@ hurdles, but it currently can take us a few days to confirm the validity
                           
                         </div>
                          {{/is_a}}
+                         -->
+                         <div class="stats-box interest-box" id="claim-box">
+<p>Claim this profile:</p><span>Control what is available to the public. Review private analysis.</span>
+                          
+                        </div>
+
                         <div class="stats-date">* Statistics as of 05/27/14<br/><span style="font-size:13px">** this calculation does not reflect current real estate prices</span></div>
                         <a href="#details-statistics" class="triangle-link">View more statistics</a>
             </div>
@@ -259,6 +266,7 @@ hurdles, but it currently can take us a few days to confirm the validity
                 <p>Valoración de empresas:</p>
                           <span>${{valuation}}</span>
                         </div>
+                        <!--
                         {{#is_a}}
                         <div class="stats-box interest-box" id="lending-box">
   <p>Artículos disponibles de financiamiento:</p><span>Opciones de financiamiento Artículos disponibles para el crecimiento de este negocio.</span>
@@ -271,6 +279,11 @@ hurdles, but it currently can take us a few days to confirm the validity
                           
                         </div>
                         {{/is_a}}
+                      -->
+                      <div class="stats-box interest-box" id="claim-box">
+  <p>Afirme su empresa:</p><span>Controlar lo que se encuentra disponible al público. Revise el análisis privado.</span>
+                          
+                        </div>
                         <div class="stats-date">* Estadísticas  del 05/27/14</div>
                         <a href="#details-statistics" class="triangle-link">Ver mas estadísticas</a>
             </div>
@@ -278,7 +291,7 @@ hurdles, but it currently can take us a few days to confirm the validity
           </div>
   <script type="text/javascript">
   $( '#valuation-box' ).mousedown(function() {
-    if (!$('#valuationmodal').hasClass('in')){
+    if (!$('#loginmodal').hasClass('in')){
           analytics.page({
             title: 'Valuation Info',
             url: '{{full_url}}#info',
@@ -286,10 +299,11 @@ hurdles, but it currently can take us a few days to confirm the validity
             referrer: '{{full_url}}'
           });
         }
-$('#valuationmodal').modal('toggle');
+$('#loginmodal').modal('toggle');
+//$('#valuationmodal').modal('toggle');
 });
 
-$( "#lending-box" ).mousedown(function() {
+/*$( "#lending-box" ).mousedown(function() {
          if (!$('#lending_modal').hasClass('in')){
           analytics.page({
             title: 'Apply for a Loan',
@@ -299,7 +313,7 @@ $( "#lending-box" ).mousedown(function() {
           });
         }
   $('#lending_modal').modal('toggle');
-});
+});*/
 $( "#claim-box" ).mousedown(function() {
          if (!$('#loginmodal').hasClass('in')){
           analytics.page({
@@ -411,7 +425,7 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
     <div>
 <div class="social">
   {{^is_a}} 
-  <a onclick="share(this);return false;" id="Twitter-share-lower" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
+  <a onclick="share(this);return false;" title="tweet to this business" id="Twitter-share-lower" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
   
   <i class="fa fa-twitter"> </i>
   </span></a>

@@ -18,9 +18,10 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{full_url}}">
 <meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">
-<meta property="og:description" content="{{meta_description}}"><meta property="og:site_name" content="BorrowGoldfish">
+<meta property="og:description" content="{{page_description}}">
+<meta property="og:site_name" content="BorrowGoldfish">
 <meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="es_US">
 <meta property="fb:admins" content="segahm"/>
   <!-- linkedin/facebook card end -->
   
@@ -28,7 +29,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <meta name="twitter:title" content="{{page_title}}">
-<meta name="twitter:description" content="{{meta_description}}">
+<meta name="twitter:description" content="">
 <meta name="twitter:creator" content="@nesovok">
 <meta name="twitter:image:src" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">
   <!-- twitter card end -->
@@ -88,14 +89,15 @@ function clickedLink(el){
             <span class="profile-name">Why "Borrow Goldfish"?</span>
     </div>
     <div id="description">
-      <h4>Evaluating finances at thousands of restaurants</h4>
+      <h4>Thousands of businesses and information about their finances</h4>
   <p>
-Already here you can find a valuation estimate for thousands of restaurants in <a href="/tx" target="_blank">Texas</a>, <a href="/fl" target="_blank">Florida</a>, and <a href="/nm" target="_blank">New Mexico</a>. I figure, if Yelp managed to find consumers, real people, to quantify service quality at Small Businesses, I can definitely find data to quantify the financials at these same Small Businesses. For starters, take a look at these sample restaurants:
+Already here you can find a valuation estimate for thousands of restaurants in <a href="/tx" target="_blank">Texas</a>, <a href="/fl" target="_blank">Florida</a>, and <a href="/nm" target="_blank">New Mexico</a>. <!--googleoff: snippet-->I figure, if Yelp managed to find consumers, real people, to quantify service quality at Small Businesses, I can definitely find data to quantify the financials at these same Small Businesses. For starters, take a look at these sample restaurants:<!--googleon: snippet-->
   </p>
 <div class="container-fluid  bootstrap"> 
 
 <div id="equalheight" class="row">
-  
+  <!--googleoff: snippet-->
+ <!--googleoff: index--> 
     <div class="col-md-5 col-sm-6 col-xs-6 main-action col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
   <div><a href="/{{showcaseRestaurants[0].id}}">{{showcaseRestaurants[0].name}}</a><br><br>
 
@@ -105,6 +107,8 @@ Already here you can find a valuation estimate for thousands of restaurants in <
   <div class="col-action"><a href="/{{showcaseRestaurants[1].id}}">{{showcaseRestaurants[1].name}}</a></div>
   <div class="col-action2"><a href="/{{showcaseRestaurants[2].id}}">{{showcaseRestaurants[2].name}}</a></div>
     </div>
+    <!--googleon: index-->
+    <!--googleon: snippet-->
 </div>
   <div class="row"></div>
 
@@ -121,25 +125,31 @@ Despite popular statements about the importance of small business, little has be
 </p><h4>Application of data</h4>
 <p>Several years ago we’ve started seeing new types of companies such as <a onclick="clickedLink(this)" target="_blank" id="mint" href="http://www.mint.com">Mint</a> and <a onclick="clickedLink(this)" target="_blank" id="Credit Karma" href="http://www.creditkarma.com/">Credit Karma</a> that make use of data to bring transparency to the finances of consumers. Today we are seeing the emergency of new types of companies that are filling the small business financing void left by the banks. My bet is that I can do a good job at quantifying the achievements of businesses and help these new companies and small businesses as a result.</p><h4>Only a start</h4>
 <p>For now I'm focused only on restaurants since the competitive nature of the industry makes it easy to arrive at uniform cost calculations for each category and type of dining experience. I've decided to summarize all the calculations in one number: "how much the company is worth." This is surely not an ideal representation since the number I end up calculating is comprised of fundamentals and does not take into account the effect of “the trade value”. But it seems like it is still many times better than the next best approach out there.</p>
-<!--
-  <p style="font-size:12px">(p.s. if you are still interested to know the details about my choice for the site's name, feel free to tweet to me <a href="http://twitter.com/nesovok" target="_blank">@nesovok</a>.</p>    -->
 {{/es}}
 {{#es}}
-   <div class="container">
+     <div class="container">
 
 <div id="profile">
   
     <div class="profile-badge clearfix">
-            <span class="profile-name">¿Por qué "Borrow Goldfish"?</span>
+            <span class="profile-name">Por qué "Borrow Goldfish"?</span>
     </div>
     <div id="description">
+      <h4>Una evaluación de las finanzas en miles de restaurants</h4>
   <p>
-Ya hoy aqui usted puede encontrar una estimación de la valoración de cuánto vale cualquier restaurante dentro de varios condados en <a href="/es/tx">Texas</a>, Florida y nuevo México. Mi esperanza es construir un motor de predicción para cuantificar todos las pequeñas empresas en los Estados Unidos. Supongo que si Yelp lograron encontrar consumidores, personas reales, para cuantificar la calidad del servicio a las pequeñas empresas, definitivamente puedo encontrar datos que <a href="https://www.yelp.com/academic_dataset" target="_blank" onclick="clickedLink(this)" id="Yelp_API">cuantifiquen</a> las finanzas de estas mismas pequeñas empresas. Estos son algunos de ellos:
+Ya aquí puede encontrar una estimación de valoración para miles de restaurantes en <a href="/tx" target="_blank">Texas</a>, <a href="/fl" target="_blank">Florida</a>, y <a href="/nm" target="_blank">Nueva México</a>. <!--googleoff: snippet-->Supongo que si Yelp lograron encontrar consumidores, personas reales
+
+para cuantificar la calidad del servicio a las pequeñas empresas, definitivamente puedo encontrar 
+
+datos que cuantifiquen las finanzas de estas mismas pequeñas empresas. Para empezar, echa 
+
+un vistazo a estos restaurantes de muestra:<!--googleon: snippet-->
   </p>
 <div class="container-fluid  bootstrap"> 
 
 <div id="equalheight" class="row">
-  
+  <!--googleoff: snippet-->
+  <!--googleoff: index-->
     <div class="col-md-5 col-sm-6 col-xs-6 main-action col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
   <div><a href="/{{showcaseRestaurants[0].id}}">{{showcaseRestaurants[0].name}}</a><br><br>
 
@@ -149,24 +159,63 @@ Ya hoy aqui usted puede encontrar una estimación de la valoración de cuánto v
   <div class="col-action"><a href="/{{showcaseRestaurants[1].id}}">{{showcaseRestaurants[1].name}}</a></div>
   <div class="col-action2"><a href="/{{showcaseRestaurants[2].id}}">{{showcaseRestaurants[2].name}}</a></div>
     </div>
+    <!--googleon: index-->
+    <!--googleon: snippet-->
 </div>
   <div class="row"></div>
 
       </div>
-        <p>"Pequeñas empresas emplean la mayoría de población activa los E.E.U.U", "pequeñas empresas es la repuesta para salgar el país de la recesión” esas o otras <a onclick="clickedLink(this)" id="Statements" href="http://www.forbes.com/sites/rebeccabagley/2012/05/15/small-businesses-big-impact" target="_blank">citaciones</a> estamos acostumbrados <a onclick="clickedLink(this)" id="Politics" href="http://www.whitehouse.gov/economy/business/small-business" target="_blank">oírlos</a>. Por lo tanto tradicionalmente ha sido poco hecho por el sector financiero para llamar la atención en <a href="http://www.nydailynews.com/new-york/loan-groan-spite-improving-economy-nyc-small-businesses-bank-loans-article-1.1788874" target="_blank" onclick="clickedLink(this)" id="Financing_SMB">el financiamiento de las pequeñas empresas</a>.  
-</p>
 
-        
+       <h4>Los bancos descuidan pequeños negocios</h4> 
         <p>
- Sin embargo, lo que hace hoy diferente de, digamos, hace 10 años, es que hay todo tipo de datos disponibles en las PYMES. Además de los datos económicos y censo tradicionales, ahora hay lugares de datos con los cuales es posible predecir el éxito en los negocios y los ingresos por la exposición de cada empresa en la audiencia web y el trafico local. 
+A pesar de afirmaciones populares acerca de la importancia de las pequeñas empresas, poco 
+
+se ha hecho por el sector financiero convencional para llamar la atención a la financiación de las 
+
+pequeñas empresas. Los créditos a las pequeñas empresas por parte de los bancos ha ido en 
+
+descenso desde hace ya muchos años. Y aquellos bancos que prestan, no son muy buenos en 
+
+esto. Yo mismo me he topado con los bancos que evalúan el potencial de ingresos de las tiendas 
+
+sólo usando el web, todas las cosas , para una premisa evaluación.
     </p>
         
 
-        
-        <p>Esto y otros pensamientos sobre la arena de pequeños negocios han estado conmigo durante mucho tiempo. Ya cuando tuve un trabajo en el Banco Mundial, no obtuvieron préstamo de capital a pesar de que  tenian rendimientos del capital mas de 28%. Durante mi posterior start-up también he encontrado a prestamistas comerciales que comúnmente evalúan el potencial de ingresos de tiendas en línea usando la evaluación de la premisa. Incluso entonces, supe que podía recibir ata <a onclick="clickedLink(this)" id="Quora" href="http://www.quora.com/Financial-Modeling/Where-can-web-startups-learn-about-financial-modeling-that-accounts-for-the-important-metrics-and-costs" target="_blank">una mejor estimación</a> de los ingresos por el precio de la compañía, los gastos de los anuncios, y los índices de conversión.
-</p><p>Este proyecto esta en sus etapas iniciales, pero apuesto que puedo hacer un mejor trabajo en la cuantificación de logros de las pequeñas empresas y espero ayudar a pequeñas empresas como resultado. Por ahora estoy concentrado soló en los restaurantes ya que la naturaleza competitiva de la industria hace que sea mas fácil de llegar  a cálculos de costo uniforme para cada categoría y tipo de cocina. He decido resumir todos los cálculos en un numero : “ ¿Cual es el valor de la compañía.” Seguramente no es una representación ideal puesto que el número se compone de fundamentos y no toma en cuenta el efecto de la opinión del comerciante <a target="_blank" onclick="clickedLink(this)" id="Aswath" href="http://aswathdamodaran.blogspot.com/2014/02/facebook-buys-whatsapp-for-19-billion.html" title="facebook buys whatsapp for 19 billion by Aswath Damodaran">&ldquo;The Trader (Pricing) View&rdquo;</a>. Pero se parece que todavía es muchas veces mejor que el mejor enfoque.</p><p>Así que seguí adelante y lo construí.</p>
-<!--
-  <p style="font-size:12px">(p.s si usted todavía está interesado en conocer los detalles sobre  mi elección para el nombre del sitio, no dude en enviarme un tweet <a href="http://twitter.com/nesovok" target="_blank">@nesovok</a>.</p>-->     
+        <h4>Nueva disponibilidad de datos</h4>
+        <p>Lo que hace hoy diferente de hace, supongamos, 10 años es que hay todas clases de datos 
+
+disponibles en PYME. Por ejemplo, en el caso de un almacén exclusivo de la web, Por ejemplo, 
+
+en el caso de una tienda sólomente web , puedo llegar a una estimación más exacta al mirar a los precios de una web empresa, los gastos de los anuncios, y los índices de conversión. Para
+
+comercios tradicionales, ahora hay lugares de datos (además del censo económico, tradicional 
+
+e Inmobiliaria datos) con el cual es posible predecir el éxito en los negocios y los ingresos por la 
+
+exposición de un negocio web público y tráfico local.
+</p><h4>Aplicación de los datos</h4>
+<p>Hace varios años hemos comenzado a ver nuevos tipos de empresas como <a onclick="clickedLink(this)" target="_blank" id="mint" href="http://www.mint.com">Mint</a> y <a onclick="clickedLink(this)" target="_blank" id="Credit Karma" href="http://www.creditkarma.com/">Credit Karma</a> hacen uso de datos para traer transparencia a las finanzas de los consumidores. Hoy
+
+estamos viendo la emergencia de nuevos tipos de empresas que se están llenando la financiación 
+
+de pequeñas empresas vacío dejado por los bancos. Mi apuesta es que puedo hacer un buen 
+
+trabajo en la cuantificación de los logros de las empresas y ayudar a estas nuevas empresas y 
+
+pequeños negocios como resultado.</p>
+<h4>Sólo un comienzo</h4>
+<p>Ahora mismo estoy centrado sólo en los restaurantes ya que la naturaleza competitiva de la
+
+industria hace que sea fácil llegar a cálculos de costo uniforme para cada categoría y tipo de 
+
+experiencia a la hora de comer. He decidido resumir todos los cálculos en un número: 'cuánto 
+
+vale la compañía. ' Seguramente esto no es una representación ideal  desde que el número 
+
+final de cálculo consta de fundamentos y no toma en cuenta el efecto del "valor comercial". Pero 
+
+parece es muchas veces mejor que el mejor enfoque.</p>   
 {{/es}}
 
         
@@ -186,12 +235,13 @@ Ya hoy aqui usted puede encontrar una estimación de la valoración de cuánto v
 <div class="container bootstrap">
 
   <div class="row">
+    <!--googleoff: index-->
     <div class="col-sm-2 col-md-2"></div>
     {{#showcaseRestaurants}}
 <div class="col-sm-3"><a onclick="clickedLink(this)" id="bottom-action" href="/{{id}}">{{name}}</a></div>
 {{/showcaseRestaurants}}
 
-  
+  <!--googleon: index-->
 </div>
 </div>
 </div>

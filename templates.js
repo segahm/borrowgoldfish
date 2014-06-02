@@ -27,7 +27,9 @@ var config = {
 						review: 'Review Available Financing'
 					},
 			directory: {page_title: 'Small Business Finances and Valuation in'},
-			index: {page_title: 'BorrowGoldfish: small business finances and valuation'}
+			index: {page_title: 'Small Business Profile that matters to Lenders',
+					page_description: 'Find thousands of restaurants, information about their finances and cash flow health. Explore a valuation estimate for restaurants in Texas, Florida, and New Mexico.'
+				}
 		},
 		all_pages: {
 			twitter_share_text: encodeURIComponent('#smallbiz #insight'),
@@ -60,7 +62,8 @@ var config = {
 						review: 'Artículos disponibles de financiamiento'
 			},
 			directory: {page_title: 'Finanzas de las pequeñas empresas y la valoración en'},
-			index: {page_title: 'BorrowGoldfish: Finanzas de las pequeñas empresas y la valoración'}
+			index: {page_title: 'Finanzas de las pequeñas empresas y la valoración',
+					page_description: 'Encuentre miles de restaurantes, información sobre sus finanzas y la salud de flujo de caja. Explora una estimación de valuación de restaurantes en Texas, Florida y Nuevo México.'}
 		},
 		all_pages: {
 			twitter_share_text: encodeURIComponent('#smallbiz #PYMES #insight'),
