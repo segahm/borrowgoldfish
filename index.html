@@ -17,7 +17,7 @@
   <meta property="og:title" content="{{page_title}}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{full_url}}">
-<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">
+<!--<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
 <meta property="og:description" content="{{page_description}}">
 <meta property="og:site_name" content="BorrowGoldfish">
 <meta property="og:locale" content="en_US">
@@ -151,13 +151,13 @@ un vistazo a estos restaurantes de muestra:<!--googleon: snippet-->
   <!--googleoff: snippet-->
   <!--googleoff: index-->
     <div class="col-md-5 col-sm-6 col-xs-6 main-action col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-  <div><a href="/{{showcaseRestaurants[0].id}}">{{showcaseRestaurants[0].name}}</a><br><br>
+  <div><a href="/es/{{showcaseRestaurants[0].id}}">{{showcaseRestaurants[0].name}}</a><br><br>
 
 </div>
     </div>
     <div class="col-md-4 col-sm-4 hidden-xs second-action">
-  <div class="col-action"><a href="/{{showcaseRestaurants[1].id}}">{{showcaseRestaurants[1].name}}</a></div>
-  <div class="col-action2"><a href="/{{showcaseRestaurants[2].id}}">{{showcaseRestaurants[2].name}}</a></div>
+  <div class="col-action"><a href="/es/{{showcaseRestaurants[1].id}}">{{showcaseRestaurants[1].name}}</a></div>
+  <div class="col-action2"><a href="/es/{{showcaseRestaurants[2].id}}">{{showcaseRestaurants[2].name}}</a></div>
     </div>
     <!--googleon: index-->
     <!--googleon: snippet-->
@@ -238,7 +238,7 @@ parece es muchas veces mejor que el mejor enfoque.</p>
     <!--googleoff: index-->
     <div class="col-sm-2 col-md-2"></div>
     {{#showcaseRestaurants}}
-<div class="col-sm-3"><a onclick="clickedLink(this)" id="bottom-action" href="/{{id}}">{{name}}</a></div>
+<div class="col-sm-3"><a onclick="clickedLink(this)" id="bottom-action" href="{{#es}}/es{{/es}}/{{id}}">{{name}}</a></div>
 {{/showcaseRestaurants}}
 
   <!--googleon: index-->

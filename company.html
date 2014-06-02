@@ -17,7 +17,7 @@
   <meta property="og:title" content="{{title}} - {{page_title}}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="{{full_url}}">
-<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">
+<!--<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
 <meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="BorrowGoldfish"><meta property="article:publisher" content="NeSovok">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="es_US">
@@ -60,6 +60,12 @@ function claim(el){
             referrer: '{{full_url}}'
           });
 }
+function clickedLink(el){
+  analytics.track('Engaged', {
+    category: 'Nonshared',
+    label: el.id
+  });
+}
 </script>
 </head><body class="" style="zoom: 1;" data-twttr-rendered="true">
 
@@ -73,13 +79,13 @@ function claim(el){
   <div class="bootstrap">
 </div>
 {{^es}}
-            <strong>Dear Bankers:</strong>While you read this, make sure that you remember that these stats only provide a biased and one-sided view.<br> Don't take it too seriously! 
+            <strong>Dear Bankers:</strong>While you read this, make sure that you remember that these stats only provide a biased and one-sided view.<br><!--Don't take it too seriously-->
             <span class="promise">OK. I promise!</span>
             {{/es}}
 {{#es}}
             <strong>Estimados banqueros:</strong>mientras leen eso, asegúrense que ustedes se recuerden que esas
  
-estadísticas proveen solamente  un punto de vista parcial y unilateral.<br>¡No se lo tomen tan en serio!
+estadísticas proveen solamente  un punto de vista parcial y unilateral.<br><!--¡No se lo tomen tan en serio!-->
             <span class="promise">¡Bien lo prometo !</span>
             {{/es}}
             <!--googleon: all -->
@@ -343,10 +349,10 @@ $( "#claim-from-loan" ).mousedown(function() {
 
     <div class="container">
 <div class="hidden-md">
-{{#company2.found}}<a href="{{company2.id}}" class="bt-pag next fixed" rel="prev">PREV</a>{{/company2.found}}
+{{#company2.found}}<a onclick="clickedLink(this)" title="another similar company" id="company-next" href="{{company2.id}}" class="bt-pag next fixed" rel="prev">NEXT</a>{{/company2.found}}
 </div>
 <div class="hidden-md">
-{{#company1.found}}<a href="{{company1.id}}" class="bt-pag prev fixed" rel="next">NEXT</a>{{/company1.found}}
+{{#company1.found}}<a onclick="clickedLink(this)" title="another similar company" id="company-prev" href="{{company1.id}}" class="bt-pag prev fixed" rel="next">PREV</a>{{/company1.found}}
 </div>
 <div id="profile">
   
@@ -387,9 +393,15 @@ but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.pr
         <p>
         It seems like {{title}} is {{#company1.found}}also {{/company1.found}}somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
  That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}. 
+ {{#show_map}}  
 With this in mind, both aforementioned companies could make for franchise
- partners based on ideal regional coverage: <a target="_blank" href="{{company1.map}}">{{company1.title}}</a>, <a target="_blank"  href="{{company2.map}}">{{company2.title}}</a> (Google maps).
-        </p>    
+ partners based on ideal regional coverage:
+ {{/show_map}}
+        </p>
+        {{#show_map}}    
+        <img id="google-map" src="http://maps.googleapis.com/maps/api/staticmap?&path=color:0x00000000|weight:5|fillcolor:0x1E90FF|{{company1.address}}|{{company2.address}}|{{encodedAddress}}&sensor=false&key=AIzaSyCY43D3JjW05XCs4DBGiAhpaTbjUpkR2sQ&maptype=roadmap&size=600x300&markers=color:green%7Clabel:A%7C{{company1.address}}&markers=color:blue%7Clabel:B%7C{{company2.address}}&markers=color:red%7Clabel:C%7C{{encodedAddress}}"/>
+{{/show_map}}
+
 {{/company2.found}}   
 {{^company1.found}}{{^company2.found}}<p>We will keep looking, but it appears that this is quite a unique business - there really is not anything like it anywhere in the neighborhood.</p>{{/company2.found}}{{/company1.found}}
         
@@ -413,9 +425,15 @@ pero {{company1.title}} {{#company1.price.p}}tiene mas gastos por plato{{/compan
       Parece que {{title}} {{#company1.found}}también {{/company1.found}}es algo similar a
  <a href="{{company2.id}}">{{company2.title}}</a>.
  Sin embargo, es importante destacar que {{company2.title}} {{#company2.fact[0]}}es probable el que genera mayores márgenes por cliente{{/company2.fact[0]}}{{#company2.fact[1]}} que está ejecutando potencialmente mayores costos para aumentar la comodidad
- {{/company2.fact[1]}}{{#company2.fact[2]}}que está abierto cuando {{title}} tiende a cerrar{{/company2.fact[2]}}{{#company2.fact[3]}}Es probable que genera menores márgenes por cliente{{/company2.fact[3]}}{{#company2.fact[4]}}posiblemente está optimizando sus costos por conveniencia anterior{{/company2.fact[4]}}. 
-Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser socios de franquicia basada en una cobertura regional ideal: <a target="_blank" href="{{company1.map}}">{{company1.title}}</a>, <a target="_blank"  href="{{company2.map}}">{{company2.title}}</a> (mapas Google).
-        </p>    
+ {{/company2.fact[1]}}{{#company2.fact[2]}}que está abierto cuando {{title}} tiende a cerrar{{/company2.fact[2]}}{{#company2.fact[3]}}Es probable que genera menores márgenes por cliente{{/company2.fact[3]}}{{#company2.fact[4]}}posiblemente está optimizando sus costos por conveniencia anterior{{/company2.fact[4]}}.
+ {{#show_map}}  
+Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser socios de franquicia basada en una cobertura regional ideal:
+{{/show_map}}  
+        </p>  
+{{#show_map}}    
+        <img id="google-map" src="http://maps.googleapis.com/maps/api/staticmap?&path=color:0x00000000|weight:5|fillcolor:0x1E90FF|{{company1.address}}|{{company2.address}}|{{encodedAddress}}&sensor=false&key=AIzaSyCY43D3JjW05XCs4DBGiAhpaTbjUpkR2sQ&maptype=roadmap&size=600x300&markers=color:green%7Clabel:A%7C{{company1.address}}&markers=color:blue%7Clabel:B%7C{{company2.address}}&markers=color:red%7Clabel:C%7C{{encodedAddress}}"/>
+{{/show_map}}  
+
 {{/company2.found}}   
 {{^company1.found}}{{^company2.found}}<p>Vamos a seguir buscando, pero parece que este es un negocio único - en realidad no hay nada igual en todo el barrio.</p>{{/company2.found}}{{/company1.found}}
         

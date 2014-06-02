@@ -277,6 +277,12 @@ companyPage = function(template_data,company_id,template){
 				},
 				bitmap
 			);
+			if (!data.company.address){
+				template_data.show_map = false;
+				data.company.address = '';
+			}else{
+				template_data.encodedAddress = encodeURIComponent(data.company.address+','+data.company.city+','+data.company.state+',USA');
+			}
 			page = 'company';
 			regional_info = {state: data.company.state,
 					county: data.company.county,

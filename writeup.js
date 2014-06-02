@@ -80,7 +80,15 @@ function CompanyWriter(){
       return ar;
     }
     function setBitMapsForCompany(i){
+      var address = '';
+      var address_is_set = false;
+      if (similar[i].address){
+        address = encodeURIComponent(similar[i].address+','+similar[i].city+','+similar[i].state+',USA');
+        address_is_set = true;
+      }
       return {
+        address_is_set: address_is_set,
+        address: address,
         id: similar[i].id,
         title: similar[i].title,
         price: {
@@ -131,7 +139,8 @@ function CompanyWriter(){
         cater: {},
         deliver: {}
       },
-      company2: {fact: []}
+      company2: {fact: []},
+      show_map: true
     };
     if (similar.length > 0){
       result.company1 = setBitMapsForCompany(0);
@@ -145,6 +154,9 @@ function CompanyWriter(){
         }
       });
       result.company1.found = set;
+      if (!set || !result.company1.address_is_set){
+        result.show_map = false;
+      }
       result.company1.map = 'http://maps.google.com/?q='+encodeURIComponent(((similar[0].address)?similar[0].address+', ':'')+similar[0].city+', '+similar[0].state)+'&output=classic';
       //TEMPORARY
       if (DEBUG){
@@ -182,6 +194,10 @@ function CompanyWriter(){
         title: similar[1].title,
         map: 'http://maps.google.com/?q='+encodeURIComponent(((similar[1].address)?similar[1].address+', ':'')+similar[1].city+', '+similar[1].state)+'&output=classic'
       };
+      result.company2.address = bitmap.address;
+      if (!bitmap.address_is_set){
+        result.show_map = false;
+      }
       result.company2.found = true;
       result.company2.fact = [false,false,false,false,false];
       if (bitmap.price.p || bitmap.alcohol.p || bitmap.cater.p){
