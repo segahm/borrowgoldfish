@@ -11,7 +11,7 @@ AUTH_KEY = 'AIzaSyCI5jQFj4v_xeAh5LuGrg4QEKm-4orfX08'
 RADIUS = 1000
 
 attempts = 0
-ATTEMPT_LIMIT = 2
+ATTEMPT_LIMIT = 3
 
 def fetch(url):
 	global attempts,ATTEMPT_LIMIT
@@ -78,7 +78,15 @@ def getReference(location,name):
 
 def getInfo(address, name):
 	reference = False
-	location = getLoc(address)
+	this_address = address.split(',')
+	city = this_address[len(this_address)-3]
+	state = this_address[len(this_address)-2]
+	zipcode = this_address[len(this_address)-1]
+	if len(this_address) > 3:
+		location = getLoc(city,state,zipcode,this_address[0])
+	else:
+		location = getLoc(city,state,zipcode,False)
+
 	place = ''
 
 	if location:
@@ -95,20 +103,24 @@ def getInfo(address, name):
 
 def main():
 	name = 'La Esquinta'
-	address = ['2350 N Expressway,Brownsville,TX,78521','4695 Southmost Rd,Brownsville,TX,78521','3305 E 26th St,Brownsville,TX,78521','1544 Southmost Rd,Brownsville,TX,78521','252 Paredes Line Rd,Brownsville,TX,78521','755 Milpa Verde,Brownsville,TX,78521','2974 East Ave,Brownsville,TX,78521','2124 Boca Chica Blvd,Brownsville,TX,78521','6031 Southmost Rd,Brownsville,TX,78521','3355 International Blvd,Brownsville,TX,78521','7102 Padre Island Hwy,Brownsville,TX,78521','2155 Paredes Line Rd,Brownsville,TX,78521','1191 Ruben Torres Blvd,Brownsville,TX,78521','7395 Padre Island Hwy,Brownsville,TX,78521','1122 Fm 802,Brownsville,TX,78521','1700 Southmost Rd,Brownsville,TX,78521','2403 Boca Chica Blvd,Brownsville,TX,78521','8128 Boca Chica Blvd,Brownsville,TX,78521','119 Billy Mitchell Blvd,Brownsville,TX,78521','2370 N Expressway,Brownsville,TX,78521','435 Old Prt,Brownsville,TX,78521','4025 Boca Chica Blvd,Brownsville,TX,78521','5455 Boca Chica Blvd,Brownsville,TX,78521','2474 Boca Chica Blvd,Brownsville,TX,78521','2121 International Blvd,Brownsville,TX,78521','3025 Boca Chica Blvd,Brownsville,TX,78521','1627 E Price Rd,Brownsville,TX,78521','6418 Padre Island Hwy,Brownsville,TX,78521','2576 Rockwell Dr,Brownsville,TX,78521','3704 Boca Chica Blvd,Brownsville,TX,78521','349 Paredes Line Rd,Brownsville,TX,78521','2912 Boca Chica Blvd,Brownsville,TX,78521','2335 Boca Chica Blvd,Brownsville,TX,78521','226 Security Dr,Brownsville,TX,78521','2804 East Ave,Brownsville,TX,78521','2200 Boca Chica Blvd,Brownsville,TX,78521','5487 Boca Chica Blvd,Brownsville,TX,78521','2921 Boca Chica Blvd,Brownsville,TX,78521','755 Milpa Verde,Brownsville,TX,78521','2804 Boca Chica Blvd,Brownsville,TX,78521','1629 E Price Rd,Brownsville,TX,78521','2370 N Expressway,Brownsville,TX,78521','6170 Padre Island Hwy,Brownsville,TX,78521','2207 E Price Rd,Brownsville,TX,78521','1700 Southmost Rd,Brownsville,TX,78521','3194 Southmost Rd,Brownsville,TX,78521','401 Paredes Line Rd,Brownsville,TX,78521','3155 International Blvd,Brownsville,TX,78521','1480 N Expressway,Brownsville,TX,78521','2588 Rockwell Dr,Brownsville,TX,78521','2300 International Blvd,Brownsville,TX,78521','334 Paredes Line Rd,Brownsville,TX,78521','6955 Boca Chica Blvd,Brownsville,TX,78521','3155 International Blvd,Brownsville,TX,78521','3516 Coffeeport Rd,Brownsville,TX,78521','5059 Boca Chica Blvd,Brownsville,TX,78521','7877 Boca Chica Blvd,Brownsville,TX,78521']
+	address = ['2350 N Expressway,Brownsville,TX,78521','4695 Southmost Rd,Brownsville,TX,78521','3305 E 26th St,Brownsville,TX,78521','1544 Southmost Rd,Brownsville,TX,78521']
+	names = ['Chick-Fil-A','La Esquinta','Los Jacalitos Mexican Restaurant','Montelongo Refresqueria']
 	#place = getInfo(address,name)
 	
 	#print '%s: %s\n' % (place['name'], place['url'])
 	i = 0
-	while i < 3:
+	while i < 4:
 		this_address = address[i].split(',')
 		city = this_address[len(this_address)-3]
 		state = this_address[len(this_address)-2]
 		zipcode = this_address[len(this_address)-1]
-		if len(this_address) > 3:
-  			print getLoc(city,state,zipcode,this_address[0])
-  		else:
-  			print getLoc(city,state,zipcode,False)
+		
+		place = getInfo(address[i],names[i])
+		if place != '':
+	  		website = place.get('website',place.get('url','null'))
+	  		print '%s: %s' % (place['name'],website)
+	  	else:
+	  		print '%s!!!' % (place['name'])
   		i = i+1
 
 if __name__ == '__main__':
