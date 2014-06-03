@@ -2,9 +2,20 @@
 
 from factual import Factual
 from yelp import YSearch
+from gplaces import GSearch
 import csv
 import copy
 import json
+
+#Google Places
+#GOOGLE_AUTH_KEY = 'AIzaSyAD2PFsRBWs9LRZCeKE5yoJO3PITVlqmK8'   #production
+#GOOGLE_AUTH_KEY = 'AIzaSyCx7idVBv7n4xtKjkKCHSdxnkL3LTFzqkU'    #development
+
+google = GSearch(
+    'AIzaSyCx7idVBv7n4xtKjkKCHSdxnkL3LTFzqkU',  #GOOGLE_AUTH_KEY
+    12000,  #GOOGLE_LIMIT_ENTRIES      
+    10000,   #GOOGLE_CITY_RADIUS  # Define the radius (in meters) for city search
+    3)      #GOOGLE_ATTEMPT_LIMIT       
 
 #must not exceed 10,000 (daily limitation)
 LIMIT_ENTRIES = 10000
@@ -109,7 +120,7 @@ def main():
     with open(OUT_DATA_FILE, 'wb') as f:
         writer = csv.writer(f,write_keys)
         header = copy.copy(write_keys)
-        header += ['county','Yelp review','Yelp # of reviews','Yelp categories','Yelp # of matches','Yelp is closed']#,'Twitter']
+        header += ['county','Yelp review','Yelp # of reviews','Yelp categories','Yelp # of matches','Yelp is closed','Google Name','Google Website']#,'Twitter']
         writer.writerow(header)
         daily_total = 0
         for zip_code in zip_codes.keys():
@@ -132,10 +143,8 @@ def main():
                     total = q1.total_row_count()
                     print "Total business entries for %s: %d" % (zip_code,total)
                     #aggregate entries accross counties
-                    if county_totals.get(zip_codes[zip_code],False):
-                        county_totals[zip_codes[zip_code]] += total
-                    else:
-                        county_totals[zip_codes[zip_code]] = total
+                    if county_totals.get(zip_codes[zip_code],False) == False:
+                        county_totals[zip_codes[zip_code]] = 0
                 offset += 50
 
                 if not DEBUG_WRITE_AGGREGATE_SUMMARY_ONLY:
@@ -145,51 +154,76 @@ def main():
                         data = q1.data()
                         #loop through all businesses on the page
                         for b in data:
-                            row = parseYelpEntry(b,write_keys)
-                            options['term'] = b['name']
-                            row.append(zip_codes[b['postcode']])
+                            g_is_closed = False
+                            gwebsite = ''
+                            address = {'street': b.get('address',''),   #only street address is optional
+                                        'city': b['locality'],
+                                        'zipcode': zip_codes[b['postcode']],
+                                        'state': b['region']
+                                        }
                             try:
-                                options['location'] = ', '.join([b.get('address',''),b.get('locality',''),zip_codes[b['postcode']]])
-                                #options to additional narrowing down
-                                options.update({
-                                            'tel': b.get('tel',False),
-                                            'address': b.get('address',False),
-                                            'name': b['name']
-                                })
-                                response = yelp.request('/v2/search', options)
-                                #print json.dumps(response, sort_keys=True, indent=2)
-                                if response['total'] > 0:
-                                    rating = 0
-                                    number_reviews = 0
-                                    categories = {}
-                                    for num in range(0,response['total']):
-                                        #merge Yelp rankings with weights for multiple matches
-                                        rating += response['businesses'][num]['rating']*response['businesses'][num]['review_count']
-                                        number_reviews += response['businesses'][num]['review_count']
-                                        #merge Yelp categories accross multiple business matches
-                                        for cat in response['businesses'][num].get('categories',[]):
-                                            cat_identifier = cat[1]
-                                            categories[cat_identifier] = 1 
-                                    rating = rating/number_reviews
+                                company = google.request(address,b['name'])
+                                if company:
+                                    if company['website'] == '-1':
+                                        g_is_closed = True
+                                    elif company['website'] != '1':
+                                        gname = company['found_name']
+                                        gwebsite = company['website']
+                                    else:
+                                        gname = company['found_name']   #found the business, but not a web site
+                            except Exception as ge:
+                                print "error: %s" % (ge)
+                            #skip this business if Google says it is closed
+                            if g_is_closed != True:
+                                row = parseYelpEntry(b,write_keys)
+                                options['term'] = b['name']
+                                row.append(zip_codes[b['postcode']])
+                                try:
+                                    options['location'] = ', '.join([b.get('address',''),b.get('locality',''),zip_codes[b['postcode']]])
+                                    #options to additional narrowing down
+                                    options.update({
+                                                'tel': b.get('tel',False),
+                                                'address': b.get('address',False),
+                                                'name': b['name']
+                                    })
+                                    response = yelp.request('/v2/search', options)
+                                    #print json.dumps(response, sort_keys=True, indent=2)
+                                    if response['total'] > 0:
+                                        rating = 0
+                                        number_reviews = 0
+                                        categories = {}
+                                        for num in range(0,response['total']):
+                                            #merge Yelp rankings with weights for multiple matches
+                                            rating += response['businesses'][num]['rating']*response['businesses'][num]['review_count']
+                                            number_reviews += response['businesses'][num]['review_count']
+                                            #merge Yelp categories accross multiple business matches
+                                            for cat in response['businesses'][num].get('categories',[]):
+                                                cat_identifier = cat[1]
+                                                categories[cat_identifier] = 1 
+                                        rating = rating/number_reviews
 
-                                    
-                                    row += [
-                                        rating,
-                                        number_reviews,
-                                        ','.join(categories.keys()),
-                                        response['total'],
-                                        response['businesses'][0]['is_closed']
+                                        
+                                        row += [
+                                            rating,
+                                            number_reviews,
+                                            ','.join(categories.keys()),
+                                            response['total'],
+                                            response['businesses'][0]['is_closed'],
+                                            gname,
+                                            gwebsite
                                         ]
-                                    # twitter_id = findTwitter(b['factual_id'])
-                                    # if twitter_id:
-                                    #     row.append(twitter_id)
-                                else:
-                                    row += ['','','',-1,'']
-                                
-                            except Exception as inst:
-                                print "error: %s" % (inst)
-                                row += ['','','',response['total']]
-                            writer.writerow(row)
+                                        # twitter_id = findTwitter(b['factual_id'])
+                                        # if twitter_id:
+                                        #     row.append(twitter_id)
+                                    else:
+                                        row += ['','','',-1,'',gname,gwebsite]
+                                    
+                                except Exception as inst:
+                                    print "error: %s" % (inst)
+                                    row += ['','','',response['total']]
+                                writer.writerow(row)
+                                #keep accounting - only add the ones we process
+                                county_totals[zip_codes[b['postcode']]] += 1
                     except Exception as e:
                         print "businesses loop error: %s" % (e)
             daily_total += total

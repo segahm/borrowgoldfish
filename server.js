@@ -153,7 +153,7 @@ function startServer() {
 		var matches = req.path.match(/^\/(es)/i);
 		var is_spanish = ((matches && (req.path.length > 3 && req.path[3] === '/')) || (typeof(req.query.fb_locale) !== 'undefined' && req.query.fb_locale === 'es_ES'))?true:false;
 
-		matches = req.path.match(/^\/(es\/)?([a-z0-9\-]{3,})$/i); // "/es/non-state-string"
+		matches = req.path.match(/^\/(es\/)?([a-z0-9\-]{3,})\/?$/i); // "/es/non-state-string"
 		var template_data = {};
 		var template = is_spanish?templates.spanish:templates.english;
 		template_data.es = is_spanish;	//whether to turn-on spanish language
@@ -170,7 +170,7 @@ function startServer() {
 		var page = 'index';	//default page
 		var resultPromise = Q.fcall(function(){ return page;});
 
-		var dir_match = req.path.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z_\-]{3,})?\/?(\/[a-z_\-]{3,})?$/i);
+		var dir_match = req.path.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z_\-]{3,})?\/?(\/[a-z_\-]{3,})?\/?$/i);
 		/**
 		 *FIRST-pass page check
 		 */
