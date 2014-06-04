@@ -19,6 +19,7 @@ function findSimilar(id,category,postcode,state,county,valuation,less_restrictiv
   var knex = require('knex').knex;
   var request = knex('companies')
     .where('category',category)
+    .andWhere('is_closed',false)
     .andWhere('postcode','<>',postcode)
     .andWhere('state',state);
   if (typeof(less_restrictive) === 'undefined' || !less_restrictive){
@@ -54,7 +55,7 @@ function top3Counties(data,county){
 //var dummyData;
 CompanyProvider.prototype.regionalStats = function(state,county,category){
   var knex = require('knex').knex;
-  var state = state.toUpperCase();
+  state = state.toUpperCase();
   var top3ByDensity,
       hourly_density;
   //first find out how many people/county in each county within a state
@@ -66,12 +67,12 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
     top3ByDensity = top3Counties(data,county);
     //then find stats for open restaurants by time of the day
     request = knex('companies').select(knex.raw('county,\'m\' as period')).whereIn('county',Object.keys(top3ByDensity))
-      .groupBy('county').count('id').where('meal_breakfast',true)
+      .groupBy('county').count('id').where('meal_breakfast',true).andWhere('is_closed',false)
       .union(function(){
         this.select(knex.raw('county,\'a\' as period')).from('companies').groupBy('county').count('id')
-        .whereIn('county',Object.keys(top3ByDensity)).where('meal_lunch',true).union(function() {
+        .whereIn('county',Object.keys(top3ByDensity)).where('meal_lunch',true).andWhere('is_closed',false).union(function() {
           this.select(knex.raw('county,\'d\' as period')).from('companies').groupBy('county').count('id')
-          .whereIn('county',Object.keys(top3ByDensity)).where('meal_dinner',true);
+          .whereIn('county',Object.keys(top3ByDensity)).where('meal_dinner',true).andWhere('is_closed',false);
         });
       });
     return request;
@@ -90,7 +91,8 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
       top3ByDensity[v.county].catDensity = top3ByDensity[v.county].people/v.count;
     });*/
     return knex('companies')
-      .where('state',state).groupBy('category').orderBy('count','desc').count('id')
+      .where('state',state).andWhere('is_closed',false).groupBy('category')
+      .orderBy('count','desc').count('id')
       .column('category').andWhere('county','ilike',county)
       .andWhere('category','<>','Food and Dining,Restaurants');
   }).then(function(data){

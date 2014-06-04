@@ -14,7 +14,7 @@ def main():
 	# AUTH_KEY = 'AIzaSyCx7idVBv7n4xtKjkKCHSdxnkL3LTFzqkU'	#development
 	google = GSearch(
 	    'AIzaSyCx7idVBv7n4xtKjkKCHSdxnkL3LTFzqkU',  #GOOGLE_AUTH_KEY
-	    2, #12000,  #GOOGLE_LIMIT_ENTRIES      
+	    100000, #GOOGLE_LIMIT_ENTRIES      
 	    10000,   #GOOGLE_CITY_RADIUS  # Define the radius (in meters) for city search
 	    3)      #GOOGLE_ATTEMPT_LIMIT 
 

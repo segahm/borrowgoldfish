@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{title}} for ${{valuation}} - {{page_title}}</title>
+    <title>{{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}{{^is_closed}}for ${{valuation}} - {{page_title}}{{/is_closed}}</title>
     {{^es}}<link rel="alternate" hreflang="es-US" href="/es{{url}}">{{/es}}
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -51,12 +51,12 @@ function share(el,should_open){
   }
 }
 function claim(el){
-  $('#valuationmodal').modal('toggle');
+  //$('#valuationmodal').modal('toggle');
   $('#loginmodal').modal('toggle');
    analytics.page({
             title: 'Claim Business',
-            url: '{{full_url}}#claim-from-valuation',
-            path: '{{#es}}/es{{/es}}{{url}}/#claim-from-valuation',
+            url: '{{full_url}}#'+el.id,
+            path: '{{#es}}/es{{/es}}{{url}}/#'+el.id,
             referrer: '{{full_url}}'
           });
 }
@@ -131,15 +131,15 @@ fa-users"></i>{{analysis[0]}}</li>
 
 
 
-         <center><a onclick="claim(this);return false;" href="#">{{claim}}</a></center>
+         <center><a onclick="claim(this);return false;" id="claim-valuation" href="#">{{claim}}</a></center>
         <br>
 <div class="alert alert-danger fade in">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
       
       <p style="
     /* text-align: left; */
-">{{^es}}Only the owner of this business can see the details. If you are the owner, please <a onclick="claim(this);return false;" href="#">claim</a> this business to proceed.{{/es}}
-{{#es}}Sólo el propietario de este negocio puede ver los detalles. Si usted es el propietario, por favor <a onclick="claim(this);return false;" href="#">reclamar</a> este negocio para proceder.{{/es}}
+">{{^es}}Only the owner of this business can see the details. If you are the owner, please <a onclick="claim(this);return false;" id="claim-valuation" href="#">claim</a> this business to proceed.{{/es}}
+{{#es}}Sólo el propietario de este negocio puede ver los detalles. Si usted es el propietario, por favor <a onclick="claim(this);return false;" id="claim-valuation" href="#">reclamar</a> este negocio para proceder.{{/es}}
 </p>
   </div>
       </div>
@@ -230,14 +230,17 @@ hurdles, but it currently can take us a few days to confirm the validity
 
 
   {{^es}}
-  <span>What is the value of my company?</span>
+  <span>{{^is_closed}}What is the value of my company?{{/is_closed}}{{#is_closed}}This company is now closed{{/is_closed}}</span>
 <div id="investment-details" class="master_clearfix">
           <div id="investment-statistics">
             
             <div id="statistics" class="grey-border-panel master_clearfix">
               <div class="stats-box loans-box" id="valuation-box">
-                <p>Business valuation:</p>
-                          <span>${{valuation}}</span>
+                {{^is_closed}}<p>Business valuation:</p>
+                          <span>${{valuation}}</span>{{/is_closed}}{{#is_closed}}
+<p>---</p>
+                          <span>&nbsp;</span>
+                          {{/is_closed}}
                         </div>
                         <!--
                         {{#is_a}}
@@ -258,19 +261,22 @@ hurdles, but it currently can take us a few days to confirm the validity
                           
                         </div>
 
-                        <div class="stats-date">* Statistics as of 05/27/14<br/><span style="font-size:13px">** this calculation does not reflect current real estate prices</span></div>
+                        <div class="stats-date">* Statistics as of 05/27/14<br/><span style="font-size:13px">{{^is_closed}}** this calculation does not reflect current real estate prices{{/is_closed}}</span></div>
                         <a href="#details-statistics" class="triangle-link">View more statistics</a>
             </div>
 {{/es}}{{#es}}
-  <span>¿Cuál es el valor de mi empresa?</span>
+  <span>{{^is_closed}}¿Cuál es el valor de mi empresa?{{/is_closed}}{{#is_closed}}Esta empresa se ​​ha cerrado{{/is_closed}}</span>
 <div id="investment-details" class="master_clearfix">
           <div id="investment-statistics">
             
 
             <div id="statistics" class="grey-border-panel master_clearfix">
               <div class="stats-box loans-box" id="valuation-box">
-                <p>Valoración de empresas:</p>
-                          <span>${{valuation}}</span>
+                          {{^is_closed}}<p>Valoración de empresas:</p>
+                          <span>${{valuation}}</span>{{/is_closed}}{{#is_closed}}
+<p>---</p>
+                          <span>&nbsp;</span>
+                          {{/is_closed}}
                         </div>
                         <!--
                         {{#is_a}}
@@ -370,10 +376,11 @@ $( "#claim-from-loan" ).mousedown(function() {
     </div>
     </div>
     </div>
+{{^is_closed}}
     <div id="description">
 {{^es}}
         <p>
-          {{title}} is 
+ {{title}} is 
 {{#praise[0]}}a lucrative{{/praise[0]}}{{#praise[1]}}an 
 amazing{{/praise[1]}}{{#praise[2]}}a highly 
 entrepreneurial{{/praise[2]}}{{#praise[3]}}a trend 
@@ -439,7 +446,22 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
         
 {{/es}}
     </div>
+{{/is_closed}}
+{{#is_closed}}
+ <div id="description">
 {{^es}}
+        <p>
+ {{title}} is now closed. There are many reasons why small businesses close. Sometimes companies fail to produce expected profits. At other times, companies 1) relocate to a new location, 2) rebrand, or even 3) restructure their assets (which leads them to (1) and (2). We don’t know what happened here, but if you are the owner and you are still running this business in some other form, <a href="#" id="closed_claim" onclick="claim(this);return false;">let us know</a>.
+</p>
+ {{/es}}
+ {{#es}}
+        <p>
+ {{title}} ahora está cerrado. Hay muchas razones por las cuales los pequeños negocios cierran. A veces las empresas no producen los beneficios esperados. En otras ocasiones, las empresas 1) trasladarse a una nueva ubicación, 2) cambio de marca, o incluso 3) reestructurar sus activos (lo que les lleva a (1) y (2). No sabemos lo que pasó aquí, pero si usted es el propietario y usted todavía está utilizando este negocio en alguna otra forma, <a href="#" id="closed_claim" onclick="claim(this);return false;">vamos a saber</a>.
+</p>
+ {{/es}}
+</div>
+ {{/is_closed}}
+ {{^es}}
     <div>
 <div class="social">
   {{^is_a}} 
