@@ -280,3 +280,18 @@ padding-top: 0px;
 #google-map{
   display:block;
 }
+
+.container h3 {
+text-align: left;
+text-transform: uppercase;
+font-weight: 300;
+font-size: 14pt;
+line-height: 1;
+color: #7F8C8D;
+}
+a.side-links{
+  padding-top:0px;margin-top:-50px;float:right;color:#7F8C8D; font-size:12pt;
+}
+a.side-links:hover{
+color: #333333;
+}

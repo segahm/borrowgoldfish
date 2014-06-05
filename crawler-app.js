@@ -1,3 +1,5 @@
+//My App
+
 // Returns a list of email and full page content
 var IGNORED_EXTENSIONS = [
 //images
@@ -51,6 +53,11 @@ var EightyApp = function() {
 						if (handle){
 							twitteHandles[handle[1]] = 1;
 						}
+					}else if (obj.indexOf('/intent') > 0){
+						handle = obj.match(/via=([a-z_0-9]+)/);
+						if (handle){
+							twitteHandles[handle[1]] = 1;
+						}
 					}else if (obj.indexOf('/tweet') > 0){
 						handle = obj.match(/screen_name=([a-z_0-9]+)/);
 						if (handle){
@@ -81,7 +88,7 @@ var EightyApp = function() {
 		url = url.toLowerCase();
 		try{
 			function getDomain(link){
-				var matches = link.match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i);
+				var matches = link.match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#].*|$)/i);
 				return (matches && matches[1]);
 			}
 			function isValidExtension(link){

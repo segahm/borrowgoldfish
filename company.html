@@ -55,8 +55,8 @@ function claim(el){
   $('#loginmodal').modal('toggle');
    analytics.page({
             title: 'Claim Business',
-            url: '{{full_url}}#'+el.id,
-            path: '{{#es}}/es{{/es}}{{url}}/#'+el.id,
+            url: '{{full_url}}#claim-'+el.id,
+            path: '{{#es}}/es{{/es}}{{url}}/#claim-'+el.id,
             referrer: '{{full_url}}'
           });
 }
@@ -230,7 +230,7 @@ hurdles, but it currently can take us a few days to confirm the validity
 
 
   {{^es}}
-  <span>{{^is_closed}}What is the value of my company?{{/is_closed}}{{#is_closed}}This company is now closed{{/is_closed}}</span>
+  <span>{{^is_closed}}What is the value of my restaurant?{{/is_closed}}{{#is_closed}}This company is now closed{{/is_closed}}</span>
 <div id="investment-details" class="master_clearfix">
           <div id="investment-statistics">
             
@@ -265,7 +265,7 @@ hurdles, but it currently can take us a few days to confirm the validity
                         <a href="#details-statistics" class="triangle-link">View more statistics</a>
             </div>
 {{/es}}{{#es}}
-  <span>{{^is_closed}}¿Cuál es el valor de mi empresa?{{/is_closed}}{{#is_closed}}Esta empresa se ​​ha cerrado{{/is_closed}}</span>
+  <span>{{^is_closed}}¿Cuál es el valor de mi restaurante?{{/is_closed}}{{#is_closed}}Esta empresa se ​​ha cerrado{{/is_closed}}</span>
 <div id="investment-details" class="master_clearfix">
           <div id="investment-statistics">
             
@@ -477,6 +477,11 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
 </div>
       <h1 id="details-statistics">Statistics</h1>
 </div>
+<div>
+  <h3>Region</h3>
+  <a href="#" onclick="claim(this);return false;" id="manage-top" class="side-links">[manage this section]</a>
+</div>
+
     <div id="schedule-text">
 
          <p id="events">
@@ -509,8 +514,25 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
 </div>
 {{/es}}
 {{#es}}
-    <h1 id="details-statistics">ESTADÍSTICAS</h1>
+    <div>
+<div class="social">
+  {{^is_a}} 
+  <a onclick="share(this);return false;" title="tweet to this business" id="Twitter-share-lower" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
+  
+  <i class="fa fa-twitter"> </i>
+  </span></a>
+   {{/is_a}} 
+  {{#is_a}}
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{full_url}}" data-text="{{unencoded_twitter_company_specific_text}}" data-via="nesovok" data-size="large" data-count="none" data-dnt="true"></a>
+{{/is_a}}
 
+</div> 
+    <h1 id="details-statistics">ESTADÍSTICAS</h1>
+</div>
+<div>
+  <h3>REGIÓN</h3>
+  <a href="#" onclick="claim(this);return false;" id="manage-top" class="side-links">[gestionar esta sección]</a>
+</div>
     <div id="schedule-text">
 
          <p id="events">
@@ -566,6 +588,9 @@ data providers we are required to acknowledge:{{/es}}
   <a href="http://twitter.com/nesovok">Segah Meer</a> en un tercero de datos sociales, además con  datos de censo y análisis económico.
 Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="http://s3-media3.ak.yelpcdn.com/assets/2/www/img/9c9b10dc7226/developers/reviewsFromYelpWHT.gif" alt="Powered by Yelp, white" height="25" width="115"></a>
 <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
+         {{^es}}<p>For feedback and offers, contact me at: <b><a onclick="clickedLink(this)" target="_blank" id="contact-footer" href="http://twitter.com/nesovok">@nesovok</a></b>. Please see here for <a href="/static/privacy.html">privacy policy</a>.</p>{{/es}}{{#es}}
+<p>Para comentarios y ofertas, póngase en contacto conmigo en: <b><a onclick="clickedLink(this)" target="_blank" id="contact-footer" href="http://twitter.com/nesovok">@nesovok</a></b>. Por favor, vea aquí para la <a href="/static/privacy.html">política de privacidad</a>.</p>
+         {{/es}}
 </div>
     </div>
 

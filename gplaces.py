@@ -130,7 +130,7 @@ class GSearch:
 		if (address['street'] == ''):
 			del address['street']
 		if count_requests >= self.limit:
-			print 'Limit Reached: %d' % (count_requests)
+			print 'Limit Reached: %d no more requests accepted in this batch' % (count_requests)
 			return False
 		else:
 			count_requests += 1

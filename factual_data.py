@@ -13,7 +13,7 @@ import json
 
 google = GSearch(
     'AIzaSyCx7idVBv7n4xtKjkKCHSdxnkL3LTFzqkU',  #GOOGLE_AUTH_KEY
-    12000,  #GOOGLE_LIMIT_ENTRIES      
+    10000,  #GOOGLE_LIMIT_ENTRIES      
     10000,   #GOOGLE_CITY_RADIUS  # Define the radius (in meters) for city search
     3)      #GOOGLE_ATTEMPT_LIMIT       
 
@@ -141,7 +141,7 @@ def main():
                 
                 if total == 0:
                     total = q1.total_row_count()
-                    print "Total business entries for %s: %d" % (zip_code,total)
+                    print "Total business entries (open & closed) for %s: %d" % (zip_code,total)
                     #aggregate entries accross counties
                     if county_totals.get(zip_codes[zip_code],False) == False:
                         county_totals[zip_codes[zip_code]] = 0
@@ -154,8 +154,10 @@ def main():
                         data = q1.data()
                         #loop through all businesses on the page
                         for b in data:
+                            #set defaults for Google request
                             g_is_closed = False
                             gwebsite = ''
+                            gname = ''
                             address = {'street': b.get('address',''),   #only street address is optional
                                         'city': b['locality'],
                                         'zipcode': zip_codes[b['postcode']],
@@ -226,8 +228,10 @@ def main():
                                 county_totals[zip_codes[b['postcode']]] += 1
                     except Exception as e:
                         print "businesses loop error: %s" % (e)
+            if offset == -1:
+                print 'daily_total is %d, reached LIMIT_ENTRIES: %d' % (daily_total,LIMIT_ENTRIES)
             daily_total += total
-            print "Total business entries: %d" % (daily_total)
+            print "Total business entries scanned: %d" % (daily_total)
 
     with open(OUT_COUNTY_FILE, 'wb') as f:
         writer = csv.writer(f,write_keys)

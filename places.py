@@ -3,8 +3,8 @@ import unicodecsv
 from gplaces import GSearch
 
 
-IN_DATA_FILE = './Crawler/data_input2.csv'
-OUT_DATA_FILE = './Crawler/places_small.csv'
+IN_DATA_FILE = './Crawler/data.csv'
+OUT_DATA_FILE = './Crawler/places.csv'
 OFFSET = 0
 
 
@@ -14,7 +14,7 @@ def main():
 	# AUTH_KEY = 'AIzaSyCx7idVBv7n4xtKjkKCHSdxnkL3LTFzqkU'	#development
 	google = GSearch(
 	    'AIzaSyCx7idVBv7n4xtKjkKCHSdxnkL3LTFzqkU',  #GOOGLE_AUTH_KEY
-	    100000, #GOOGLE_LIMIT_ENTRIES      
+	    2, #GOOGLE_LIMIT_ENTRIES      
 	    10000,   #GOOGLE_CITY_RADIUS  # Define the radius (in meters) for city search
 	    3)      #GOOGLE_ATTEMPT_LIMIT 
 

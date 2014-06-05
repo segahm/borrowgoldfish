@@ -23,7 +23,7 @@ var config = {
 						'Review available data',
 						'Explore immediate opportunities'],
 						detail_analysis: 'Detailed Business Analysis',
-						claim: 'Claim your business',
+						claim: 'Claim to manage your company page',
 						review: 'Review Available Financing',
 						is_closed_title: '- Closed or Moved. Confirm here...'
 					},
@@ -59,9 +59,9 @@ var config = {
 						'Artículos disponibles datos',
 						'Explorar las oportunidades inmediatas'],
 						detail_analysis: 'Análisis de Negocios detallado',
-						claim: 'Añade tu negocio',
+						claim: 'Reivindicación de administrar su página de la empresa',
 						review: 'Artículos disponibles de financiamiento',
-						is_closed_title: '- Closed or Moved. Confirm here'
+						is_closed_title: '- está cerrado o movido. confirme aquí'
 			},
 			directory: {page_title: 'Finanzas de las pequeñas empresas y la valoración en'},
 			index: {page_title: 'Finanzas de las pequeñas empresas y la valoración',
