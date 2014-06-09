@@ -155,6 +155,12 @@ function startServer() {
 
 		matches = req.path.match(/^\/(es\/)?([a-z0-9\-]{3,})\/?$/i); // "/es/non-state-string"
 		var template_data = {};
+		//temporary settings template => rewrite this later
+		if (process.env.NODE_ENV === 'development'){
+			template_data.settings = templates.dev;
+		}else if (process.env.NODE_ENV === 'production'){
+			template_data.settings = templates.production;
+		}
 		var template = is_spanish?templates.spanish:templates.english;
 		template_data.es = is_spanish;	//whether to turn-on spanish language
 

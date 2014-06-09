@@ -56,7 +56,7 @@ function claim(el){
    analytics.page({
             title: 'Claim Business',
             url: '{{full_url}}#claim-'+el.id,
-            path: '{{#es}}/es{{/es}}{{url}}/#claim-'+el.id,
+            path: '{{#es}}/es{{/es}}{{url}}#claim-'+el.id,
             referrer: '{{full_url}}'
           });
 }
@@ -68,7 +68,8 @@ function clickedLink(el){
 }
 </script>
 </head><body class="" style="zoom: 1;" data-twttr-rendered="true">
-
+   <!-- Google Charts API -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 
 
@@ -406,7 +407,7 @@ With this in mind, both aforementioned companies could make for franchise
  {{/show_map}}
         </p>
         {{#show_map}}    
-        <img id="google-map" src="http://maps.googleapis.com/maps/api/staticmap?&path=color:0x00000000|weight:5|fillcolor:0x1E90FF|{{company1.address}}|{{company2.address}}|{{encodedAddress}}&sensor=false&key=AIzaSyCY43D3JjW05XCs4DBGiAhpaTbjUpkR2sQ&maptype=roadmap&size=600x300&markers=color:green%7Clabel:A%7C{{company1.address}}&markers=color:blue%7Clabel:B%7C{{company2.address}}&markers=color:red%7Clabel:C%7C{{encodedAddress}}"/>
+        <img id="google-map" src="http://maps.googleapis.com/maps/api/staticmap?&path=color:0x00000000|weight:5|fillcolor:0x1E90FF|{{company1.address}}|{{company2.address}}|{{encodedAddress}}&sensor=false&key={{settings.google_key}}&maptype=roadmap&size=600x300&markers=color:green%7Clabel:A%7C{{company1.address}}&markers=color:blue%7Clabel:B%7C{{company2.address}}&markers=color:red%7Clabel:C%7C{{encodedAddress}}"/>
 {{/show_map}}
 
 {{/company2.found}}   
@@ -478,6 +479,14 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
       <h1 id="details-statistics">Statistics</h1>
 </div>
 <div>
+  <h3>Peer Comparison</h3>
+  <a href="#" onclick="claim(this);return false;" id="manage-top-1" class="side-links">[manage this section]</a>
+     <p id="events">
+      The uniqueness of every business is not about any one thing, but rather about everything that the business does. So, peer comparison about {{title}} along a few dimensions is not an indicator of success by any stretch of the imagination. With that, here are the facts:
+     </p>
+     <div id="peer-comparison"></div> 
+</div>
+<div>
   <h3>Region</h3>
   <a href="#" onclick="claim(this);return false;" id="manage-top" class="side-links">[manage this section]</a>
 </div>
@@ -486,26 +495,25 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
 
          <p id="events">
         The following analysis has been made for {{county}} county as a whole. While a greater number of any type of cuisine simply speaks to the local demand, it can also shine some light on the level of competition. We have sampled these stats based on <strong>{{total_restaurants}}</strong> restaurants. The colors in the pie chart stand for the most popular types of cuisine (i.e. greatest number of restaurants):
-        <span class="evttype" data-ind="0">{{categories[0]}}</span>,
-        <span class="evttype" data-ind="1">{{categories[1]}}</span>,
-        <span class="evttype" data-ind="2">{{categories[2]}}</span>, and
-        <span class="evttype" data-ind="3">{{categories[3]}}</span> in {{county}} county.
+        <span class="evttype2" data-ind="{{categories[0]}}">{{categories[0]}}</span>,
+        <span class="evttype2" data-ind="{{categories[1]}}">{{categories[1]}}</span>,
+        <span class="evttype2" data-ind="{{categories[2]}}">{{categories[2]}}</span>, and
+        <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> in {{county}} county.
         </p>
-        <div class="hist-block">
-            <div id="rest-by-cat-chart"></div>
-        </div>
+        <div id="top-segments"></div>
 
 
         <p id="schedule">
         
-        Next are some stats about <span class="evttype" data-ind="0">{{counties[0]}}</span> county in comparison to nearby counties:
-        <span class="evttype" data-ind="1">{{counties[1]}}</span> and <span class="evttype" data-ind="2">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening). If we combine the two charts, we get a first glimpse at how competitive the restaurant industry is in {{county}} county relative to that of another region.
+        Next are some stats about <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> county in comparison to nearby counties:
+        <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> and <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening). If we combine the two charts, we get a first glimpse at how competitive the restaurant industry is in {{county}} county relative to that of another region.
         </p>
 
-        <div class="hist-block">
-            <div id="density" class="hist"><h6>Restaurant Density by County</h6>
-            </div>
-            <div id="day" class="hist"><h6>Share of open restaurants by time of the day, county</h6></div>
+        <div class="container bootstrap">
+          <div class="row-fluid">
+          <div class="col-md-6"><div id="rest-density"></div></div>
+           <div class="col-md-6"> <div id="rest-hourly"></div></div>
+          </div>
         </div>
     
 
@@ -530,6 +538,14 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
     <h1 id="details-statistics">ESTADÍSTICAS</h1>
 </div>
 <div>
+  <h3>comparación por pares</h3>
+  <a href="#" onclick="claim(this);return false;" id="manage-top-1" class="side-links">[manage this section]</a>
+     <p id="events">
+      La singularidad de cada negocio no se trata de una sola cosa, sino más bien de todo lo que hace la empresa. Por lo tanto, la comparación entre pares sobre {{title}} a lo largo de unas pocas dimensiones no es un indicador del éxito de cualquier tramo de la imaginación. Con eso, aquí están los hechos:
+     </p>
+     <div id="peer-comparison"></div> 
+</div>
+<div>
   <h3>REGIÓN</h3>
   <a href="#" onclick="claim(this);return false;" id="manage-top" class="side-links">[gestionar esta sección]</a>
 </div>
@@ -537,28 +553,26 @@ Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser s
 
          <p id="events">
         El siguiente análisis fue realizado para {{county}} condado en conjunto. Mientras que un número mayor de cualquier tipo de cocina simplemente corresponde a la demanda local, sino que también  puede aclarar en el nivel de la competencia. Hemos probado esas estadísticas a partir de <strong>{{total_restaurants}}</strong> restaurantes. Los colores del gráfico circular representan los más populares tipos de cocina (i.e. el mayor número de restaurantes) :
-        <span class="evttype" data-ind="0">{{categories[0]}}</span>,
-        <span class="evttype" data-ind="1">{{categories[1]}}</span>,
-        <span class="evttype" data-ind="2">{{categories[2]}}</span> y
-        <span class="evttype" data-ind="3">{{categories[3]}}</span> en el condado de {{county}}.
+        <span class="evttype2" data-ind="{{categories[0]}}">{{categories[0]}}</span>,
+        <span class="evttype2" data-ind="{{categories[1]}}">{{categories[1]}}</span>,
+        <span class="evttype2" data-ind="{{categories[2]}}">{{categories[2]}}</span> y
+        <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> en el condado de {{county}}.
         </p>
-        <div class="hist-block">
-            <div id="rest-by-cat-chart"></div>
-        </div>
+        <div id="top-segments"></div>
 
 
         <p id="schedule">
         
-        Lo siguiente son algunas estadísticas del condado de <span class="evttype" data-ind="0">{{counties[0]}}</span> en comparación con cercanos condados:
-        <span class="evttype" data-ind="1">{{counties[1]}}</span> y <span class="evttype" data-ind="2">{{counties[2]}}</span>. El grafico a la izquierda indica la concentración medida de restaurantes por el <strong>#de clientes/#de restaurantes</strong>. El grafico a la derecha muestra el relativo número de restaurantes  abiertos durante diferentes partes del día (mañana / tarde / noche).
+        Lo siguiente son algunas estadísticas del condado de <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> en comparación con cercanos condados:
+        <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> y <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. El grafico a la izquierda indica la concentración medida de restaurantes por el <strong>#de clientes/#de restaurantes</strong>. El grafico a la derecha muestra el relativo número de restaurantes  abiertos durante diferentes partes del día (mañana / tarde / noche).
         </p>
 
-        <div class="hist-block">
-            <div id="density" class="hist"><h6>Restaurant Density by County</h6>
-            </div>
-            <div id="day" class="hist"><h6>Share of open restaurants by time of the day, county</h6></div>
+        <div class="container bootstrap">
+          <div class="row-fluid">
+          <div class="col-md-6"><div id="rest-density"></div></div>
+           <div class="col-md-6"> <div id="rest-hourly"></div></div>
+          </div>
         </div>
-    
 
     </div>
 
@@ -620,16 +634,12 @@ Es solo una estimación. No haría que responsabilizar proveedor de datos ya que
 
     </script>
     
-
-<script src="/static/d3.js"></script>
-<script src="/static/plot.js"></script>
 <script src="/static/bootstrap.js"></script>
 <script>
-{{#disable}}//{top_counties: {"county": {density: , people: ,catDensity: [category: , count: ]}],top_cats:}{{/disable}}
 var svg = {{{svg}}};  
 var counties = {{{json_counties}}}; 
+
 </script>
-<script src="/static/stats_plot.js"></script>
 <!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
 {{#is_a}}
 <!-- twitter -->
@@ -653,4 +663,117 @@ twttr.ready(function (twttr) {
     </script>
     <!-- twitter -->
     {{/is_a}}
+    <!-- Charts -->
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var ar;
+    //peer comparison
+    var data = google.visualization.arrayToDataTable([
+      ['Metric', 'Relative Placement', { role: "style" } ],
+      ['price',  {{peers.price}},'color: #1F77B4;'],
+      ['reviews',  {{peers.reviews}},'color: #1F77B4'],
+      ['website',  {{peers.web}},'color: #1F77B4'],
+      ['social popularity',{{peers.popularity}},'color: #1F77B4'],
+      ['location',{{peers.location}},'color: #1F77B4']
+    ]);
+
+    var options = {
+      legend: { position: "none" },
+      title: '{{charts[0].title}}',
+      hAxis: {title: '{{charts[0].hAxis}}', titleTextStyle: {color: 'black'}}
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById('peer-comparison'));
+    chart.draw(data, options);
+    //segmentation in a county
+    ar = [['Type of Food', '# of restaurants']];
+    var topc = svg.top_cats;
+    c_color = {};
+    colors = ['#76A7FA','#FF7F0E','#1F77B4','#75B869'];
+    var row = 0;
+    for (var k in topc){
+      c_color[k] = colors[row];
+      ar.push([k,parseFloat(topc[k])]);
+      row++;
+    }
+    data = google.visualization.arrayToDataTable(ar);
+    $(".evttype2").each(function () {
+        var el = $(this);
+        el.css("color", c_color[el.data("ind")]);
+    });
+
+    options = {
+      title: '{{charts[1].title}}',
+      chartArea:{left:200,top:5,width:'100%',height:'100%'},
+      colors: colors,
+      legend: {position: "none"},
+      width: 450,
+      height: 200
+    };
+
+    chart = new google.visualization.PieChart(document.getElementById('top-segments'));
+    chart.draw(data, options);
+    //restaurant density
+    ar = [['County','# of people per restaurant',{ role: "style" }]];
+    var tc = svg.top_counties;
+    c_color = {};
+    colors = ['#2CA02C','#FF7F0E','#1F77B4'];
+    row = 0;
+    for (var c in tc){
+      c_color[c] = colors[row];
+      ar.push([c+', '+tc[c].state,tc[c].density,'color: '+c_color[c]]);
+      row++
+    }
+    console.log(ar);
+    $(".evttype").each(function () {
+        var el = $(this);
+        el.css("color", c_color[el.data("ind")]);
+    });
+    data = google.visualization.arrayToDataTable(ar);
+    options = {
+      title: '{{charts[2].title}}',
+      width: 450,
+      legend: { position: "none" }
+    };
+    chart = new google.visualization.BarChart(document.getElementById('rest-density'));
+    chart.draw(data, options);
+    //restaurant hourly operations
+    ar = [['hour'],['8:00-10:00'],['12-3pm'],['5pm - ']];
+    var hr = svg.hourly_density;
+    colors = [];
+    for (var c in hr){
+      colors.push(c_color[c]);
+      var tot = tc[c].people/tc[c].density;
+      ar[0].push(c);
+      ar[1].push(hr[c].m/tot);
+      ar[2].push(hr[c].a/tot);
+      ar[3].push(hr[c].d/tot);
+    }
+    for (var h=1;h<4;h++){
+      tot = ar[h][1]+ar[h][2]+ar[h][3];
+      ar[h][1] = Math.round(ar[h][1]/tot*100)/100;
+      ar[h][2] = Math.round(ar[h][2]/tot*100)/100;
+      ar[h][3] = Math.round(ar[h][3]/tot*100)/100;
+    }
+    data = google.visualization.arrayToDataTable(ar);
+    options = {
+        title: '{{charts[3].title}}',
+        colors: colors,
+        legend: { position: "none" },
+        vAxis:{
+          format:'##%',
+          viewWindow: {max: 1}
+        },
+        width: 500,
+        height: 300,
+        rx: 10, 
+      ry: 10,
+        bar: { groupWidth: '50%' },
+        isStacked: true,
+      };
+    chart = new google.visualization.ColumnChart(document.getElementById('rest-hourly'));
+    chart.draw(data, options);
+  }
+</script>
 </body></html>

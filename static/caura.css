@@ -295,3 +295,9 @@ a.side-links{
 a.side-links:hover{
 color: #333333;
 }
+
+#top-segments{
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}

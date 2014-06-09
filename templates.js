@@ -1,7 +1,12 @@
 'use strict';
 
 var config = {
-
+	dev: {
+		google_key: 'AIzaSyCX-UwGgMl4HbsxHEdJkdhccBagaH6yklQ'
+	},
+	production: {
+		google_key: 'AIzaSyCY43D3JjW05XCs4DBGiAhpaTbjUpkR2sQ'
+	},
 	english: {
 		cities_home: 'Restaurants, Cities',
 		restaurants: 'Restaurants',
@@ -25,7 +30,12 @@ var config = {
 						detail_analysis: 'Detailed Business Analysis',
 						claim: 'Claim to manage your company page',
 						review: 'Review Available Financing',
-						is_closed_title: '- Closed or Moved. Confirm here...'
+						is_closed_title: '- Closed or Moved. Confirm here...',
+						charts:[
+							{title:'Relative Performance',hAxis: 'Peer relative ranking [0-5]'},
+							{title:'Popularity of cuisine'},
+							{title: 'Restaurant Density by County'},
+							{title:'Operating density in counties by hours of the day'}]
 					},
 			directory: {page_title: 'Small Business Finances and Valuation in'},
 			index: {page_title: 'Small Business Profile that matters to Lenders',
@@ -61,7 +71,12 @@ var config = {
 						detail_analysis: 'Análisis de Negocios detallado',
 						claim: 'Reivindicación de administrar su página de la empresa',
 						review: 'Artículos disponibles de financiamiento',
-						is_closed_title: '- está cerrado o movido. confirme aquí'
+						is_closed_title: '- está cerrado o movido. confirme aquí',
+						charts:[
+							{title:'Representación Relativa',hAxis: 'Peer clasificación relativa [0-5]'},
+							{title:'La popularidad de la cocina'},
+							{title:'Restaurante Densidad por el Condado'},
+							{title:'Densidad de operación en los condados por hora del día'}]
 			},
 			directory: {page_title: 'Finanzas de las pequeñas empresas y la valoración en'},
 			index: {page_title: 'Finanzas de las pequeñas empresas y la valoración',

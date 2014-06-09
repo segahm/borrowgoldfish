@@ -220,6 +220,14 @@ function CompanyWriter(){
     /*if (result.join.length > 0){
       result.company1.found = true;
     }*/
+    result.peers = {
+      price: (Number(2+rng()*2).toFixed(2)),
+      nratings: (Number(2+rng()*2.2).toFixed(2)),
+      reviews:(Number(2.9+rng()*1.2).toFixed(2)),
+      web:(Number(2+rng()*2.2).toFixed(2)),
+      popularity:(Number(2+rng()*2.2).toFixed(2)),
+      location: (Number(2+rng()*2.2).toFixed(2))
+    };
     return result;
   };
 }
