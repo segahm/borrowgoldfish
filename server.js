@@ -132,7 +132,9 @@ function startServer() {
 	app.use(cookieParser());
 
 	app.use(function(req, res, next){
+		var is_home_page_test = false;
 		res.set('Content-Type', 'text/html');
+		var path = req.path;
 		if (process.env.NODE_ENV === 'development'){
 			console.log(req.url);
 		}
@@ -148,12 +150,19 @@ function startServer() {
 		//user-specific random
 		var rng = seedrandom(user_id,{ global: false });
 		var A_B_Split = Math.round(rng());
+		if (typeof(req.cookies.say_hello) !== 'undefined'){
+			is_home_page_test = Boolean(req.cookies.say_hello === 'true');
+		}else if (path.match(/\/(say-hello)/)){
+			path = path.replace('/say-hello','');
+			is_home_page_test = (Math.round(rng()) === 1)?true:false;
+			res.cookie('say_hello', (is_home_page_test+''), { maxAge: 172800000});
+		}
 		
 		//spanish
-		var matches = req.path.match(/^\/(es)/i);
-		var is_spanish = ((matches && (req.path.length > 3 && req.path[3] === '/')) || (typeof(req.query.fb_locale) !== 'undefined' && req.query.fb_locale === 'es_ES'))?true:false;
+		var matches = path.match(/^\/(es)/i);
+		var is_spanish = ((matches && (path.length > 3 && path[3] === '/')) || (typeof(req.query.fb_locale) !== 'undefined' && req.query.fb_locale === 'es_ES'))?true:false;
 
-		matches = req.path.match(/^\/(es\/)?([a-z0-9\-]{3,})\/?$/i); // "/es/non-state-string"
+		matches = path.match(/^\/(es\/)?([a-z0-9\-]{3,})\/?$/i); // "/es/non-state-string"
 		var template_data = {};
 		//temporary settings template => rewrite this later
 		if (process.env.NODE_ENV === 'development'){
@@ -170,13 +179,13 @@ function startServer() {
 		template_data.url_path = is_spanish?'http://'+req.host+'/es/':'http://'+req.host+'/';
 		template_data.encoded_url = encodeURIComponent(
 			'http://'+req.host+req.originalUrl);
-		template_data.url = req.path.replace(/^\/es\//i,'/').replace(/^\/es$/i,'/');
+		template_data.url = path.replace(/^\/es\//i,'/').replace(/^\/es$/i,'/');
 		template_data.full_url = (is_spanish?'http://'+req.host+'/es':'http://'+req.host)+req.url.replace(/^\/es\//i,'/').replace(/^\/es$/i,'/');
 
 		var page = 'index';	//default page
 		var resultPromise = Q.fcall(function(){ return page;});
 
-		var dir_match = req.path.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z_\-]{3,})?\/?(\/[a-z_\-]{3,})?\/?$/i);
+		var dir_match = path.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z_\-]{3,})?\/?(\/[a-z_\-]{3,})?\/?$/i);
 		/**
 		 *FIRST-pass page check
 		 */
@@ -223,6 +232,10 @@ function startServer() {
 			var page_template;
 			switch(mypage){
 			case 'index':
+				if (is_home_page_test === true){
+					mypage = 'alternative_home';
+				}
+				//keep the same template for both variations of a home page
 				page_template = template.page.index;
 				break;
 			case 'directory':

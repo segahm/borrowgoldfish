@@ -10,6 +10,7 @@ lib-cov
 *.exe
 *.pdf
 *.PNG
+*.jpg
 *.pyc
 *.lnk
 *.db
