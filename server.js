@@ -12,13 +12,6 @@ var express     = require('express'),
 	cookieParser = require('cookie-parser'),
 	sitemap = require('sitemap');
 
-var HOME_PAGE_IDS = require('./sample_ids');
-var HOME_PAGE_IDS_LENGTH = Object.keys(HOME_PAGE_IDS).length;
-var HOME_PAGE_KEYS = {};
-_(HOME_PAGE_IDS).forEach(function(restaurant){
-	HOME_PAGE_KEYS[restaurant.id] = restaurant.twitter;
-});
-
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -57,50 +50,19 @@ Knex.knex = Knex.initialize({
 //  configLoader  = require('./core/config-loader.js'),
  // errors        = require('./core/error-handling');
 
-function toTitleCase(str){
-	return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}).replace(/_/g,' ');
-}
-function join(array,key,with_el){
-	var str = '';
-	_(array).forEachRight(function(v){
-		str += v[key]+with_el;
-	});
-	return str.slice(0,str.length-with_el.length);
-}
-
-function formatValuation(valuation){
-	if (valuation){
-		valuation = Math.round(valuation/100)*100;
-		valuation = valuation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	}
-	return valuation;
-}
-
-function getRandomRestaurants(howMany){
-	var entries = [];
-	var old_r = {};
-	var new_r = -1;
-	var i=0;
-	while (i<howMany){
-		new_r = Math.round(Math.random()*(HOME_PAGE_IDS_LENGTH-1));
-		if (typeof(old_r[new_r]) === 'undefined'){
-			entries.push(HOME_PAGE_IDS[new_r]);
-			old_r[new_r] = 1;
-			i++;
-		}
-	}
-	return entries;
-}
 function startServer() {
 	var app = express();
 	
 
 	if (process.env.NODE_ENV === 'production'){
-		var forceDomain = require('node-force-domain');
-		app.use(forceDomain({
-		  hostname: 'www.borrowgoldfish.com',
-		  type: 'permanent'
-		}));
+		app.all(/.*/, function(req, res, next) {
+		  var host = req.header('host');
+		  if (host.match(/^www\..*/i)) {
+		    next();
+		  } else {
+		    res.redirect(301, 'http://www.' + host);
+		  }
+		});
 	}
 	app.engine('html', cons.templayed);
 	// set .html as the default extension 
@@ -154,7 +116,12 @@ function startServer() {
 			is_home_page_test = Boolean(req.cookies.say_hello === 'true');
 		}else if (path.match(/\/(say-hello)/)){
 			path = path.replace('/say-hello','');
-			is_home_page_test = (Math.round(rng()) === 1)?true:false;
+			if (typeof(req.query.f) === 'undefined'){
+				is_home_page_test = (Math.round(rng()) === 1)?true:false;
+			}else{
+				//force new_home_page
+				is_home_page_test = true;
+			}
 			res.cookie('say_hello', (is_home_page_test+''), { maxAge: 172800000});
 		}
 		
@@ -197,8 +164,8 @@ function startServer() {
 		}else if (dir_match && typeof(dir_match[2]) !== 'undefined' && dir_match[2].toLowerCase() !== 'es'){
 			var region = {
 				state_abrev: dir_match[2].toUpperCase(),
-				county: (dir_match && typeof(dir_match[3]) !== 'undefined')?toTitleCase(dir_match[3].slice(1)):null,
-				city: (dir_match && typeof(dir_match[4]) !== 'undefined')?toTitleCase(dir_match[4].slice(1)):null
+				county: (dir_match && typeof(dir_match[3]) !== 'undefined')?Utility.prototype.toTitleCase(dir_match[3].slice(1)):null,
+				city: (dir_match && typeof(dir_match[4]) !== 'undefined')?Utility.prototype.toTitleCase(dir_match[4].slice(1)):null
 			};
 			region.state = STATES[region.state_abrev];
 			resultPromise = directoryPage(region,template_data,dir_match,template);
@@ -281,7 +248,7 @@ companyPage = function(template_data,company_id,template){
 	).then(function(data){
 		var regional_info = null;
 		if (data){
-			data.company.valuation = formatValuation(data.company.valuation);
+			data.company.valuation = Utility.prototype.formatValuation(data.company.valuation);
 			//similar companies:
 			var writeUp = new Writeup();
 			var bitmap = writeUp.write(data.similar,data.company);
@@ -307,8 +274,8 @@ companyPage = function(template_data,company_id,template){
 					county: data.company.county,
 					category: data.company.category};
 			//temporary hack to show twitter handles for some businesses
-			if (typeof(HOME_PAGE_KEYS[company_id]) !== 'undefined'){
-				var twitter_handle = HOME_PAGE_KEYS[company_id];
+			if (typeof(Utility.prototype.HOME_PAGE_KEYS[company_id]) !== 'undefined'){
+				var twitter_handle = Utility.prototype.HOME_PAGE_KEYS[company_id];
 				template_data.twitter_company_specific_text = template.twitter(data.company.title,data.company.valuation,data.company.county,twitter_handle);
 			}
 			template_data.unencoded_twitter_company_specific_text = template_data.twitter_company_specific_text;
@@ -345,7 +312,7 @@ companyPage = function(template_data,company_id,template){
 };
 homePage = function(req,template_data){
 	var page = 'index';
-	var showcaseRestaurants = getRandomRestaurants(3);
+	var showcaseRestaurants = Utility.prototype.getRandomRestaurants(3);
 	//make sure the restaurant with the longest name is the first one
 	showcaseRestaurants.sort(function(a,b){
 		return b.name.length - a.name.length;
@@ -398,7 +365,7 @@ directoryPage = function(region,template_data,dir_match,template){
 					});
 				}
 			});
-			template_data.title_region = join(breadcrumb,'name',', ');
+			template_data.title_region = Utility.prototype.join(breadcrumb,'name',', ');
 			template_data.show_other_states = true;
 
 			//links for NAVBAR
