@@ -5,15 +5,15 @@ from urlparse import urlparse
 
 #ID_DATA_FILE = './Crawler/file2.txt'
 #OUT_DATA_FILE = './Crawler/social_ids.csv'
-IN_DATA_FILE = './Crawler/datafinity-in2.txt'
-OUT_DATA_FILE = './Crawler/full_emails.csv'
+IN_DATA_FILE = './Crawler/datafinity-in.txt'
+OUT_DATA_FILE = './Crawler/full_email2.csv'
 
 
 def main():
 	results = {}
 	with open(OUT_DATA_FILE, 'wb') as outfile:
 		writer = csv.writer(outfile)
-		header = ['domain','twitter','email']
+		header = ['domain','URLS','twitter','email']
 		writer.writerow(header)
 
 		with open(IN_DATA_FILE) as infile:
@@ -40,8 +40,8 @@ def main():
 			for url in vals['urls']:
 				str_url += url+';'
 			row.append(str_url)
-			for handle in vals['twitter']:
-				row.append(handle)
+			#for handle in vals['twitter']:
+			#	row.append(handle)
 			for email in vals['email']:
 				row.append(email)	
 			writer.writerow(row)

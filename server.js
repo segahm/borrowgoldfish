@@ -60,7 +60,7 @@ function startServer() {
 		  if (host.match(/^www\..*/i)) {
 		    next();
 		  } else {
-		    res.redirect(301, 'http://www.' + host);
+		    res.redirect(301, 'http://www.' + host+req.url);
 		  }
 		});
 	}
