@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <!--meta(name="apple-mobile-web-app-capable", content="yes")-->
+    <!--meta(name="apple-mobile-web-app-status-bar-style", content="black")-->
+    <title>{{^offers}}{{offer.title}} - 2014 TRA Marketplace{{/offers}}{{#offers}}TRA - Texas Restaurant Marketplace{{/offers}}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Open+Sans+Condensed:700" rel="stylesheet">
+    <link rel="apple-touch-icon-precomposed" href="http://www.kimonolabs.com/kimonoapp/img/iphone.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://www.kimonolabs.com/kimonoapp/img/ipad.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://www.kimonolabs.com/kimonoapp/img/iphone-retina.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://www.kimonolabs.com/kimonoapp/img/ipad-retina.png">
+    <link rel="stylesheet" href="http://www.kimonolabs.com/kimonoapp/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://www.kimonolabs.com/kimonoapp/css/main.css">
+    <!--if lt IE 9script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
+    -->
+    <!-- analytics -->
+<script type="text/javascript">
+window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+window.analytics.load("rucaagoxlx");
+window.analytics.page();
+</script>
+<!-- analytics -->
+</head>
+  <body style="" cz-shortcut-listen="true">
+    <!-- ngView:  --><div ng-view="" class="ng-scope"><div style="background-color:#ffffff" class="wrap ng-scope">
+
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #27679F;">
+    <div class="navbar-header">
+      <a class="navbar-brand ng-binding" style="color:#ffffff">TRA - Texas Restaurant Marketplace</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <!-- ngRepeat: set in data --><li ng-repeat="set in data" ng-class="isActive($index)" class="ng-scope active"></li><!-- end ngRepeat: set in data -->
+    </ul>
+    </div>
+  </div>
+
+  <section class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <header>
+          <h2 class="api-name ng-binding" style="color:#6b7770">Caura.co Small Business Offerings</h2>
+          <ul class="meta">
+            <li style="color:#6b7770" class="comments ng-binding">Showing {{^offers}}1 of {{/offers}}492 providers to restaurants </li>
+            
+          </ul>
+        </header>
+  
+        <!-- ngRepeat: collectionName in collectionNames[activeSet] --><section ng-repeat="collectionName in collectionNames[activeSet]" class="ng-scope">
+          <ul class="contentlist">
+            {{#offers}}
+            <li ng-repeat="obj in data[activeSet].results[collectionName]" class="ng-scope">
+              <div class="media">
+                <div class="media-body">
+                  <h3 ng-hide="isImg(obj[propertyName])" class=""> 
+                    <a href="/tra/{{id}}/{{url}}" target="_top" style="color:#6b7770" class="ng-binding">{{title}}}</a>
+                  </h3>
+                </div>
+              </div>
+            </li>
+            {{/offers}}
+            {{^offers}}
+            <li ng-repeat="obj in data[activeSet].results[collectionName]" class="ng-scope">
+              <div class="media">
+                <div class="media-body">
+                  <h3 ng-hide="isImg(obj[propertyName])" class=""> 
+                    <a href="{{offer.link}}" target="_top" style="color:#6b7770" class="ng-binding">1) {{offer.title}}</a>
+                  </h3>
+                  <p ng-repeat="propertyName in propertyNames[activeSet][collectionName]" ng-show="$index&gt;data[activeSet].imgCount &amp;&amp; !isImg(obj[propertyName]) &amp;&amp; obj[propertyName]" class="secondary ng-scope">
+                    <span ng-hide="isLink(obj[propertyName])" style="color:#6b7770" class="ng-binding">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{offer.property1}}</span>
+                  </p>
+                  <p ng-repeat="propertyName in propertyNames[activeSet][collectionName]" ng-show="$index&gt;data[activeSet].imgCount &amp;&amp; !isImg(obj[propertyName]) &amp;&amp; obj[propertyName]" class="secondary ng-scope">
+                    <span ng-hide="isLink(obj[propertyName])" style="color:#6b7770" class="ng-binding">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{offer.property2}}</span>
+                  </p>
+                </div>
+              </div>
+            </li>
+            {{/offers}}
+			</ul>
+        </section><!-- end ngRepeat: collectionName in collectionNames[activeSet] -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="contact">
+          <li><a href="http://www.facebook.com/sharer.php?u=http://www.caura.co/" target="_blank" class="facebook">Facebook</a></li>
+          <li><a href="http://twitter.com/share?via=nesovok&url=http://www.caura.co/" class="twitter" target="_blank">Twitter</a></li>
+          <li><a href="https://plus.google.com/share?url=http://www.caura.co/" class="googleplus" target="_blank">Google+</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  
+
+</div></div>
+      <!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+</body></html>

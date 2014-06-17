@@ -63,7 +63,6 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
     .select(knex.raw('county,people,density,state,(CASE WHEN state=\''+state+'\' THEN 1 ELSE 0 END) as orderstate'))
     .orderBy('orderstate','desc')
     .orderBy(knex.raw('random()'));  //need at least 2 != to this county
-  console.log(request.toString());
   return request.then(function(data){
     top3ByDensity = top3Counties(data,county);
     //then find stats for open restaurants by time of the day

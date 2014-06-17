@@ -107,4 +107,37 @@ Utility.prototype.listPages = function(){
   });
 };
 
+
+Utility.prototype.listOfferings = function(){
+  var file = require('./fixtures/tra_data.json');
+  var content = JSON.parse(JSON.stringify(file));
+  var results = new Array(content.results.collection1.length);
+  var count = 0;
+  for (var item in content.results.collection1){
+    var val = content.results.collection1[item];
+    results[count] = {title: val.property1.text,id: this.hashCode(val.property1.text),url: encodeURIComponent(val.property1.text)};
+    count++;
+  }
+  return results;
+};
+
+Utility.prototype.listOffer = function(hashcode){
+  var file = require('./fixtures/tra_data.json');
+  var content = JSON.parse(JSON.stringify(file));
+  var result = null;
+  for (var item in content.results.collection1){
+    var val = content.results.collection1[item];
+    if (this.hashCode(val.property1.text) === hashcode){
+      result = {title:val.property1.text,
+                link: val.property1.href,
+                property1: val.property3};
+      if (typeof(val.property2) !== 'undefined'){
+        result.property2 = val.property2;
+      }
+      break;
+    }
+  }
+  return result;
+};
+
 module.exports = Utility;

@@ -25,7 +25,8 @@ var STATES = {'TX': 'Texas','FL': 'Florida','NM': 'New Mexico','CA': 'California
 //define page function
 var directoryPage,
 	homePage,
-	companyPage;
+	companyPage,
+	tra;
 var knex_connection = {
 	host     : '127.0.0.1',
 	database : 'goldfish',
@@ -157,7 +158,12 @@ function startServer() {
 		 *FIRST-pass page check
 		 */
 		 //COMPANY
-		if (matches && typeof(matches[2]) !== 'undefined'){
+		 //temporary Texas event
+		var tra_matches = path.match(/^\/tra\/([0-9]{10,})?/i);
+		if (tra_matches){
+			var hashcode = (typeof(tra_matches[1]) !== 'undefined')?tra_matches[1]:null;
+			resultPromise = tra(template_data,hashcode);
+		}else if (matches && typeof(matches[2]) !== 'undefined'){
 			var company_id = matches[2];
 			resultPromise = companyPage(template_data,company_id,template);
 		//DIRECTORY
@@ -241,7 +247,17 @@ function startServer() {
 	}).listen(17912);*/
 }
 
-
+tra = function(template_data,hashcode){
+	var page = 'tra-texas-restaurant-marketplace';
+	return Q.fcall(function(){
+		if (hashcode){
+			template_data.offer = Utility.prototype.listOffer(hashcode);
+		}else{
+			template_data.offers = Utility.prototype.listOfferings();
+		}
+		return page;
+	});
+};
 companyPage = function(template_data,company_id,template){
 	var page;
 	return Company.prototype.findById(company_id
