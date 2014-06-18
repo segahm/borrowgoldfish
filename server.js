@@ -57,12 +57,14 @@ function startServer() {
 
 	if (process.env.NODE_ENV === 'production'){
 		app.all(/.*/, function(req, res, next) {
-		  var host = req.header('host');
-		  if (host.match(/^www\..*/i)) {
-		    next();
-		  } else {
-		    res.redirect(301, 'http://www.' + host+req.url);
-		  }
+			var host = req.header('host');
+			//if (host.match(/^www\..*/i)) {
+			if (host.match(/^www\.caura.co/i)) {
+				next();
+			} else {
+				//res.redirect(301, 'http://www.' + host+req.url);
+				res.redirect(301, 'http://www.caura.co'+req.url);
+			}
 		});
 	}
 	app.engine('html', cons.templayed);
@@ -81,7 +83,7 @@ function startServer() {
 	app.get('/sitemap.xml', function(req, res) {
 		Utility.prototype.listPages().then(function(urls){
 			var sm = sitemap.createSitemap ({
-				hostname: 'http://www.borrowgoldfish.com',
+				hostname: 'http://www.caura.co',
 				cacheTime: 600000,        // 6000 sec - cache purge period
 				urls: urls
 			});
