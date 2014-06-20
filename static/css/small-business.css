@@ -1,0 +1,44 @@
+body {
+	margin-top: 125px; /* adjust this if the height of the menu bar changes */
+}
+
+.navbar-fixed-top .nav {
+	padding: 15px 0;
+}
+
+footer {
+	padding: 30px 0;	
+}
+
+.navbar {
+	background-color: #1B2730;
+}
+.navbar-brand img {
+	height: 40px;
+}
+#google-map, a.btn.btn-primary.btn-lg {
+	margin-bottom:10px;
+}
+
+i.fa:hover {
+    color: gray;
+}
+.social {
+    float:  right;
+}
+.fa-lg{
+	font-size: 2em;
+}
+.fa {
+    color: #F8AA1F; 
+    /*rgb(116, 155, 192);*/
+}
+.offers i.fa:hover{
+	color: #F8AA1F; 
+}
+.offers h4,.offers{
+	color:#000;
+}
+.section{
+border-top: 1px solid #BDC3C7;
+}

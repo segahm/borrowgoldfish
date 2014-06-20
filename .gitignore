@@ -16,6 +16,7 @@ lib-cov
 *.db
 *.txt
 *.ico
+*.bat
 Thumbs.db
 
 
