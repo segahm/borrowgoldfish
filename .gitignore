@@ -30,3 +30,7 @@ node_modules
 
 /config.js
 .DS_Store
+
+static/jquery.slimscroll
+static/jQuery
+static/bower
