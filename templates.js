@@ -24,6 +24,12 @@ var config = {
 		},
 		page: {
 			company: {page_title: 'How much is my business worth?',
+						points_3: {
+							learn: 'Discover Opportunities',
+							calculator: 'Simplify Financing',
+							sell: 'Receive Offers'
+						},
+						val_text: 'Business valuation',
 						analysis: ['Perform competitor analysis',
 						'Review available data',
 						'Explore immediate opportunities'],
@@ -65,6 +71,12 @@ var config = {
 		},
 		page: {
 			company: {page_title: '¿Cuánto exactamente vale mi empresa?',
+						points_3: {
+							learn: 'Discover Opportunities',
+							calculator: 'Simplify Financing',
+							sell: 'Receive Offers'
+						},
+						val_text: 'Valoración de empresas',
 						analysis: ['Realizar análisis de la competencia',
 						'Artículos disponibles datos',
 						'Explorar las oportunidades inmediatas'],
