@@ -29,6 +29,7 @@ var config = {
 							calculator: 'Simplify Financing',
 							sell: 'Receive Offers'
 						},
+						learn_more: 'Learn More',
 						val_text: 'Business valuation',
 						analysis: ['Perform competitor analysis',
 						'Review available data',
@@ -76,6 +77,7 @@ var config = {
 							calculator: 'Simplify Financing',
 							sell: 'Receive Offers'
 						},
+						learn_more: 'Learn More',
 						val_text: 'Valoración de empresas',
 						analysis: ['Realizar análisis de la competencia',
 						'Artículos disponibles datos',

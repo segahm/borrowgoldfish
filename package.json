@@ -26,7 +26,8 @@
     "errorhandler": "~1.0.1",
     "forever": "0.11.1",
     "sitemap": "0.7.2",
-    "cookie-parser": "1.1.0"
+    "cookie-parser": "1.1.0",
+    "node-twitter-api": "1.2.3"
   },
   "devDependencies": {
     "jshint": "~2.4.x"

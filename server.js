@@ -10,7 +10,8 @@ var express     = require('express'),
 	templates   = require('./templates'),
 	seedrandom	= require('seedrandom'),
 	cookieParser = require('cookie-parser'),
-	sitemap = require('sitemap');
+	sitemap = require('sitemap'),
+	twitterAPI = require('node-twitter-api');
 
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -53,7 +54,11 @@ Knex.knex = Knex.initialize({
 
 function startServer() {
 	var app = express();
-	
+	var twitter = new twitterAPI({
+		consumerKey: 'xbZMI7NtccoXTmIe3MQA',
+		consumerSecret: 'lD04vbN5YpyMWMmFX1uZja4nBVFTNAuwKPEoXu0KuSg',
+		callback: 'http://www.caura.co/'
+	});
 
 	if (process.env.NODE_ENV === 'production'){
 		app.all(/.*/, function(req, res, next) {
