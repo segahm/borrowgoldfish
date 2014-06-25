@@ -29,6 +29,7 @@ var config = {
 							calculator: 'Simplify Financing',
 							sell: 'Receive Offers'
 						},
+						target_audience: 'Own a restaurant business?',
 						learn_more: 'Learn More',
 						val_text: 'Business valuation',
 						analysis: ['Perform competitor analysis',
@@ -39,7 +40,8 @@ var config = {
 						review: 'Review Available Financing',
 						is_closed_title: '- Closed or Moved. Confirm here...',
 						charts:[
-							{title:'Relative Performance',hAxis: 'Peer relative ranking [0-5]'},
+							{title:'Performance Relative to Peers',hAxis: 'Peer relative ranking [0-5]',
+								metric: 'Relative Placement'},
 							{title:'Popularity of cuisine'},
 							{title: 'Restaurant Density by County'},
 							{title:'Operating density in counties by hours of the day'}]
@@ -77,6 +79,7 @@ var config = {
 							calculator: 'Simplify Financing',
 							sell: 'Receive Offers'
 						},
+						target_audience: 'Own a restaurant business?',
 						learn_more: 'Learn More',
 						val_text: 'Valoración de empresas',
 						analysis: ['Realizar análisis de la competencia',
@@ -87,7 +90,8 @@ var config = {
 						review: 'Artículos disponibles de financiamiento',
 						is_closed_title: '- está cerrado o movido. confirme aquí',
 						charts:[
-							{title:'Representación Relativa',hAxis: 'Peer clasificación relativa [0-5]'},
+							{title:'Representación Relativa',hAxis: 'Peer clasificación relativa [0-5]',
+								metric: 'Relative Placement'},
 							{title:'La popularidad de la cocina'},
 							{title:'Restaurante Densidad por el Condado'},
 							{title:'Densidad de operación en los condados por hora del día'}]

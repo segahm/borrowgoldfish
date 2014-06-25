@@ -88,3 +88,16 @@ float: right;
 .navbar-brand{
 	padding-top:5px;
 }
+hr{
+	margin-bottom:0;
+}
+.target-audience,.target-audience:hover{
+	color: #333;
+}
+div#offer-header {
+	padding: 40px 0;
+	text-align:center;
+}
+.right-column {
+background-color: #F7F4EF;
+}

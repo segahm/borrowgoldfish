@@ -54,11 +54,11 @@ Knex.knex = Knex.initialize({
 
 function startServer() {
 	var app = express();
-	var twitter = new twitterAPI({
+	/*var twitter = new twitterAPI({
 		consumerKey: 'xbZMI7NtccoXTmIe3MQA',
 		consumerSecret: 'lD04vbN5YpyMWMmFX1uZja4nBVFTNAuwKPEoXu0KuSg',
 		callback: 'http://www.caura.co/'
-	});
+	});*/
 
 	if (process.env.NODE_ENV === 'production'){
 		app.all(/.*/, function(req, res, next) {
