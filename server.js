@@ -232,7 +232,9 @@ function startServer() {
 				template.all_pages
 			);
 
-
+			if (mypage === 'index'){
+				mypage = 'new-index';
+			}
 			res.render(mypage, template_data);
 		}).catch(function (error) {
 			if (process.env.NODE_ENV === 'development'){
