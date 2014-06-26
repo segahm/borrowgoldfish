@@ -1,5 +1,9 @@
 body {
 	margin-top: 125px; /* adjust this if the height of the menu bar changes */
+	line-height: 1.6em;
+}
+h1,h2{
+	font-family: 'Gotham Rounded A', 'Gotham Rounded B';
 }
 
 .navbar-fixed-top .nav {
@@ -94,10 +98,20 @@ hr{
 .target-audience,.target-audience:hover{
 	color: #333;
 }
-div#offer-header {
+div#offer {
 	padding: 40px 0;
 	text-align:center;
 }
-.right-column {
+.upper-column{
 background-color: #F7F4EF;
+}
+.left-column {
+background-color: #fff;
+}
+.form-horizontal, .right-column h2{
+	padding: 5px 5px 0px 5px;
+}
+.btn-danger{
+	background-color: #E96E57;
+	border-color: #E96E57;
 }

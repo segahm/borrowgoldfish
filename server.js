@@ -11,7 +11,8 @@ var express     = require('express'),
 	seedrandom	= require('seedrandom'),
 	cookieParser = require('cookie-parser'),
 	sitemap = require('sitemap'),
-	twitterAPI = require('node-twitter-api');
+	twitterAPI = require('node-twitter-api'),
+	favicon = require('serve-favicon');
 
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -79,7 +80,7 @@ function startServer() {
 
 	//ignore static file requests
 	app.use('/static',express.static(__dirname+'/static'));
-	app.use('/favicon.ico',express.static(__dirname+'/static/favicon.ico'));
+	app.use(favicon(__dirname + '/static/favicon.ico'));
 	app.use('/robots.txt',express.static(__dirname+'/static/robots.txt'));
 
 	if (process.env.NODE_ENV === 'development'){

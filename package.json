@@ -27,7 +27,8 @@
     "forever": "0.11.1",
     "sitemap": "0.7.2",
     "cookie-parser": "1.1.0",
-    "node-twitter-api": "1.2.3"
+    "node-twitter-api": "1.2.3",
+    "serve-favicon": "2.0.1"
   },
   "devDependencies": {
     "jshint": "~2.4.x"

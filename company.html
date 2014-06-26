@@ -9,6 +9,7 @@
     <!--<link rel="stylesheet" type="text/css" href="/static/fullpage.js/jquery.fullPage.css" />-->
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static//css/gothem.css" />
     <!-- Add custom CSS here -->
     <link href="/static/css/small-business.css" rel="stylesheet">
     <script src="/static/js/jquery-1.10.2.js"></script>
@@ -232,12 +233,13 @@
         </div>
       </div>
       <div class="section">
-        <div id="offer-header"><h2>Web presence helps grow your business!</h2></div>
+        <div id="offer"><h2>Web presence helps grow your business!</h2></div>
         <hr>
+        <div class="upper-column">
         <div class="row">
-          <div class="col-lg-6 hidden-sm hidden-xs col-md-6">
-            <div id="peer-comparison" style="width: 550px; height: 300px;"></div>
-            <div id="peer-comparison-2" style="width: 550px; height: 300px;"></div>
+          <div class="col-lg-6 col-md-6 hidden-sm hidden-xs left-column">
+            <div id="peer-comparison" style="width: 100%;height: 300px;"></div>
+            <div id="peer-comparison-2" style="width: 100%; height: 300px;"></div>
           </div>
           <div class="col-sm-8 col-xs-12 col-md-6 col-lg-6 right-column">
             <h2><small>Make your web success work for you. Leverage the insight to get better offers. What opportunities are you exploring?</small></h2>
@@ -247,8 +249,8 @@
                 <legend>&nbsp;</legend>
                 <!-- Select Multiple -->
                 <div class="form-group">
-                  <label class="col-md-4 control-label" for="selectmultiple">Opportunities:</label>
-                  <div class="col-md-6">
+                  <label class="col-xs-4 control-label" for="selectmultiple">Opportunities:</label>
+                  <div class="col-xs-8">
                     <select id="selectmultiple" name="selectmultiple" class="form-control" multiple="multiple">
                       <option value="1">Credit improvement</option>
                       <option value="2">Debt consolidation / refinance</option>
@@ -265,23 +267,46 @@
                 </div>
                 <!-- Text input-->
                 <div class="form-group">
-                  <label class="col-md-4 control-label" for="textinput">Business Name:</label>
-                  <div class="col-md-5">
+                  <label class="col-xs-4 control-label" for="textinput">Business Name:</label>
+                  <div class="col-xs-8">
                     <input id="textinput" name="textinput" type="text" placeholder="{{title}}" class="form-control input-md">
                     <span class="help-block">if different from the above</span>
                   </div>
                 </div>
                 <!-- Button -->
                 <div class="form-group">
-                  <label class="col-md-4 control-label" for="singlebutton"></label>
-                  <div class="col-md-4">
+                  <label class="col-xs-4 control-label" for="singlebutton"></label>
+                  <div class="col-xs-4">
                     <button id="singlebutton" name="singlebutton" class="btn btn-warning">See your options <span class="glyphicon glyphicon-arrow-right"></span></button>
                   </div>
                 </div>
               </fieldset>
             </form>
+<hr>
+<form class="form-horizontal">
+<fieldset>
+
+<div style="text-align:center"><h3><small>Interested in this business?</small></h3></div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-xs-4 control-label" for="email">Your Contact: </label>  
+  <div class="col-xs-8">
+  <input id="email" name="email" type="text" placeholder="sales@company.com" class="form-control input-xs"></div>
+</div><div class="form-group">
+    <div class="col-xs-4 col-xs-offset-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-danger">Make My Best Offer!</button>
+  </div>  
+</div>
+
+
+
+</fieldset>
+</form>
+
           </div>
         </div>
+      </div>
       </div>
       <!--     <div class="section no-line">
         <ul id="tabs3" class="nav nav-tabs nav-justified">
@@ -354,14 +379,6 @@
   function drawChart() {
   var ar;
   //peer comparison
-  /*var data = google.visualization.arrayToDataTable([
-  ['Metric', 'Relative Placement', { role: "style" } ],
-  ['price',  {{peers.price}},'color: #1F77B4;'],
-  ['reviews',  {{peers.reviews}},'color: #1F77B4'],
-  ['website',  {{peers.web}},'color: #1F77B4'],
-  ['social popularity',{{peers.popularity}},'color: #1F77B4'],
-  ['location',{{peers.location}},'color: #1F77B4']
-  ]);*/
   var options = {
   legend: { position: "none" },
   title: '{{charts[0].title}}',
@@ -388,13 +405,6 @@
   ]);
   chart = new google.visualization.ColumnChart(document.getElementById('peer-comparison-2'));
   chart.draw(data, options);
-  /*data = google.visualization.arrayToDataTable([
-  ['Metric', 'Relative Placement', { role: "style" } ],
-  ['social popularity',{{peers.popularity}},'color: #1F77B4'],
-  ['location',{{peers.location}},'color: #1F77B4']
-  ]);
-  var chart = new google.visualization.ColumnChart(document.getElementById('peer-comparison-3'));
-  chart.draw(data, options);*/
   //segmentation in a county
   ar = [['Type of Food', '# of restaurants']];
   var topc = svg.top_cats;
