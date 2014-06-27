@@ -343,8 +343,21 @@ homePage = function(req,template_data){
 	showcaseRestaurants.sort(function(a,b){
 		return b.name.length - a.name.length;
 	});
-	template_data.showcaseRestaurants = showcaseRestaurants;
-	return Q.fcall(function(){ return page;});
+	var ids = [];
+	_(showcaseRestaurants).forEach(function(val){
+		ids.push(val.id);
+	});
+	return Company.prototype.findByIds(ids).then(function(data){
+		_(showcaseRestaurants).forIn(function(val,k){
+			var id = showcaseRestaurants[k].id;
+			showcaseRestaurants[k] = _.merge(data[id],showcaseRestaurants[k]);
+			showcaseRestaurants[k].value = Utility.prototype.formatValuation(data[id].valuation);
+			//showcaseRestaurants[k].desc = 'fdsfds';
+		});
+		console.log(showcaseRestaurants[0]);
+		template_data.showcaseRestaurants = showcaseRestaurants;
+		return page;
+	});
 };
 directoryPage = function(region,template_data,dir_match,template){
 	//guard against bad states by showing default directory page, rather than no results

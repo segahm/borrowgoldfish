@@ -4,17 +4,24 @@
 <head>
 
     <meta charset="utf-8">
+     <meta name="google-site-verification" content="Ak0e1ydbPnnjboxN7lfpAh1dVl9A1XddjtcMnvKCr4c" />   
+    <meta name="google-site-verification" content="halx-ADaKPaH8O7N2NLf5cgB4oKQPVocdwhG6gy7wFY" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Spectrum</title>
+    <title>{{page_title}}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <!-- Fonts -->
+    {{#settings.is_dev}}
+    <link href="/static/assets/css/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    {{/settings.is_dev}}
+    {{^settings.is_dev}}
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    {{/settings.is_dev}}
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
@@ -24,18 +31,52 @@
 
     <!-- Plugin CSS -->
     <link href="/static/assets/css/plugins/hover/hover.min.css" rel="stylesheet">
-    <link href="/static/assets/css/plugins/owl.carousel/owl.carousel.css" rel="stylesheet">
+    <!--<link href="/static/assets/css/plugins/owl.carousel/owl.carousel.css" rel="stylesheet">
     <link href="/static/assets/css/plugins/owl.carousel/owl.theme.css" rel="stylesheet">
-    <link href="/static/assets/css/plugins/owl.carousel/owl.transitions.css" rel="stylesheet">
+    <link href="/static/assets/css/plugins/owl.carousel/owl.transitions.css" rel="stylesheet">-->
     <link href="/static/assets/css/plugins/jquery.fs.wallpaper/jquery.fs.wallpaper.css" rel="stylesheet">
     <link href="/static/assets/css/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <link href="/static/assets/css/spectrum-orange.css" rel="stylesheet">
-    
+      <!-- linkedin/facebook card begin -->
+  <meta property="og:title" content="{{page_title}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{full_url}}">
+    <!--<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
+    <meta property="og:description" content="{{page_description}}">
+    <meta property="og:site_name" content="Caura">
+    <meta property="og:locale" content="es_US">
+    <meta property="fb:admins" content="segahm"/>
+      <!-- linkedin/facebook card end -->
+      
+      <!-- twitter card begin -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="{{page_title}}">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:creator" content="@nesovok">
+    <!--<meta name="twitter:image:src" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
+      <!-- twitter card end -->
     <style type="text/css">
     .navbar-inner {
-    background:transparent;
-}
+        background:transparent;
+    }
+    .pic0{
+        background-image: url(/static/slide1.jpg);
+    }
+    .pic1{
+        background-image: url(/static/slide2.jpg);
+    }
+    .pic2{
+        background-image: url(/static/slide3.jpg);
+    }
+    .bg-primary{
+        padding: 20px 0;
+    }
+    nav.navbar.navbar-dark.navbar-fixed-top.top-nav-collapse {
+        background-color: rgba(62, 68, 77, 0.60);
+        /*background-color: rgba(119, 108, 88, 0.901961);*/
+    }
     /*.navbar-dark.top-nav-collapse {
         border-color: rgba(62,68,77,.5);
         background-color: #766B57;
@@ -56,56 +97,53 @@
         <nav class="navbar navbar-dark navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                        <i class="fa fa-bars"></i>
-                    </button>
                     <a class="navbar-brand" href="#page-top">
                         <span class="logo">
-                            <img src="https://dl.dropboxusercontent.com/u/5902603/caura/logo/best.png" alt="">
+                            <img src="https://dl.dropboxusercontent.com/u/5902603/caura/logo/transparent.png" alt="">
                         </span>
                         <span class="logo-collapse">
-                            <img src="https://dl.dropboxusercontent.com/u/5902603/caura/logo/best2.png" alt="">
+                            <img src="https://dl.dropboxusercontent.com/u/5902603/caura/logo/transparent.png" alt="">
                         </span>
                     </a>
                 </div>
-
+                <div class="navbar-header pull-right">
+                    <ul class="nav navbar-nav list-inline">
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="#sample">Listings</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="#">Login</a>
+                        </li>
+                    </ul>
+                </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <!--<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                     <ul class="nav navbar-nav">
-                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                         <li class="hidden">
                             <a href="#page-top"></a>
                         </li>
                         <li class="page-scroll">
                             <a href="#about">About</a>
                         </li>
-<!--                         <li class="page-scroll">
-                            <a href="#features">Features</a>
+                        <li>
+                            <a onclick="share(this);return false;" title="tweet to this business" class="social" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_share_text}}">
+                    <span class="fa-stack fa-lg"><i class="fa fa-twitter"> </i></span></a>
                         </li>
-                        <li class="page-scroll">
-                            <a href="#work">Work</a>
-                        </li>
-                        <li class="page-scroll">
-                            <a href="#blog">Blog</a>
-                        </li>
-                        <li class="page-scroll">
-                            <a href="#pricing">Pricing</a>
-                        </li>
-                        <li class="page-scroll">
-                            <a href="#contact">Contact</a>
-                        </li> -->
                     </ul>
-                </div>
+                </div>-->
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container -->
         </nav>
 
-        <header class="intro-img-half intro-dark-bg" style="background-image: url(/static/assets/img/demo-bgs/demo-bg-1.jpg)" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="50">
+        <header id="header" class="intro-img-half intro-dark-bg" class="pic2" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="50">
             <div class="overlay"></div>
             <div class="intro-body" data-scrollreveal="move 0 over 1s">
                 <div class="container">
-                    <div class="intro-welcome">Caura</div>
+                    <!--<div class="intro-welcome">Caura.co</div>-->
                     <br>
                     <h1 class="brand-heading">
                         Small Business
@@ -118,27 +156,29 @@
                                 <h4>Caura is a Directory of Restaurants and their Financial Profiles</h4>
                             </div>
                             <div class="item">
-                                <h4>Revenue estimates for Thousands of Businesses</h4>
+                                <h4>Revenue estimates for thousands of businesses</h4>
                             </div>
                             <div class="item">
-                                <h4>Offerings from Lenders and Financial institutions</h4>
+                                <h4>Detailed analysis of all available web data</h4>
+                            </div>
+                            <div class="item">
+                                <h4>and then some</h4>
                             </div>
                         </div>
                     </div>
                     <div class="page-scroll" data-scrollreveal="enter bottom after .6s">
-                        <a href="#about" class="btn btn-scroll-light sink">
+                        <a href="#sample" class="btn btn-scroll-light sink">
                             <i class="fa fa-angle-double-down"></i>
                         </a>
                     </div>
                 </div>
             </div>
         </header>
-
-        <section id="about" class="blog-1 bg-lighter">
+        <section id="sample" class="blog-1 bg-lighter">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2>From Our Blog</h2>
+                        <h2>Featured Small Businesses</h2>
                         <hr class="primary mb">
                     </div>
                 </div>
@@ -150,21 +190,21 @@
                                     <i class="fa fa-search fa-3x"></i>
                                 </div>
                             </div>
-                            <img src="/static/assets/img/demo-blog/1.jpg" class="img-responsive" alt="">
+                            <a href="/{{showcaseRestaurants[0].id}}"><img src="https://dl.dropboxusercontent.com/u/5902603/caura/restaurant1.jpg" class="img-responsive" alt=""></a>
                         </a>
+                        <!--googleoff: all-->
                         <div class="blog-preview-content">
                             <h3>
-                                <a href="#">Blog Post Title</a>
+                                <a href="/{{showcaseRestaurants[0].id}}">{{showcaseRestaurants[0].name}}</a>
                             </h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quisquam, sunt, corporis.</p>
-                            <div class="continue"><a href="#">Continue Reading &rarr;</a>
+                            <p>situated in {{showcaseRestaurants[0].county}} county, {{showcaseRestaurants[0].name}} is already a highly successful business with multiple opportunities for growth. It has high margins in..</p>
+                            <div class="continue"><a href="/{{showcaseRestaurants[0].id}}">Continue Reading &rarr;</a>
                             </div>
                             <ul class="meta list-inline">
-                                <li>February 31, 2014</li>
-                                <li>9 Comments</li>
-                                <li><i class="fa fa-heart text-primary"></i> 12</li>
+                                <li>Valued at ${{showcaseRestaurants[0].value}}</li>
                             </ul>
                         </div>
+                        <!--googleon: all-->
                     </div>
                     <div class="col-md-4 blog-col" data-scrollreveal="enter bottom over 1.5s">
                         <a href="#" class="blog-preview-img">
@@ -173,21 +213,21 @@
                                     <i class="fa fa-search fa-3x"></i>
                                 </div>
                             </div>
-                            <img src="/static/assets/img/demo-blog/2.jpg" class="img-responsive" alt="">
+                            <a href="/{{showcaseRestaurants[1].id}}"><img src="https://dl.dropboxusercontent.com/u/5902603/caura/restaurant2.jpg" class="img-responsive" alt=""></a>
                         </a>
+                        <!--googleoff: all-->
                         <div class="blog-preview-content">
                             <h3>
-                                <a href="#">Blog Post Title</a>
+                                <a href="/{{showcaseRestaurants[1].id}}">{{showcaseRestaurants[1].name}}</a>
                             </h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quisquam, sunt, corporis.</p>
-                            <div class="continue"><a href="#">Continue Reading &rarr;</a>
+                            <p>is a growing business with solid revenue projections. It is competing with several restaurants of similar and different sizes. Situated in {{showcaseRestaurants[1].county}}..</p>
+                            <div class="continue"><a href="/{{showcaseRestaurants[1].id}}">Continue Reading &rarr;</a>
                             </div>
                             <ul class="meta list-inline">
-                                <li>February 31, 2014</li>
-                                <li>9 Comments</li>
-                                <li><i class="fa fa-heart text-primary"></i> 12</li>
-                            </ul>
+                                <li>Valued at ${{showcaseRestaurants[1].value}}</li>
+                                </ul>
                         </div>
+                        <!--googleon: all-->
                     </div>
                     <div class="col-md-4 blog-col" data-scrollreveal="enter right over 1.5s">
                         <a href="#" class="blog-preview-img">
@@ -196,123 +236,31 @@
                                     <i class="fa fa-search fa-3x"></i>
                                 </div>
                             </div>
-                            <img src="/static/assets/img/demo-blog/3.jpg" class="img-responsive" alt="">
+                            <a href="/{{showcaseRestaurants[2].id}}"><img src="https://dl.dropboxusercontent.com/u/5902603/caura/restaurant3.jpg" class="img-responsive" alt=""></a>
                         </a>
+                        <!--googleoff: all-->
                         <div class="blog-preview-content">
                             <h3>
-                                <a href="#">Blog Post Title</a>
+                                <a href="/{{showcaseRestaurants[2].id}}">{{showcaseRestaurants[2].name}}</a>
                             </h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quisquam, sunt, corporis.</p>
-                            <div class="continue"><a href="#">Continue Reading &rarr;</a>
+                            <p>hiring must be a bottleneck for this busy restaurant. From new inventory purchases to active web marketing, there are..</p>
+                            <div class="continue"><a href="/{{showcaseRestaurants[2].id}}">Continue Reading &rarr;</a>
                             </div>
                             <ul class="meta list-inline">
-                                <li>February 31, 2014</li>
-                                <li>9 Comments</li>
-                                <li><i class="fa fa-heart text-primary"></i> 12</li>
-                            </ul>
+                                <li>Valued at ${{showcaseRestaurants[2].value}}</li>
+                                </ul>
                         </div>
+                        <!--googleon: all-->
                     </div>
                 </div>
             </div>
         </section>
-<!--
-        <section id="pricing" class="pricing-1">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h2>Pricing</h2>
-                        <hr class="primary">
-                        <p>Three licensing options are availalbe for the Spectrum Template. A single application license, a multiple application license, and an extended license are the three options availalbe.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 pricing-col" data-scrollreveal="enter left over 1.5s">
-                        <div class="pricing-table">
-                            <div class="pricing-heading" style="background-image: url('assets/img/demo-pricing/1.jpg')">
-                                <h2>Single</h2>
-                            </div>
-                            <div class="content">
-                                <div class="price">
-                                    <span class="amount">$15</span>
-                                    <span class="period">one time</span>
-                                </div>
-                                <ul class="pricing-items list-unstyled text-center">
-                                    <li class="item">Single Installation</li>
-                                    <li class="item">
-                                        <span class="text-primary">Fully Responsive</span> Design</li>
-                                    <li class="item">Dedicated Email Support</li>
-                                    <li class="item">Complete
-                                        <span class="text-primary">CSS and LESS</span> Files Included</li>
-                                    <li class="item">Full Documentation and Usage Instructions</li>
-                                    <li class="pricing-button">
-                                        <a href="#" class="btn btn-primary btn-square btn-raised">Buy Now</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 pricing-col" data-scrollreveal="enter bottom over 1.5s">
-                        <div class="pricing-table featured">
-                            <div class="pricing-heading" style="background-image: url('assets/img/demo-pricing/2.jpg')">
-                                <h2>Multiple</h2>
-                            </div>
-                            <div class="content">
-                                <div class="price">
-                                    <span class="amount">$55</span>
-                                    <span class="period">one time</span>
-                                </div>
-                                <ul class="pricing-items list-unstyled text-center">
-                                    <li class="item">Multiple Installations</li>
-                                    <li class="item">
-                                        <span class="text-primary">Fully Responsive</span> Design</li>
-                                    <li class="item">Dedicated Email Support</li>
-                                    <li class="item">Complete
-                                        <span class="text-primary">CSS and LESS</span> Files Included</li>
-                                    <li class="item">Full Documentation and Usage Instructions</li>
-                                    <li class="pricing-button">
-                                        <a href="#" class="btn btn-primary btn-square btn-raised">Buy Now</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 pricing-col" data-scrollreveal="enter right over 1.5s">
-                        <div class="pricing-table">
-                            <div class="pricing-heading" style="background-image: url('assets/img/demo-pricing/1.jpg')">
-                                <h2>Extended</h2>
-                            </div>
-                            <div class="content">
-                                <div class="price">
-                                    <span class="amount">$650</span>
-                                    <span class="period">one time</span>
-                                </div>
-                                <ul class="pricing-items list-unstyled text-center">
-                                    <li class="item">Multiple Installations, Sublicense, or Resell</li>
-                                    <li class="item">
-                                        <span class="text-primary">Fully Responsive</span> Design</li>
-                                    <li class="item">Dedicated Email Support</li>
-                                    <li class="item">Complete
-                                        <span class="text-primary">CSS and LESS</span> Files Included</li>
-                                    <li class="item">Full Documentation and Usage Instructions</li>
-                                    <li class="pricing-button">
-                                        <a href="#" class="btn btn-primary btn-square btn-raised">Buy Now</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>-->
 
         <section class="bg-primary">
             <div class="container">
                 <div class="row text-center">
                     <div class="col-lg-8 col-lg-offset-2">
-                        <h2 class="allcaps">Your New Website is Waiting!</h2>
-                        <br>
-                        <a href="#" class="btn btn-default btn-lg btn-square btn-raised">Buy Spectrum!</a>
-                    </div>
+                        <h4>Thousands of restaurants in Texas, California, Florida, and New Mexico are added everyday</h4>
                 </div>
             </div>
         </section>
@@ -322,8 +270,8 @@
                 <div class="row">
                     <div class="col-lg-6" data-scrollreveal="enter left over 1.5s">
                         <h2>Contact Us</h2>
-                        <p>Spectrum comes loaded with a working contact form! Just follow the instructions in the documentation to get your form working. All you need to do is change an email address, no code writing required!</p>
-                        <p>The contact form to the right is a demo form and will not send email to Start Bootstrap. If you have a question about the theme, please contact us through our WrapBootstrap profile.</p>
+                        <p>Are you a service provider to small businesses? Do you currently work with restaurants? If you are a quality service provider with good reviews, please write to us. We are always interested in helping our member businesses discover new deals.</p>
+                        <p>If you are a restaurant owner, you are welcome to write to us with the name of your business - whether it is listed on the site or not.</p>
                     </div>
                     <div class="col-lg-5 col-lg-offset-1" data-scrollreveal="enter right over 1.5s">
                         <br>
@@ -376,47 +324,44 @@
                             </address>
                         </div>
                         <div class="col-md-3">
-                            <h4>Features</h4>
+                            <h4>Regional Coverage</h4>
                             <ul class="list-unstyled footer-links">
                                 <li>
-                                    <a href="#">Responsive</a>
+                                    <a href="/tx">Texas</a>
                                 </li>
                                 <li>
-                                    <a href="#">Easy to Use</a>
+                                    <a href="/fl">Florida</a>
                                 </li>
                                 <li>
-                                    <a href="#">Well Documented</a>
+                                    <a href="/ca">California</a>
+                                </li>
+                                <li>
+                                    <a href="/nm">New Mexico</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-md-3">
-                            <h4>Documentation</h4>
+                            <h4></h4>
                             <ul class="list-unstyled footer-links">
                                 <li>
-                                    <a href="#">Bootstrap Components</a>
+                                    <a href="/static/about.html">About Us</a>
                                 </li>
                                 <li>
-                                    <a href="#">Usage Information</a>
-                                </li>
-                                <li>
-                                    <a href="#">Full Documentation</a>
+                                    <a href="/static/privacy.html">Privacy</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-md-3">
-                            <h4>Social</h4>
+                            <h4>Like what you see?</h4>
                             <ul class="list-inline">
                                 <li>
-                                    <a href="#" class="btn btn-social-light btn-facebook"><i class="fa fa-fw fa-facebook"></i></a>
+                                    <a onclick="share(this);return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok" class="btn btn-social-light btn-twitter"><i class="fa fa-fw fa-twitter"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="btn btn-social-light btn-twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                                    <a onclick="share(this);return false;" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup" class="btn btn-social-light btn-facebook"><i class="fa fa-fw fa-facebook"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="btn btn-social-light btn-dribbble"><i class="fa fa-fw fa-dribbble"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn btn-social-light btn-google-plus"><i class="fa fa-fw fa-google-plus"></i></a>
+                                    <a onclick="share(this);return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title=Caura&<s></s>ource=Caura" class="btn btn-social-light btn-linkedin"><i class="fa fa-fw fa-linkedin"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -435,106 +380,9 @@
         </footer>
 
     </div>
-
-    <!-- Standard Portfolio Modal - Images and Text -->
-    <div id="portfolio-modal-1" class="portfolio-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row first">
-                    <div class="col-lg-12">
-                        <h2 class="page-header">Project Name</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div id="project-details-carousel" class="owl-carousel owl-theme">
-
-                            <div class="item">
-                                <img src="/static/assets/img/demo-portfolio/10.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="/static/assets/img/demo-portfolio/11.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="/static/assets/img/demo-portfolio/12.jpg" alt="">
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Project Description:</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, et, ea, accusantium reprehenderit aliquam numquam fuga natus fugiat odit distinctio illo at unde.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, iusto molestiae possimus sint dignissimos! Laudantium, dolore, vel, sint, labore optio perferendis illo dolorum similique soluta eum cupiditate assumenda consequatur maiores.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <h3>Project Details:</h3>
-                        <ul class="list-unstyled project-details">
-                            <li>
-                                <strong>Client:</strong>Lorem Ipsum</li>
-                            <li>
-                                <strong>Services:</strong>Web Design, Photography</li>
-                            <li>
-                                <strong>Date:</strong>January 2014</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Standard Portfolio Modal - Video and Text -->
-    <div id="portfolio-modal-2" class="portfolio-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row first">
-                    <div class="col-lg-12">
-                        <h2 class="page-header">Project Name</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <iframe src="http://player.vimeo.com/video/87701971?title=0&amp;byline=0&amp;portrait=0" width="400" height="225" style="border: none;"></iframe>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Project Description:</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, et, ea, accusantium reprehenderit aliquam numquam fuga natus fugiat odit distinctio illo at unde.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, iusto molestiae possimus sint dignissimos! Laudantium, dolore, vel, sint, labore optio perferendis illo dolorum similique soluta eum cupiditate assumenda consequatur maiores.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <h3>Project Details:</h3>
-                        <ul class="list-unstyled project-details">
-                            <li>
-                                <strong>Client:</strong>Lorem Ipsum</li>
-                            <li>
-                                <strong>Services:</strong>Web Design, Photography</li>
-                            <li>
-                                <strong>Date:</strong>January 2014</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Core JavaScript Files -->
-    <script src="/static/assets/js/jquery-1.10.2.js"></script>
-    <script src="/static/assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/static/js/jquery-1.10.2.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/assets/js/modernizr.custom.js"></script>
 
     <!-- Plugin JavaScript Files -->
@@ -555,7 +403,12 @@
     <!-- Spectrum JavaScript Files -->
     <script src="/static/assets/js/spectrum.nav.js"></script>
     <script src="/static/assets/js/spectrum.js"></script>
-
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var which = Math.round(Math.random()*2);
+        $('#header').addClass('pic'+which);
+    });
+    </script>
 </body>
 
 </html>

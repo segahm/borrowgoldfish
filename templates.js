@@ -2,10 +2,12 @@
 
 var config = {
 	dev: {
-		google_key: 'AIzaSyCX-UwGgMl4HbsxHEdJkdhccBagaH6yklQ'
+		google_key: 'AIzaSyCX-UwGgMl4HbsxHEdJkdhccBagaH6yklQ',
+		is_dev: true
 	},
 	production: {
-		google_key: 'AIzaSyCY43D3JjW05XCs4DBGiAhpaTbjUpkR2sQ'
+		google_key: 'AIzaSyCY43D3JjW05XCs4DBGiAhpaTbjUpkR2sQ',
+		is_dev: false
 	},
 	english: {
 		cities_home: 'Restaurants, Cities',
