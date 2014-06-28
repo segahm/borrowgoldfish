@@ -15,7 +15,12 @@
     <link href="/static/assets/css/plugins/owl.carousel/owl.transitions.css" rel="stylesheet">
     <!-- Add custom CSS here -->
     <link href="/static/css/small-business.css" rel="stylesheet">
-    <script src="/static/js/jquery-1.10.2.js"></script>
+            {{^settings.is_dev}}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        {{/settings.is_dev}}
+        {{#settings.is_dev}}
+        <script src="/static/js/jquery-1.11.1.js"></script>
+        {{/settings.is_dev}}
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/static/fullpage.js/jquery.fullPage.js"></script>-->
     <script src="/static/js/bootstrap.js"></script>
@@ -212,7 +217,7 @@
             <span class="evttype2" data-ind="{{categories[2]}}">{{categories[2]}}</span>, and
             <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> in {{county}} county.
             </p>
-            <a class="btn btn-default" href="#">More Info</a>
+            <a class="btn btn-default" href="#offer">More Info</a>
             {{/es}}
             {{#es}}
             <h2>REGIÓN</h2>
@@ -223,7 +228,7 @@
         <span class="evttype2" data-ind="{{categories[2]}}">{{categories[2]}}</span> y
         <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> en el condado de {{county}}.
             </p>
-            <a class="btn btn-default" href="#">Más información</a>        
+            <a class="btn btn-default" href="#offer">Más información</a>        
         {{/es}}
 
             <div id="top-segments"></div>
@@ -233,13 +238,13 @@
             <h2>Competition</h2>
             <p>Next are some stats about <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> county in comparison to nearby counties:
             <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> and <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening). If we combine the two charts, we get a first glimpse at how competitive the restaurant industry is in {{county}} county relative to that of another region.</p>
-            <a class="btn btn-default" href="#">More Info</a>
+            <a class="btn btn-default" href="#offer">More Info</a>
             {{/es}}
             {{#es}}
             <h2>Competencia</h2>
             <p>Lo siguiente son algunas estadísticas del condado de <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> en comparación con cercanos condados:
         <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> y <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. El grafico a la izquierda indica la concentración medida de restaurantes por el <strong>#de clientes/#de restaurantes</strong>. El grafico a la derecha muestra el relativo número de restaurantes  abiertos durante diferentes partes del día (mañana / tarde / noche).</p>
-            <a class="btn btn-default" href="#">Más información</a>
+            <a class="btn btn-default" href="#offer">Más información</a>
             {{/es}}
             <!--<div class="owl-carousel owl-theme row-fluid" id="owl-charts">
               <div class="col-lg-6">

@@ -51,9 +51,6 @@
                     <!--<meta name="twitter:image:src" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
                     <!-- twitter card end -->
                     <style type="text/css">
-                    .navbar-inner {
-                        background:transparent;
-                    }
                     .pic0{
                         background-image: url(/static/slide1.jpg);
                     }
@@ -66,9 +63,9 @@
                     .bg-primary{
                         padding: 20px 0;
                     }
-                    nav.navbar.navbar-dark.navbar-fixed-top.top-nav-collapse,.navbar-dark, .navbar-light {
+                    nav.navbar.navbar-dark.navbar-fixed-top.top-nav-collapse{
+                        background-color: rgb(62, 68, 77);
                         background-color: rgba(62, 68, 77, 0.60);
-                    /*background-color: rgba(119, 108, 88, 0.901961);*/
                     }
                     .footer-1 .upper {
                         background-color: #737579;
@@ -471,7 +468,12 @@
             </footer>
         </div>
         <!-- Core JavaScript Files -->
-        <script src="/static/js/jquery-1.10.2.js"></script>
+        {{^settings.is_dev}}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        {{/settings.is_dev}}
+        {{#settings.is_dev}}
+        <script src="/static/js/jquery-1.11.1.js"></script>
+        {{/settings.is_dev}}
         <script src="/static/js/bootstrap.min.js"></script>
         <script src="/static/assets/js/modernizr.custom.js"></script>
         <!-- Plugin JavaScript Files -->
