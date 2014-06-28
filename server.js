@@ -195,7 +195,7 @@ function startServer() {
 		resultPromise.then(function(mypage){
 			//either default or no records, forcing to show a HOME page
 			if (mypage === 'index' || mypage === '404'){
-				return homePage(req,template_data
+				return homePage(req,template_data,template
 					).then(function(status){
 						//make sure to send the original status if successfully executed
 						return (status !== 'index')?status:mypage;
@@ -221,17 +221,18 @@ function startServer() {
 				break;
 			case 'directory':
 				page_template = template.page.directory;
+				mypage = 'index';
 				break;
 			case 'company':
 				page_template = template.page.company;
 				break;
 			}
 			template_data = _.merge(
-				template_data,
+				{},
+				template.all_pages,
 				page_template,
-				template.all_pages
+				template_data
 			);
-
 			if (mypage === 'index'){
 				mypage = 'new-index';
 			}
@@ -336,27 +337,40 @@ companyPage = function(template_data,company_id,template){
 		return page;
 	});
 };
-homePage = function(req,template_data){
+homePage = function(req,template_data,template){
 	var page = 'index';
-	var showcaseRestaurants = Utility.prototype.getRandomRestaurants(3);
-	//make sure the restaurant with the longest name is the first one
-	showcaseRestaurants.sort(function(a,b){
-		return b.name.length - a.name.length;
-	});
-	var ids = [];
-	_(showcaseRestaurants).forEach(function(val){
-		ids.push(val.id);
-	});
-	return Company.prototype.findByIds(ids).then(function(data){
-		_(showcaseRestaurants).forIn(function(val,k){
-			var id = showcaseRestaurants[k].id;
-			showcaseRestaurants[k] = _.merge(data[id],showcaseRestaurants[k]);
-			showcaseRestaurants[k].value = Utility.prototype.formatValuation(data[id].valuation);
-			//showcaseRestaurants[k].desc = 'fdsfds';
-		});
-		console.log(showcaseRestaurants[0]);
-		template_data.showcaseRestaurants = showcaseRestaurants;
-		return page;
+	return Q.fcall(function(){
+		if (typeof(req.query.page) !== 'undefined'){
+			if (req.query.page === 'about'){
+				template_data = _.merge(template_data,template.page.about);
+				template_data.is_about = true;
+			}else if(req.query.page === 'privacy'){
+				template_data = _.merge(template_data,template.page.privacy);
+				template_data.is_privacy = true;
+			}
+			return page;
+		}else{
+			template_data.is_index = true;
+			var showcaseRestaurants = Utility.prototype.getRandomRestaurants(3);
+			//make sure the restaurant with the longest name is the first one
+			showcaseRestaurants.sort(function(a,b){
+				return b.name.length - a.name.length;
+			});
+			var ids = [];
+			_(showcaseRestaurants).forEach(function(val){
+				ids.push(val.id);
+			});
+			return Company.prototype.findByIds(ids).then(function(data){
+				_(showcaseRestaurants).forIn(function(val,k){
+					var id = showcaseRestaurants[k].id;
+					showcaseRestaurants[k] = _.merge(data[id],showcaseRestaurants[k]);
+					showcaseRestaurants[k].value = Utility.prototype.formatValuation(data[id].valuation);
+					//showcaseRestaurants[k].desc = 'fdsfds';
+				});
+				template_data.showcaseRestaurants = showcaseRestaurants;
+				return page;
+			});
+		}
 	});
 };
 directoryPage = function(region,template_data,dir_match,template){
@@ -414,13 +428,13 @@ directoryPage = function(region,template_data,dir_match,template){
 			}
 			breadcrumb[breadcrumb.length-1].last = true;
 
-			template_data = _.merge(
+			_.merge(
 				template_data,{
 					breadcrumb: breadcrumb,
 					other_states: other_states
 				},
-				data
-			);
+				data,
+				{is_directory: true});
 			page = 'directory';
 		}
 		return page;

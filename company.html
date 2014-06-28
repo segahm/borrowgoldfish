@@ -33,7 +33,7 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-header pull-right">
-          <a href="#" title="Login"><span class="fa-stack fa-lg"><i class="fa fa-unlock"></i></span></a>
+          <!--<a href="#" title="Login"><span class="fa-stack fa-lg"><i class="fa fa-unlock"></i></span></a>-->
           <a onclick="share(this);return false;" title="tweet to this business" class="social" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}">
           <span class="fa-stack fa-lg"><i class="fa fa-twitter"> </i></span></a>
         </div>
@@ -203,6 +203,7 @@
       <div class="section">
         <div class="row">
           <div class="col-lg-4">
+            {{^es}}
             <h2>Region</h2>
             <p id="events">
             The following analysis has been made for {{county}} county as a whole. We have sampled these stats based on <strong>{{total_restaurants}}</strong> restaurants. The colors in the pie chart stand for the most popular types of cuisine (i.e. greatest number of restaurants):
@@ -212,13 +213,34 @@
             <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> in {{county}} county.
             </p>
             <a class="btn btn-default" href="#">More Info</a>
+            {{/es}}
+            {{#es}}
+            <h2>REGIÓN</h2>
+            <p id="events">
+            El siguiente análisis fue realizado para {{county}} condado en conjunto. Hemos probado esas estadísticas a partir de <strong>{{total_restaurants}}</strong> restaurantes. Los colores del gráfico circular representan los más populares tipos de cocina (i.e. el mayor número de restaurantes) :
+        <span class="evttype2" data-ind="{{categories[0]}}">{{categories[0]}}</span>,
+        <span class="evttype2" data-ind="{{categories[1]}}">{{categories[1]}}</span>,
+        <span class="evttype2" data-ind="{{categories[2]}}">{{categories[2]}}</span> y
+        <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> en el condado de {{county}}.
+            </p>
+            <a class="btn btn-default" href="#">Más información</a>        
+        {{/es}}
+
             <div id="top-segments"></div>
           </div>
           <div class="col-lg-8">
+            {{^es}}
             <h2>Competition</h2>
             <p>Next are some stats about <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> county in comparison to nearby counties:
             <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> and <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening). If we combine the two charts, we get a first glimpse at how competitive the restaurant industry is in {{county}} county relative to that of another region.</p>
             <a class="btn btn-default" href="#">More Info</a>
+            {{/es}}
+            {{#es}}
+            <h2>Competencia</h2>
+            <p>Lo siguiente son algunas estadísticas del condado de <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> en comparación con cercanos condados:
+        <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> y <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. El grafico a la izquierda indica la concentración medida de restaurantes por el <strong>#de clientes/#de restaurantes</strong>. El grafico a la derecha muestra el relativo número de restaurantes  abiertos durante diferentes partes del día (mañana / tarde / noche).</p>
+            <a class="btn btn-default" href="#">Más información</a>
+            {{/es}}
             <!--<div class="owl-carousel owl-theme row-fluid" id="owl-charts">
               <div class="col-lg-6">
                 <div id="rest-density"></div>
@@ -333,15 +355,10 @@
         <div class="row">
           <div class="col-lg-12">
             <p>Copyright &copy; Caura 2014</p>
-            {{^es}}           The valuation and estimates of small businesses are based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the
-            data providers we are required to acknowledge:{{/es}}
-            {{#es}}           La valuación de las pequeñas empresas fue estimada y construida por
-            <a href="http://twitter.com/nesovok">Segah Meer</a> en un tercero de datos sociales, además con  datos de censo y análisis económico.
-            Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="http://s3-media3.ak.yelpcdn.com/assets/2/www/img/9c9b10dc7226/developers/reviewsFromYelpWHT.gif" alt="Yelp Small Business" height="25" width="115"></a>
+            The valuation and estimates of small businesses are based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the
+            data providers we are required to acknowledge:
+           <a style="padding-left:10px" href="http://biz.yelp.com/"><img src="http://s3-media3.ak.yelpcdn.com/assets/2/www/img/9c9b10dc7226/developers/reviewsFromYelpWHT.gif" alt="Yelp Small Business" height="25" width="115"></a>
             <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
-            {{^es}}<p>Please see here for <a href="/static/privacy.html">privacy policy</a>.</p>{{/es}}{{#es}}
-            <p>Por favor, vea aquí para la <a href="/static/privacy.html">política de privacidad</a>.</p>
-            {{/es}}
           </div>
         </div>
       </div>
@@ -512,5 +529,27 @@
   chart.draw(data, options);
   }
   </script>
+      {{^settings.is_dev}}
+    <!-- begin olark code -->
+<script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+f[z]=function(){
+(a.s=a.s||[]).push(arguments)};var a=f[z]._={
+},q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
+f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={
+0:+new Date};a.P=function(u){
+a.p[u]=new Date-a.p[0]};function s(){
+a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){
+hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){
+return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){
+b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{
+b.contentWindow[g].open()}catch(w){
+c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{
+var t=b.contentWindow[g];t.write(p());t.close()}catch(x){
+b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
+loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+/* custom configuration goes here (www.olark.com/documentation) */
+olark.identify('1002-384-10-9905');/*]]>*/</script><noscript><a href="https://www.olark.com/site/1002-384-10-9905/contact" title="Contact us" target="_blank">Questions? Feedback?</a></noscript>
+<!-- end olark code -->
+{{/settings.is_dev}}
 </body>
 </html>
