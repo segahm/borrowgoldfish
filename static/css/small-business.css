@@ -116,3 +116,7 @@ background-color: #fff;
 	background-color: #E96E57;
 	border-color: #E96E57;
 }
+.full-page.upper-column{
+	padding-left:15px;
+	padding-right:15px;
+}
