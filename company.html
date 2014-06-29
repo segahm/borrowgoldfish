@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <title>{{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}{{^is_closed}}for ${{valuation}} - {{page_title}}{{/is_closed}}</title>
     <!--<link rel="stylesheet" type="text/css" href="/static/fullpage.js/jquery.fullPage.css" />-->
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static//css/gothem.css" />
     <link href="/static/assets/css/plugins/owl.carousel/owl.carousel.css" rel="stylesheet">
@@ -280,9 +280,9 @@
                     <legend>&nbsp;</legend>
                     <!-- Select Multiple -->
                     <div class="form-group">
-                      <label class="col-xs-4 control-label" for="selectmultiple">Opportunities:</label>
+                      <label class="col-xs-4 control-label" for="form_opportunities">Opportunities:</label>
                       <div class="col-xs-8">
-                        <select id="selectmultiple" name="selectmultiple" class="form-control" multiple="multiple">
+                        <select id="form_opportunities" name="opportunities" class="form-control" multiple="multiple">
                           <option value="1">Credit improvement</option>
                           <option value="2">Debt consolidation / refinance</option>
                           <option value="2">Inventory purchase</option>
@@ -298,17 +298,17 @@
                     </div>
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="col-xs-4 control-label" for="textinput">Business Name:</label>
+                      <label class="col-xs-4 control-label" for="form_busname">Business Name:</label>
                       <div class="col-xs-8">
-                        <input id="textinput" name="textinput" type="text" placeholder="{{title}}" class="form-control input-md">
+                        <input id="form_busname" name="business_name" type="text" placeholder="{{title}}" class="form-control input-md">
                         <span class="help-block">if different from the above</span>
                       </div>
                     </div>
                     <!-- Button -->
                     <div class="form-group">
-                      <label class="col-xs-4 control-label" for="singlebutton"></label>
+                      <label class="col-xs-4 control-label" for="continue-page2"></label>
                       <div class="col-xs-4">
-                        <button id="singlebutton" name="singlebutton" class="btn btn-warning">See your options <span class="glyphicon glyphicon-arrow-right"></span></button>
+                        <button id="continue-page2" class="btn btn-warning">See your options <span class="glyphicon glyphicon-arrow-right"></span></button>
                       </div>
                     </div>
                   </fieldset>
@@ -319,12 +319,12 @@
                     <div style="text-align:center"><h3><small>Interested in this business?</small></h3></div>
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="col-xs-4 control-label" for="email">Your Contact: </label>
+                      <label class="col-xs-4 control-label" for="form_lender_email">Your Contact: </label>
                       <div class="col-xs-8">
-                        <input id="email" name="email" type="text" placeholder="sales@company.com" class="form-control input-xs"></div>
+                        <input id="form_lender_email" name="lender_email" type="text" placeholder="sales@company.com" class="form-control input-xs"></div>
                       </div><div class="form-group">
                       <div class="col-xs-4 col-xs-offset-4">
-                        <button id="singlebutton" name="singlebutton" class="btn btn-danger">Make My Best Offer!</button>
+                        <button id="continue-lender" class="btn btn-danger">Make My Best Offer!</button>
                       </div>
                     </div>
                   </fieldset>
@@ -338,102 +338,120 @@
           <div id="offer"><h2>Stop giving your data away for free. Use it to your advantage!</h2></div>
           <hr>
           <div class="upper-column full-page">
-          <div class="row">
-          <div class="col-lg-11">
-            <h2><small>You answer a few simple questions. We match you to the best opportunities. You choose whether our suggestions are right for you.</small></h2>
-            <hr/>
-          </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-8 col-xs-12 col-md-6 col-lg-5">
-              <form class="form-horizontal">
-                <fieldset>
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label" for="textinput">Amount:</label>
-                    <div class="col-xs-4">
-                      <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                      <input id="textinput" name="textinput" type="text" placeholder="10000" class="form-control input-md" required="">
+            <div class="row">
+              <div class="col-lg-11">
+                <h2><small>You answer a few simple questions. We match you to the best opportunities. You choose whether our suggestions are right for you.</small></h2>
+                <hr/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <form class="form-inline" id="form2">
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                          <label class="col-xs-4 col-sm-4 control-label" for="form_amount">Amount:</label>
+                          <div class="col-xs-6 col-sm-8 col-md-6">
+                            <div class="input-group">
+                              <span class="input-group-addon">$</span>
+                              <input id="form_amount" name="amount" type="text" placeholder="10000" class="form-control" required="">
+                            </div>
+                            <span class="help-block">you are requesting</span>
+                          </div>
+                        </div>
                       </div>
-                      <span class="help-block">you are requesting</span>
-                    </div>
-                  </div>
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label" for="textinput">Repayment period:</label>
-                    <div class="col-xs-5">
-                      <div class="input-group">
-                      <input id="appendedtext" name="appendedtext" class="form-control" placeholder="20" type="text">
-                        <span class="input-group-addon">days</span>
+                      <div class="col-sm-7 col-xs-12">
+                        <div class="form-group">
+                          <label class="col-xs-4 col-sm-5 control-label" for="form_term">Repayment term:</label>
+                          <div class="col-xs-6 col-sm-7 col-md-6">
+                            <div class="input-group">
+                              <input id="form_term" name="term" class="form-control" placeholder="30" type="text">
+                              <span class="input-group-addon">days</span>
+                            </div>
+                            <span class="help-block">until full repayment</span>
+                          </div>
+                        </div>
                       </div>
-                      <span class="help-block">before first payment</span>
                     </div>
-                  </div>
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label" for="textinput">Time to Funding:</label>
-                    <div class="col-xs-5">
-                      <div class="input-group">
-                        <input id="appendedtext" name="appendedtext" class="form-control" placeholder="20" type="text">
-                        <span class="input-group-addon">days</span>
+                    <div class="row">
+                      <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                          <label class="col-xs-4 col-sm-4 control-label" for="form_apr">APR:</label>
+                          <div class="col-xs-6 col-sm-7 col-md-5">
+                            <div class="input-group">
+                              <input id="form_apr" name="apr" class="form-control" placeholder="20" type="text">
+                              <span class="input-group-addon">%</span>
+                            </div>
+                            <span class="help-block">maximum acceptable rate</span>
+                          </div>
+                        </div>
                       </div>
-                      <span class="help-block">how long can you wait?</span>
-                    </div>
-                  </div>
-                  <!-- Appended Input-->
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label" for="appendedtext">APR:</label>
-                    <div class="col-xs-4">
-                      <div class="input-group">
-                        <input id="appendedtext" name="appendedtext" class="form-control" placeholder="20" type="text">
-                        <span class="input-group-addon">%</span>
+                      <div class="col-sm-7 col-xs-12">
+                        <div class="form-group">
+                          <label class="col-xs-4 col-sm-5 control-label" for="form_funding">Time to Funding:</label>
+                          <div class="col-xs-6 col-sm-7 col-md-6">
+                            <div class="input-group">
+                              <input id="form_funding" name="funding" class="form-control" placeholder="3" type="text">
+                              <span class="input-group-addon">days</span>
+                            </div>
+                            <span class="help-block">how long can you wait?</span>
+                            
+                          </div>
+                        </div>
                       </div>
-                      <span class="help-block">What is your maximum acceptable rate (limits your options)?</span>
-                      
                     </div>
-                  </div>
-                  <!-- Select Basic -->
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label" for="selectbasic">Repayment:</label>
-                    <div class="col-xs-8">
-                      <select id="selectbasic" name="selectbasic" class="form-control">
-                        <option value="daily">daily</option>
-                        <option value="weekly">weekly</option>
-                        <option value="monthly">monthly</option>
-                        <option value="line of credit">line of credit</option>
-                        <option value="at the end of the term">at the end of the term</option>
-                      </select>
+                    <div class="row">
+                      <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                          <label class="col-xs-4 col-sm-4 control-label" for="form_schedule">Repayment:</label>
+                          <div class="col-xs-6 col-sm-7 col-md-5">
+                            <select id="form_schedule" name="repayment_schedule" class="form-control">
+                              <option value="daily">daily</option>
+                              <option value="weekly">weekly</option>
+                              <option value="monthly">monthly</option>
+                              <option value="line of credit">line of credit</option>
+                              <option value="at the end of the term">at the end of the term</option>
+                            </select>
+                            <span class="help-block">preferred billing frequency</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-7 col-xs-12">
+                        <div class="form-group">
+                          <label class="col-xs-4 col-sm-5 control-label" for="form_lenders">Previous Applications:</label>
+                          <div class="col-xs-6 col-sm-7 col-md-6">
+                            <select id="form_lenders" name="lenders" class="form-control">
+                              <option value="none"></option>
+                              <option value="LendingClub">LendingClub</option>
+                              <option value="Kabbage">Kabbage</option>
+                              <option value="swiftcapital.com">swiftcapital.com</option>
+                              <option value="onDeck.com">onDeck.com</option>
+                              <option value="Capital One">Capital One Small Business</option>
+                              <option value="cancapital">cancapital</option>
+                            </select>
+                            <span class="help-block">Have you applied for a loan with any of these companies before?</span>
+                            
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <!-- Select Basic -->
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label" for="selectbasic">Previous applications:</label>
-                    <div class="col-xs-8">
-                      <select id="selectbasic" name="selectbasic" class="form-control">
-                        <option value="none">----</option>
-                        <option value="LendingClub">LendingClub</option>
-                        <option value="Kabbage">Kabbage</option>
-                        <option value="swiftcapital.com">swiftcapital.com</option>
-                        <option value="onDeck.com">onDeck.com</option>
-                        <option value="Capital One">Capital One Small Business</option>
-                        <option value="cancapital">cancapital</option>
-                      </select>
-                      <span class="help-block">Have you applied for a loan with any of these companies before?</span>
+                    <div class="row">
+                      <div class="col-md-8 text-center">
+                        <!-- Button -->
+                        <div class="form-group">
+                          <label class="col-xs-4 control-label" for="continue-submit"></label>
+                          <div class="col-xs-4">
+                            <button id="continue-submit" class="btn btn-warning">Continue <span class="glyphicon glyphicon-arrow-right"></span></button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <!-- Button -->
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label" for="singlebutton"></label>
-                    <div class="col-xs-4">
-                      <button id="singlebutton" name="singlebutton" class="btn btn-warning">Continue</button>
-                    </div>
-                  </div>
-                </fieldset>
-              </form>
+                  </fieldset>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
         </div>
         <!-- hidden sectiond ends -->
         {{#settings.is_dev}}
@@ -467,38 +485,17 @@
       </div>
     </div>
     <script src="/static/assets/js/plugins/owl.carousel/owl.carousel.min.js"></script>
-    <!-- /.container -->
     <script type="text/javascript">
+    //continue-page2
     $(document).ready(function() {
-    $("#owl-offers").owlCarousel();
+      $("#owl-offers").owlCarousel();
     });
     $('#tabs3 a').click(function (e) {
-    e.preventDefault()
-    $(this).tab('show')
-    })
-    //FULL PAGE
-    /*$(document).ready(function() {
-    $('#fullpage').fullpage();
-    });*/
-    //TOP BANNER
-    function hide_banner () {
-    $("#banner").hide();
-    document.cookie = "bgf_promise=true";
-    analytics.track('Engaged', {
-    category: 'Nonshared',
-    label: 'Banner'
+      e.preventDefault();
+      $(this).tab('show');
     });
-    return false;
-    }
-    $(function () {
-    $("#banner .promise").on("click", hide_banner);
-    var cookie = document.cookie,
-    s = cookie.indexOf("bgf_promise="), e;
-    if (s == -1) return;
-    s = cookie.indexOf("=", s) + 1;
-    e = cookie.indexOf(";", s);
-    if (e == -1) e = cookie.length;
-    if (cookie.substring(s, e) === "true") $("#banner").hide();
+    $('continue-page2').click(function(e){
+      e.preventDefault();
     });
     // CHARTS
     var svg = {{{svg}}};
@@ -533,14 +530,15 @@
     ['location',{{peers.location}},'color: #E5D9C9']
     ]);
     chart = new google.visualization.ColumnChart(document.getElementById('peer-comparison-2'));
+    {{#settings.is_dev}}
     /*google.visualization.events.addListener(chart, 'ready', function(){
-    console.log('hello');
     $("#owl-charts").addClass( "owl-carousel owl-theme" );
     //do coroussel only after chart is drawn
     $(document).ready(function(){
     $("#owl-charts").owlCarousel({responsive: false,itemsScaleUp: true});
     });
     });*/
+    {{/settings.is_dev}}
     chart.draw(data, options);
     //segmentation in a county
     ar = [['Type of Food', '# of restaurants']];
@@ -564,8 +562,6 @@
     colors: colors,
     legend: {position: "none"},
     width: "100%"
-    //width: 450,
-    //height: 200
     };
     chart = new google.visualization.PieChart(document.getElementById('top-segments'));
     chart.draw(data, options);
@@ -620,7 +616,6 @@
     viewWindow: {max: 1}
     },
     width: "50%",
-    //height: 250,
     rx: 10,
     ry: 10,
     bar: { groupWidth: '50%' },
@@ -630,7 +625,7 @@
     chart.draw(data, options);
     }
     </script>
-    {{#settings.is_dev}}
+    {{^settings.is_dev}}
     <!-- begin olark code -->
     <script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
     f[z]=function(){

@@ -12,7 +12,8 @@ var express     = require('express'),
 	cookieParser = require('cookie-parser'),
 	sitemap = require('sitemap'),
 	twitterAPI = require('node-twitter-api'),
-	favicon = require('serve-favicon');
+	favicon = require('serve-favicon'),
+	sendgrid  = require('sendgrid')('caura', '4JNKQVXpc7NfyN');
 
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -28,7 +29,8 @@ var STATES = {'TX': 'Texas','FL': 'Florida','NM': 'New Mexico','CA': 'California
 var directoryPage,
 	homePage,
 	companyPage,
-	tra;
+	tra,
+	submitData;
 var knex_connection = {
 	host     : '127.0.0.1',
 	database : 'goldfish',
@@ -49,6 +51,7 @@ Knex.knex = Knex.initialize({
 	connection: knex_connection
 });
 
+var paths = ['submit','search'];
 
 //  configLoader  = require('./core/config-loader.js'),
  // errors        = require('./core/error-handling');
@@ -162,6 +165,7 @@ function startServer() {
 		var resultPromise = Q.fcall(function(){ return page;});
 
 		var dir_match = path.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z_\-]{3,})?\/?(\/[a-z_\-]{3,})?\/?$/i);
+		var path_match = new RegExp('^\/(es\/)?('+paths.join('|')+')\/?$','i').exec(path);
 		/**
 		 *FIRST-pass page check
 		 */
@@ -171,6 +175,11 @@ function startServer() {
 		if (tra_matches){
 			var hashcode = (typeof(tra_matches[1]) !== 'undefined')?tra_matches[1]:null;
 			resultPromise = tra(template_data,hashcode);
+		}else if (path_match && typeof(path_match[2]) !== 'undefined' && path_match[2].toLowerCase() !== 'es'){
+			switch(path_match[2]){
+			case 'submit':
+				resultPromise = submitData(req,res);
+			}
 		}else if (matches && typeof(matches[2]) !== 'undefined'){
 			var company_id = matches[2];
 			resultPromise = companyPage(template_data,company_id,template);
@@ -233,10 +242,9 @@ function startServer() {
 				page_template,
 				template_data
 			);
-			if (mypage === 'index'){
-				mypage = 'new-index';
+			if (mypage !== 'api'){
+				res.render(mypage, template_data);
 			}
-			res.render(mypage, template_data);
 		}).catch(function (error) {
 			if (process.env.NODE_ENV === 'development'){
 				res.send(500, error.message);
@@ -257,6 +265,27 @@ function startServer() {
 	  response.end();
 	}).listen(17912);*/
 }
+
+submitData = function(req,res){
+	var email = new sendgrid.Email({
+		toname:   ['Business Name'],
+		from:     'grow@caura.co',
+		fromname: 'Caura',
+		subject:  'Testing Submit',
+		text:     'Testing Submit - Body'
+	});
+	email.addTo('smeer@nes.ru');
+	return Q.ninvoke(sendgrid, 'send', email)
+	.then(function(json) {
+		if (json.message && json.message === 'success') {
+			res.json({status: 'OK'});
+		}else{
+			res.json({status: 'ERROR'});
+			console.log(json);
+		}
+		return 'api';
+	});
+};
 
 tra = function(template_data,hashcode){
 	var page = 'tra-texas-restaurant-marketplace';
