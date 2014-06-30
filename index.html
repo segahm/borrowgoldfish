@@ -24,14 +24,15 @@
                     <script src="/static/assets/js/plugins/retina/retina.min.js"></script>
                     <!-- Plugin CSS -->
                     <link href="/static/assets/css/plugins/hover/hover.min.css" rel="stylesheet">
-                    {{#settings.is_dev}}
+                    {{#disable}}
                     <!--<link href="/static/assets/css/plugins/owl.carousel/owl.carousel.css" rel="stylesheet">
                     <link href="/static/assets/css/plugins/owl.carousel/owl.theme.css" rel="stylesheet">
                     <link href="/static/assets/css/plugins/owl.carousel/owl.transitions.css" rel="stylesheet">-->
-                    {{/settings.is_dev}}
+                    {{/disable}}
                     <link href="/static/assets/css/plugins/jquery.fs.wallpaper/jquery.fs.wallpaper.css" rel="stylesheet">
                     <link href="/static/assets/css/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
                     <link href="/static/assets/css/spectrum-orange.css" rel="stylesheet">
+                    <link href="/static/css/index.css" rel="stylesheet">
                     <!-- linkedin/facebook card begin -->
                     <meta property="og:title" content="{{page_title}}">
                     <meta property="og:type" content="website">
@@ -50,59 +51,33 @@
                     <meta name="twitter:creator" content="@nesovok">
                     <!--<meta name="twitter:image:src" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
                     <!-- twitter card end -->
-                    <style type="text/css">
-                    .pic0{
-                        background-image: url(/static/slide1.jpg);
-                    }
-                    .pic1{
-                        background-image: url(/static/slide2.jpg);
-                    }
-                    .pic2{
-                        background-image: url(/static/slide3.jpg);
-                    }
-                    .bg-primary{
-                        padding: 20px 0;
-                    }
-                    nav.navbar.navbar-dark.navbar-fixed-top.top-nav-collapse{
-                        background-color: rgb(62, 68, 77);
-                        background-color: rgba(62, 68, 77, 0.60);
-                    }
-                    .footer-1 .upper {
-                        background-color: #737579;
-                    }
-                    .footer-1 .lower {
-                        background-color: #434446;
-                    }
-                    .blog-1 .blog-col .blog-preview-img .caption .caption-content {
-                        margin-top: 30px;
-                    }
-                    .nav:before, .nav:after, .navbar:before, .navbar:after, .navbar-header:before, .navbar-header:after, .navbar-collapse:before, .navbar-collapse:after{
-                    content: " ";
-                        display: none;
-                    }
-                    div#directory a {
-                        padding-left: 10px;
-                        font-size: 14px;
-                    }
-                    div#directory ul {
-                        list-style-type: none;
-                    }
-                    div#languages {
-                        float: right;
-                    }
-                    div.carousel-inner {
-                        text-shadow: rgba(0, 0, 0, 0.6) 0px 2px 2px;
-                    }
-                    /*.navbar-dark.top-nav-collapse {
-                    border-color: rgba(62,68,77,.5);
-                    background-color: #766B57;
-                    }*/
-                    </style>
                     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
                     <!--[if lt IE 9]>
                     <script src="/static/assets/js/html5shiv.js"></script>
                     <script src="/static/assets/js/respond.min.js"></script>
                     <![endif]-->
+                          <!-- analytics -->
+<script type="text/javascript">
+window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+window.analytics.load("rucaagoxlx");
+window.analytics.page();
+</script>
+<script type="text/javascript">
+function share(el){
+  analytics.track('Engaged', {
+    category: 'Shared',
+    label: el.id
+  });
+  window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
+}
+function clickedLink(el){
+  analytics.track('Engaged', {
+    category: 'Nonshared',
+    label: el.id
+  });
+}
+</script>
+<!-- analytics -->
                 </head>
                 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
                     <div id="wrapper">
@@ -442,13 +417,13 @@
                                 <h4>Like what you see?</h4>
                                 <ul class="list-inline">
                                     <li>
-                                        <a onclick="share(this);return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok" class="btn btn-social-light btn-twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                                        <a onclick="share(this);return false;" id="Twitter-share"  onclick="share(this);return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok" class="btn btn-social-light btn-twitter"><i class="fa fa-fw fa-twitter"></i></a>
                                     </li>
                                     <li>
-                                        <a onclick="share(this);return false;" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup" class="btn btn-social-light btn-facebook"><i class="fa fa-fw fa-facebook"></i></a>
+                                        <a onclick="share(this);return false;" id="Facebook-share" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup" class="btn btn-social-light btn-facebook"><i class="fa fa-fw fa-facebook"></i></a>
                                     </li>
                                     <li>
-                                        <a onclick="share(this);return false;" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title=Caura&<s></s>ource=Caura" class="btn btn-social-light btn-linkedin"><i class="fa fa-fw fa-linkedin"></i></a>
+                                        <a onclick="share(this);return false;" id="Linkedin-share" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title=Caura&<s></s>ource=Caura" class="btn btn-social-light btn-linkedin"><i class="fa fa-fw fa-linkedin"></i></a>
                                     </li>
                                 </ul>
                             </div>

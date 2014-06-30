@@ -23,4 +23,3 @@
     if (e == -1) e = cookie.length;
     if (cookie.substring(s, e) === "true") $("#banner").hide();
     });*/
-console.log('hello');

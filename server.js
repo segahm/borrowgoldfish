@@ -13,7 +13,8 @@ var express     = require('express'),
 	sitemap = require('sitemap'),
 	twitterAPI = require('node-twitter-api'),
 	favicon = require('serve-favicon'),
-	sendgrid  = require('sendgrid')('caura', '4JNKQVXpc7NfyN');
+	sendgrid  = require('sendgrid')('caura', '4JNKQVXpc7NfyN'),
+	validator = require('validator');
 
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -267,20 +268,29 @@ function startServer() {
 }
 
 submitData = function(req,res){
-	var email = new sendgrid.Email({
-		toname:   ['Business Name'],
-		from:     'grow@caura.co',
-		fromname: 'Caura',
-		subject:  'Testing Submit',
-		text:     'Testing Submit - Body'
-	});
-	email.addTo('smeer@nes.ru');
-	return Q.ninvoke(sendgrid, 'send', email)
-	.then(function(json) {
+	return Q.fcall(function(){
+		var email = null;
+		if (typeof(req.query.lender) !== 'undefined'){
+			if (req.param('lender') && req.param('page') && validator.isEmail(req.param('lender'))){
+				email = new sendgrid.Email({
+					//toname:   ['Business Name'],
+					from:     'grow@caura.co',
+					fromname: 'Caura',
+					subject:  'About advertising on Caura',
+					text:     req.param('lender')+' just contacted Caura through http://www.caura.co/'+req.param('page')+' regarding advertising and other offers.'
+				});
+				email.addTo('segahm@gmail.com');
+			}
+		}else if (typeof(req.query.customer) !== 'undefined'){
+			
+		}
+		return (email)?Q.ninvoke(sendgrid, 'send', email):{};
+	}).then(function(json) {
 		if (json.message && json.message === 'success') {
 			res.json({status: 'OK'});
 		}else{
 			res.json({status: 'ERROR'});
+			console.log('sendgrid error');
 			console.log(json);
 		}
 		return 'api';

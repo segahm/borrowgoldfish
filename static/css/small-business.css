@@ -99,7 +99,7 @@ hr{
 .target-audience,.target-audience:hover{
 	color: #333;
 }
-div#offer {
+.offer{
 	padding: 40px 0;
 	text-align:center;
 }
@@ -118,4 +118,10 @@ background-color: #fff;
 }
 .full-page.upper-column{
 	padding:15px;
+}
+.message-success {
+	color: #8FBC8F;
+}
+.message-error{
+	color: #E60C0C;
 }

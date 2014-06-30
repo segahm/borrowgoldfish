@@ -24,6 +24,28 @@
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/static/fullpage.js/jquery.fullPage.js"></script>-->
     <script src="/static/js/bootstrap.js"></script>
+      <!-- analytics -->
+<script type="text/javascript">
+window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+window.analytics.load("rucaagoxlx");
+window.analytics.page();
+</script>
+<script type="text/javascript">
+function share(el){
+  analytics.track('Engaged', {
+    category: 'Shared',
+    label: el.id
+  });
+  window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
+}
+function clickedLink(el){
+  analytics.track('Engaged', {
+    category: 'Nonshared',
+    label: el.id
+  });
+}
+</script>
+<!-- analytics -->
   </head>
   <body>
     <!-- Google Charts API -->
@@ -110,14 +132,14 @@
               {{^es}}
               {{#company1.found}}
               <p>
-              The company’s business focus is very similar to that of <a href="{{company1.id}}">{{company1.title}}</a>
+              The company’s business focus is very similar to that of <a onclick="clickedLink(this)" id="company-next"  href="{{company1.id}}">{{company1.title}}</a>
               but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}is open more frequently{{/company1.doors.p}}{{#company1.doors.n}}is open less frequently{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}tends to attract customers in the evening{{/company1.evening.p}}{{#company1.evening.n}}actually closes much earlier{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}earns some extra cash from booze sales{{/company1.alcohol.p}}{{#company1.alcohol.n}}does not have alcohol sales to boost those high margins{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}.
               
               </p>
               {{/company1.found}}
               {{#company2.found}}
               <p>
-              It seems like {{title}} is {{#company1.found}}also {{/company1.found}}somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
+              It seems like {{title}} is {{#company1.found}}also {{/company1.found}}somewhat similar to <a onclick="clickedLink(this)" id="company-prev" href="{{company2.id}}">{{company2.title}}</a>.
               That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}.
               </p>
               {{/company2.found}}
@@ -263,8 +285,9 @@
             </div>
           </div>
         </div>
+        <!--googleoff: all-->
         <div class="section">
-          <div id="offer"><h2>Web presence helps grow your business!</h2></div>
+          <div id="offer" class="offer"><h2>Web presence helps grow your business!</h2></div>
           <hr>
           <div class="upper-column">
             <div class="row">
@@ -274,7 +297,8 @@
               </div>
               <div class="col-sm-8 col-xs-12 col-md-6 col-lg-6 right-column">
                 <h2><small>Make your web success work for you. Leverage the insight to get better offers. What opportunities are you exploring?</small></h2>
-                <form class="form-horizontal">
+                <form id="form1" class="form-horizontal">
+                  <input type="hidden" id="page-company-id" name="page-company-id" value="{{id}}">
                   <fieldset>
                     <!-- Form Name -->
                     <legend>&nbsp;</legend>
@@ -283,16 +307,16 @@
                       <label class="col-xs-4 control-label" for="form_opportunities">Opportunities:</label>
                       <div class="col-xs-8">
                         <select id="form_opportunities" name="opportunities" class="form-control" multiple="multiple">
-                          <option value="1">Credit improvement</option>
-                          <option value="2">Debt consolidation / refinance</option>
-                          <option value="2">Inventory purchase</option>
-                          <option value="2">Equipment purchase</option>
-                          <option value="2">Working capital</option>
-                          <option value="2">Remodel</option>
-                          <option value="2">Acquire business location</option>
-                          <option value="2">Marketing</option>
-                          <option value="2">Emergency repairs</option>
-                          <option value="2">Other business purpose</option>
+                          <option value="credit">Credit improvement</option>
+                          <option value="debt">Debt consolidation / refinance</option>
+                          <option value="inventory">Inventory purchase</option>
+                          <option value="equipment">Equipment purchase</option>
+                          <option value="working">Working capital</option>
+                          <option value="remodel">Remodel</option>
+                          <option value="acquire">Acquire business location</option>
+                          <option value="marketing">Marketing</option>
+                          <option value="emergency">Emergency repairs</option>
+                          <option value="other">Other business purpose</option>
                         </select>
                       </div>
                     </div>
@@ -316,7 +340,7 @@
                 <hr>
                 <form class="form-horizontal">
                   <fieldset>
-                    <div style="text-align:center"><h3><small>Interested in this business?</small></h3></div>
+                    <div style="text-align:center" id="lender-message"><h3><small>Interested in this business?</small></h3></div>
                     <!-- Text input-->
                     <div class="form-group">
                       <label class="col-xs-4 control-label" for="form_lender_email">Your Contact: </label>
@@ -335,126 +359,10 @@
         </div>
         <!-- hidden section begins -->
         <div class="section" id="form-page2">
-          <div id="offer"><h2>Stop giving your data away for free. Use it to your advantage!</h2></div>
-          <hr>
-          <div class="upper-column full-page">
-            <div class="row">
-              <div class="col-lg-11">
-                <h2><small>You answer a few simple questions. We match you to the best opportunities. You choose whether our suggestions are right for you.</small></h2>
-                <hr/>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12">
-                <form class="form-inline" id="form2">
-                  <fieldset>
-                    <div class="row">
-                      <div class="col-sm-4 col-xs-12">
-                        <div class="form-group">
-                          <label class="col-xs-4 col-sm-4 control-label" for="form_amount">Amount:</label>
-                          <div class="col-xs-6 col-sm-8 col-md-6">
-                            <div class="input-group">
-                              <span class="input-group-addon">$</span>
-                              <input id="form_amount" name="amount" type="text" placeholder="10000" class="form-control" required="">
-                            </div>
-                            <span class="help-block">you are requesting</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-7 col-xs-12">
-                        <div class="form-group">
-                          <label class="col-xs-4 col-sm-5 control-label" for="form_term">Repayment term:</label>
-                          <div class="col-xs-6 col-sm-7 col-md-6">
-                            <div class="input-group">
-                              <input id="form_term" name="term" class="form-control" placeholder="30" type="text">
-                              <span class="input-group-addon">days</span>
-                            </div>
-                            <span class="help-block">until full repayment</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4 col-xs-12">
-                        <div class="form-group">
-                          <label class="col-xs-4 col-sm-4 control-label" for="form_apr">APR:</label>
-                          <div class="col-xs-6 col-sm-7 col-md-5">
-                            <div class="input-group">
-                              <input id="form_apr" name="apr" class="form-control" placeholder="20" type="text">
-                              <span class="input-group-addon">%</span>
-                            </div>
-                            <span class="help-block">maximum acceptable rate</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-7 col-xs-12">
-                        <div class="form-group">
-                          <label class="col-xs-4 col-sm-5 control-label" for="form_funding">Time to Funding:</label>
-                          <div class="col-xs-6 col-sm-7 col-md-6">
-                            <div class="input-group">
-                              <input id="form_funding" name="funding" class="form-control" placeholder="3" type="text">
-                              <span class="input-group-addon">days</span>
-                            </div>
-                            <span class="help-block">how long can you wait?</span>
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4 col-xs-12">
-                        <div class="form-group">
-                          <label class="col-xs-4 col-sm-4 control-label" for="form_schedule">Repayment:</label>
-                          <div class="col-xs-6 col-sm-7 col-md-5">
-                            <select id="form_schedule" name="repayment_schedule" class="form-control">
-                              <option value="daily">daily</option>
-                              <option value="weekly">weekly</option>
-                              <option value="monthly">monthly</option>
-                              <option value="line of credit">line of credit</option>
-                              <option value="at the end of the term">at the end of the term</option>
-                            </select>
-                            <span class="help-block">preferred billing frequency</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-7 col-xs-12">
-                        <div class="form-group">
-                          <label class="col-xs-4 col-sm-5 control-label" for="form_lenders">Previous Applications:</label>
-                          <div class="col-xs-6 col-sm-7 col-md-6">
-                            <select id="form_lenders" name="lenders" class="form-control">
-                              <option value="none"></option>
-                              <option value="LendingClub">LendingClub</option>
-                              <option value="Kabbage">Kabbage</option>
-                              <option value="swiftcapital.com">swiftcapital.com</option>
-                              <option value="onDeck.com">onDeck.com</option>
-                              <option value="Capital One">Capital One Small Business</option>
-                              <option value="cancapital">cancapital</option>
-                            </select>
-                            <span class="help-block">Have you applied for a loan with any of these companies before?</span>
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-8 text-center">
-                        <!-- Button -->
-                        <div class="form-group">
-                          <label class="col-xs-4 control-label" for="continue-submit"></label>
-                          <div class="col-xs-4">
-                            <button id="continue-submit" class="btn btn-warning">Continue <span class="glyphicon glyphicon-arrow-right"></span></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                </form>
-              </div>
-            </div>
-          </div>
         </div>
         <!-- hidden sectiond ends -->
-        {{#settings.is_dev}}
+        <!--googleon: all-->
+        {{#disable}}
         <!--     <div class="section no-line">
           <ul id="tabs3" class="nav nav-tabs nav-justified">
             <li class="active"><a href="#opportunities" data-toggle="tab"><h4>Step 1: What Opportunities?</h4></a></li>
@@ -469,14 +377,14 @@
             <div class="slide tab-pane" id="offers">...</div>
           </div>
         </div>-->
-        {{/settings.is_dev}}
+        {{/disable}}
         <div id="footer">
           <hr>
           <div class="row">
             <div class="col-lg-12">
               <p>Copyright &copy; Caura 2014</p>
-              The valuation and estimates of small businesses are based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the
-              data providers we are required to acknowledge:
+              {{^es}}The valuation and estimates of small businesses are based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the
+              data providers we are required to acknowledge:{{/es}}{{#es}}La valuación de las pequeñas empresas fue basada en un tercero de datos sociales, además con  datos de censo y análisis económico. Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}
               <a style="padding-left:10px" href="http://biz.yelp.com/"><img src="http://s3-media3.ak.yelpcdn.com/assets/2/www/img/9c9b10dc7226/developers/reviewsFromYelpWHT.gif" alt="Yelp Small Business" height="25" width="115"></a>
               <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
             </div>
@@ -486,16 +394,52 @@
     </div>
     <script src="/static/assets/js/plugins/owl.carousel/owl.carousel.min.js"></script>
     <script type="text/javascript">
-    //continue-page2
     $(document).ready(function() {
       $("#owl-offers").owlCarousel();
-    });
-    $('#tabs3 a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    });
-    $('continue-page2').click(function(e){
-      e.preventDefault();
+      /*$('#tabs3 a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+      });*/
+      $('#continue-page2').click(function(e){
+        var options = $('#form_opportunities').val() || [];
+        var link;
+        for (k in options){
+          var option = options[k];
+          switch(option){
+            case 'credit':
+              link = '/submit?offer=1';
+            default:
+              link = '/static/form-lend2.html';
+          }
+          analytics.track('Form', {
+            category: 'Preference',
+            label: option
+          });
+        }
+        if (link){
+          $('#form-page2').load(link,function(){
+            var top = $('#offer-2').position().top;
+            $(window).scrollTop( top );
+          });
+        }
+        e.preventDefault();
+      });
+      $('#continue-lender').click(function(e){
+        $.getJSON('/submit',{page: $( "#page-company-id" ).val(),lender: $( "#form_lender_email" ).val()},function(data){
+          if (data.status === 'OK'){
+            $('#lender-message').html('<div class="message-success">Thank You. We will contact you shortly.</div>');
+            $('#continue-lender').remove();
+          }else{
+            $('#lender-message').html('<div class="message-error">Looks like contact email was entered incorrectly.</div>');
+          }
+        });
+        e.preventDefault();
+      });
+      /*
+      $( "#form2" ).on( "submit", function( event ) {
+        console.log( $( this ).serialize() );
+      });
+      */
     });
     // CHARTS
     var svg = {{{svg}}};
@@ -625,6 +569,10 @@
     chart.draw(data, options);
     }
     </script>
+    <!--<script src="/static/assets/js/plugins/jqBootstrapValidation/jqBootstrapValidation.js"></script>
+    <script>
+      $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation({sniffHtml: false}); } );
+    </script>-->
     {{^settings.is_dev}}
     <!-- begin olark code -->
     <script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
