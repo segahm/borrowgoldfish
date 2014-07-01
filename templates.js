@@ -2,10 +2,12 @@
 
 var config = {
 	dev: {
-		google_key: 'AIzaSyCX-UwGgMl4HbsxHEdJkdhccBagaH6yklQ'
+		google_key: 'AIzaSyCX-UwGgMl4HbsxHEdJkdhccBagaH6yklQ',
+		is_dev: true
 	},
 	production: {
-		google_key: 'AIzaSyCY43D3JjW05XCs4DBGiAhpaTbjUpkR2sQ'
+		google_key: 'AIzaSyCY43D3JjW05XCs4DBGiAhpaTbjUpkR2sQ',
+		is_dev: false
 	},
 	english: {
 		cities_home: 'Restaurants, Cities',
@@ -18,12 +20,20 @@ var config = {
 			if (typeof(handle) !== 'undefined'){
 				return '@'+handle+' estimated at $'+valuation;
 			}else{
-				return 'Restaurant estimates';
+				return '';
 				//(title.match(/Resta/i)?title:title+' restaurant')+' from '+county+' county at $'+valuation;
 			}
 		},
 		page: {
 			company: {page_title: 'How much is my business worth?',
+						points_3: {
+							learn: 'Discover Opportunities',
+							calculator: 'Simplify Financing',
+							sell: 'Receive Offers'
+						},
+						target_audience: 'Own a restaurant business?',
+						learn_more: 'Learn More',
+						val_text: 'Business valuation',
 						analysis: ['Perform competitor analysis',
 						'Review available data',
 						'Explore immediate opportunities'],
@@ -32,7 +42,8 @@ var config = {
 						review: 'Review Available Financing',
 						is_closed_title: '- Closed or Moved. Confirm here...',
 						charts:[
-							{title:'Relative Performance',hAxis: 'Peer relative ranking [0-5]'},
+							{title:'Performance Relative to Peers',hAxis: 'Peer relative ranking [0-5]',
+								metric: 'Relative Placement'},
 							{title:'Popularity of cuisine'},
 							{title: 'Restaurant Density by County'},
 							{title:'Operating density in counties by hours of the day'}]
@@ -40,7 +51,10 @@ var config = {
 			directory: {page_title: 'Small Business Finances and Valuation in'},
 			index: {page_title: 'Small Business Profile that matters to Lenders',
 					page_description: 'Find thousands of restaurants, information about their finances and cash flow health. Explore a valuation estimate for restaurants in Texas, Florida, and New Mexico.'
-				}
+				},
+			about: {page_title: 'About Us - why focus on small business & lending?'},
+			privacy: {page_title: 'Privacy - why make data public?'}
+
 		},
 		all_pages: {
 			twitter_share_text: encodeURIComponent('#smallbiz #insight'),
@@ -65,6 +79,14 @@ var config = {
 		},
 		page: {
 			company: {page_title: '¿Cuánto exactamente vale mi empresa?',
+						points_3: {
+							learn: 'Discover Opportunities',
+							calculator: 'Simplify Financing',
+							sell: 'Receive Offers'
+						},
+						target_audience: 'Own a restaurant business?',
+						learn_more: 'Learn More',
+						val_text: 'Valoración de empresas',
 						analysis: ['Realizar análisis de la competencia',
 						'Artículos disponibles datos',
 						'Explorar las oportunidades inmediatas'],
@@ -73,14 +95,17 @@ var config = {
 						review: 'Artículos disponibles de financiamiento',
 						is_closed_title: '- está cerrado o movido. confirme aquí',
 						charts:[
-							{title:'Representación Relativa',hAxis: 'Peer clasificación relativa [0-5]'},
+							{title:'Representación Relativa',hAxis: 'Peer clasificación relativa [0-5]',
+								metric: 'Relative Placement'},
 							{title:'La popularidad de la cocina'},
 							{title:'Restaurante Densidad por el Condado'},
 							{title:'Densidad de operación en los condados por hora del día'}]
 			},
 			directory: {page_title: 'Finanzas de las pequeñas empresas y la valoración en'},
 			index: {page_title: 'Finanzas de las pequeñas empresas y la valoración',
-					page_description: 'Encuentre miles de restaurantes, información sobre sus finanzas y la salud de flujo de caja. Explora una estimación de valuación de restaurantes en Texas, Florida y Nuevo México.'}
+					page_description: 'Encuentre miles de restaurantes, información sobre sus finanzas y la salud de flujo de caja. Explora una estimación de valuación de restaurantes en Texas, Florida y Nuevo México.'},
+			about: {page_title: 'About Us - why focus on small business & lending?'},
+			privacy: {page_title: 'Privacy - why make data public?'}
 		},
 		all_pages: {
 			twitter_share_text: encodeURIComponent('#smallbiz #PYMES #insight'),

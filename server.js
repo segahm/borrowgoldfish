@@ -10,7 +10,12 @@ var express     = require('express'),
 	templates   = require('./templates'),
 	seedrandom	= require('seedrandom'),
 	cookieParser = require('cookie-parser'),
-	sitemap = require('sitemap');
+	sitemap = require('sitemap'),
+	//twitterAPI = require('node-twitter-api'),
+	favicon = require('serve-favicon'),
+	sendgrid  = require('sendgrid')('caura', '4JNKQVXpc7NfyN'),
+	validator = require('validator'),
+	bodyParser = require('body-parser');
 
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -22,11 +27,14 @@ var Writeup = require('./writeup');
 
 var STATES = {'TX': 'Texas','FL': 'Florida','NM': 'New Mexico','CA': 'California','AZ': 'Arizona'};
 
+var PARTNERS = require('./partners');
+
 //define page function
 var directoryPage,
 	homePage,
 	companyPage,
-	tra;
+	tra,
+	submitData;
 var knex_connection = {
 	host     : '127.0.0.1',
 	database : 'goldfish',
@@ -47,13 +55,18 @@ Knex.knex = Knex.initialize({
 	connection: knex_connection
 });
 
+var paths = ['submit','search'];
 
 //  configLoader  = require('./core/config-loader.js'),
  // errors        = require('./core/error-handling');
 
 function startServer() {
 	var app = express();
-	
+	/*var twitter = new twitterAPI({
+		consumerKey: 'xbZMI7NtccoXTmIe3MQA',
+		consumerSecret: 'lD04vbN5YpyMWMmFX1uZja4nBVFTNAuwKPEoXu0KuSg',
+		callback: 'http://www.caura.co/'
+	});*/
 
 	if (process.env.NODE_ENV === 'production'){
 		app.all(/.*/, function(req, res, next) {
@@ -74,7 +87,7 @@ function startServer() {
 
 	//ignore static file requests
 	app.use('/static',express.static(__dirname+'/static'));
-	app.use('/favicon.ico',express.static(__dirname+'/static/favicon.ico'));
+	app.use(favicon(__dirname + '/static/favicon.ico'));
 	app.use('/robots.txt',express.static(__dirname+'/static/robots.txt'));
 
 	if (process.env.NODE_ENV === 'development'){
@@ -95,6 +108,8 @@ function startServer() {
 	});
 
 	app.use(cookieParser());
+	app.use( bodyParser.json() );       // to support JSON-encoded bodies
+	app.use( bodyParser.urlencoded({extended: false}) ); // to support URL-encoded bodies
 
 	app.use(function(req, res, next){
 		var is_home_page_test = false;
@@ -156,6 +171,7 @@ function startServer() {
 		var resultPromise = Q.fcall(function(){ return page;});
 
 		var dir_match = path.match(/^\/(es\/)?([a-z]{2,2})\/?(\/[a-z_\-]{3,})?\/?(\/[a-z_\-]{3,})?\/?$/i);
+		var path_match = new RegExp('^\/(es\/)?('+paths.join('|')+')\/?$','i').exec(path);
 		/**
 		 *FIRST-pass page check
 		 */
@@ -165,6 +181,11 @@ function startServer() {
 		if (tra_matches){
 			var hashcode = (typeof(tra_matches[1]) !== 'undefined')?tra_matches[1]:null;
 			resultPromise = tra(template_data,hashcode);
+		}else if (path_match && typeof(path_match[2]) !== 'undefined' && path_match[2].toLowerCase() !== 'es'){
+			switch(path_match[2]){
+			case 'submit':
+				resultPromise = submitData(req,res);
+			}
 		}else if (matches && typeof(matches[2]) !== 'undefined'){
 			var company_id = matches[2];
 			resultPromise = companyPage(template_data,company_id,template);
@@ -189,7 +210,7 @@ function startServer() {
 		resultPromise.then(function(mypage){
 			//either default or no records, forcing to show a HOME page
 			if (mypage === 'index' || mypage === '404'){
-				return homePage(req,template_data
+				return homePage(req,template_data,template
 					).then(function(status){
 						//make sure to send the original status if successfully executed
 						return (status !== 'index')?status:mypage;
@@ -215,19 +236,21 @@ function startServer() {
 				break;
 			case 'directory':
 				page_template = template.page.directory;
+				mypage = 'index';
 				break;
 			case 'company':
 				page_template = template.page.company;
 				break;
 			}
 			template_data = _.merge(
-				template_data,
+				{},
+				template.all_pages,
 				page_template,
-				template.all_pages
+				template_data
 			);
-
-
-			res.render(mypage, template_data);
+			if (mypage !== 'api'){
+				res.render(mypage, template_data);
+			}
 		}).catch(function (error) {
 			if (process.env.NODE_ENV === 'development'){
 				res.send(500, error.message);
@@ -248,6 +271,84 @@ function startServer() {
 	  response.end();
 	}).listen(17912);*/
 }
+
+submitData = function(req,res){
+	return Q.fcall(function(){
+		var email = null;
+		var default_then = {};
+		if (typeof(req.query.lender) !== 'undefined'){
+			if (req.param('lender') && req.param('page') && validator.isEmail(req.param('lender'))){
+				email = new sendgrid.Email({
+					//toname:   ['Business Name'],
+					from:     'grow@caura.co',
+					fromname: 'Caura',
+					subject:  'About advertising on Caura',
+					text:     req.param('lender')+' just contacted Caura through http://www.caura.co/'+req.param('page')+' regarding advertising and other offers.'
+				});
+				email.addTo('segahm+caura@gmail.com');
+			}
+		}else if (typeof(req.query.customer) !== 'undefined'){
+			var template;
+
+			if (req.query.customer === '1'){
+				template = {
+					options: PARTNERS.nonlenders,
+					type_monitoring: true
+				};
+			}else if(req.query.customer === '2'){
+				template = {
+					options: PARTNERS.lenders,
+					type_lender: true
+				};
+			}
+			if (template){
+				default_then = {no_response: true};
+				res.render('static/form-lend3.html', template);
+			}
+		}else if(typeof(req.query.redirect) !== 'undefined'){
+			if (req.body.chosen_partner){
+				var reporting = new sendgrid.Email({
+					from:     'grow@caura.co',
+					to: 'segahm+caura@gmail.com',
+					fromname: 'Caura',
+					subject:  'New Application',
+					text: JSON.stringify(req.body)
+				});
+				//no need to wait for a reponse
+				sendgrid.send(reporting, function(err,json) {
+					if (err) {
+						console.log('sendgrid error 2');
+						console.log(json);
+					}
+				});
+				var offer;
+				for (var i in PARTNERS.lenders){
+					var partner = PARTNERS.lenders[i];
+					if (partner.name === req.body.chosen_partner){
+						offer = partner;
+						break;
+					}
+				}
+				if (offer){
+					res.redirect(offer.link);
+					return {no_response: true};
+				}
+			}
+			res.redirect('http://www.caura.co');
+			default_then = {no_response: true};
+		}
+		return (email)?Q.ninvoke(sendgrid, 'send', email):default_then;
+	}).then(function(json) {
+		if (json && typeof(json.message) !== 'undefined' && json.message === 'success' && typeof(json.no_response) === 'undefined') {
+			res.json({status: 'OK'});
+		}else if(json && typeof(json.no_response) === 'undefined'){
+			res.json({status: 'ERROR'});
+			console.log('sendgrid error');
+			console.log(json);
+		}
+		return 'api';
+	});
+};
 
 tra = function(template_data,hashcode){
 	var page = 'tra-texas-restaurant-marketplace';
@@ -328,15 +429,41 @@ companyPage = function(template_data,company_id,template){
 		return page;
 	});
 };
-homePage = function(req,template_data){
+homePage = function(req,template_data,template){
 	var page = 'index';
-	var showcaseRestaurants = Utility.prototype.getRandomRestaurants(3);
-	//make sure the restaurant with the longest name is the first one
-	showcaseRestaurants.sort(function(a,b){
-		return b.name.length - a.name.length;
+	return Q.fcall(function(){
+		if (typeof(req.query.page) !== 'undefined'){
+			if (req.query.page === 'about'){
+				template_data = _.merge(template_data,template.page.about);
+				template_data.is_about = true;
+			}else if(req.query.page === 'privacy'){
+				template_data = _.merge(template_data,template.page.privacy);
+				template_data.is_privacy = true;
+			}
+			return page;
+		}else{
+			template_data.is_index = true;
+			var showcaseRestaurants = Utility.prototype.getRandomRestaurants(3);
+			//make sure the restaurant with the longest name is the first one
+			showcaseRestaurants.sort(function(a,b){
+				return b.name.length - a.name.length;
+			});
+			var ids = [];
+			_(showcaseRestaurants).forEach(function(val){
+				ids.push(val.id);
+			});
+			return Company.prototype.findByIds(ids).then(function(data){
+				_(showcaseRestaurants).forIn(function(val,k){
+					var id = showcaseRestaurants[k].id;
+					showcaseRestaurants[k] = _.merge(data[id],showcaseRestaurants[k]);
+					showcaseRestaurants[k].value = Utility.prototype.formatValuation(data[id].valuation);
+					//showcaseRestaurants[k].desc = 'fdsfds';
+				});
+				template_data.showcaseRestaurants = showcaseRestaurants;
+				return page;
+			});
+		}
 	});
-	template_data.showcaseRestaurants = showcaseRestaurants;
-	return Q.fcall(function(){ return page;});
 };
 directoryPage = function(region,template_data,dir_match,template){
 	//guard against bad states by showing default directory page, rather than no results
@@ -393,13 +520,13 @@ directoryPage = function(region,template_data,dir_match,template){
 			}
 			breadcrumb[breadcrumb.length-1].last = true;
 
-			template_data = _.merge(
+			_.merge(
 				template_data,{
 					breadcrumb: breadcrumb,
 					other_states: other_states
 				},
-				data
-			);
+				data,
+				{is_directory: true});
 			page = 'directory';
 		}
 		return page;

@@ -1,655 +1,673 @@
 <!DOCTYPE html>
-<html><head>
-<!--<script src="//cdn.optimizely.com/js/385010028.js"></script>-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="alternate" hreflang="es-US" href="/es{{url}}">
+    <link rel="alternate" hreflang="en-US" href="{{url}}">
+    <!-- linkedin/facebook card begin -->
+    <meta property="og:title" content="{{title}} - {{page_title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{full_url}}">
+    <!--<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
+    <meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="Caura"><meta property="article:publisher" content="NeSovok">
+    {{^es}}
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="es_US">
+    {{/es}}
+    {{#es}}
+    <meta property="og:locale" content="es_US">
+    {{/es}}
+    <!-- linkedin/facebook card end -->
     
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- twitter card begin -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{title}} - {{page_title}}">
+    <meta name="twitter:description" content="{{description_short_text}}">
+    <meta name="twitter:creator" content="@nesovok">
+    <!--<meta name="twitter:image:src" content="http://www.caura.com/static/organization-image.png?id={{id}}">-->
     <title>{{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}{{^is_closed}}for ${{valuation}} - {{page_title}}{{/is_closed}}</title>
-<link rel="alternate" hreflang="es-US" href="/es{{url}}">
-<link rel="alternate" hreflang="en-US" href="{{url}}">
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-   <link rel="shortcut icon" href="data:image/x-icon;" type="image/x-icon"> 
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/static/part-bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" href="/static/normalize.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="/static/osrc.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="/static/caura.css" type="text/css" media="screen" charset="utf-8">
-  <!-- linkedin/facebook card begin -->
-  <meta property="og:title" content="{{title}} - {{page_title}}">
-<meta property="og:type" content="article">
-<meta property="og:url" content="{{full_url}}">
-<!--<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
-<meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="Caura"><meta property="article:publisher" content="NeSovok">
-{{^es}}
-<meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="es_US">
-{{/es}}
-{{#es}}
-<meta property="og:locale" content="es_US">
-{{/es}}
-
-  <!-- linkedin/facebook card end -->
-  
-  <!-- twitter card begin -->
-<meta name="twitter:card" content="summary_large_image">
-
-<meta name="twitter:title" content="{{title}} - {{page_title}}">
-<meta name="twitter:description" content="{{description_short_text}}">
-<meta name="twitter:creator" content="@nesovok">
-<!--<meta name="twitter:image:src" content="http://www.caura.com/static/organization-image.png?id={{id}}">-->
-  <!-- twitter card end -->
-  <!-- analytics -->
-
-<script type="text/javascript">
-window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
-window.analytics.load("rucaagoxlx");
-window.analytics.page();
-</script>
-<!-- analytics -->
-<script type="text/javascript">
-function share(el,should_open){
-  analytics.track('Engaged', {
+    <!--<link rel="stylesheet" type="text/css" href="/static/fullpage.js/jquery.fullPage.css" />-->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static//css/gothem.css" />
+    <link href="/static/assets/css/plugins/owl.carousel/owl.carousel.css" rel="stylesheet">
+    <link href="/static/assets/css/plugins/owl.carousel/owl.theme.css" rel="stylesheet">
+    <link href="/static/assets/css/plugins/owl.carousel/owl.transitions.css" rel="stylesheet">
+    <!-- Add custom CSS here -->
+    <link href="/static/css/small-business.css" rel="stylesheet">
+    {{^settings.is_dev}}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {{/settings.is_dev}}
+    {{#settings.is_dev}}
+    <script src="/static/js/jquery-1.11.1.js"></script>
+    {{/settings.is_dev}}
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/fullpage.js/jquery.fullPage.js"></script>-->
+    <script src="/static/js/bootstrap.js"></script>
+    <!-- analytics -->
+    <script type="text/javascript">
+    window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+    window.analytics.load("rucaagoxlx");
+    window.analytics.page();
+    </script>
+    <script type="text/javascript">
+    function share(el){
+    analytics.track('Engaged', {
     category: 'Shared',
     label: el.id
-  });
-  if (typeof(should_open) === 'undefined'){
-    window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
-  }
-}
-function claim(el){
-  //$('#valuationmodal').modal('toggle');
-  $('#loginmodal').modal('toggle');
-   analytics.page({
-            title: 'Claim Business',
-            url: '{{full_url}}#claim-'+el.id,
-            path: '{{#es}}/es{{/es}}{{url}}#claim-'+el.id,
-            referrer: '{{full_url}}'
-          });
-}
-function clickedLink(el){
-  analytics.track('Engaged', {
+    });
+    window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
+    }
+    function clickedLink(el){
+    analytics.track('Engaged', {
     category: 'Nonshared',
     label: el.id
-  });
-}
-</script>
-</head><body class="" style="zoom: 1;" data-twttr-rendered="true">
-   <!-- Google Charts API -->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-
-
-
-    <div id="banner">
-        <div class="container">
-          <!--googleoff: all -->
-  <div class="bootstrap">
-</div>
-{{^es}}
-            <strong>Dear Bankers:</strong>While you read this, make sure that you remember that these stats only provide a biased and one-sided view.<br><!--Don't take it too seriously-->
-            <span class="promise">OK. I promise!</span>
-            {{/es}}
-{{#es}}
-            <strong>Estimados banqueros:</strong>mientras leen eso, asegúrense que ustedes se recuerden que esas
- 
-estadísticas proveen solamente  un punto de vista parcial y unilateral.<br><!--¡No se lo tomen tan en serio!-->
-            <span class="promise">¡Bien lo prometo !</span>
-            {{/es}}
-            <!--googleon: all -->
-        </div>
-    </div>
-
-    <div class="header">
-       <a class="header-title" href="{{url_path}}">{{^es}}Small Business<br>Finances<br>&amp; Valuation{{/es}}{{#es}}PEQUEÑAS EMPRESAS<br>FINANZAS<br>&amp; VALORACION{{/es}}</a>
-
-  <div class="social">
-  <a onclick="share(this);return false;" title="tweet to this business" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
-  
-  <i class="fa fa-twitter"> </i>
-  </span></a>
-  <!--<a onclick="share(this);return false;" id="Linkedin-share" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title={{encoded_title}}&summary={{encoded_description_short_text}}&source=Caura"><span class="fa-stack fa-lg">
-  
-  <i class="fa fa-linkedin"> </i>
-  </span></a>
-  <a onclick="share(this);return false;" id="Facebook-share" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup"><span class="fa-stack fa-lg">
-  
-  <i class="fa fa-facebook"> </i>
-  </span></a>-->
-<br>
-
-</div></div>
-<div class="header">
-  
-<div class="bootstrap">
-  <div class="modal fade" id="valuationmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel">{{detail_analysis}}</h4>
-      </div>
-      <div class="modal-body">
-<ul class="fa-ul">
-  <li><i class="fa-li fa 
-fa-users"></i>{{analysis[0]}}</li>
-  <li><i class="fa-li fa fa-check-square"></i>{{analysis[1]}}</li>
-  <li><i class="fa-li fa fa-money"></i>{{analysis[2]}}</li>
-</ul>
-
-
-
-         <center><a onclick="claim(this);return false;" id="claim-valuation" href="#">{{claim}}</a></center>
-        <br>
-<div class="alert alert-danger fade in">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      
-      <p style="
-    /* text-align: left; */
-">{{^es}}Only the owner of this business can see the details. If you are the owner, please <a onclick="claim(this);return false;" id="claim-valuation" href="#">claim</a> this business to proceed.{{/es}}
-{{#es}}Sólo el propietario de este negocio puede ver los detalles. Si usted es el propietario, por favor <a onclick="claim(this);return false;" id="claim-valuation" href="#">reclamar</a> este negocio para proceder.{{/es}}
-</p>
-  </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-<!-- -->
-  <div class="modal fade" id="lending_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel3">{{review}}</h4>
-      </div>
-      <div class="modal-body">
-         <div class="bs-callout bs-callout-info">
-          {{^es}}
-          <h4>Looking for financing?</h4>
-          <p>There is no need to fill out lengthy forms. We already know about your business. Once you verify yourself as the legitimate owner of this business, we will help you explore best available options. We will never ask you to compare apples to oranges.</p>
-          {{/es}}{{#es}}
-<h4>Buscando financiación?</h4>
-          <p>No hay necesidad de llenar largos formularios. Ya sabemos acerca de su negocio. Una vez que verifique que es el propietario legítimo de este negocio, vamos a ayudarle a explorar las mejores opciones disponibles. Nunca le pediremos que usted pueda comparar manzanas con naranjas.</p>
-          {{/es}}
-
-<div>
-                     
-   <a class="btn btn-primary btn-md" id="claim-from-loan" role="button"><i class="fa fa-angle-down fa-4" style="color:#fff"></i> {{claim}}</a>                  
-
-                     
-
-                     
-
-      </div></div>
-
-    </div>
-
-  </div>
-</div>
-</div>
-<!-- -->
-  <div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel2">{{claim}}</h4>
-      </div>
-      <div class="modal-body">
-<div class="bs-callout bs-callout-info">
-    {{^es}}
-    <h4>Confirm yourself using "social"</h4>
-    <p>To identify you as an owner, we use social media. Please tweet to us using a <b>#hashtag</b> for the name of your business from your company's official account. </p><pre>Ex: @nesovok #{{id}}</pre><p></p>
-  
-</div>
-
-  <blockquote>You do NOT need to login/register or go through other 
-hurdles, but it currently can take us a few days to confirm the validity
- of your claim.</blockquote>
-
-  {{/es}}{{#es}}
-    <h4>Confirme usted mismo usando "social"</h4>
-    <p>Para identificarlo como un propietario, utilizamos los medios de comunicación sociales. Por favor, twittear con nosotros usando un <b>#hashtag</b> para el nombre de su negocio desde la cuenta oficial de la empresa. </p><pre>Ex: @nesovok #{{id}}</pre><p></p>
-  
-</div>
-
-  <blockquote>NO es necesario hacer login / register o ir a través de otros obstáculos, pero en este momento nos puede tomar unos días para confirmar la validez de su reclamo.</blockquote>
-
-  {{/es}}
-</div>
-      <div class="modal-footer">
-  email to <a href="mailto:grow@caura.co?subject=Business%20Claim:{{id}}">grow@caura.co</a><span> OR </span>    
-
-    
-  <a onclick="share(this);return false;" href="https://twitter.com/intent/tweet?button_hashtag={{id}}&amp;screen_name=nesovok" class="btn btn-primary" data-lang="en"><span class="fa fa-twitter"></span> Tweet to @nesovok</a>
-<!--
-    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
-  
-  
-    </div>
-    </div>
-
-  </div>
-</div>
-  
-  </div>
-
-
-  {{^es}}
-  <span>{{^is_closed}}What is the value of my restaurant?{{/is_closed}}{{#is_closed}}This company is now closed{{/is_closed}}</span>
-<div id="investment-details" class="master_clearfix">
-          <div id="investment-statistics">
-            
-            <div id="statistics" class="grey-border-panel master_clearfix">
-              <div class="stats-box loans-box" id="valuation-box">
-                {{^is_closed}}<p>Business valuation:</p>
-                          <span>${{valuation}}</span>{{/is_closed}}{{#is_closed}}
-<p>---</p>
-                          <span>&nbsp;</span>
-                          {{/is_closed}}
-                        </div>
-                        <!--
-                        {{#is_a}}
-                        <div class="stats-box interest-box" id="lending-box">
-  <p>Review available financing:</p><span>Review best available growth financing options for this business.</span>
-                          
-                        </div>
-                        {{/is_a}}
-                        {{^is_a}}
-                        <div class="stats-box interest-box" id="claim-box">
-<p>Claim this business:</p><span>Review detailed business valuation analysis and learn how your company is valued.</span>
-                          
-                        </div>
-                         {{/is_a}}
-                         -->
-                         <div class="stats-box interest-box" id="claim-box">
-<p>Claim this profile:</p><span>Control what is available to the public. Review private analysis.</span>
-                          
-                        </div>
-
-                        <div class="stats-date">* Statistics as of 05/27/14<br/><span style="font-size:13px">{{^is_closed}}** this calculation does not reflect current real estate prices{{/is_closed}}</span></div>
-                        <a href="#details-statistics" class="triangle-link">View more statistics</a>
-            </div>
-{{/es}}{{#es}}
-  <span>{{^is_closed}}¿Cuál es el valor de mi restaurante?{{/is_closed}}{{#is_closed}}Esta empresa se ​​ha cerrado{{/is_closed}}</span>
-<div id="investment-details" class="master_clearfix">
-          <div id="investment-statistics">
-            
-
-            <div id="statistics" class="grey-border-panel master_clearfix">
-              <div class="stats-box loans-box" id="valuation-box">
-                          {{^is_closed}}<p>Valoración de empresas:</p>
-                          <span>${{valuation}}</span>{{/is_closed}}{{#is_closed}}
-<p>---</p>
-                          <span>&nbsp;</span>
-                          {{/is_closed}}
-                        </div>
-                        <!--
-                        {{#is_a}}
-                        <div class="stats-box interest-box" id="lending-box">
-  <p>Artículos disponibles de financiamiento:</p><span>Opciones de financiamiento Artículos disponibles para el crecimiento de este negocio.</span>
-                          
-                        </div>
-                        {{/is_a}}
-                        {{^is_a}}
-                        <div class="stats-box interest-box" id="claim-box">
-  <p>Afirme su empresa:</p><span>Revisión detallada del análisis de la valoración  de empresas y descubren como se valora su empresa e.</span>
-                          
-                        </div>
-                        {{/is_a}}
-                      -->
-                      <div class="stats-box interest-box" id="claim-box">
-  <p>Afirme su empresa:</p><span>Controlar lo que se encuentra disponible al público. Revise el análisis privado.</span>
-                          
-                        </div>
-                        <div class="stats-date">* Estadísticas  del 05/27/14</div>
-                        <a href="#details-statistics" class="triangle-link">Ver mas estadísticas</a>
-            </div>
-{{/es}}
-          </div>
-  <script type="text/javascript">
-  $( '#valuation-box' ).mousedown(function() {
-    if (!$('#loginmodal').hasClass('in')){
-          analytics.page({
-            title: 'Valuation Info',
-            url: '{{full_url}}#info',
-            path: '{{#es}}/es{{/es}}{{url}}/#info',
-            referrer: '{{full_url}}'
-          });
-        }
-$('#loginmodal').modal('toggle');
-//$('#valuationmodal').modal('toggle');
-});
-
-/*$( "#lending-box" ).mousedown(function() {
-         if (!$('#lending_modal').hasClass('in')){
-          analytics.page({
-            title: 'Apply for a Loan',
-            url: '{{full_url}}#loan',
-            path: '{{#es}}/es{{/es}}{{url}}/#loan',
-            referrer: '{{full_url}}'
-          });
-        }
-  $('#lending_modal').modal('toggle');
-});*/
-$( "#claim-box" ).mousedown(function() {
-         if (!$('#loginmodal').hasClass('in')){
-          analytics.page({
-            title: 'Claim Business',
-            url: '{{full_url}}#claim',
-            path: '{{#es}}/es{{/es}}{{url}}/#claim',
-            referrer: '{{full_url}}'
-          });
-        }
-  $('#loginmodal').modal('toggle');
-});
-
-$( "#claim-from-loan" ).mousedown(function() {
-  $('#lending_modal').modal('toggle');
-  $('#loginmodal').modal('toggle');
-  analytics.page({
-            title: 'Apply for a Loan',
-            url: '{{full_url}}#claim-from-loan',
-            path: '{{#es}}/es{{/es}}{{url}}/#claim-from-loan',
-            referrer: '{{full_url}}'
-          });
-});
-</script>
-        </div>
-  
-</div>
-
-    <div class="container">
-<div class="hidden-md">
-{{#company2.found}}<a onclick="clickedLink(this)" title="another similar company" id="company-next" href="{{company2.id}}" class="bt-pag next fixed" rel="prev">NEXT</a>{{/company2.found}}
-</div>
-<div class="hidden-md">
-{{#company1.found}}<a onclick="clickedLink(this)" title="another similar company" id="company-prev" href="{{company1.id}}" class="bt-pag prev fixed" rel="next">PREV</a>{{/company1.found}}
-</div>
-<div id="profile">
-  
-    <div class="profile-badge clearfix"><div itemscope itemtype="http://schema.org/Organization"> 
-        <a href="{{full_url}}" target="_blank">
-            
-            <span class="profile-name" itemprop="name">{{title}}</span>
-            <span itemprop="telephone" content="{{phone}}"></span>
-        </a><br/>
-        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-        <p id="address">
-  <span itemprop="streetAddress">{{address}}</span><br>
-  <span itemprop="addressLocality">{{city}}</span>, <span itemprop="addressRegion">{{state}}</span> <span itemprop="postalCode">{{postcode}}</span>
-      </p>
-    </div>
-    </div>
-    </div>
-{{^is_closed}}
-    <div id="description">
-{{^es}}
-        <p>
- {{title}} is 
-{{#praise[0]}}a lucrative{{/praise[0]}}{{#praise[1]}}an 
-amazing{{/praise[1]}}{{#praise[2]}}a highly 
-entrepreneurial{{/praise[2]}}{{#praise[3]}}a trend 
-setting{{/praise[3]}} restaurant {{#loc[0]}}situated 
-in{{/loc[0]}}{{#loc[1]}}located in{{/loc[1]}} {{county}} 
-county.</p>
-
- {{#company1.found}}       
-        <p>
-    The company’s business focus is very similar to <a href="{{company1.id}}">{{company1.title}}</a>'s
-
-but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}is open more frequently{{/company1.doors.p}}{{#company1.doors.n}}is open less frequently{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}tends to attract customers in the evening{{/company1.evening.p}}{{#company1.evening.n}}actually closes much earlier{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}earns some extra cash from booze sales{{/company1.alcohol.p}}{{#company1.alcohol.n}}does not have alcohol sales to boost those high margins{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}.
-        
-    </p>
-{{/company1.found}}    
-{{#company2.found}}        
-        <p>
-        It seems like {{title}} is {{#company1.found}}also {{/company1.found}}somewhat similar to <a href="{{company2.id}}">{{company2.title}}</a>.
- That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}. 
- {{#show_map}}  
-With this in mind, both aforementioned companies could make for franchise
- partners based on ideal regional coverage:
- {{/show_map}}
-        </p>
-        {{#show_map}}    
-        <img id="google-map" src="http://maps.googleapis.com/maps/api/staticmap?&path=color:0x00000000|weight:5|fillcolor:0x1E90FF|{{company1.address}}|{{company2.address}}|{{encodedAddress}}&sensor=false&key={{settings.google_key}}&maptype=roadmap&size=600x300&markers=color:green%7Clabel:A%7C{{company1.address}}&markers=color:blue%7Clabel:B%7C{{company2.address}}&markers=color:red%7Clabel:C%7C{{encodedAddress}}"/>
-{{/show_map}}
-
-{{/company2.found}}   
-{{^company1.found}}{{^company2.found}}<p>We will keep looking, but it appears that this is quite a unique business - there really is not anything like it anywhere in the neighborhood.</p>{{/company2.found}}{{/company1.found}}
-        
-{{/es}}
-{{#es}}
-        <p>
-          {{title}}
-{{#praise[0]}}es un restaurante lucrativo{{/praise[0]}}{{#praise[1]}}es un increíble restaurante{{/praise[1]}}{{#praise[2]}}es un entrepreneurial{{/praise[2]}}{{#praise[3]}}es una configuración de restaurante de tendencia{{/praise[3]}} {{#loc[0]}}situado en{{/loc[0]}}{{#loc[1]}}situado en{{/loc[1]}} {{county}} condado.</p>
-
- {{#company1.found}}       
-        <p>
-    El foco comercial de la compañía es muy similar a
- <a href="{{company1.id}}">{{company1.title}}</a>'s
-
-pero {{company1.title}} {{#company1.price.p}}tiene mas gastos por plato{{/company1.price.p}}{{#company1.price.n}}menos gatos por plato{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}mantiene las puertas abiertas más a menudo{{/company1.doors.p}}{{#company1.doors.n}}mantiene las puertas con menos frecuencia{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}provee comida para "crecer  temprano y sobresalir clientes"{{/company1.morning.p}}{{#company1.morning.n}}Emplee el tiempo en la mañana para  reabastecer por el resto del dia{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}Tiende a atraer a los clientes por la noche{{/company1.evening.p}}{{#company1.evening.n}}En realidad se cierra mucho antes{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}Mantiene sus puertas abiertas durante todo el día{{/company1.day.p}}{{#company1.day.n}}No mantiene sus puertas abiertas tan mucho a lo largo del día{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}Gira en torno a unos dólares extra de las ventas de alcohol{{/company1.alcohol.p}}{{#company1.alcohol.n}}No tiene las ventas de alcohol para aumentar los márgenes{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}Alto margen ofrece servicios de catering{{/company1.cater.p}}{{#company1.cater.n}}Renuncia a los ingresos adicionales de servicios de catering{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}Mantiene personas adicionales de servicio listo para las entregas{{/company1.deliver.p}}{{#company1.deliver.n}}Gana dinero principalmente de trafico{{/company1.deliver.n}}.
-        
-    </p>
-{{/company1.found}}    
-{{#company2.found}}        
-        <p>
-      Parece que {{title}} {{#company1.found}}también {{/company1.found}}es algo similar a
- <a href="{{company2.id}}">{{company2.title}}</a>.
- Sin embargo, es importante destacar que {{company2.title}} {{#company2.fact[0]}}es probable el que genera mayores márgenes por cliente{{/company2.fact[0]}}{{#company2.fact[1]}} que está ejecutando potencialmente mayores costos para aumentar la comodidad
- {{/company2.fact[1]}}{{#company2.fact[2]}}que está abierto cuando {{title}} tiende a cerrar{{/company2.fact[2]}}{{#company2.fact[3]}}Es probable que genera menores márgenes por cliente{{/company2.fact[3]}}{{#company2.fact[4]}}posiblemente está optimizando sus costos por conveniencia anterior{{/company2.fact[4]}}.
- {{#show_map}}  
-Con esto en mente, podrían hacer que ambas compañías mencionadas pueden ser socios de franquicia basada en una cobertura regional ideal:
-{{/show_map}}  
-        </p>  
-{{#show_map}}    
-        <img id="google-map" src="http://maps.googleapis.com/maps/api/staticmap?&path=color:0x00000000|weight:5|fillcolor:0x1E90FF|{{company1.address}}|{{company2.address}}|{{encodedAddress}}&sensor=false&key=AIzaSyCY43D3JjW05XCs4DBGiAhpaTbjUpkR2sQ&maptype=roadmap&size=600x300&markers=color:green%7Clabel:A%7C{{company1.address}}&markers=color:blue%7Clabel:B%7C{{company2.address}}&markers=color:red%7Clabel:C%7C{{encodedAddress}}"/>
-{{/show_map}}  
-
-{{/company2.found}}   
-{{^company1.found}}{{^company2.found}}<p>Vamos a seguir buscando, pero parece que este es un negocio único - en realidad no hay nada igual en todo el barrio.</p>{{/company2.found}}{{/company1.found}}
-        
-{{/es}}
-    </div>
-{{/is_closed}}
-{{#is_closed}}
- <div id="description">
-{{^es}}
-        <p>
- {{title}} is now closed. There are many reasons why small businesses close. Sometimes companies fail to produce expected profits. At other times, companies 1) relocate to a new location, 2) rebrand, or even 3) restructure their assets (which leads them to (1) and (2). We don’t know what happened here, but if you are the owner and you are still running this business in some other form, <a href="#" id="closed_claim" onclick="claim(this);return false;">let us know</a>.
-</p>
- {{/es}}
- {{#es}}
-        <p>
- {{title}} ahora está cerrado. Hay muchas razones por las cuales los pequeños negocios cierran. A veces las empresas no producen los beneficios esperados. En otras ocasiones, las empresas 1) trasladarse a una nueva ubicación, 2) cambio de marca, o incluso 3) reestructurar sus activos (lo que les lleva a (1) y (2). No sabemos lo que pasó aquí, pero si usted es el propietario y usted todavía está utilizando este negocio en alguna otra forma, <a href="#" id="closed_claim" onclick="claim(this);return false;">vamos a saber</a>.
-</p>
- {{/es}}
-</div>
- {{/is_closed}}
- {{^es}}
-    <div>
-<div class="social">
-  {{^is_a}} 
-  <a onclick="share(this);return false;" title="tweet to this business" id="Twitter-share-lower" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
-  
-  <i class="fa fa-twitter"> </i>
-  </span></a>
-   {{/is_a}} 
-  {{#is_a}}
-    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{full_url}}" data-text="{{unencoded_twitter_company_specific_text}}" data-via="nesovok" data-size="large" data-count="none" data-dnt="true"></a>
-{{/is_a}}
-
-</div>
-      <h1 id="details-statistics">Statistics</h1>
-</div>
-<div>
-  <h3>Peer Comparison</h3>
-  <a href="#" onclick="claim(this);return false;" id="manage-top-1" class="side-links">[manage this section]</a>
-     <p id="events">
-      The uniqueness of every business is not about any one thing, but rather about everything that the business does. So, peer comparison about {{title}} along a few dimensions is not an indicator of success by any stretch of the imagination. With that, here are the facts:
-     </p>
-     <div id="peer-comparison"></div> 
-</div>
-<div>
-  <h3>Region</h3>
-  <a href="#" onclick="claim(this);return false;" id="manage-top" class="side-links">[manage this section]</a>
-</div>
-
-    <div id="schedule-text">
-
-         <p id="events">
-        The following analysis has been made for {{county}} county as a whole. While a greater number of any type of cuisine simply speaks to the local demand, it can also shine some light on the level of competition. We have sampled these stats based on <strong>{{total_restaurants}}</strong> restaurants. The colors in the pie chart stand for the most popular types of cuisine (i.e. greatest number of restaurants):
-        <span class="evttype2" data-ind="{{categories[0]}}">{{categories[0]}}</span>,
-        <span class="evttype2" data-ind="{{categories[1]}}">{{categories[1]}}</span>,
-        <span class="evttype2" data-ind="{{categories[2]}}">{{categories[2]}}</span>, and
-        <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> in {{county}} county.
-        </p>
-        <div id="top-segments"></div>
-
-
-        <p id="schedule">
-        
-        Next are some stats about <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> county in comparison to nearby counties:
-        <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> and <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening). If we combine the two charts, we get a first glimpse at how competitive the restaurant industry is in {{county}} county relative to that of another region.
-        </p>
-
-        <div class="container bootstrap">
-          <div class="row-fluid">
-          <div class="col-md-6"><div id="rest-density"></div></div>
-           <div class="col-md-6"> <div id="rest-hourly"></div></div>
-          </div>
-        </div>
-    
-
-    </div>
-
-</div>
-{{/es}}
-{{#es}}
-    <div>
-<div class="social">
-  {{^is_a}} 
-  <a onclick="share(this);return false;" title="tweet to this business" id="Twitter-share-lower" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}"><span class="fa-stack fa-lg">
-  
-  <i class="fa fa-twitter"> </i>
-  </span></a>
-   {{/is_a}} 
-  {{#is_a}}
-    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{full_url}}" data-text="{{unencoded_twitter_company_specific_text}}" data-via="nesovok" data-size="large" data-count="none" data-dnt="true"></a>
-{{/is_a}}
-
-</div> 
-    <h1 id="details-statistics">ESTADÍSTICAS</h1>
-</div>
-<div>
-  <h3>comparación por pares</h3>
-  <a href="#" onclick="claim(this);return false;" id="manage-top-1" class="side-links">[manage this section]</a>
-     <p id="events">
-      La singularidad de cada negocio no se trata de una sola cosa, sino más bien de todo lo que hace la empresa. Por lo tanto, la comparación entre pares sobre {{title}} a lo largo de unas pocas dimensiones no es un indicador del éxito de cualquier tramo de la imaginación. Con eso, aquí están los hechos:
-     </p>
-     <div id="peer-comparison"></div> 
-</div>
-<div>
-  <h3>REGIÓN</h3>
-  <a href="#" onclick="claim(this);return false;" id="manage-top" class="side-links">[gestionar esta sección]</a>
-</div>
-    <div id="schedule-text">
-
-         <p id="events">
-        El siguiente análisis fue realizado para {{county}} condado en conjunto. Mientras que un número mayor de cualquier tipo de cocina simplemente corresponde a la demanda local, sino que también  puede aclarar en el nivel de la competencia. Hemos probado esas estadísticas a partir de <strong>{{total_restaurants}}</strong> restaurantes. Los colores del gráfico circular representan los más populares tipos de cocina (i.e. el mayor número de restaurantes) :
-        <span class="evttype2" data-ind="{{categories[0]}}">{{categories[0]}}</span>,
-        <span class="evttype2" data-ind="{{categories[1]}}">{{categories[1]}}</span>,
-        <span class="evttype2" data-ind="{{categories[2]}}">{{categories[2]}}</span> y
-        <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> en el condado de {{county}}.
-        </p>
-        <div id="top-segments"></div>
-
-
-        <p id="schedule">
-        
-        Lo siguiente son algunas estadísticas del condado de <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> en comparación con cercanos condados:
-        <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> y <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. El grafico a la izquierda indica la concentración medida de restaurantes por el <strong>#de clientes/#de restaurantes</strong>. El grafico a la derecha muestra el relativo número de restaurantes  abiertos durante diferentes partes del día (mañana / tarde / noche).
-        </p>
-
-        <div class="container bootstrap">
-          <div class="row-fluid">
-          <div class="col-md-6"><div id="rest-density"></div></div>
-           <div class="col-md-6"> <div id="rest-hourly"></div></div>
-          </div>
-        </div>
-
-    </div>
-
-</div>
-{{/es}}
-{{#disable}}
-<div class="front-splash">
-    <div class="splash-text">
-        
-        Want to try another Business? Enter a <a href="https://yelp.com/">Yelp</a>
-        Business and Region
-        
-    </div>
-    <form class="nav-form">
-        <input id="username" placeholder="Mexican Restaurant" type="text">
-    </form>
-</div>
-{{/disable}}
-</div>
-
-<div class="container">
-        <div id="footer">
- {{^es}}           The valuation of small businesses has been estimated and built by 
-  <a href="http://twitter.com/nesovok">Segah Meer</a> based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the 
-data providers we are required to acknowledge:{{/es}}
-{{#es}}           La valuación de las pequeñas empresas fue estimada y construida por 
-  <a href="http://twitter.com/nesovok">Segah Meer</a> en un tercero de datos sociales, además con  datos de censo y análisis económico.
-Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}<a style="padding-left:10px" href="http://biz.yelp.com/"><img src="http://s3-media3.ak.yelpcdn.com/assets/2/www/img/9c9b10dc7226/developers/reviewsFromYelpWHT.gif" alt="Yelp Small Business" height="25" width="115"></a>
-<div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
-         {{^es}}<p>For feedback and offers, contact me at: <b><a onclick="clickedLink(this)" target="_blank" id="contact-footer" href="http://twitter.com/nesovok">@nesovok</a></b>. Please see here for <a href="/static/privacy.html">privacy policy</a>.</p>{{/es}}{{#es}}
-<p>Para comentarios y ofertas, póngase en contacto conmigo en: <b><a onclick="clickedLink(this)" target="_blank" id="contact-footer" href="http://twitter.com/nesovok">@nesovok</a></b>. Por favor, vea aquí para la <a href="/static/privacy.html">política de privacidad</a>.</p>
-         {{/es}}
-</div>
-    </div>
-
-    <script type="text/javascript">
-
-        function hide_banner () {
-            $("#banner").hide();
-            document.cookie = "bgf_promise=true";
-            analytics.track('Engaged', {
-              category: 'Nonshared',
-              label: 'Banner'
-            });
-            return false;
-        }
-
-        $(function () {
-            $("#banner .promise").on("click", hide_banner);
-
-            var cookie = document.cookie,
-                s = cookie.indexOf("bgf_promise="), e;
-            if (s == -1) return;
-            s = cookie.indexOf("=", s) + 1;
-            e = cookie.indexOf(";", s);
-            if (e == -1) e = cookie.length;
-            if (cookie.substring(s, e) === "true") $("#banner").hide();
-        });
-
+    });
+    }
     </script>
-    
-<script src="/static/bootstrap.js"></script>
-<script>
-var svg = {{{svg}}};  
-var counties = {{{json_counties}}}; 
-
-</script>
-<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
-{{#is_a}}
-<!-- twitter -->
+    <!-- analytics -->
+  </head>
+  <body data-twttr-rendered="true">
+    <!-- Google Charts API -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <nav class="navbar navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header pull-left">
+          <a class="navbar-brand" href="{{url_path}}" title="Caura">
+            <img src="https://dl.dropboxusercontent.com/u/5902603/caura/logo/transparent.png" alt="Caura small business finance">
+          </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="navbar-header pull-right">
+          <!--<a href="#" title="Login"><span class="fa-stack fa-lg"><i class="fa fa-unlock"></i></span></a>-->
+          <a onclick="share(this);return false;" title="tweet to this business" class="social" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}">
+          <span class="fa-stack fa-lg"><i class="fa fa-twitter"> </i></span></a>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+    </nav>
+    <div class="container" id="fullpage">
+      <div class="section active">
+        <div class="row">
+          {{#show_map}}
+          <div class="col-lg-7 col-md-7 col-sm-7">
+            <!--     <div class="row">-->
+            <img id="google-map" class="img-responsive img-rounded" src="http://maps.googleapis.com/maps/api/staticmap?&path=color:0x00000000|weight:5|fillcolor:0x1E90FF|{{company1.address}}|{{company2.address}}|{{encodedAddress}}&sensor=false&key={{settings.google_key}}&maptype=roadmap&size=600x200&markers=color:green%7Clabel:A%7C{{company1.address}}&markers=color:blue%7Clabel:B%7C{{company2.address}}&markers=color:red%7Clabel:C%7C{{encodedAddress}}"/>
+          </div>
+          <div class="col-lg-5" itemscope itemtype="http://schema.org/Organization">
+            {{/show_map}}
+            {{^show_map}}
+            <div class="col-lg-7" itemscope itemtype="http://schema.org/Organization">
+              {{/show_map}}
+              <h2 itemprop="name" class="bus-title">{{title}}</h2>
+              <span itemprop="telephone" content="{{phone}}"></span>
+              <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <p id="address">
+                <span itemprop="streetAddress">{{address}}</span><br>
+                <span itemprop="addressLocality">{{city}}</span>, <span itemprop="addressRegion">{{state}}</span> <span itemprop="postalCode">{{postcode}}</span>
+                </p>
+              </div>
+              {{^is_closed}}
+              {{^es}}
+              <p>
+              {{title}} is
+              {{#praise[0]}}a lucrative{{/praise[0]}}{{#praise[1]}}an
+              amazing{{/praise[1]}}{{#praise[2]}}a highly
+              entrepreneurial{{/praise[2]}}{{#praise[3]}}a trend
+              setting{{/praise[3]}} restaurant {{#loc[0]}}situated
+              in{{/loc[0]}}{{#loc[1]}}located in{{/loc[1]}} {{county}}
+              county.</p>
+              {{/es}}
+              {{#es}}
+              <p>
+              {{title}}
+              {{#praise[0]}}es un restaurante lucrativo{{/praise[0]}}{{#praise[1]}}es un increíble restaurante{{/praise[1]}}{{#praise[2]}}es un entrepreneurial{{/praise[2]}}{{#praise[3]}}es una configuración de restaurante de tendencia{{/praise[3]}} {{#loc[0]}}situado en{{/loc[0]}}{{#loc[1]}}situado en{{/loc[1]}} {{county}} condado.</p>
+              {{/es}}
+              <div class="row">
+                <div class="hidden-xs hidden-sm col-md-12">
+                  <a class="btn btn-default btn-md stats-box" href="#offer">
+                    {{val_text}}: <br/>${{valuation}}
+                  </a>
+                  <a class="btn btn-md learn-more-box btn-warning" href="#offer">{{learn_more}}<br/><span>&nbsp;</span></a>
+                </div>
+              </div>
+              {{/is_closed}}
+              {{#is_closed}}
+              {{^es}}
+              <p>
+              {{title}} is now closed. There are many reasons why small businesses close. Sometimes companies fail to produce expected profits. At other times, companies 1) relocate to a new location, 2) rebrand, or even 3) restructure their assets (which leads them to (1) and (2). We don’t know what happened here, but if you are the owner and you are still running this business in some other form, <a href="#" id="closed_claim" onclick="claim(this);return false;">let us know</a>.
+              </p>
+              {{/es}}
+              {{#es}}
+              <p>
+              {{title}} ahora está cerrado. Hay muchas razones por las cuales los pequeños negocios cierran. A veces las empresas no producen los beneficios esperados. En otras ocasiones, las empresas 1) trasladarse a una nueva ubicación, 2) cambio de marca, o incluso 3) reestructurar sus activos (lo que les lleva a (1) y (2). No sabemos lo que pasó aquí, pero si usted es el propietario y usted todavía está utilizando este negocio en alguna otra forma, <a href="#" id="closed_claim" onclick="claim(this);return false;">vamos a saber</a>.
+              </p>
+              {{/es}}
+              {{/is_closed}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              {{^es}}
+              {{#company1.found}}
+              <p>
+              The company’s business focus is very similar to that of <a onclick="clickedLink(this)" id="company-next"  href="{{company1.id}}">{{company1.title}}</a>
+              but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}is open more frequently{{/company1.doors.p}}{{#company1.doors.n}}is open less frequently{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}tends to attract customers in the evening{{/company1.evening.p}}{{#company1.evening.n}}actually closes much earlier{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}earns some extra cash from alcohol sales{{/company1.alcohol.p}}{{#company1.alcohol.n}}does not have alcohol sales to boost those high margins{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}.
+              
+              </p>
+              {{/company1.found}}
+              {{#company2.found}}
+              <p>
+              It seems like {{title}} is {{#company1.found}}also {{/company1.found}}somewhat similar to <a onclick="clickedLink(this)" id="company-prev" href="{{company2.id}}">{{company2.title}}</a>.
+              That said, it's worth noting that {{company2.title}} {{#company2.fact[0]}}is likely generating higher margins per customer{{/company2.fact[0]}}{{#company2.fact[1]}}is potentially running higher costs to increase convenience{{/company2.fact[1]}}{{#company2.fact[2]}}is open when {{title}} tends to be closed{{/company2.fact[2]}}{{#company2.fact[3]}}is likely generating lower margins per customer{{/company2.fact[3]}}{{#company2.fact[4]}}is possibly optimizing its costs by foregoing convenience{{/company2.fact[4]}}.
+              </p>
+              {{/company2.found}}
+              {{^company1.found}}{{^company2.found}}<p>We will keep looking, but it appears that this is quite a unique business - there really is not anything like it anywhere in the neighborhood.</p>{{/company2.found}}{{/company1.found}}
+              {{/es}}{{#es}}
+              {{#company1.found}}
+              <p>
+              El foco comercial de la compañía es muy similar a
+              <a href="{{company1.id}}">{{company1.title}}</a>'s
+              pero {{company1.title}} {{#company1.price.p}}tiene mas gastos por plato{{/company1.price.p}}{{#company1.price.n}}menos gatos por plato{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}mantiene las puertas abiertas más a menudo{{/company1.doors.p}}{{#company1.doors.n}}mantiene las puertas con menos frecuencia{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}provee comida para "crecer  temprano y sobresalir clientes"{{/company1.morning.p}}{{#company1.morning.n}}Emplee el tiempo en la mañana para  reabastecer por el resto del dia{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}Tiende a atraer a los clientes por la noche{{/company1.evening.p}}{{#company1.evening.n}}En realidad se cierra mucho antes{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}Mantiene sus puertas abiertas durante todo el día{{/company1.day.p}}{{#company1.day.n}}No mantiene sus puertas abiertas tan mucho a lo largo del día{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}Gira en torno a unos dólares extra de las ventas de alcohol{{/company1.alcohol.p}}{{#company1.alcohol.n}}No tiene las ventas de alcohol para aumentar los márgenes{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}Alto margen ofrece servicios de catering{{/company1.cater.p}}{{#company1.cater.n}}Renuncia a los ingresos adicionales de servicios de catering{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}Mantiene personas adicionales de servicio listo para las entregas{{/company1.deliver.p}}{{#company1.deliver.n}}Gana dinero principalmente de trafico{{/company1.deliver.n}}.
+              
+              </p>
+              {{/company1.found}}
+              {{#company2.found}}
+              <p>
+              Parece que {{title}} {{#company1.found}}también {{/company1.found}}es algo similar a
+              <a href="{{company2.id}}">{{company2.title}}</a>.
+              Sin embargo, es importante destacar que {{company2.title}} {{#company2.fact[0]}}es probable el que genera mayores márgenes por cliente{{/company2.fact[0]}}{{#company2.fact[1]}} que está ejecutando potencialmente mayores costos para aumentar la comodidad
+              {{/company2.fact[1]}}{{#company2.fact[2]}}que está abierto cuando {{title}} tiende a cerrar{{/company2.fact[2]}}{{#company2.fact[3]}}Es probable que genera menores márgenes por cliente{{/company2.fact[3]}}{{#company2.fact[4]}}posiblemente está optimizando sus costos por conveniencia anterior{{/company2.fact[4]}}.
+              </p>
+              {{/company2.found}}
+              {{^company1.found}}{{^company2.found}}<p>Vamos a seguir buscando, pero parece que este es un negocio único - en realidad no hay nada igual en todo el barrio.</p>{{/company2.found}}{{/company1.found}}
+              {{/es}}
+            </div>
+          </div>
+          {{^is_closed}}
+          <div class="row">
+            <div class="visible-xs visible-sm col-lg-12">
+              <a class="btn btn-default btn-md stats-box" href="#offer">
+                {{val_text}}: <br/>${{valuation}}
+              </a>
+              <a class="btn btn-md learn-more-box btn-warning" href="#offer">{{learn_more}}<br/><span>&nbsp;</span></a>
+            </div>
+          </div>
+          {{/is_closed}}
+          <hr/>
+          <div class="row">
+            <div class="col-lg-12">
+              <a class="target-audience" href="#offer">{{target_audience}}</a>
+            </div>
+          </div>
+          <!--
+          <div class="row" >
+            <div class="col-lg-4">
+              <a href="#offer" class="offers" title="Marketing Strategy">
+                <i class="fa fa-bar-chart-o fa-4x"></i>
+                <h4>{{points_3.learn}}</h4>
+              </a>
+            </div>
+            <div class="col-lg-4">
+              <a href="#offer" class="offers" title="Loan Calculator">
+                <span class="fa fa-th-list fa-4x"></span>
+                <h4>{{points_3.calculator}}</h4>
+              </a>
+            </div>
+            <div class="col-lg-4">
+              <a href="#offer" class="offers" title="Equipment & Appliance Financing">
+                <i class="fa fa-exchange fa-4x"></i>
+                <h4>{{points_3.sell}}</h4>
+              </a>
+            </div>
+          </div>
+          -->
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center owl-carousel owl-theme" id="owl-offers">
+              <div class="owl-item">
+                <a href="#offer" class="offers" title="Marketing Strategy">
+                  <i class="fa fa-bar-chart-o fa-4x"></i>
+                  <h4>{{points_3.learn}}</h4>
+                </a>
+              </div>
+              <div class="owl-item col-lg-4">
+                <a href="#offer" class="offers" title="Loan Calculator">
+                  <span class="fa fa-th-list fa-4x"></span>
+                  <h4>{{points_3.calculator}}</h4>
+                </a>
+              </div>
+              <div class="owl-item col-lg-4">
+                <a href="#offer" class="offers" title="Equipment & Appliance Financing">
+                  <i class="fa fa-exchange fa-4x"></i>
+                  <h4>{{points_3.sell}}</h4>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="row">
+            <div class="col-lg-4">
+              {{^es}}
+              <h2>Region</h2>
+              <p id="events">
+              The following analysis has been made for {{county}} county as a whole. We have sampled these stats based on <strong>{{total_restaurants}}</strong> restaurants. The colors in the pie chart stand for the most popular types of cuisine (i.e. greatest number of restaurants):
+              <span class="evttype2" data-ind="{{categories[0]}}">{{categories[0]}}</span>,
+              <span class="evttype2" data-ind="{{categories[1]}}">{{categories[1]}}</span>,
+              <span class="evttype2" data-ind="{{categories[2]}}">{{categories[2]}}</span>, and
+              <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> in {{county}} county.
+              </p>
+              <a class="btn btn-default" href="#offer">More Info</a>
+              {{/es}}
+              {{#es}}
+              <h2>REGIÓN</h2>
+              <p id="events">
+              El siguiente análisis fue realizado para {{county}} condado en conjunto. Hemos probado esas estadísticas a partir de <strong>{{total_restaurants}}</strong> restaurantes. Los colores del gráfico circular representan los más populares tipos de cocina (i.e. el mayor número de restaurantes) :
+              <span class="evttype2" data-ind="{{categories[0]}}">{{categories[0]}}</span>,
+              <span class="evttype2" data-ind="{{categories[1]}}">{{categories[1]}}</span>,
+              <span class="evttype2" data-ind="{{categories[2]}}">{{categories[2]}}</span> y
+              <span class="evttype2" data-ind="{{categories[3]}}">{{categories[3]}}</span> en el condado de {{county}}.
+              </p>
+              <a class="btn btn-default" href="#offer">Más información</a>
+              {{/es}}
+              <div id="top-segments"></div>
+            </div>
+            <div class="col-lg-8">
+              {{^es}}
+              <h2>Competition</h2>
+              <p>Next are some stats about <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> county in comparison to nearby counties:
+              <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> and <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. The chart on the left indicates restaurant density - measured as the <strong>#of people/#of restaurants</strong>. The chart on the right shows the relative number of restaurants open during different parts of the day (morning/afternoon/evening). If we combine the two charts, we get a first glimpse at how competitive the restaurant industry is in {{county}} county relative to that of another region.</p>
+              <a class="btn btn-default" href="#offer">More Info</a>
+              {{/es}}
+              {{#es}}
+              <h2>Competencia</h2>
+              <p>Lo siguiente son algunas estadísticas del condado de <span class="evttype" data-ind="{{counties[0]}}">{{counties[0]}}</span> en comparación con cercanos condados:
+              <span class="evttype" data-ind="{{counties[1]}}">{{counties[1]}}</span> y <span class="evttype" data-ind="{{counties[2]}}">{{counties[2]}}</span>. El grafico a la izquierda indica la concentración medida de restaurantes por el <strong>#de clientes/#de restaurantes</strong>. El grafico a la derecha muestra el relativo número de restaurantes  abiertos durante diferentes partes del día (mañana / tarde / noche).</p>
+              <a class="btn btn-default" href="#offer">Más información</a>
+              {{/es}}
+              <!--<div class="owl-carousel owl-theme row-fluid" id="owl-charts">
+                <div class="col-lg-6">
+                  <div id="rest-density"></div>
+                </div>
+                <div class="col-lg-6">
+                  <div id="rest-hourly"></div>
+                </div>
+              </div>-->
+              <div class="row-fluid" id="owl-charts">
+                <div class="col-lg-6">
+                  <div id="rest-density"></div>
+                </div>
+                <div class="col-lg-6">
+                  <div id="rest-hourly"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--googleoff: all-->
+        <div class="section">
+          <div id="offer" class="offer"><h2>Web presence helps grow your business!</h2></div>
+          <hr>
+          <div class="upper-column">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 hidden-sm hidden-xs left-column">
+                <!-- Google Charts -->
+                <div id="peer-comparison" style="width: 100%;height: 300px;"></div>
+                <div id="peer-comparison-2" style="width: 100%; height: 300px;"></div>
+                <!-- Google Charts -->
+              </div>
+              <div class="col-sm-8 col-xs-12 col-md-6 col-lg-6 right-column">
+                <h2><small>Make your web success work for you. Leverage the insight to get better offers. What opportunities are you exploring?</small></h2>
+                <form id="form1" class="form-horizontal">
+                  <input type="hidden" id="page-company-id" name="page-company-id" value="{{id}}">
+                  <fieldset>
+                    <!-- Form Name -->
+                    <legend>&nbsp;</legend>
+                    <!-- Select Multiple -->
+                    <div class="form-group">
+                      <label class="col-xs-4 control-label" for="form_opportunities">Opportunities:</label>
+                      <div class="col-xs-8">
+                        <select id="form_opportunities" name="opportunities" class="form-control" multiple="multiple">
+                          <!--<option value="credit">Credit improvement</option>-->
+                          <option value="debt">Debt consolidation / refinance</option>
+                          <option value="inventory">Inventory purchase</option>
+                          <option value="equipment">Equipment purchase</option>
+                          <option value="working">Working capital</option>
+                          <option value="remodel">Remodel</option>
+                          <option value="acquire">Acquire business location</option>
+                          <option value="marketing">Marketing</option>
+                          <option value="emergency">Emergency repairs</option>
+                          <option value="other">Other business purpose</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-xs-4 control-label" for="form_busname">Business Name:</label>
+                      <div class="col-xs-8">
+                        <input id="form_busname" name="business_name" type="text" placeholder="{{title}}" class="form-control input-md">
+                        <span class="help-block">if different from the above</span>
+                      </div>
+                    </div>
+                    <!-- Button -->
+                    <div class="form-group">
+                      <label class="col-xs-4 control-label" for="continue-page2"></label>
+                      <div class="col-xs-4">
+                        <button id="continue-page2" class="btn btn-warning">See your options <span class="glyphicon glyphicon-arrow-right"></span></button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+                <hr>
+                <form class="form-horizontal">
+                  <fieldset>
+                    <div style="text-align:center" id="lender-message"><h3><small>Interested in this business?</small></h3></div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-xs-4 control-label" for="form_lender_email">Your Contact: </label>
+                      <div class="col-xs-8">
+                        <input id="form_lender_email" name="lender_email" type="text" placeholder="sales@company.com" class="form-control input-xs"></div>
+                      </div><div class="form-group">
+                      <div class="col-xs-4 col-xs-offset-4">
+                        <button id="continue-lender" class="btn btn-danger">Make My Best Offer!</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- hidden section begins -->
+        <div class="section hidden" id="form-page2">
+        </div>
+        <div class="section hidden" id="form-page3">
+        </div>
+        <!-- hidden sectiond ends -->
+        <!--googleon: all-->
+        {{#disable}}
+        <!--     <div class="section no-line">
+          <ul id="tabs3" class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#opportunities" data-toggle="tab"><h4>Step 1: What Opportunities?</h4></a></li>
+            <li><a href="#financing" data-toggle="tab"><h4>Step 2: What are your needs?</h4></a></li>
+            <li><a href="#offers" data-toggle="tab"><h4>Step 3: Review available offers...</h4></a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="slide tab-pane active" id="opportunities">
+              <div id="peer-comparison"></div>
+            </div>
+            <div class="slide tab-pane" id="financing">...</div>
+            <div class="slide tab-pane" id="offers">...</div>
+          </div>
+        </div>-->
+        {{/disable}}
+        <div id="footer">
+          <hr>
+          <div class="row">
+            <div class="col-lg-12">
+              <p>Copyright &copy; Caura 2014</p>
+              {{^es}}The valuation and estimates of small businesses are based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the
+              data providers we are required to acknowledge:{{/es}}{{#es}}La valuación de las pequeñas empresas fue basada en un tercero de datos sociales, además con  datos de censo y análisis económico. Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}
+              <a style="padding-left:10px" href="http://biz.yelp.com/"><img src="http://s3-media3.ak.yelpcdn.com/assets/2/www/img/9c9b10dc7226/developers/reviewsFromYelpWHT.gif" alt="Yelp Small Business" height="25" width="115"></a>
+              <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/static/assets/js/plugins/owl.carousel/owl.carousel.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $.fn.serializeObject = function()
+    {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+    if (o[this.name] !== undefined) {
+    if (!o[this.name].push) {
+    o[this.name] = [o[this.name]];
+    }
+    o[this.name].push(this.value || '');
+    } else {
+    o[this.name] = this.value || '';
+    }
+    });
+    return o;
+    };
+    $("#owl-offers").owlCarousel();
+    /*$('#tabs3 a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+    });*/
+    $('#continue-page2').click(function(e){
+    var options = $('#form_opportunities').val() || [];
+    var link;
+    var nextLink;
+    for (k in options){
+    var option = options[k];
+    switch(option){
+    case 'credit':
+    link = '/submit?customer=1';
+    break;
+    default:
+    link = '/static/form-lend2.html';
+    nextLink = '/submit?customer=2';
+    }
+    analytics.track('Form', {
+    category: 'Preference',
+    label: option
+    });
+    }
+    if (link){
+    $('#form-page2').load(link,function(){
+    $('#form-page2').removeClass('hidden');
+    //clean bottom form just in case
+    $('#form-page3').removeClass('hidden');
+    $('#form-page3').addClass('hidden');
+    $('#form-page3').html('');
+    if (nextLink){
+    $(window).scrollTop( $('#offer-2').position().top );
+    $('#continue-submit').click(function(ev){
+    var post_form = $('#form2').serializeObject();
+    //report these choices
+    for (name in post_form){
+    if (name.indexOf('email') < 0 && post_form[name]){
+    analytics.track('Form', {
+    category: name,
+    label: post_form[name]
+    });
+    }
+    }
+    $('#form-page3').load(nextLink,post_form,function(){
+    $('#form-page3').removeClass('hidden');
+    $(window).scrollTop( $('#offer-3').position().top );
+    });
+    ev.preventDefault();
+    });
+    }else{
+    $(window).scrollTop( $('#offer-3').position().top );
+    }
+    });
+    }
+    e.preventDefault();
+    });
+    $('#continue-lender').click(function(e){
+    $.getJSON('/submit',{page: $( "#page-company-id" ).val(),lender: $( "#form_lender_email" ).val()},function(data){
+    if (data.status === 'OK'){
+    $('#lender-message').html('<div class="alert alert-success" role="alert">Thank You. We will contact you shortly.</div>');
+    $('#continue-lender').remove();
+    }else{
+    $('#lender-message').html('<div class="alert alert-danger" role="alert">Sorry! Looks like contact email was entered incorrectly.</div>');
+    }
+    });
+    e.preventDefault();
+    });
+    /*
+    $( "#form2" ).on( "submit", function( event ) {
+    console.log( $( this ).serialize() );
+    });
+    */
+    });
+    // CHARTS
+    var svg = {{{svg}}};
+    var counties = {{{json_counties}}};
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+    var ar;
+    //peer comparison
+    var options = {
+    legend: { position: "none" },
+    title: '{{charts[0].title}}',
+    hAxis: {title: '', titleTextStyle: {color: 'black'}}
+    };
+    var data = google.visualization.arrayToDataTable([
+    ['Metric', '{{charts[0].metric}}', { role: "style" } ],
+    ['social popularity',{{peers.popularity}},'color: #EBF1E6'],
+    ['reviews',  {{peers.reviews}},'color: #EBF1E6'],
+    ['website',  {{peers.web}},'color: #EBF1E6']
+    ]);
+    var chart = new google.visualization.ColumnChart(document.getElementById('peer-comparison'));
+    chart.draw(data, options);
+    options = {
+    legend: { position: "none" },
+    title: '',
+    bar: {groupWidth: "45%"},
+    hAxis: {title: '{{charts[0].hAxis}}', titleTextStyle: {color: 'black'}}
+    };
+    data = google.visualization.arrayToDataTable([
+    ['Metric', '{{charts[0].metric}}', { role: "style" } ],
+    ['price',  {{peers.price}},'color: #E5D9C9;'],
+    ['location',{{peers.location}},'color: #E5D9C9']
+    ]);
+    chart = new google.visualization.ColumnChart(document.getElementById('peer-comparison-2'));
+    {{#settings.is_dev}}
+    /*google.visualization.events.addListener(chart, 'ready', function(){
+    $("#owl-charts").addClass( "owl-carousel owl-theme" );
+    //do coroussel only after chart is drawn
+    $(document).ready(function(){
+    $("#owl-charts").owlCarousel({responsive: false,itemsScaleUp: true});
+    });
+    });*/
+    {{/settings.is_dev}}
+    chart.draw(data, options);
+    //segmentation in a county
+    ar = [['Type of Food', '# of restaurants']];
+    var topc = svg.top_cats;
+    c_color = {};
+    colors = ['#CBE0F4','#ffde6b','#E5D9C9','#C1EDC8'];
+    var row = 0;
+    for (var k in topc){
+    c_color[k] = colors[row];
+    ar.push([k,parseFloat(topc[k])]);
+    row++;
+    }
+    data = google.visualization.arrayToDataTable(ar);
+    $(".evttype2").each(function () {
+    var el = $(this);
+    el.css("color", c_color[el.data("ind")]);
+    });
+    options = {
+    title: '{{charts[1].title}}',
+    chartArea:{left:0,top:5,width:'100%',height:'100%'},
+    colors: colors,
+    legend: {position: "none"},
+    width: "100%"
+    };
+    chart = new google.visualization.PieChart(document.getElementById('top-segments'));
+    chart.draw(data, options);
+    //restaurant density
+    ar = [['County','# of people per restaurant',{ role: "style" }]];
+    var tc = svg.top_counties;
+    c_color = {};
+    colors = ['#CBE0F4','#ffde6b','#E5D9C9'];
+    row = 0;
+    for (var c in tc){
+    c_color[c] = colors[row];
+    ar.push([c+', '+tc[c].state,tc[c].density,'color: '+c_color[c]]);
+    row++
+    }
+    $(".evttype").each(function () {
+    var el = $(this);
+    el.css("color", c_color[el.data("ind")]);
+    });
+    data = google.visualization.arrayToDataTable(ar);
+    options = {
+    title: '{{charts[2].title}}',
+    width: "50%",
+    legend: { position: "none" }
+    };
+    chart = new google.visualization.BarChart(document.getElementById('rest-density'));
+    chart.draw(data, options);
+    //restaurant hourly operations
+    ar = [['hour'],['8:00-10:00'],['12-3pm'],['5pm - ']];
+    var hr = svg.hourly_density;
+    colors = [];
+    for (var c in hr){
+    colors.push(c_color[c]);
+    var tot = tc[c].people/tc[c].density;
+    ar[0].push(c);
+    ar[1].push(hr[c].m/tot);
+    ar[2].push(hr[c].a/tot);
+    ar[3].push(hr[c].d/tot);
+    }
+    for (var h=1;h<4;h++){
+    tot = ar[h][1]+ar[h][2]+ar[h][3];
+    ar[h][1] = Math.round(ar[h][1]/tot*100)/100;
+    ar[h][2] = Math.round(ar[h][2]/tot*100)/100;
+    ar[h][3] = Math.round(ar[h][3]/tot*100)/100;
+    }
+    data = google.visualization.arrayToDataTable(ar);
+    options = {
+    title: '{{charts[3].title}}',
+    colors: colors,
+    legend: { position: "none" },
+    vAxis:{
+    format:'##%',
+    viewWindow: {max: 1}
+    },
+    width: "50%",
+    rx: 10,
+    ry: 10,
+    bar: { groupWidth: '50%' },
+    isStacked: true,
+    };
+    chart = new google.visualization.ColumnChart(document.getElementById('rest-hourly'));
+    chart.draw(data, options);
+    }
+    </script>
+    <!--<script src="/static/assets/js/plugins/jqBootstrapValidation/jqBootstrapValidation.js"></script>
+    <script>
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation({sniffHtml: false}); } );
+    </script>-->
+    {{^settings.is_dev}}
+    <!-- begin olark code -->
+    <script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+    f[z]=function(){
+    (a.s=a.s||[]).push(arguments)};var a=f[z]._={
+    },q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
+    f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={
+    0:+new Date};a.P=function(u){
+    a.p[u]=new Date-a.p[0]};function s(){
+    a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){
+    hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){
+    return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){
+    b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{
+    b.contentWindow[g].open()}catch(w){
+    c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{
+    var t=b.contentWindow[g];t.write(p());t.close()}catch(x){
+    b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
+    loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+    /* custom configuration goes here (www.olark.com/documentation) */
+    olark.identify('1002-384-10-9905');/*]]>*/</script><noscript><a href="https://www.olark.com/site/1002-384-10-9905/contact" title="Contact us" target="_blank">Questions? Feedback?</a></noscript>
+    <!-- end olark code -->
+    <!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+    {{#disabled}}
+    <!-- twitter -->
     <script>window.twttr = (function (d, s, id) {
       var t, js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
@@ -666,121 +684,9 @@ twttr.ready(function (twttr) {
     });
   });
 });
-
     </script>
     <!-- twitter -->
-    {{/is_a}}
-    <!-- Charts -->
-<script type="text/javascript">
-  google.load("visualization", "1", {packages:["corechart"]});
-  google.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var ar;
-    //peer comparison
-    var data = google.visualization.arrayToDataTable([
-      ['Metric', 'Relative Placement', { role: "style" } ],
-      ['price',  {{peers.price}},'color: #1F77B4;'],
-      ['reviews',  {{peers.reviews}},'color: #1F77B4'],
-      ['website',  {{peers.web}},'color: #1F77B4'],
-      ['social popularity',{{peers.popularity}},'color: #1F77B4'],
-      ['location',{{peers.location}},'color: #1F77B4']
-    ]);
-
-    var options = {
-      legend: { position: "none" },
-      title: '{{charts[0].title}}',
-      hAxis: {title: '{{charts[0].hAxis}}', titleTextStyle: {color: 'black'}}
-    };
-    var chart = new google.visualization.ColumnChart(document.getElementById('peer-comparison'));
-    chart.draw(data, options);
-    //segmentation in a county
-    ar = [['Type of Food', '# of restaurants']];
-    var topc = svg.top_cats;
-    c_color = {};
-    colors = ['#76A7FA','#FF7F0E','#1F77B4','#75B869'];
-    var row = 0;
-    for (var k in topc){
-      c_color[k] = colors[row];
-      ar.push([k,parseFloat(topc[k])]);
-      row++;
-    }
-    data = google.visualization.arrayToDataTable(ar);
-    $(".evttype2").each(function () {
-        var el = $(this);
-        el.css("color", c_color[el.data("ind")]);
-    });
-
-    options = {
-      title: '{{charts[1].title}}',
-      chartArea:{left:200,top:5,width:'100%',height:'100%'},
-      colors: colors,
-      legend: {position: "none"},
-      width: 450,
-      height: 200
-    };
-
-    chart = new google.visualization.PieChart(document.getElementById('top-segments'));
-    chart.draw(data, options);
-    //restaurant density
-    ar = [['County','# of people per restaurant',{ role: "style" }]];
-    var tc = svg.top_counties;
-    c_color = {};
-    colors = ['#2CA02C','#FF7F0E','#1F77B4'];
-    row = 0;
-    for (var c in tc){
-      c_color[c] = colors[row];
-      ar.push([c+', '+tc[c].state,tc[c].density,'color: '+c_color[c]]);
-      row++
-    }
-    console.log(ar);
-    $(".evttype").each(function () {
-        var el = $(this);
-        el.css("color", c_color[el.data("ind")]);
-    });
-    data = google.visualization.arrayToDataTable(ar);
-    options = {
-      title: '{{charts[2].title}}',
-      width: 450,
-      legend: { position: "none" }
-    };
-    chart = new google.visualization.BarChart(document.getElementById('rest-density'));
-    chart.draw(data, options);
-    //restaurant hourly operations
-    ar = [['hour'],['8:00-10:00'],['12-3pm'],['5pm - ']];
-    var hr = svg.hourly_density;
-    colors = [];
-    for (var c in hr){
-      colors.push(c_color[c]);
-      var tot = tc[c].people/tc[c].density;
-      ar[0].push(c);
-      ar[1].push(hr[c].m/tot);
-      ar[2].push(hr[c].a/tot);
-      ar[3].push(hr[c].d/tot);
-    }
-    for (var h=1;h<4;h++){
-      tot = ar[h][1]+ar[h][2]+ar[h][3];
-      ar[h][1] = Math.round(ar[h][1]/tot*100)/100;
-      ar[h][2] = Math.round(ar[h][2]/tot*100)/100;
-      ar[h][3] = Math.round(ar[h][3]/tot*100)/100;
-    }
-    data = google.visualization.arrayToDataTable(ar);
-    options = {
-        title: '{{charts[3].title}}',
-        colors: colors,
-        legend: { position: "none" },
-        vAxis:{
-          format:'##%',
-          viewWindow: {max: 1}
-        },
-        width: 500,
-        height: 300,
-        rx: 10, 
-      ry: 10,
-        bar: { groupWidth: '50%' },
-        isStacked: true,
-      };
-    chart = new google.visualization.ColumnChart(document.getElementById('rest-hourly'));
-    chart.draw(data, options);
-  }
-</script>
-</body></html>
+    {{/disabled}}
+    {{/settings.is_dev}}
+  </body>
+</html>

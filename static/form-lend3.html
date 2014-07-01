@@ -1,0 +1,82 @@
+<div id="offer-3" class="offer"><h2>{{#type_monitoring}}Researching financial services for your restaurant is easy.{{/type_monitoring}}
+  {{#type_lender}}Level the playing field!{{/type_lender}}</h2></div>
+<hr>
+<div class="upper-column full-page">
+  <div class="row">
+    <div class="col-lg-11">
+      <h2><small>{{#type_monitoring}}Improve your financial profile!{{/type_monitoring}}
+        {{#type_lender}}Choose the lender! Compare offers on your own terms.{{/type_lender}}</small></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <form class="form-inline" method="post" action="/submit?redirect=1" id="form3" data-toggle="validator">
+        <fieldset>
+          <legend>&nbsp;</legend>
+          <input type="hidden" id="form_chosen_partner" name="chosen_partner" value="">
+          <input type="hidden" id="form_specified_business" name="specified_business" value="">
+          <input type="hidden" id="form3_page_id" name="page_id" value="">
+          <div class="row">
+              <div class="form-group col-sm-6 col-xs-12 col-md-6 col-lg-6">
+                <label class="col-xs-4 col-sm-4 control-label" for="form_schedule">
+{{#type_monitoring}}Services{{/type_monitoring}}
+        {{#type_lender}}Lenders{{/type_lender}}:</label>
+                <div class="col-xs-8 col-sm-8">
+                  <select id="form_offers" name="partner" class="form-control" required="">
+                     <option value=""></option>
+                     {{#options}}
+                    <option value="{{value}}">{{name}}</option>
+                    {{/options}}
+                  </select>
+                  <script>
+                  $(document).ready(function() {
+                    $('#form_offers').change(function(){
+                      if ($( this ).val()){
+                        $('#form_message').html('<div class="well well-sm">'+$( this ).val()+'</div>');
+                      }else{
+                        $('#form_message').html('');
+                      }
+                      $('#form_chosen_partner').val($(this).find("option:selected").text());
+                    });
+                    $('#form3').submit(function(){
+                      analytics.track('Partner', {
+                          category: 'redirect',
+                          label: $('#form_chosen_partner').val()
+                        });
+                    });
+                    //copy fields from company page
+                    $('#form3_page_id').val($('#page-company-id').val());
+                    $('#form_specified_business').val($('#form_busname').val());
+                  });
+                  </script>
+                  <span class="help-block">choose one to see the terms</span>
+                </div>
+              </div>
+              <div class="form-group col-sm-6 col-xs-12 col-md-6 col-lg-6">
+                <label class="col-xs-4 col-sm-4 control-label" for="form_term">Email:</label>
+                <div class="col-xs-8 col-sm-8">
+                  <div class="input-group">
+                    <input id="form_customer_email" name="customer_email" placeholder="owner@restaurant.com" class="form-control input-xs" required="">
+                  </div>
+                  <span class="help-block">where can we contact you with similar offers?</span>
+                </div>
+              </div>
+          </div>
+          <div class="row"><div class="col-lg-12" id="form_message"></div></div>
+          <div class="row">
+            <div class="col-xs-4"><small>{{#type_monitoring}}Step 2 of 2{{/type_monitoring}}
+        {{#type_lender}}Step 3 of 3{{/type_lender}}</small></div>
+            <div class="col-xs-8">
+              <!-- Button -->
+              <div class="form-group">
+                <div class="col-xs-4">
+                  <button id="continue-submit3" class="btn btn-warning">View my Offers <span class="glyphicon glyphicon-arrow-right"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

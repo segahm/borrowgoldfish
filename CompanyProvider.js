@@ -156,6 +156,23 @@ CompanyProvider.prototype.findById = function(id) {
     return result;
   });
 };
+
+CompanyProvider.prototype.findByIds = function(ids) {
+  var knex = require('knex').knex;
+  var request = knex('companies').whereIn('id',ids).limit(ids.length).select();
+  var result = null;
+  return request.then(function(data){
+    if (data && data.length > 0){
+      result = {};
+      _(data).forEach(function(val){
+        result[val.id] = val;
+      });
+      return result;
+    }else{
+      return null;
+    }
+  });
+};
 /**
  * returns a list of counties, cities, or company titles along with company_id
  * or null if nothing is found under this search

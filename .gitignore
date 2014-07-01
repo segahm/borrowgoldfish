@@ -16,6 +16,7 @@ lib-cov
 *.db
 *.txt
 *.ico
+*.bat
 Thumbs.db
 
 
@@ -29,3 +30,8 @@ node_modules
 
 /config.js
 .DS_Store
+
+static/jquery.slimscroll
+static/jQuery
+static/bower
+static/assets
