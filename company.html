@@ -464,6 +464,12 @@
     }
     if (link){
     $('#form-page2').load(link,function(){
+      analytics.page({
+          title: 'Offers Info',
+          url: '{{full_url}}#info',
+          path: '{{#es}}/es{{/es}}{{url}}/#info',
+          referrer: '{{full_url}}'
+      });
     $('#form-page2').removeClass('hidden');
     //clean bottom form just in case
     $('#form-page3').removeClass('hidden');
@@ -483,6 +489,12 @@
     }
     }
     $('#form-page3').load(nextLink,post_form,function(){
+      analytics.page({
+          title: 'Loan Apply',
+          url: '{{full_url}}#claim',
+          path: '{{#es}}/es{{/es}}{{url}}/#claim',
+          referrer: '{{full_url}}'
+      });
     $('#form-page3').removeClass('hidden');
     $(window).scrollTop( $('#offer-3').position().top );
     });
