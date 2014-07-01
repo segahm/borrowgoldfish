@@ -120,7 +120,6 @@ function startServer() {
     })); // to support URL-encoded bodies
 
     app.use(function(req, res, next) {
-        var is_home_page_test = false;
         res.set('Content-Type', 'text/html');
         var path = req.path;
         if (process.env.NODE_ENV === 'development') {
@@ -142,7 +141,7 @@ function startServer() {
             global: false
         });
         var A_B_Split = Math.round(rng());
-        if (typeof(req.cookies.say_hello) !== 'undefined') {
+        /*if (typeof(req.cookies.say_hello) !== 'undefined') {
             is_home_page_test = Boolean(req.cookies.say_hello === 'true');
         } else if (path.match(/\/(say-hello)/)) {
             path = path.replace('/say-hello', '');
@@ -155,7 +154,7 @@ function startServer() {
             res.cookie('say_hello', (is_home_page_test + ''), {
                 maxAge: 172800000
             });
-        }
+        }*/
 
         //spanish
         var matches = path.match(/^\/(es)/i);
@@ -243,9 +242,6 @@ function startServer() {
             var page_template;
             switch (mypage) {
                 case 'index':
-                    if (is_home_page_test === true) {
-                        mypage = 'alternative_home';
-                    }
                     //keep the same template for both variations of a home page
                     page_template = template.page.index;
                     break;
