@@ -7,6 +7,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="alternate" hreflang="es-US" href="/es{{url}}">
+        <link rel="alternate" hreflang="en-US" href="{{url}}">
+        <!-- linkedin/facebook card begin -->
+        <meta property="og:title" content="{{page_title}}">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{full_url}}">
+        <!--<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
+        <meta property="og:description" content="{{page_description}}">
+        <meta property="og:site_name" content="Caura">
+        {{^es}}
+        <meta property="og:locale" content="en_US">
+        <meta property="og:locale:alternate" content="es_US">
+        {{/es}}
+        {{#es}}
+        <meta property="og:locale" content="es_US">
+        {{/es}}
+        <meta property="fb:admins" content="segahm"/>
+        <!-- linkedin/facebook card end -->
+        
+        <!-- twitter card begin -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{page_title}}">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:creator" content="@nesovok">
+        <!--<meta name="twitter:image:src" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
+        <!-- twitter card end -->
         <title>{{page_title}}{{#is_directory}} {{title_region}}{{/is_directory}}</title>
         <!-- Bootstrap Core CSS -->
         <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -56,28 +82,28 @@
                     <script src="/static/assets/js/html5shiv.js"></script>
                     <script src="/static/assets/js/respond.min.js"></script>
                     <![endif]-->
-                          <!-- analytics -->
-<script type="text/javascript">
-window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
-window.analytics.load("rucaagoxlx");
-window.analytics.page();
-</script>
-<script type="text/javascript">
-function share(el){
-  analytics.track('Engaged', {
-    category: 'Shared',
-    label: el.id
-  });
-  window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
-}
-function clickedLink(el){
-  analytics.track('Engaged', {
-    category: 'Nonshared',
-    label: el.id
-  });
-}
-</script>
-<!-- analytics -->
+                    <!-- analytics -->
+                    <script type="text/javascript">
+                    window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+                    window.analytics.load("rucaagoxlx");
+                    window.analytics.page();
+                    </script>
+                    <script type="text/javascript">
+                    function share(el){
+                    analytics.track('Engaged', {
+                    category: 'Shared',
+                    label: el.id
+                    });
+                    window.open(el.href);
+                    }
+                    function clickedLink(el){
+                    analytics.track('Engaged', {
+                    category: 'Nonshared',
+                    label: el.id
+                    });
+                    }
+                    </script>
+                    <!-- analytics -->
                 </head>
                 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
                     <div id="wrapper">
@@ -314,7 +340,7 @@ function clickedLink(el){
                 </div>
             </section>
             {{/is_index}}
-            {{#settings.is_dev}}
+            {{#disabled}}
             <!--
             <section class="bg-primary">
                 <div class="container">
@@ -368,7 +394,7 @@ function clickedLink(el){
                         </div>
                     </div>
                 </section>
-                -->{{/settings.is_dev}}
+                -->{{/disabled}}
                 <footer class="footer-1">
                     <div class="upper">
                         <div class="container">
@@ -423,7 +449,7 @@ function clickedLink(el){
                                         <a onclick="share(this);return false;" id="Facebook-share" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup" class="btn btn-social-light btn-facebook"><i class="fa fa-fw fa-facebook"></i></a>
                                     </li>
                                     <li>
-                                        <a onclick="share(this);return false;" id="Linkedin-share" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title=Caura&<s></s>ource=Caura" class="btn btn-social-light btn-linkedin"><i class="fa fa-fw fa-linkedin"></i></a>
+                                        <a onclick="share(this);return false;" id="Linkedin-share" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title=Caura&source=Caura" class="btn btn-social-light btn-linkedin"><i class="fa fa-fw fa-linkedin"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -435,7 +461,7 @@ function clickedLink(el){
                         <div class="row">
                             <div class="col-md-12">
                                 <span class="small">Copyright &copy; 2014 - Caura.co</span>
-                                 <div id="languages"><span class="small">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</span></div>
+                                <div id="languages"><span class="small">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</span></div>
                             </div>
                         </div>
                     </div>
@@ -495,6 +521,7 @@ function clickedLink(el){
         /* custom configuration goes here (www.olark.com/documentation) */
         olark.identify('1002-384-10-9905');/*]]>*/</script><noscript><a href="https://www.olark.com/site/1002-384-10-9905/contact" title="Contact us" target="_blank">Questions? Feedback?</a></noscript>
         <!-- end olark code -->
+        <!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
         {{/settings.is_dev}}
     </body>
 </html>

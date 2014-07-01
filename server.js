@@ -11,10 +11,11 @@ var express     = require('express'),
 	seedrandom	= require('seedrandom'),
 	cookieParser = require('cookie-parser'),
 	sitemap = require('sitemap'),
-	twitterAPI = require('node-twitter-api'),
+	//twitterAPI = require('node-twitter-api'),
 	favicon = require('serve-favicon'),
 	sendgrid  = require('sendgrid')('caura', '4JNKQVXpc7NfyN'),
-	validator = require('validator');
+	validator = require('validator'),
+	bodyParser = require('body-parser');
 
 // If no env is set, default to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -25,6 +26,8 @@ var Utility = require('./utils');
 var Writeup = require('./writeup');
 
 var STATES = {'TX': 'Texas','FL': 'Florida','NM': 'New Mexico','CA': 'California','AZ': 'Arizona'};
+
+var PARTNERS = require('./partners');
 
 //define page function
 var directoryPage,
@@ -105,6 +108,8 @@ function startServer() {
 	});
 
 	app.use(cookieParser());
+	app.use( bodyParser.json() );       // to support JSON-encoded bodies
+	app.use( bodyParser.urlencoded({extended: false}) ); // to support URL-encoded bodies
 
 	app.use(function(req, res, next){
 		var is_home_page_test = false;
@@ -270,6 +275,7 @@ function startServer() {
 submitData = function(req,res){
 	return Q.fcall(function(){
 		var email = null;
+		var default_then = {};
 		if (typeof(req.query.lender) !== 'undefined'){
 			if (req.param('lender') && req.param('page') && validator.isEmail(req.param('lender'))){
 				email = new sendgrid.Email({
@@ -279,16 +285,63 @@ submitData = function(req,res){
 					subject:  'About advertising on Caura',
 					text:     req.param('lender')+' just contacted Caura through http://www.caura.co/'+req.param('page')+' regarding advertising and other offers.'
 				});
-				email.addTo('segahm@gmail.com');
+				email.addTo('segahm+caura@gmail.com');
 			}
 		}else if (typeof(req.query.customer) !== 'undefined'){
-			
+			var template;
+
+			if (req.query.customer === '1'){
+				template = {
+					options: PARTNERS.nonlenders,
+					type_monitoring: true
+				};
+			}else if(req.query.customer === '2'){
+				template = {
+					options: PARTNERS.lenders,
+					type_lender: true
+				};
+			}
+			if (template){
+				default_then = {no_response: true};
+				res.render('static/form-lend3.html', template);
+			}
+		}else if(typeof(req.query.redirect) !== 'undefined'){
+			if (req.body.chosen_partner){
+				var reporting = new sendgrid.Email({
+					from:     'grow@caura.co',
+					to: 'segahm+caura@gmail.com',
+					fromname: 'Caura',
+					subject:  'New Application',
+					text: JSON.stringify(req.body)
+				});
+				//no need to wait for a reponse
+				sendgrid.send(reporting, function(err,json) {
+					if (err) {
+						console.log('sendgrid error 2');
+						console.log(json);
+					}
+				});
+				var offer;
+				for (var i in PARTNERS.lenders){
+					var partner = PARTNERS.lenders[i];
+					if (partner.name === req.body.chosen_partner){
+						offer = partner;
+						break;
+					}
+				}
+				if (offer){
+					res.redirect(offer.link);
+					return {no_response: true};
+				}
+			}
+			res.redirect('http://www.caura.co');
+			default_then = {no_response: true};
 		}
-		return (email)?Q.ninvoke(sendgrid, 'send', email):{};
+		return (email)?Q.ninvoke(sendgrid, 'send', email):default_then;
 	}).then(function(json) {
-		if (json.message && json.message === 'success') {
+		if (json && typeof(json.message) !== 'undefined' && json.message === 'success' && typeof(json.no_response) === 'undefined') {
 			res.json({status: 'OK'});
-		}else{
+		}else if(json && typeof(json.no_response) === 'undefined'){
 			res.json({status: 'ERROR'});
 			console.log('sendgrid error');
 			console.log(json);

@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="alternate" hreflang="es-US" href="/es{{url}}">
+    <link rel="alternate" hreflang="en-US" href="{{url}}">
+    <!-- linkedin/facebook card begin -->
+    <meta property="og:title" content="{{title}} - {{page_title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{full_url}}">
+    <!--<meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.png">-->
+    <meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="Caura"><meta property="article:publisher" content="NeSovok">
+    {{^es}}
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="es_US">
+    {{/es}}
+    {{#es}}
+    <meta property="og:locale" content="es_US">
+    {{/es}}
+    <!-- linkedin/facebook card end -->
+    
+    <!-- twitter card begin -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{title}} - {{page_title}}">
+    <meta name="twitter:description" content="{{description_short_text}}">
+    <meta name="twitter:creator" content="@nesovok">
+    <!--<meta name="twitter:image:src" content="http://www.caura.com/static/organization-image.png?id={{id}}">-->
     <title>{{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}{{^is_closed}}for ${{valuation}} - {{page_title}}{{/is_closed}}</title>
     <!--<link rel="stylesheet" type="text/css" href="/static/fullpage.js/jquery.fullPage.css" />-->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -24,30 +47,30 @@
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/static/fullpage.js/jquery.fullPage.js"></script>-->
     <script src="/static/js/bootstrap.js"></script>
-      <!-- analytics -->
-<script type="text/javascript">
-window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
-window.analytics.load("rucaagoxlx");
-window.analytics.page();
-</script>
-<script type="text/javascript">
-function share(el){
-  analytics.track('Engaged', {
+    <!-- analytics -->
+    <script type="text/javascript">
+    window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+    window.analytics.load("rucaagoxlx");
+    window.analytics.page();
+    </script>
+    <script type="text/javascript">
+    function share(el){
+    analytics.track('Engaged', {
     category: 'Shared',
     label: el.id
-  });
-  window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); 
-}
-function clickedLink(el){
-  analytics.track('Engaged', {
+    });
+    window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
+    }
+    function clickedLink(el){
+    analytics.track('Engaged', {
     category: 'Nonshared',
     label: el.id
-  });
-}
-</script>
-<!-- analytics -->
+    });
+    }
+    </script>
+    <!-- analytics -->
   </head>
-  <body>
+  <body data-twttr-rendered="true">
     <!-- Google Charts API -->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <nav class="navbar navbar-fixed-top" role="navigation">
@@ -133,7 +156,7 @@ function clickedLink(el){
               {{#company1.found}}
               <p>
               The company’s business focus is very similar to that of <a onclick="clickedLink(this)" id="company-next"  href="{{company1.id}}">{{company1.title}}</a>
-              but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}is open more frequently{{/company1.doors.p}}{{#company1.doors.n}}is open less frequently{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}tends to attract customers in the evening{{/company1.evening.p}}{{#company1.evening.n}}actually closes much earlier{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}earns some extra cash from booze sales{{/company1.alcohol.p}}{{#company1.alcohol.n}}does not have alcohol sales to boost those high margins{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}.
+              but {{company1.title}} {{#company1.price.p}}charges more per plate{{/company1.price.p}}{{#company1.price.n}}charges less per plate{{/company1.price.n}}{{join[0]}}{{#company1.doors.p}}is open more frequently{{/company1.doors.p}}{{#company1.doors.n}}is open less frequently{{/company1.doors.n}}{{join[1]}}{{#company1.morning.p}}caters more to “early rise and shine customers"{{/company1.morning.p}}{{#company1.morning.n}}uses time in the morning to re-stock for the rest of the day{{/company1.morning.n}}{{join[2]}}{{#company1.evening.p}}tends to attract customers in the evening{{/company1.evening.p}}{{#company1.evening.n}}actually closes much earlier{{/company1.evening.n}}{{join[3]}}{{#company1.day.p}}keeps its doors open throughout the day{{/company1.day.p}}{{#company1.day.n}}does not keep its doors open as much throughout the day{{/company1.day.n}}{{join[4]}}{{#company1.alcohol.p}}earns some extra cash from alcohol sales{{/company1.alcohol.p}}{{#company1.alcohol.n}}does not have alcohol sales to boost those high margins{{/company1.alcohol.n}}{{join[5]}}{{#company1.cater.p}}offers high margin catering services{{/company1.cater.p}}{{#company1.cater.n}}forgoes the extra revenue from catering services{{/company1.cater.n}}{{join[6]}}{{#company1.deliver.p}}keeps extra people on duty ready to take deliveries{{/company1.deliver.p}}{{#company1.deliver.n}}earns money predominantly from foot traffic{{/company1.deliver.n}}.
               
               </p>
               {{/company1.found}}
@@ -292,8 +315,10 @@ function clickedLink(el){
           <div class="upper-column">
             <div class="row">
               <div class="col-lg-6 col-md-6 hidden-sm hidden-xs left-column">
+                <!-- Google Charts -->
                 <div id="peer-comparison" style="width: 100%;height: 300px;"></div>
                 <div id="peer-comparison-2" style="width: 100%; height: 300px;"></div>
+                <!-- Google Charts -->
               </div>
               <div class="col-sm-8 col-xs-12 col-md-6 col-lg-6 right-column">
                 <h2><small>Make your web success work for you. Leverage the insight to get better offers. What opportunities are you exploring?</small></h2>
@@ -307,7 +332,7 @@ function clickedLink(el){
                       <label class="col-xs-4 control-label" for="form_opportunities">Opportunities:</label>
                       <div class="col-xs-8">
                         <select id="form_opportunities" name="opportunities" class="form-control" multiple="multiple">
-                          <option value="credit">Credit improvement</option>
+                          <!--<option value="credit">Credit improvement</option>-->
                           <option value="debt">Debt consolidation / refinance</option>
                           <option value="inventory">Inventory purchase</option>
                           <option value="equipment">Equipment purchase</option>
@@ -358,7 +383,9 @@ function clickedLink(el){
           </div>
         </div>
         <!-- hidden section begins -->
-        <div class="section" id="form-page2">
+        <div class="section hidden" id="form-page2">
+        </div>
+        <div class="section hidden" id="form-page3">
         </div>
         <!-- hidden sectiond ends -->
         <!--googleon: all-->
@@ -395,51 +422,95 @@ function clickedLink(el){
     <script src="/static/assets/js/plugins/owl.carousel/owl.carousel.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-      $("#owl-offers").owlCarousel();
-      /*$('#tabs3 a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-      });*/
-      $('#continue-page2').click(function(e){
-        var options = $('#form_opportunities').val() || [];
-        var link;
-        for (k in options){
-          var option = options[k];
-          switch(option){
-            case 'credit':
-              link = '/submit?offer=1';
-            default:
-              link = '/static/form-lend2.html';
-          }
-          analytics.track('Form', {
-            category: 'Preference',
-            label: option
-          });
-        }
-        if (link){
-          $('#form-page2').load(link,function(){
-            var top = $('#offer-2').position().top;
-            $(window).scrollTop( top );
-          });
-        }
-        e.preventDefault();
-      });
-      $('#continue-lender').click(function(e){
-        $.getJSON('/submit',{page: $( "#page-company-id" ).val(),lender: $( "#form_lender_email" ).val()},function(data){
-          if (data.status === 'OK'){
-            $('#lender-message').html('<div class="message-success">Thank You. We will contact you shortly.</div>');
-            $('#continue-lender').remove();
-          }else{
-            $('#lender-message').html('<div class="message-error">Looks like contact email was entered incorrectly.</div>');
-          }
-        });
-        e.preventDefault();
-      });
-      /*
-      $( "#form2" ).on( "submit", function( event ) {
-        console.log( $( this ).serialize() );
-      });
-      */
+    $.fn.serializeObject = function()
+    {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+    if (o[this.name] !== undefined) {
+    if (!o[this.name].push) {
+    o[this.name] = [o[this.name]];
+    }
+    o[this.name].push(this.value || '');
+    } else {
+    o[this.name] = this.value || '';
+    }
+    });
+    return o;
+    };
+    $("#owl-offers").owlCarousel();
+    /*$('#tabs3 a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+    });*/
+    $('#continue-page2').click(function(e){
+    var options = $('#form_opportunities').val() || [];
+    var link;
+    var nextLink;
+    for (k in options){
+    var option = options[k];
+    switch(option){
+    case 'credit':
+    link = '/submit?customer=1';
+    break;
+    default:
+    link = '/static/form-lend2.html';
+    nextLink = '/submit?customer=2';
+    }
+    analytics.track('Form', {
+    category: 'Preference',
+    label: option
+    });
+    }
+    if (link){
+    $('#form-page2').load(link,function(){
+    $('#form-page2').removeClass('hidden');
+    //clean bottom form just in case
+    $('#form-page3').removeClass('hidden');
+    $('#form-page3').addClass('hidden');
+    $('#form-page3').html('');
+    if (nextLink){
+    $(window).scrollTop( $('#offer-2').position().top );
+    $('#continue-submit').click(function(ev){
+    var post_form = $('#form2').serializeObject();
+    //report these choices
+    for (name in post_form){
+    if (name.indexOf('email') < 0 && post_form[name]){
+    analytics.track('Form', {
+    category: name,
+    label: post_form[name]
+    });
+    }
+    }
+    $('#form-page3').load(nextLink,post_form,function(){
+    $('#form-page3').removeClass('hidden');
+    $(window).scrollTop( $('#offer-3').position().top );
+    });
+    ev.preventDefault();
+    });
+    }else{
+    $(window).scrollTop( $('#offer-3').position().top );
+    }
+    });
+    }
+    e.preventDefault();
+    });
+    $('#continue-lender').click(function(e){
+    $.getJSON('/submit',{page: $( "#page-company-id" ).val(),lender: $( "#form_lender_email" ).val()},function(data){
+    if (data.status === 'OK'){
+    $('#lender-message').html('<div class="alert alert-success" role="alert">Thank You. We will contact you shortly.</div>');
+    $('#continue-lender').remove();
+    }else{
+    $('#lender-message').html('<div class="alert alert-danger" role="alert">Sorry! Looks like contact email was entered incorrectly.</div>');
+    }
+    });
+    e.preventDefault();
+    });
+    /*
+    $( "#form2" ).on( "submit", function( event ) {
+    console.log( $( this ).serialize() );
+    });
+    */
     });
     // CHARTS
     var svg = {{{svg}}};
@@ -571,7 +642,7 @@ function clickedLink(el){
     </script>
     <!--<script src="/static/assets/js/plugins/jqBootstrapValidation/jqBootstrapValidation.js"></script>
     <script>
-      $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation({sniffHtml: false}); } );
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation({sniffHtml: false}); } );
     </script>-->
     {{^settings.is_dev}}
     <!-- begin olark code -->
@@ -594,6 +665,28 @@ function clickedLink(el){
     /* custom configuration goes here (www.olark.com/documentation) */
     olark.identify('1002-384-10-9905');/*]]>*/</script><noscript><a href="https://www.olark.com/site/1002-384-10-9905/contact" title="Contact us" target="_blank">Questions? Feedback?</a></noscript>
     <!-- end olark code -->
+    <!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+    {{#disabled}}
+    <!-- twitter -->
+    <script>window.twttr = (function (d, s, id) {
+      var t, js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id; js.src= "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+    }(document, "script", "twitter-wjs"));
+twttr.ready(function (twttr) {
+  twttr.events.bind('click', function (ev) { share({id:'Twitter-share-orig'},false) });
+  twttr.events.bind('tweet', function (event) {
+    analytics.track('Tweet', {
+      category: event.type,
+      label: 'Twitter-share-orig'
+    });
+  });
+});
+    </script>
+    <!-- twitter -->
+    {{/disabled}}
     {{/settings.is_dev}}
   </body>
 </html>

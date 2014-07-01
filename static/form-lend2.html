@@ -4,13 +4,13 @@
   <div class="row">
     <div class="col-lg-11">
       <h2><small>You answer a few simple questions. We match you to the best opportunities. You choose whether our suggestions are right for you.</small></h2>
-      <hr/>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
       <form class="form-inline" id="form2">
         <fieldset>
+          <legend>&nbsp;</legend>
           <div class="row">
             <div class="col-sm-4 col-xs-12">
               <div class="form-group">
@@ -18,7 +18,7 @@
                 <div class="col-xs-6 col-sm-8 col-md-6">
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input id="form_amount" name="amount" type="text" placeholder="10000" class="form-control" required="">
+                    <input id="form_amount" name="amount" type="text" placeholder="10000" class="form-control" required>
                   </div>
                   <span class="help-block">you are requesting</span>
                 </div>
@@ -29,7 +29,7 @@
                 <label class="col-xs-4 col-sm-5 control-label" for="form_term">Repayment term:</label>
                 <div class="col-xs-6 col-sm-7 col-md-6">
                   <div class="input-group">
-                    <input id="form_term" name="term" class="form-control" placeholder="30" type="text">
+                    <input id="form_term" name="term" class="form-control" placeholder="30" type="text" required>
                     <span class="input-group-addon">days</span>
                   </div>
                   <span class="help-block">until full repayment</span>
@@ -43,7 +43,7 @@
                 <label class="col-xs-4 col-sm-4 control-label" for="form_apr">APR:</label>
                 <div class="col-xs-6 col-sm-7 col-md-5">
                   <div class="input-group">
-                    <input id="form_apr" name="apr" class="form-control" placeholder="20" type="text">
+                    <input id="form_apr" name="apr" class="form-control" placeholder="20" type="text" required>
                     <span class="input-group-addon">%</span>
                   </div>
                   <span class="help-block">maximum acceptable rate</span>
@@ -55,7 +55,7 @@
                 <label class="col-xs-4 col-sm-5 control-label" for="form_funding">Time to Funding:</label>
                 <div class="col-xs-6 col-sm-7 col-md-6">
                   <div class="input-group">
-                    <input id="form_funding" name="funding" class="form-control" placeholder="3" type="text">
+                    <input id="form_funding" name="funding" class="form-control" placeholder="3" type="text" required>
                     <span class="input-group-addon">days</span>
                   </div>
                   <span class="help-block">how long can you wait?</span>
@@ -69,7 +69,7 @@
               <div class="form-group">
                 <label class="col-xs-4 col-sm-4 control-label" for="form_schedule">Repayment:</label>
                 <div class="col-xs-6 col-sm-7 col-md-5">
-                  <select id="form_schedule" name="repayment_schedule" class="form-control">
+                  <select id="form_schedule" name="repayment_schedule" class="form-control" required="">
                     <option value="daily">daily</option>
                     <option value="weekly">weekly</option>
                     <option value="monthly">monthly</option>
@@ -84,8 +84,7 @@
               <div class="form-group">
                 <label class="col-xs-4 col-sm-5 control-label" for="form_lenders">Previous Applications:</label>
                 <div class="col-xs-6 col-sm-7 col-md-6">
-                  <select id="form_lenders" name="lenders" class="form-control">
-                    <option value="none"></option>
+                  <select id="form_lenders" name="lenders" class="form-control" multiple="multiple">
                     <option value="LendingClub">LendingClub</option>
                     <option value="Kabbage">Kabbage</option>
                     <option value="swiftcapital.com">swiftcapital.com</option>
