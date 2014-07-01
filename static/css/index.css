@@ -1,11 +1,11 @@
  .pic0{
-    background-image: url(/static/slide1.jpg);
+    background-image: url(https://dl.dropboxusercontent.com/u/5902603/caura/slide1.jpg);
 }
 .pic1{
-    background-image: url(/static/slide2.jpg);
+    background-image: url(https://dl.dropboxusercontent.com/u/5902603/caura/slide2.jpg);
 }
 .pic2{
-    background-image: url(/static/slide3.jpg);
+    background-image: url(https://dl.dropboxusercontent.com/u/5902603/caura/slide3.jpg);
 }
 .bg-primary{
     padding: 20px 0;
