@@ -21,7 +21,7 @@
                 <label class="col-xs-4 col-sm-4 control-label" for="form_schedule">
 {{#type_monitoring}}Services{{/type_monitoring}}
         {{#type_lender}}Lenders{{/type_lender}}:</label>
-                <div class="col-xs-6 col-sm-8">
+                <div class="col-xs-8 col-sm-8">
                   <select id="form_offers" name="partner" class="form-control" required="">
                      <option value=""></option>
                      {{#options}}
@@ -54,9 +54,9 @@
               </div>
               <div class="form-group col-sm-6 col-xs-12 col-md-6 col-lg-6">
                 <label class="col-xs-4 col-sm-4 control-label" for="form_term">Email:</label>
-                <div class="col-xs-6 col-sm-8">
+                <div class="col-xs-8 col-sm-8">
                   <div class="input-group">
-                    <input id="form_customer_email" name="customer_email" placeholder="owner@restaurant.com" class="form-control input-xs" required>
+                    <input id="form_customer_email" name="customer_email" placeholder="owner@restaurant.com" class="form-control input-xs" required="">
                   </div>
                   <span class="help-block">where can we contact you with similar offers?</span>
                 </div>
@@ -69,7 +69,6 @@
             <div class="col-xs-8">
               <!-- Button -->
               <div class="form-group">
-                <label class="col-xs-4 control-label" for="continue-submit"></label>
                 <div class="col-xs-4">
                   <button id="continue-submit3" class="btn btn-warning">View my Offers <span class="glyphicon glyphicon-arrow-right"></span></button>
                 </div>

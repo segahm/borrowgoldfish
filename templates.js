@@ -20,7 +20,7 @@ var config = {
 			if (typeof(handle) !== 'undefined'){
 				return '@'+handle+' estimated at $'+valuation;
 			}else{
-				return 'Restaurant estimates';
+				return '';
 				//(title.match(/Resta/i)?title:title+' restaurant')+' from '+county+' county at $'+valuation;
 			}
 		},
