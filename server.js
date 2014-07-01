@@ -355,8 +355,10 @@ tra = function(template_data,hashcode){
 	return Q.fcall(function(){
 		if (hashcode){
 			template_data.offer = Utility.prototype.listOffer(hashcode);
+			template_data.offer.show = true;
 		}else{
 			template_data.offers = Utility.prototype.listOfferings();
+			template_data.offer = {show: false};
 		}
 		return page;
 	});
