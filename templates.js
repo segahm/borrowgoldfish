@@ -49,7 +49,7 @@ var config = {
 							{title:'Operating density in counties by hours of the day'}]
 					},
 			directory: {page_title: 'Small Business Finances and Valuation in'},
-			index: {page_title: 'Small Business Profile that matters to Lenders',
+			index: {page_title: 'Caura: Directory of restaurants and their financial profiles',
 					page_description: 'Find thousands of restaurants, information about their finances and cash flow health. Explore a valuation estimate for restaurants in Texas, Florida, and New Mexico.'
 				},
 			about: {page_title: 'About Us - why focus on small business & lending?'},
@@ -80,12 +80,12 @@ var config = {
 		page: {
 			company: {page_title: '¿Cuánto exactamente vale mi empresa?',
 						points_3: {
-							learn: 'Discover Opportunities',
-							calculator: 'Simplify Financing',
-							sell: 'Receive Offers'
+							learn: 'Descubra Oportunidades',
+							calculator: 'Simplifique Financiación',
+							sell: 'Acceso a las Ofertas'
 						},
-						target_audience: 'Own a restaurant business?',
-						learn_more: 'Learn More',
+						target_audience: 'Poseer un negocio de restaurante?',
+						learn_more: 'aprender más',
 						val_text: 'Valoración de empresas',
 						analysis: ['Realizar análisis de la competencia',
 						'Artículos disponibles datos',
@@ -102,7 +102,7 @@ var config = {
 							{title:'Densidad de operación en los condados por hora del día'}]
 			},
 			directory: {page_title: 'Finanzas de las pequeñas empresas y la valoración en'},
-			index: {page_title: 'Finanzas de las pequeñas empresas y la valoración',
+			index: {page_title: 'Caura: Directorio de restaurantes y sus perfiles financieros',
 					page_description: 'Encuentre miles de restaurantes, información sobre sus finanzas y la salud de flujo de caja. Explora una estimación de valuación de restaurantes en Texas, Florida y Nuevo México.'},
 			about: {page_title: 'About Us - why focus on small business & lending?'},
 			privacy: {page_title: 'Privacy - why make data public?'}
