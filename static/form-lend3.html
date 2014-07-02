@@ -25,14 +25,19 @@
                   <select id="form_offers" name="partner" class="form-control" required="">
                      <option value=""></option>
                      {{#options}}
-                    <option value="{{value}}">{{name}}</option>
+                    <option value="{{value}}" data-img="{{image}}">{{name}}</option>
                     {{/options}}
                   </select>
                   <script>
                   $(document).ready(function() {
                     $('#form_offers').change(function(){
                       if ($( this ).val()){
-                        $('#form_message').html('<div class="well well-sm">'+$( this ).val()+'</div>');
+                        var selected = $(this).find('option:selected');
+                        if (selected.data('img')){
+                          $('#form_message').html('<div class="well well-sm">'+$( this ).val()+'<img height="1" width="1" src="'+selected.data('img')+'" border="0" /></div>');
+                        }else{
+                          $('#form_message').html('<div class="well well-sm">'+$( this ).val()+'</div>');
+                        }
                       }else{
                         $('#form_message').html('');
                       }
@@ -70,7 +75,7 @@
               <!-- Button -->
               <div class="form-group">
                 <div class="col-xs-4">
-                  <button id="continue-submit3" class="btn btn-warning">View my Offers <span class="glyphicon glyphicon-arrow-right"></span></button>
+                  <button id="continue-submit3" class="btn btn-warning">To My Offer <span class="glyphicon glyphicon-arrow-right"></span></button>
                 </div>
               </div>
             </div>

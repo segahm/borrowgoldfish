@@ -1,8 +1,9 @@
 var PARTNERS = {
     nonlenders: [{
-        name: 'Credit Analytics',
-        value: '$5 at ...',
-        link: 'http://www.google.com'
+        name: 'Creditera',
+        value: 'Credit monitoring at different levels, ranging from $10/month (for personal) to $100 (for Business+)',
+        link: 'http://creditera.7eer.net/c/96111/104543/2410',
+        image: 'http://creditera.7eer.net/i/96111/104543/2410'
     }],
     lenders: [{
             name: 'swiftcapital.com',

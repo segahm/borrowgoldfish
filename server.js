@@ -335,8 +335,9 @@ submitData = function(req, res) {
                     }
                 });
                 var offer;
-                for (var i in PARTNERS.lenders) {
-                    var partner = PARTNERS.lenders[i];
+                var allpartners = PARTNERS.nonlenders.concat(PARTNERS.lenders);
+                for (var i in allpartners) {
+                    var partner = allpartners[i];
                     if (partner.name === req.body.chosen_partner) {
                         offer = partner;
                         break;
