@@ -15,9 +15,8 @@ footer {
 }
 
 .navbar {
-	background-color: rgba(62, 68, 77, 0.60);
-	/*background-color: rgb(119, 108, 88);*/
-	/*#1B2730;*/
+	background-color: rgb(62, 68, 77);
+	background-color: rgba(25, 26, 27, 0.6);
 }
 .navbar-brand img {
 	height: 40px;
