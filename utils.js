@@ -38,7 +38,7 @@ Utility.prototype.join = function(array,key,with_el){
 
 Utility.prototype.formatValuation = function(valuation){
   if (valuation){
-    valuation = Math.round(valuation/100)*100;
+    valuation = Math.round(valuation/1000)*1000;
     valuation = valuation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
   return valuation;
