@@ -49,9 +49,10 @@ var config = {
 							{title:'Operating density in counties by hours of the day'}]
 					},
 			directory: {page_title: 'Small Business Finances and Valuation in'},
-			index: {page_title: 'Caura: Directory of restaurants and their financial profiles',
+			index: {page_title: 'Caura | Directory of restaurants and their financial profiles',
 					page_description: 'Find thousands of restaurants, information about their finances and cash flow health. Explore a valuation estimate for restaurants in Texas, Florida, and New Mexico.'
 				},
+			search: {page_title: 'Caura | Financial services for independent restaurants'},
 			about: {page_title: 'About Us - why focus on small business & lending?'},
 			privacy: {page_title: 'Privacy - why make data public?'}
 
@@ -102,8 +103,9 @@ var config = {
 							{title:'Densidad de operación en los condados por hora del día'}]
 			},
 			directory: {page_title: 'Finanzas de las pequeñas empresas y la valoración en'},
-			index: {page_title: 'Caura: Directorio de restaurantes y sus perfiles financieros',
+			index: {page_title: 'Caura | Directorio de restaurantes y sus perfiles financieros',
 					page_description: 'Encuentre miles de restaurantes, información sobre sus finanzas y la salud de flujo de caja. Explora una estimación de valuación de restaurantes en Texas, Florida y Nuevo México.'},
+			search: {page_title: 'Caura | Financial services for independent restaurants'},
 			about: {page_title: 'About Us - why focus on small business & lending?'},
 			privacy: {page_title: 'Privacy - why make data public?'}
 		},

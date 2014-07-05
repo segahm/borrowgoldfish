@@ -40,7 +40,8 @@ var directoryPage,
     homePage,
     companyPage,
     tra,
-    submitData;
+    submitData,
+    searchPage;
 var knex_connection = {
     host: '127.0.0.1',
     database: 'goldfish',
@@ -86,6 +87,7 @@ function startServer() {
             }
         });
     }
+    //app.engine('html',cons.toffee);
     app.engine('html', cons.templayed);
     // set .html as the default extension 
     app.set('view engine', 'html');
@@ -162,6 +164,9 @@ function startServer() {
 
         matches = path.match(/^\/(es\/)?([a-z0-9\-]{3,})\/?$/i); // "/es/non-state-string"
         var template_data = {};
+        if (typeof(req.cookies.bgf_promise) === 'undefined') {
+            template_data.landing_banner = true;
+        }
         //temporary settings template => rewrite this later
         if (process.env.NODE_ENV === 'development') {
             template_data.settings = templates.dev;
@@ -193,7 +198,10 @@ function startServer() {
         //COMPANY
         //temporary Texas event
         var tra_matches = path.match(/^\/tra\/([0-9]{10,})?/i);
-        if (tra_matches) {
+        if (path.match(/^\/(es\/)?$/)){
+            //search
+            resultPromise = searchPage(req, res);
+        }else if (tra_matches) {
             var hashcode = (typeof(tra_matches[1]) !== 'undefined') ? tra_matches[1] : null;
             resultPromise = tra(template_data, hashcode);
         } else if (path_match && typeof(path_match[2]) !== 'undefined' && path_match[2].toLowerCase() !== 'es') {
@@ -252,6 +260,9 @@ function startServer() {
                 case 'company':
                     page_template = template.page.company;
                     break;
+                case 'search':
+                    page_template = template.page.search;
+                    break;
             }
             template_data = _.merge({},
                 template.all_pages,
@@ -282,7 +293,11 @@ function startServer() {
 	  response.end();
 	}).listen(17912);*/
 }
-
+searchPage = function(req,res){
+    return Q.fcall(function() {
+        return 'search';
+    });
+};
 submitData = function(req, res) {
     return Q.fcall(function() {
         var email = null;

@@ -125,6 +125,9 @@
                                             <a href="#page-top"></a>
                                         </li>
                                         <li class="page-scroll">
+                                            <a href="/{{#es}}es/{{/es}}">Search Businesses</a>
+                                        </li>
+                                        <li class="page-scroll">
                                             <a href="#sample">{{#is_index}}Listings{{/is_index}}{{#is_about}}About{{/is_about}}{{#is_privacy}}Privacy{{/is_privacy}}</a>
                                         </li>
                                         <!--<li class="page-scroll">
@@ -173,10 +176,10 @@
                                                 <h4>Revenue estimates for thousands of businesses</h4>
                                             </div>
                                             <div class="item">
-                                                <h4>Detailed analysis of all available web data</h4>
+                                                <h4>Financial tools for restaurant managers</h4>
                                             </div>
                                             <div class="item">
-                                                <h4>and then some</h4>
+                                                <h4>Detailed analysis of all available web data</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -433,13 +436,13 @@
                                 <h4>&nbsp;</h4>
                                 <ul class="list-unstyled footer-links">
                                     <li>
-                                        <a href="{{#es}}/es{{/es}}/">Home</a>
+                                        <a href="{{#es}}/es{{/es}}/partner">Home</a>
                                     </li>
                                     <li>
-                                        <a href="{{#es}}/es{{/es}}/?page=about">About Us</a>
+                                        <a href="{{#es}}/es{{/es}}/partner?page=about">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="{{#es}}/es{{/es}}/?page=privacy">Privacy</a>
+                                        <a href="{{#es}}/es{{/es}}/partner?page=privacy">Privacy</a>
                                     </li>
                                 </ul>
                             </div>
@@ -493,7 +496,6 @@
         <script src="/static/assets/js/plugins/jquery.mousewheel/jquery.mousewheel.js"></script>
         <script src="/static/assets/js/plugins/jquery.simplr.smoothscroll/jquery.simplr.smoothscroll.js"></script>
         <script src="/static/assets/js/plugins/jqBootstrapValidation/jqBootstrapValidation.js"></script>
-        <script src="/static/assets/js/contact_me.js"></script>
         <script src="/static/assets/js/plugins/isotope/isotope.pkgd.min.js"></script>
         <!-- Spectrum JavaScript Files -->
         <script src="/static/assets/js/spectrum.nav.js"></script>
@@ -503,6 +505,7 @@
         var which = Math.round(Math.random()*2);
         $('#header').addClass('pic'+which);
         });
+        document.cookie = "bgf_promise=true";   //landing page
         </script>
         {{^settings.is_dev}}
         <!-- begin olark code -->

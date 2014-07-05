@@ -54,12 +54,25 @@
     window.analytics.page();
     </script>
     <script type="text/javascript">
+    function doSearch(el){
+      console.log(el.href );
+      analytics.track('Landing', {
+        category: 'Preference',
+        label: el.id
+      });
+      document.cookie = "bgf_promise=true";
+      if (el.id !== 'financial_comparison'){
+        window.open(el.href);
+      }else{
+        $('#landingModal').modal('hide');
+      }
+    }
     function share(el){
-    analytics.track('Engaged', {
-    category: 'Shared',
-    label: el.id
-    });
-    window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
+      analytics.track('Engaged', {
+      category: 'Shared',
+      label: el.id
+      });
+      window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
     }
     function clickedLink(el){
     analytics.track('Engaged', {
@@ -67,10 +80,61 @@
     label: el.id
     });
     }
+    var full_url = '{{full_url}}',
+    es = {{#es}}'/es'{{/es}}{{^es}}''{{/es}},
+    url = '{{url}}';
     </script>
     <!-- analytics -->
   </head>
   <body data-twttr-rendered="true">
+    {{#landing_banner}}
+    <div class="landingModal modal fade" id="landingModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="col-sm-8 col-sm-offset-4">
+                  <h1>Your restaurant needs...</h1>
+                  <!--<input type="search" value="" placeholder="What do you need for your restaurant?">-->
+                  <input type="search" id="search" class="search" placeholder="what?" value="">
+                  <button id="Next-landing" name="submit" class="btn btn-primary">Next</button>
+                  <h3>or choose among:</h3>
+                  <ul class="list-inline">
+                    <li>
+                      <a onclick="doSearch(this);return false;" id="inventory_management" href="/grocery-shopping-food-cost-calculator">Inventory Management</a>
+                    </li>
+                    <li>
+                      <a onclick="doSearch(this);return false;" id="financial_comparison" href="#">Financial Comparison</a>
+                    </li>
+                  </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+    var options = {
+      backdrop: 'static',
+      keyboard: true
+    };
+    $('#landingModal').modal(options);
+    $(document).ready(function(){
+      $('#search').focus();
+    });
+    $('#Next-landing').click(function (e) {
+      var searching = $('#search').val();
+      if (searching){
+        analytics.track('Landing', {
+          category: 'Preference',
+          label: searching
+        });
+        document.cookie = "bgf_promise=true";
+        $('#landingModal').modal('hide');
+      }else{
+        $('#search').focus();
+      }
+    });
+    </script>
+    {{/landing_banner}}
     <!-- Google Charts API -->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <nav class="navbar navbar-fixed-top" role="navigation">
@@ -420,110 +484,8 @@
       </div>
     </div>
     <script src="/static/assets/js/plugins/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/static/js/company-form.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
-    $.fn.serializeObject = function()
-    {
-    var o = {};
-    var a = this.serializeArray();
-    $.each(a, function() {
-    if (o[this.name] !== undefined) {
-    if (!o[this.name].push) {
-    o[this.name] = [o[this.name]];
-    }
-    o[this.name].push(this.value || '');
-    } else {
-    o[this.name] = this.value || '';
-    }
-    });
-    return o;
-    };
-    $("#owl-offers").owlCarousel();
-    /*$('#tabs3 a').click(function (e) {
-    e.preventDefault();
-    $(this).tab('show');
-    });*/
-    $('#continue-page2').click(function(e){
-    var options = $('#form_opportunities').val() || [];
-    var link;
-    var nextLink;
-    for (k in options){
-    var option = options[k];
-    switch(option){
-    case 'credit':
-    link = '/submit?customer=1';
-    break;
-    default:
-    link = '/static/form-lend2.html';
-    nextLink = '/submit?customer=2';
-    }
-    analytics.track('Form', {
-    category: 'Preference',
-    label: option
-    });
-    }
-    if (link){
-    $('#form-page2').load(link,function(){
-      analytics.page({
-          title: 'Offers Info',
-          url: '{{full_url}}#info',
-          path: '{{#es}}/es{{/es}}{{url}}/#info',
-          referrer: '{{full_url}}'
-      });
-    $('#form-page2').removeClass('hidden');
-    //clean bottom form just in case
-    $('#form-page3').removeClass('hidden');
-    $('#form-page3').addClass('hidden');
-    $('#form-page3').html('');
-    if (nextLink){
-    $(window).scrollTop( $('#offer-2').position().top );
-    $('#continue-submit').click(function(ev){
-    var post_form = $('#form2').serializeObject();
-    //report these choices
-    for (name in post_form){
-    if (name.indexOf('email') < 0 && post_form[name]){
-    analytics.track('Form', {
-    category: name,
-    label: post_form[name]
-    });
-    }
-    }
-    $('#form-page3').load(nextLink,post_form,function(){
-      analytics.page({
-          title: 'Loan Apply',
-          url: '{{full_url}}#claim',
-          path: '{{#es}}/es{{/es}}{{url}}/#claim',
-          referrer: '{{full_url}}'
-      });
-    $('#form-page3').removeClass('hidden');
-    $(window).scrollTop( $('#offer-3').position().top );
-    });
-    ev.preventDefault();
-    });
-    }else{
-    $(window).scrollTop( $('#offer-3').position().top );
-    }
-    });
-    }
-    e.preventDefault();
-    });
-    $('#continue-lender').click(function(e){
-    $.getJSON('/submit',{page: $( "#page-company-id" ).val(),lender: $( "#form_lender_email" ).val()},function(data){
-    if (data.status === 'OK'){
-    $('#lender-message').html('<div class="alert alert-success" role="alert">Thank You. We will contact you shortly.</div>');
-    $('#continue-lender').remove();
-    }else{
-    $('#lender-message').html('<div class="alert alert-danger" role="alert">Sorry! Looks like contact email was entered incorrectly.</div>');
-    }
-    });
-    e.preventDefault();
-    });
-    /*
-    $( "#form2" ).on( "submit", function( event ) {
-    console.log( $( this ).serialize() );
-    });
-    */
-    });
     // CHARTS
     var svg = {{{svg}}};
     var counties = {{{json_counties}}};
@@ -681,21 +643,21 @@
     {{#disabled}}
     <!-- twitter -->
     <script>window.twttr = (function (d, s, id) {
-      var t, js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id; js.src= "https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
-      return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id; js.src= "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
     }(document, "script", "twitter-wjs"));
-twttr.ready(function (twttr) {
-  twttr.events.bind('click', function (ev) { share({id:'Twitter-share-orig'},false) });
-  twttr.events.bind('tweet', function (event) {
+    twttr.ready(function (twttr) {
+    twttr.events.bind('click', function (ev) { share({id:'Twitter-share-orig'},false) });
+    twttr.events.bind('tweet', function (event) {
     analytics.track('Tweet', {
-      category: event.type,
-      label: 'Twitter-share-orig'
+    category: event.type,
+    label: 'Twitter-share-orig'
     });
-  });
-});
+    });
+    });
     </script>
     <!-- twitter -->
     {{/disabled}}

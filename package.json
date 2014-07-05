@@ -31,7 +31,8 @@
     "serve-favicon": "2.0.1",
     "sendgrid": "1.1.0",
     "validator": "3.16.0",
-    "body-parser": "1.4.3"
+    "body-parser": "1.4.3",
+    "toffee": "0.1.12"
   },
   "devDependencies": {
     "jshint": "~2.4.x"
