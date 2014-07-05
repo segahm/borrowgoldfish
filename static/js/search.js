@@ -33,7 +33,8 @@ $(document).ready(function () {
         displayKey: 'value',
         // `ttAdapter` wraps the suggestion engine in an adapter that
         // is compatible with the typeahead jQuery plugin
-        source: states.ttAdapter(),
+        source: states.ttAdapter()
+        /*,
         templates: {
             empty: [
                 '<div class="empty-message">',
@@ -41,7 +42,7 @@ $(document).ready(function () {
                 '</div>'
             ].join('\n'),
             suggestion: Handlebars.compile('<p><strong>{{value}}</strong> – {{year}}</p>')
-        }
+        }*/
     });
 });
 $(document).ready(function () {
