@@ -55,14 +55,13 @@
     </script>
     <script type="text/javascript">
     function doSearch(el){
-      console.log(el.href );
       analytics.track('Landing', {
         category: 'Preference',
         label: el.id
       });
       document.cookie = "bgf_promise=true";
       if (el.id !== 'financial_comparison'){
-        window.open(el.href);
+        window.location.href = el.href;
       }else{
         $('#landingModal').modal('hide');
       }

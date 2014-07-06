@@ -55,10 +55,14 @@
         <link href="/static/css/index.css" rel="stylesheet">
         <style>
         #bloodhound{
-          width:350px;text-align:center;margin:0 auto;padding:10px
+          width:340px;text-align:center;margin:0 auto;padding:10px;
+          padding-left:0;
         }
         .form-inline .form-control{
           width:100%;
+        }
+        #business-search{
+          padding-bottom:10px;
         }
         </style>
         <!-- linkedin/facebook card begin -->
@@ -92,17 +96,17 @@
         </script>
         <script type="text/javascript">
         function share(el){
-        analytics.track('Engaged', {
-        category: 'Shared',
-        label: el.id
-        });
-        window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
+          analytics.track('Engaged', {
+            category: 'Shared',
+            label: el.id
+          });
+          window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
         }
         function clickedLink(el){
-        analytics.track('Engaged', {
-        category: 'Nonshared',
-        label: el.id
-        });
+          analytics.track('Engaged', {
+            category: 'Nonshared',
+            label: el.id
+          });
         }
         </script>
         <!-- analytics -->
@@ -132,20 +136,21 @@
                       
                       <br><br><br>
                       
-                      <form class="form-inline col-sm-12" role="form">
+                      <form id="business-search" class="form-inline col-sm-12" role="form" action="https://www.googleapis.com/customsearch/v1?key={{settings.google_key}}&cx=007191848951261473677:btycexlpytg&num=1" method="get">
                         <div id="bloodhound" class="form-group">
                           <input class="form-control input-lg typeahead" title="Don't worry. We hate spam, and will not share your email with anyone." placeholder="Enter the name of your business" type="text">
                           
                         </div>
                         <button type="submit" class="btn btn-lg btn-primary btn-square btn-raised">Analyze!</button>
                       </form>
+                      <div id="business-search-message"></div>
                     </div>
                     
                     </div> <!-- /row -->
                     
                     
                     
-                    <br><br><br><br><br>
+                    <br><br><br><br>
                   </div></div>
                 </div>
                 

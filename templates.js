@@ -53,7 +53,7 @@ var config = {
 					page_description: 'Find thousands of restaurants, information about their finances and cash flow health. Explore a valuation estimate for restaurants in Texas, Florida, and New Mexico.'
 				},
 			search: {page_title: 'Caura | Financial services for independent restaurants',
-					three_points: ['Competitive Analytics','Food Cost','Inventory Management']},
+					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management']},
 			about: {page_title: 'About Us - why focus on small business & lending?'},
 			privacy: {page_title: 'Privacy - why make data public?'}
 
@@ -107,7 +107,7 @@ var config = {
 			index: {page_title: 'Caura | Directorio de restaurantes y sus perfiles financieros',
 					page_description: 'Encuentre miles de restaurantes, información sobre sus finanzas y la salud de flujo de caja. Explora una estimación de valuación de restaurantes en Texas, Florida y Nuevo México.'},
 			search: {page_title: 'Caura | Financial services for independent restaurants',
-					three_points: ['Competitive Analytics','Food Costs','Inventory Management']},
+					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management']},
 			about: {page_title: 'About Us - why focus on small business & lending?'},
 			privacy: {page_title: 'Privacy - why make data public?'}
 		},
