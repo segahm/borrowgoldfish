@@ -10,8 +10,9 @@ $(document).ready(function () {
                     analytics.track('Search', {
                         category: 'Home',
                         label: keywords
+                    },function(){
+                        window.location.href = 'http://'+window.location.hostname+(window.location.port?':'+window.location.port:'')+'/'+data.items[0].link.split("/").slice(3).join("/")                       
                     });
-                    window.location.href = data.items[0].link;
                 } else {
                     $('#business-search-message').html('<div class="alert alert-danger" role="alert">Looks like this business is outside of our current coverage. But we can change that: <a href="mailto:grow@caura.co" class="alert-link">grow@caura.co</a></div>');
                 }

@@ -129,6 +129,8 @@ background-color: #fff;
 	top: 0;
 	right: 0;
 	bottom: 0;
+	margin-bottom:-100px;
+	margin-right:-100px;
 	left: 0;
 	z-index: 1040;
 	background-color: rgb(0, 0, 0);

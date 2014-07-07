@@ -3,6 +3,7 @@
   <meta charset="utf-8">
   <meta name="google-site-verification" content="Ak0e1ydbPnnjboxN7lfpAh1dVl9A1XddjtcMnvKCr4c" />
   <meta name="google-site-verification" content="halx-ADaKPaH8O7N2NLf5cgB4oKQPVocdwhG6gy7wFY" />
+  <meta name="msvalidate.01" content="16026AFCED0EECEA39E202D13376B293" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -46,11 +47,7 @@
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
       <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
         <!-- Retina Images Plugin -->
-        <script src="/static/assets/js/plugins/retina/retina.min.js"></script>
         <!-- Plugin CSS -->
-        <link href="/static/assets/css/plugins/hover/hover.min.css" rel="stylesheet">
-        <link href="/static/assets/css/plugins/jquery.fs.wallpaper/jquery.fs.wallpaper.css" rel="stylesheet">
-        <link href="/static/assets/css/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
         <link href="/static/assets/css/spectrum-orange.css" rel="stylesheet">
         <link href="/static/css/index.css" rel="stylesheet">
         <style>
@@ -92,6 +89,9 @@
         <script type="text/javascript">
         window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
         window.analytics.load("rucaagoxlx");
+        window.analytics.identify({
+          "Experiment: Business-interest": {{^is_a}}'Cost Optimization'{{/is_a}}{{#is_a}}'Financial Services'{{/is_a}}
+        });
         window.analytics.page();
         </script>
         <script type="text/javascript">
@@ -113,7 +113,17 @@
       </head>
       <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" cz-shortcut-listen="true">
         <div id="wrapper">
-          
+          <ul class="list-inline">
+                                    <li>
+                                        <a onclick="share(this);return false;" id="Twitter-share"  onclick="share(this);return false;" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok" class="btn btn-social-dark btn-twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a onclick="share(this);return false;" id="Facebook-share" href="http://www.facebook.com/sharer.php?app_id=560291973997690&sdk=joey&u={{encoded_url}}&display=popup" class="btn btn-social-dark btn-facebook"><i class="fa fa-fw fa-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a onclick="share(this);return false;" id="Linkedin-share" href="http://www.linkedin.com/shareArticle?mini=true&url={{encoded_url}}&title=Caura&source=Caura" class="btn btn-social-dark btn-linkedin"><i class="fa fa-fw fa-linkedin"></i></a>
+                                    </li>
+                                </ul>
           
           
           <!--googleoff: all-->
@@ -131,9 +141,12 @@
                     
                     <div class="col-lg-12 text-center v-center">
                       
-                      
+                      {{^is_a}}
                       <p class="lead">{{#three_points}}{{.}}{{foo}}. {{/three_points}}</p>
-                      
+                      {{/is_a}}
+                      {{#is_a}}
+                      <p class="lead">Benchmark Your Business. Simplify Financing. Receive Offers.</p>
+                      {{/is_a}}
                       <br><br><br>
                       
                       <form id="business-search" class="form-inline col-sm-12" role="form" action="https://www.googleapis.com/customsearch/v1?key={{settings.google_key}}&cx=007191848951261473677:btycexlpytg&num=1" method="get">
@@ -165,9 +178,9 @@
               <div class="lower">
                 <div class="container">
                   <div class="row">
-                    <div class="col-md-12">
-                      <span class="small">Copyright &copy; 2014 - Caura.co</span>
-                      <div id="languages"><span class="small">Financial service providers: <a href="/partners">start here</a></div>
+                    <div class="col-sm-9">
+                      <span class="small">Copyright &copy; 2014 - Caura.co</span></div>
+                      <div class="col-sm-3"><span class="small">Financial service providers: <a href="/partners">start here</a></div>
                     </div>
                   </div>
                 </div>

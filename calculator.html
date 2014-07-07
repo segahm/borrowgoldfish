@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="alternate" hreflang="es-US" href="/es{{url}}">
+    <link rel="alternate" hreflang="en-US" href="{{url}}">
+    <!-- linkedin/facebook card begin -->
+    <meta property="og:title" content="{{title}} - {{page_title}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{full_url}}">
+    <meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.jpg">
+    <meta property="og:description" content="{{description_short_text}}"><meta property="og:site_name" content="Caura"><meta property="article:publisher" content="NeSovok">
+    {{^es}}
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="es_US">
+    {{/es}}
+    {{#es}}
+    <meta property="og:locale" content="es_US">
+    {{/es}}
+    <!-- linkedin/facebook card end -->
+    
+    <!-- twitter card begin -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{page_title}}">
+    <meta name="twitter:description" content="{{description_short_text}}">
+    <meta name="twitter:creator" content="@nesovok">
+    <meta name="twitter:image:src" content="http://www.caura.com/static/organization-image.jpg">
+    <title>{{page_title}}</title>
+    <!--<link rel="stylesheet" type="text/css" href="/static/fullpage.js/jquery.fullPage.css" />-->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static//css/gothem.css" />
+    <!-- Add custom CSS here -->
+    <link href="/static/css/small-business.css" rel="stylesheet">
+    {{^settings.is_dev}}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {{/settings.is_dev}}
+    {{#settings.is_dev}}
+    <script src="/static/js/jquery-1.11.1.js"></script>
+    {{/settings.is_dev}}
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/fullpage.js/jquery.fullPage.js"></script>-->
+    <script src="/static/js/bootstrap.js"></script>
+    <!-- analytics -->
+    <script type="text/javascript">
+    window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+    window.analytics.load("rucaagoxlx");
+    window.analytics.page();
+    </script>
+    <script type="text/javascript">
+    function share(el){
+    analytics.track('Engaged', {
+    category: 'Shared',
+    label: el.id
+    });
+    window.open(el.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
+    }
+    function clickedLink(el){
+    analytics.track('Engaged', {
+      category: 'Nonshared',
+      label: el.id
+    });
+    }
+    es = {{#es}}'/es'{{/es}}{{^es}}''{{/es}},
+    url = '{{url}}';
+    </script>
+    <!-- analytics -->
+    <style>
+    .nav-links{
+color: #F89406;
+font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+font-size: 14px;
+font-weight: normal;
+text-transform: uppercase;
+padding-top:10px;
+    }
+    .nav-links:hover{
+color: #F89406;
+text-decoration: underline;
+
+    }
+    </style>
+  </head>
+  <body data-twttr-rendered="true">
+    <!-- Google Charts API -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <nav class="navbar navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header pull-left">
+          <a class="navbar-brand" href="{{url_path}}" title="Caura">
+            <img src="https://dl.dropboxusercontent.com/u/5902603/caura/logo/transparent.png" alt="Caura small business finance">
+          </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!--<div class="navbar-header pull-right">
+          <a onclick="share(this);return false;" title="tweet to this business" class="social" id="Twitter-share" href="https://twitter.com/share?url={{encoded_url}}&via=nesovok&text={{twitter_company_specific_text}}">
+          <span class="fa-stack fa-lg"><i class="fa fa-twitter"> </i></span></a>
+        </div>-->
+        <div class="navbar-header pull-right">
+                                     
+                                </div>
+        <!-- /.navbar-collapse -->
+      </div>
+    </nav>
+    <div class="container" id="fullpage">
+      <div class="section active">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <!--     <div class="row">-->
+            <div id="offer" class="offer"><h2>Preview</h2></div>
+            <img class="img-responsive img-rounded" src="https://dl.dropboxusercontent.com/u/5902603/caura/grocery-shopping-calculator.png"/>
+             {{#id_is_set}}<button id="go-back-to-profile" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> Back to Business Profile</button>{{/id_is_set}}
+          <div id="offer" class="offer"><h2>Sign-up for a Beta Trial:</h2></div>
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+          <form id="email-beta" class="form-horizontal">
+                      <fieldset>
+                        <div style="text-align:center" id="beta-message"></div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-xs-4 control-label" for="form_beta_email">Your Contact: </label>
+                          <div class="col-xs-8">
+                            <input id="form_beta_email" name="email" type="text" placeholder="owner@restaurant.com" class="form-control input-xs"></div>
+                          </div><div class="form-group">
+                          <div class="col-xs-4 col-xs-offset-4">
+                            <button id="beta-signup" class="btn btn-danger">Sign me up!</button>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                    <script>
+                    $('#beta-signup').click(function(el){
+                      if ($('#form_beta_email').val()){
+                        analytics.track('Calculator', {
+                          category: 'Subscribe',
+                          label: $('#form_beta_email').val()
+                        });
+                        $('#beta-message').html('<div class="alert alert-success" role="alert">We will get back to you soon. Thank you!</div>');
+                      }else{
+                        $('#beta-message').html('<div class="alert alert-danger" role="alert">Please enter a valid email.</div>');
+                      }
+                      return false;
+                    });
+                        {{#id_is_set}}
+                        $('#go-back-to-profile').click(function(el){
+                            analytics.track('Calculator', {
+                                category: 'Go_Back',
+                                label: '{{get_id}}'
+                            },function(){
+                              window.location.href = es+'/{{get_id}}';
+                            });
+                        });
+                        {{/id_is_set}}
+                    </script>
+                  </div>
+                </div>
+          </div>
+        </div>
+        <div id="footer">
+          <hr>
+          <div class="row">
+            <div class="col-lg-12">
+              <p>Copyright &copy; Caura 2014</p>
+              {{^es}}The valuation and estimates of small businesses are based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the
+              data providers we are required to acknowledge:{{/es}}{{#es}}La valuación de las pequeñas empresas fue basada en un tercero de datos sociales, además con  datos de censo y análisis económico. Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}
+              <a style="padding-left:10px" href="http://biz.yelp.com/"><img src="http://s3-media3.ak.yelpcdn.com/assets/2/www/img/9c9b10dc7226/developers/reviewsFromYelpWHT.gif" alt="Yelp Small Business" height="25" width="115"></a>
+              <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<script src="/static/assets/js/plugins/jqBootstrapValidation/jqBootstrapValidation.js"></script>
+    <script>
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation({sniffHtml: false}); } );
+    </script>-->
+    {{^settings.is_dev}}
+    <!-- begin olark code -->
+    <script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+    f[z]=function(){
+    (a.s=a.s||[]).push(arguments)};var a=f[z]._={
+    },q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
+    f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={
+    0:+new Date};a.P=function(u){
+    a.p[u]=new Date-a.p[0]};function s(){
+    a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){
+    hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){
+    return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){
+    b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{
+    b.contentWindow[g].open()}catch(w){
+    c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{
+    var t=b.contentWindow[g];t.write(p());t.close()}catch(x){
+    b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
+    loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+    /* custom configuration goes here (www.olark.com/documentation) */
+    olark.identify('1002-384-10-9905');/*]]>*/</script><noscript><a href="https://www.olark.com/site/1002-384-10-9905/contact" title="Contact us" target="_blank">Questions? Feedback?</a></noscript>
+    <!-- end olark code -->
+    <!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+    {{/settings.is_dev}}
+    {{#disabled}}
+    <!-- twitter -->
+    <script>window.twttr = (function (d, s, id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id; js.src= "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+    }(document, "script", "twitter-wjs"));
+    twttr.ready(function (twttr) {
+    twttr.events.bind('click', function (ev) { share({id:'Twitter-share-orig'},false) });
+    twttr.events.bind('tweet', function (event) {
+    analytics.track('Tweet', {
+    category: event.type,
+    label: 'Twitter-share-orig'
+    });
+    });
+    });
+    </script>
+    <!-- twitter -->
+    {{/disabled}}
+  </body>
+</html>

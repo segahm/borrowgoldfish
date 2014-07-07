@@ -50,61 +50,77 @@ $(document).ready(function () {
         var nextLink;
         for (k in options) {
             var option = options[k];
+            analytics.track('Form', {
+                category: 'Preference',
+                label: option
+            });
             switch (option) {
             case 'credit':
                 link = '/submit?customer=1';
+                break;
+            case 'food':
+                window.location.href = es+'/calculator';
+                link = 'redirect';
+                break;
+            case 'inventory_management':
+                window.location.href = es+'/calculator';
+                link = 'redirect';
+                break;
+            case 'tracking_shopping':
+                window.location.href = es+'/calculator';
+                link = 'redirect';
                 break;
             default:
                 link = '/static/form-lend2.html';
                 nextLink = '/submit?customer=2';
             }
-            analytics.track('Form', {
-                category: 'Preference',
-                label: option
-            });
         }
-        if (link) {
-            $('#form-page2').load(link, function () {
-                analytics.page({
-                    title: 'Offers Info',
-                    url: full_url + '#info',
-                    path: es + url + '/#info',
-                    referrer: full_url
-                });
-                $('#form-page2').removeClass('hidden');
-                //clean bottom form just in case
-                $('#form-page3').removeClass('hidden');
-                $('#form-page3').addClass('hidden');
-                $('#form-page3').html('');
-                if (nextLink) {
-                    $(window).scrollTop($('#offer-2').position().top);
-                    $('#continue-submit').click(function (ev) {
-                        var post_form = $('#form2').serializeObject();
-                        //report these choices
-                        for (name in post_form) {
-                            if (name.indexOf('email') < 0 && post_form[name]) {
-                                analytics.track('Form', {
-                                    category: name,
-                                    label: post_form[name]
-                                });
-                            }
-                        }
-                        $('#form-page3').load(nextLink, post_form, function () {
-                            analytics.page({
-                                title: 'Loan Apply',
-                                url: full_url + '#claim',
-                                path: es + url + '/#claim',
-                                referrer: full_url
-                            });
-                            $('#form-page3').removeClass('hidden');
-                            $(window).scrollTop($('#offer-3').position().top);
-                        });
-                        ev.preventDefault();
+        if (link !== 'redirect'){
+            if (link) {
+                $('#form-page2').load(link, function () {
+                    analytics.page({
+                        title: 'Offers Info',
+                        url: full_url + '#info',
+                        path: es + url + '#info',
+                        referrer: full_url
                     });
-                } else {
-                    $(window).scrollTop($('#offer-3').position().top);
-                }
-            });
+                    $('#form-page2').removeClass('hidden');
+                    //clean bottom form just in case
+                    $('#form-page3').removeClass('hidden');
+                    $('#form-page3').addClass('hidden');
+                    $('#form-page3').html('');
+                    if (nextLink) {
+                        $(window).scrollTop($('#offer-2').position().top);
+                        $('#continue-submit').click(function (ev) {
+                            var post_form = $('#form2').serializeObject();
+                            //report these choices
+                            for (name in post_form) {
+                                if (name.indexOf('email') < 0 && post_form[name]) {
+                                    analytics.track('Form', {
+                                        category: name,
+                                        label: post_form[name]
+                                    });
+                                }
+                            }
+                            $('#form-page3').load(nextLink, post_form, function () {
+                                analytics.page({
+                                    title: 'Loan Apply',
+                                    url: full_url + '#claim',
+                                    path: es + url + '/#claim',
+                                    referrer: full_url
+                                });
+                                $('#form-page3').removeClass('hidden');
+                                $(window).scrollTop($('#offer-3').position().top);
+                            });
+                            ev.preventDefault();
+                        });
+                    } else {
+                        $(window).scrollTop($('#offer-3').position().top);
+                    }
+                });
+            }else{
+                $('#customer-message').html('<div class="alert alert-danger" role="alert">Please choose one of the options.</div>');
+            }
         }
         e.preventDefault();
     });

@@ -164,7 +164,7 @@ function startServer() {
 
         matches = path.match(/^\/(es\/)?([a-z0-9\-]{3,})\/?$/i); // "/es/non-state-string"
         var template_data = {};
-        if (typeof(req.cookies.bgf_promise) === 'undefined') {
+        if (typeof(req.cookies.bgf_promise) === 'undefined' && !(req.headers['user-agent'].indexOf('Googlebot') >= 0)) {
             template_data.landing_banner = true;
         }
         //temporary settings template => rewrite this later
@@ -175,7 +175,6 @@ function startServer() {
         }
         var template = is_spanish ? templates.spanish : templates.english;
         template_data.es = is_spanish; //whether to turn-on spanish language
-
         template_data.is_a = (A_B_Split === 0) ? true : false;
         template_data.is_b = (A_B_Split === 1) ? true : false;
 
@@ -185,7 +184,7 @@ function startServer() {
         template_data.url = path.replace(/^\/es\//i, '/').replace(/^\/es$/i, '/');
         template_data.full_url = (is_spanish ? 'http://' + req.host + '/es' : 'http://' + req.host) + req.url.replace(/^\/es\//i, '/').replace(/^\/es$/i, '/');
 
-        var page = 'index'; //default page
+        var page = '404'; //default page
         var resultPromise = Q.fcall(function() {
             return page;
         });
@@ -201,6 +200,16 @@ function startServer() {
         if (path.match(/^\/(es\/)?$/)){
             //search
             resultPromise = searchPage(req, res);
+        }else if (path.match(/^\/(es\/)?partner$/)){
+            resultPromise = Q.fcall(function() {
+                return 'index';
+            });
+        }else if(path.match(/^\/(es\/)?(grocery-shopping-food-cost-calculator|calculator)$/)){
+            resultPromise = Q.fcall(function() {
+                template_data.get_id = (typeof(req.query.id) !== 'undefined')?req.query.id:'';
+                template_data.id_is_set = (typeof(req.query.id) !== 'undefined')?true:false;
+                return 'calculator';
+            });
         }else if (tra_matches) {
             var hashcode = (typeof(tra_matches[1]) !== 'undefined') ? tra_matches[1] : null;
             resultPromise = tra(template_data, hashcode);
@@ -221,9 +230,6 @@ function startServer() {
             };
             region.state = STATES[region.state_abrev];
             resultPromise = directoryPage(region, template_data, dir_match, template);
-        } else if (typeof(req.query.q) !== 'undefined') {
-            console.log('query');
-            page = '404';
         }
 
         /**
@@ -248,22 +254,14 @@ function startServer() {
                 mypage = 'index'; //404 alias
             }
             var page_template;
+            //do something special for some pages
             switch (mypage) {
-                case 'index':
-                    //keep the same template for both variations of a home page
-                    page_template = template.page.index;
-                    break;
                 case 'directory':
-                    page_template = template.page.directory;
                     mypage = 'index';
                     break;
-                case 'company':
-                    page_template = template.page.company;
-                    break;
-                case 'search':
-                    page_template = template.page.search;
-                    break;
             }
+            page_template = template.page[mypage];
+
             template_data = _.merge({},
                 template.all_pages,
                 page_template,
