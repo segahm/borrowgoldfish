@@ -54,7 +54,8 @@ var config = {
 				},
 			calculator: {page_title: 'Grocery Shopping - Food Cost Calculator'},
 			search: {page_title: 'Caura | Financial services for independent restaurants',
-					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management']},
+					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management'],
+					page_description: 'Benchmark your restaurant against thousands of others. Optimize your costs. Explore financial health of other restaurants in Texas, Florida, and New Mexico.'},
 			about: {page_title: 'About Us - why focus on restaurants and financial services?'},
 			privacy: {page_title: 'Privacy - why make data public?'}
 
@@ -109,7 +110,8 @@ var config = {
 					page_description: 'Encuentre miles de restaurantes, información sobre sus finanzas y la salud de flujo de caja. Explora una estimación de valuación de restaurantes en Texas, Florida y Nuevo México.'},
 			calculator: {page_title: 'Tienda de comestibles - Calculadora de Costos de Alimentos'},
 			search: {page_title: 'Caura | Financial services for independent restaurants',
-					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management']},
+					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management'],
+					page_description: 'Benchmark your restaurant against thousands of others. Optimize your costs. Explore financial health of other restaurants in Texas, Florida, and New Mexico.'},
 			about: {page_title: 'About Us - why focus on restaurants and financial services?'},
 			privacy: {page_title: 'Privacy - why make data public?'}
 		},
