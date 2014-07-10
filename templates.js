@@ -48,14 +48,15 @@ var config = {
 							{title: 'Restaurant Density by County'},
 							{title:'Operating density in counties by hours of the day'}]
 					},
-			directory: {page_title: 'Small Business Finances and Valuation in'},
+			directory: {page_title: 'Restaurant Finances and Valuation in'},
 			index: {page_title: 'Caura | Directory of restaurants and their financial profiles',
-					page_description: 'Find thousands of restaurants, information about their finances and cash flow health. Explore a valuation estimate for restaurants in Texas, Florida, and New Mexico.'
+					page_description: 'Benchmark your restaurant against thousands of others. Optimize your costs. Explore financial health of other restaurants in Texas, Florida, and New Mexico.'
 				},
 			calculator: {page_title: 'Grocery Shopping - Food Cost Calculator'},
 			search: {page_title: 'Caura | Financial services for independent restaurants',
-					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management']},
-			about: {page_title: 'About Us - why focus on small business & lending?'},
+					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management'],
+					page_description: 'Benchmark your restaurant against thousands of others. Optimize your costs. Explore financial health of other restaurants in Texas, Florida, and New Mexico.'},
+			about: {page_title: 'About Us - why focus on restaurants and financial services?'},
 			privacy: {page_title: 'Privacy - why make data public?'}
 
 		},
@@ -109,8 +110,9 @@ var config = {
 					page_description: 'Encuentre miles de restaurantes, información sobre sus finanzas y la salud de flujo de caja. Explora una estimación de valuación de restaurantes en Texas, Florida y Nuevo México.'},
 			calculator: {page_title: 'Tienda de comestibles - Calculadora de Costos de Alimentos'},
 			search: {page_title: 'Caura | Financial services for independent restaurants',
-					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management']},
-			about: {page_title: 'About Us - why focus on small business & lending?'},
+					three_points: ['Competitive Analytics','Food Cost Tracking','Inventory Management'],
+					page_description: 'Benchmark your restaurant against thousands of others. Optimize your costs. Explore financial health of other restaurants in Texas, Florida, and New Mexico.'},
+			about: {page_title: 'About Us - why focus on restaurants and financial services?'},
 			privacy: {page_title: 'Privacy - why make data public?'}
 		},
 		all_pages: {
