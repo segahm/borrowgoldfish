@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="{{description_short_text}}">
     <meta name="twitter:creator" content="@nesovok">
     <meta name="twitter:image:src" content="http://www.caura.com/static/organization-image.jpg?id={{id}}">
-    <title>{{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}{{^is_closed}}for ${{valuation}} - {{page_title}}{{/is_closed}}</title>
+    <title>{{^is_closed}}{{page_title}}{{/is_closed}} | {{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}</title>
     <!--<link rel="stylesheet" type="text/css" href="/static/fullpage.js/jquery.fullPage.css" />-->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -331,6 +331,7 @@
                 </div>
               </div>
             </div>
+            <!--googleoff: all-->
             <div class="section">
               <div class="row">
                 <div class="col-lg-4">
@@ -390,7 +391,6 @@
                 </div>
               </div>
             </div>
-            <!--googleoff: all-->
             <div class="section">
               <div id="offer" class="offer"><h2>Benchmark your business metrics!</h2></div>
               <hr>
