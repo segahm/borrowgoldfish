@@ -641,6 +641,7 @@
         $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation({sniffHtml: false}); } );
         </script>-->
         {{^settings.is_dev}}
+        {{#disabled}}
         <!-- begin olark code -->
         <script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
         f[z]=function(){
@@ -661,6 +662,7 @@
         /* custom configuration goes here (www.olark.com/documentation) */
         olark.identify('1002-384-10-9905');/*]]>*/</script><noscript><a href="https://www.olark.com/site/1002-384-10-9905/contact" title="Contact us" target="_blank">Questions? Feedback?</a></noscript>
         <!-- end olark code -->
+        {{/disabled}}
         <!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24996857 = new Ya.Metrika({id:24996857, webvisor:true, clickmap:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24996857?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
         {{/settings.is_dev}}
         {{#disabled}}
