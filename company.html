@@ -8,7 +8,7 @@
     <link rel="alternate" hreflang="es-US" href="/es{{url}}">
     <link rel="alternate" hreflang="en-US" href="{{url}}">
     <!-- linkedin/facebook card begin -->
-    <meta property="og:title" content="{{title}} - {{page_title}}">
+    <meta property="og:title" content="{{^is_closed}}{{page_title}}{{/is_closed}}: ${{^is_closed}}{{valuation}}{{/is_closed}} | {{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{full_url}}">
     <meta property="og:image" content="https://dl.dropboxusercontent.com/u/5902603/caura/organization-image.jpg">
@@ -24,11 +24,11 @@
     
     <!-- twitter card begin -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{title}} - {{page_title}}">
+    <meta name="twitter:title" content="{{^is_closed}}{{page_title}}{{/is_closed}}: ${{^is_closed}}{{valuation}}{{/is_closed}} | {{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}">
     <meta name="twitter:description" content="{{description_short_text}}">
     <meta name="twitter:creator" content="@nesovok">
     <meta name="twitter:image:src" content="http://www.caura.com/static/organization-image.jpg?id={{id}}">
-    <title>{{^is_closed}}{{page_title}}{{/is_closed}} | {{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}</title>
+    <title>{{^is_closed}}{{page_title}}{{/is_closed}}: ${{^is_closed}}{{valuation}}{{/is_closed}} | {{title}} {{#is_closed}}{{is_closed_title}}{{/is_closed}}</title>
     <!--<link rel="stylesheet" type="text/css" href="/static/fullpage.js/jquery.fullPage.css" />-->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -51,9 +51,9 @@
     <script type="text/javascript">
     window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
     window.analytics.load("rucaagoxlx");
-    window.analytics.identify({
+    {{#disabled}}window.analytics.identify({
       "Experiment: Business-interest": {{^is_a}}'Cost Optimization'{{/is_a}}{{#is_a}}'Financial Services'{{/is_a}}
-    });
+    }){{/disabled}}
     window.analytics.page();
     </script>
     <script type="text/javascript">
@@ -102,17 +102,18 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-sm-8 col-sm-offset-4">
-                <h1>Your restaurant needs...</h1>
+                <h1>Need restaurant analysis for...</h1>
                 <!--<input type="search" value="" placeholder="What do you need for your restaurant?">-->
                 <input type="search" id="search" class="search" placeholder="what?" value="">
                 <button id="Next-landing" name="submit" class="btn btn-primary">Next</button>
-                    <h3>or choose among:</h3>
+                    <h3>or choose:</h3>
                     <ul class="list-inline">
                       <li>
-                        <a onclick="doSearch(this);return false;" id="inventory_management" href="{{#es}}/es{{/es}}/calculator?id={{id}}">Inventory Management</a>
+                        <!--<a onclick="doSearch(this);return false;" id="inventory_management" href="{{#es}}/es{{/es}}/calculator?id={{id}}">Inventory Management</a>-->
+                        <a onclick="doSearch(this);return false;" id="financial_comparison" href="#">Competitive Comparison</a>
                       </li>
                       <li>
-                        <a onclick="doSearch(this);return false;" id="financial_comparison" href="#">Financial Comparison</a>
+                        <a onclick="doSearch(this);return false;" id="financial_comparison" href="#">Financial Analysis</a>
                       </li>
                     </ul>
                   </div>
@@ -288,6 +289,7 @@
               </div>
               <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center owl-carousel owl-theme" id="owl-offers">
+                  {{#disabled}}
                   {{^is_a}}
                   <div class="owl-item">
                     <a href="#offer" class="offers" title="Marketing Strategy">
@@ -308,26 +310,25 @@
                     </a>
                   </div>
                   {{/is_a}}
-                  {{#is_a}}
+                  {{/disabled}}
                   <div class="owl-item">
-                    <a href="#offer" class="offers" title="Marketing Strategy">
+                    <a href="#offer" class="offers" title="{{points_3.hover.learn}}">
                       <i class="fa fa-bar-chart-o fa-4x"></i>
                       <h4>{{points_3.learn}}</h4>
                     </a>
                   </div>
                   <div class="owl-item col-lg-4">
-                    <a href="#offer" class="offers" title="Loan Calculator">
+                    <a href="#offer" class="offers" title="{{points_3.hover.calculator}}">
                       <span class="fa fa-th-list fa-4x"></span>
                       <h4>{{points_3.calculator}}</h4>
                     </a>
                   </div>
                   <div class="owl-item col-lg-4">
-                    <a href="#offer" class="offers" title="Equipment & Appliance Financing">
+                    <a href="#offer" class="offers" title="{{points_3.hover.sell}}">
                       <i class="fa fa-exchange fa-4x"></i>
                       <h4>{{points_3.sell}}</h4>
                     </a>
                   </div>
-                  {{/is_a}}
                 </div>
               </div>
             </div>
@@ -392,19 +393,22 @@
               </div>
             </div>
             <div class="section">
-              <div id="offer" class="offer"><h2>Benchmark your business metrics!</h2></div>
+              <div id="offer" class="offer">
+<h2>Improve your financial analysis!</h2>
+                <!--<h2>Benchmark your business metrics!</h2>--></div>
               <hr>
               <div class="upper-column">
                 <div class="row">
                   <div class="col-lg-6 col-md-6 hidden-sm hidden-xs left-column">
                     <!-- Google Charts -->
                     <div id="peer-comparison" style="width: 100%;height: 300px;"></div>
-                    <div id="peer-comparison-2" style="width: 100%; height: 300px;"></div>
+                    <!--<div id="peer-comparison-2" style="width: 100%; height: 300px;"></div>-->
                     <!-- Google Charts -->
                   </div>
                   <div class="col-sm-8 col-xs-12 col-md-6 col-lg-6 right-column">
-                    <h2><small>Make your web success work for you. Leverage the insight to get better results. What opportunities are you exploring?</small></h2>
-                    <form id="form1" class="form-horizontal">
+                    <h2><!--<small>Make your web success work for you. Leverage the insight to get better results. What opportunities are you exploring?</small>-->
+                      <small>Don't re-invent the wheel. Outsource crawling and data gathering. Focus on direct business and financial insights.</small></h2>
+                    {{#disabled}}<form id="form1" class="form-horizontal">
                       <input type="hidden" id="page-company-id" name="page-company-id" value="{{id}}">
                       <fieldset>
                         <!-- Form Name -->
@@ -448,7 +452,7 @@
                         </div>
                       </fieldset>
                     </form>
-                    <hr>
+                    <hr>{{/disabled}}
                     <form class="form-horizontal">
                       <fieldset>
                         <div style="text-align:center" id="lender-message"><h3><small>Interested in this business?</small></h3></div>
@@ -459,7 +463,7 @@
                             <input id="form_lender_email" name="lender_email" type="text" placeholder="sales@company.com" class="form-control input-xs"></div>
                           </div><div class="form-group">
                           <div class="col-xs-4 col-xs-offset-4">
-                            <button id="continue-lender" class="btn btn-danger">Offer My Solution!</button>
+                            <button id="continue-lender" class="btn btn-danger">Discover Insights!</button>
                           </div>
                         </div>
                       </fieldset>
@@ -499,7 +503,7 @@
                   {{^es}}The valuation and estimates of small businesses are based on third-party social data, as well as census and economic analysis data. It is only an estimate. No data provider should be held responsible. The following are some of the
                   data providers we are required to acknowledge:{{/es}}{{#es}}La valuación de las pequeñas empresas fue basada en un tercero de datos sociales, además con  datos de censo y análisis económico. Es solo una estimación. No haría que responsabilizar proveedor de datos ya que no hay proveedor. Los siguientes son algunos de los proveedores de datos, que tenemos que reconocer:{{/es}}
                   <a style="padding-left:10px" href="http://biz.yelp.com/"><img src="http://s3-media3.ak.yelpcdn.com/assets/2/www/img/9c9b10dc7226/developers/reviewsFromYelpWHT.gif" alt="Yelp Small Business" height="25" width="115"></a>
-                  <div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>
+                  {{#disabled}}<div id="languages">view this site in {{#es}}<span>spanish</span>{{/es}}{{^es}}<a href="/es{{url}}">spanish</a>{{/es}} | {{#es}}<a href="{{url}}">english</a>{{/es}}{{^es}}<span>english</span>{{/es}}</div>{{/disabled}}
                 </div>
               </div>
             </div>
@@ -540,7 +544,7 @@
         ['price',  {{peers.price}},'color: #E5D9C9;'],
         ['location',{{peers.location}},'color: #E5D9C9']
         ]);
-        chart = new google.visualization.ColumnChart(document.getElementById('peer-comparison-2'));
+        //chart = new google.visualization.ColumnChart(document.getElementById('peer-comparison-2'));
         {{#settings.is_dev}}
         /*google.visualization.events.addListener(chart, 'ready', function(){
         $("#owl-charts").addClass( "owl-carousel owl-theme" );
@@ -550,7 +554,7 @@
         });
         });*/
         {{/settings.is_dev}}
-        chart.draw(data, options);
+        //chart.draw(data, options);
         //segmentation in a county
         ar = [['Type of Food', '# of restaurants']];
         var topc = svg.top_cats;

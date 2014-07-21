@@ -89,9 +89,6 @@
         <script type="text/javascript">
         window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
         window.analytics.load("rucaagoxlx");
-        window.analytics.identify({
-          "Experiment: Business-interest": {{^is_a}}'Cost Optimization'{{/is_a}}{{#is_a}}'Financial Services'{{/is_a}}
-        });
         window.analytics.page();
         </script>
         <script type="text/javascript">
@@ -140,13 +137,7 @@
                   <div class="row">
                     
                     <div class="col-lg-12 text-center v-center">
-                      
-                      {{^is_a}}
                       <p class="lead">{{#three_points}}{{.}}{{foo}}. {{/three_points}}</p>
-                      {{/is_a}}
-                      {{#is_a}}
-                      <p class="lead">Benchmarks. Financing. Actionable Insight.</p>
-                      {{/is_a}}
                       <br><br><br>
                       
                       <form id="business-search" class="form-inline col-sm-12" role="form" action="https://www.googleapis.com/customsearch/v1?key={{settings.google_key}}&cx=007191848951261473677:btycexlpytg&num=1" method="get">
@@ -178,9 +169,9 @@
               <div class="lower">
                 <div class="container">
                   <div class="row">
-                    <div class="col-sm-9">
-                      <span class="small">Copyright &copy; 2014 - Caura.co by Segah Meer</span></div>
-                      {{#disabled}}<div class="col-sm-3"><span class="small">Financial service providers: </span><a href="/partners">start here</a></div>{{/disabled}}
+                    <div class="col-sm-7">
+                      <span class="small">Copyright &copy; 2014 - Caura.co</span></div>
+                      <div class="col-sm-4"><span class="small">Analysts and Service Providers: </span><a href="/partners">start here</a></div>
                     </div>
                   </div>
                 </div>

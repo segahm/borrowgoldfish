@@ -26,13 +26,18 @@ var config = {
         },
         page: {
             company: {
-                page_title: 'Business Dashboard',
+                page_title: 'Financial Analysis',
                 points_3: {
-                    learn: 'Discover Opportunities',
-                    calculator: 'Simplify Financing',
-                    sell: 'Receive Offers'
+                    learn: 'Explore Data',
+                    calculator: 'Improve Underwriting',
+                    sell: 'Discover opportunities',
+                    hover: {
+                        learn: 'Search data through a convenient UI. No integration necessary to begin.',
+                        calculator: 'Use cleaned data in your existing models. Increase depth in new models.',
+                        sell: 'Provide your sales force with the right metrics.',
+                    }
                 },
-                target_audience: 'Own a restaurant business?',
+                target_audience: 'Interested in restaurant insights?',
                 learn_more: 'Learn More',
                 val_text: 'Business valuation',
                 analysis: ['Perform competitor analysis',
@@ -59,22 +64,22 @@ var config = {
                 page_title: 'Restaurant Finances and Valuation in'
             },
             index: {
-                page_title: 'Caura | Directory of restaurants and their financial profiles',
-                page_description: 'Benchmark your restaurant against thousands of others. Optimize your costs. Explore financial health of other restaurants in Texas, Florida, and New Mexico.'
+                page_title: 'Caura | Restaurant analytics and data for financial service providers',
+                page_description: 'Explore financial health of restaurants in Texas, Florida, and New Mexico.'
             },
             calculator: {
                 page_title: 'Grocery Shopping - Food Cost Calculator'
             },
             search: {
-                page_title: 'Caura | Financial services for independent restaurants',
-                three_points: ['Competitive Analytics', 'Food Cost Tracking', 'Inventory Management'],
-                page_description: 'Benchmark your restaurant against thousands of others. Optimize your costs. Explore financial health of other restaurants in Texas, Florida, and New Mexico.'
+                page_title: 'Caura | Directory of independent restaurants and their financial profiles',
+                three_points: ['Industry Benchmarks', 'Financial Analysis', 'Data Insight'],
+                page_description: 'Explore financial data about restaurants in Texas, Florida, California, and New Mexico.'
             },
             about: {
-                page_title: 'About Us - why focus on restaurants and financial services?'
+                page_title: 'About Us - why focus on financial analysis of restaurants?'
             },
             privacy: {
-                page_title: 'Privacy - why make data public?'
+                page_title: 'Privacy'
             }
 
         },
