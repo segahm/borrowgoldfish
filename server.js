@@ -43,8 +43,8 @@ var directoryPage,
     submitData,
     searchPage;
 var knex_connection = {
-    host: '127.0.0.1',
-    database: 'goldfish',
+    host: 'web327.webfaction.com',
+    database: 'lendingclub',
     charset: 'utf8',
     port: 5432 //3306 - mysql
 };
@@ -53,8 +53,8 @@ if (process.env.NODE_ENV === 'development') {
     knex_connection.user = 'postgres';
     knex_connection.password = 'kristina';
 } else if (process.env.NODE_ENV === 'production') {
-    knex_connection.user = 'caura';
-    knex_connection.password = '46uxrEb3ZExf';
+    knex_connection.user = 'mylooker';
+    knex_connection.password = 'inHLi6HCNVA7aP';
 }
 
 Knex.knex = Knex.initialize({
