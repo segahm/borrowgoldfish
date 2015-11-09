@@ -46,7 +46,8 @@ var knex_connection = {
     host: 'web327.webfaction.com',
     database: 'lendingclub',
     charset: 'utf8',
-    port: 5432 //3306 - mysql
+    port: 5432, //3306 - mysql
+    ssl: true
 };
 
 if (process.env.NODE_ENV === 'development') {
