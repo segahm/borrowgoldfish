@@ -42,13 +42,16 @@ var directoryPage,
     tra,
     submitData,
     searchPage;
-var knex_connection = {
+var knex_connection = 'pg://mylooker:inHLi6HCNVA7aP@web327.webfaction.com:5432/lendingclub';
+/*
+ * {
     host: 'web327.webfaction.com',
     database: 'lendingclub',
     charset: 'utf8',
     port: 5432, //3306 - mysql
     ssl: true
 };
+*/
 
 if (process.env.NODE_ENV === 'development') {
     knex_connection.user = 'postgres';
@@ -58,11 +61,11 @@ if (process.env.NODE_ENV === 'development') {
     knex_connection.password = 'inHLi6HCNVA7aP';
 }
 
-Knex.knex = Knex.initialize({
+Knex.knex = Knex({
     client: 'pg',
     connection: knex_connection
 });
-
+console.log('connection');
 var paths = ['submit', 'search'];
 
 //  configLoader  = require('./core/config-loader.js'),
@@ -70,24 +73,14 @@ var paths = ['submit', 'search'];
 
 function startServer() {
     var app = express();
+    app.set('port', process.env.PORT || 3000);
+    console.log('succcess');
     /*var twitter = new twitterAPI({
 		consumerKey: 'xbZMI7NtccoXTmIe3MQA',
 		consumerSecret: 'lD04vbN5YpyMWMmFX1uZja4nBVFTNAuwKPEoXu0KuSg',
 		callback: 'http://www.caura.co/'
 	});*/
 
-    if (process.env.NODE_ENV === 'production') {
-        app.all(/.*/, function(req, res, next) {
-            var host = req.header('host');
-            //if (host.match(/^www\..*/i)) {
-            if (host.match(/^www\.caura.co/i)) {
-                next();
-            } else {
-                //res.redirect(301, 'http://www.' + host+req.url);
-                res.redirect(301, 'http://www.caura.co' + req.url);
-            }
-        });
-    }
     //app.engine('html',cons.toffee);
     app.engine('html', cons.templayed);
     // set .html as the default extension 
@@ -131,6 +124,7 @@ function startServer() {
         }
     });
     app.use(function(req, res, next) {
+	console.log('accesed');
         res.set('Content-Type', 'text/html');
         var path = req.path;
         if (process.env.NODE_ENV === 'development') {
@@ -293,7 +287,6 @@ function startServer() {
 			res.send(200,'<h2>Service Temporarily Unavailable</h2><div>The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</div>');
 		}*/
     });
-    app.listen(17912);
     /*http.createServer(function(request, response) {
 	  response.writeHead(200, {'Content-Type': 'text/html'});
 	  response.write('<h2>Service Temporarily Unavailable</h2><div>The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</div>');
