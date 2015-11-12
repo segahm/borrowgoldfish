@@ -73,7 +73,6 @@ var paths = ['submit', 'search'];
 
 function startServer() {
     var app = express();
-    app.set('port', process.env.PORT || 3000);
     console.log('succcess');
     /*var twitter = new twitterAPI({
 		consumerKey: 'xbZMI7NtccoXTmIe3MQA',
@@ -287,6 +286,7 @@ function startServer() {
 			res.send(200,'<h2>Service Temporarily Unavailable</h2><div>The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</div>');
 		}*/
     });
+    app.listen(5000);
     /*http.createServer(function(request, response) {
 	  response.writeHead(200, {'Content-Type': 'text/html'});
 	  response.write('<h2>Service Temporarily Unavailable</h2><div>The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.</div>');
