@@ -42,7 +42,7 @@ var directoryPage,
     tra,
     submitData,
     searchPage;
-var knex_connection = 'pg://mylooker:inHLi6HCNVA7aP@web327.webfaction.com:5432/lendingclub';
+var knex_connection = 'pg://caura:46uxrEb3ZExf@web327.webfaction.com:5432/goldfish';
 /*
  * {
     host: 'web327.webfaction.com',
