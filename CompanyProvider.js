@@ -67,11 +67,11 @@ CompanyProvider.prototype.regionalStats = function(state,county,category){
     top3ByDensity = top3Counties(data,county);
     //then find stats for open restaurants by time of the day
     request = knex('companies').select(knex.raw('county,\'m\' as period')).whereIn('county',Object.keys(top3ByDensity))
-      .count('id').where('meal_breakfast',true).andWhere('is_closed',false)
+      .groupByRaw('county').count('id').where('meal_breakfast',true).andWhere('is_closed',false)
       .union(function(){
-        this.select(knex.raw('county,\'a\' as period')).from('companies').count('id')
+        this.select(knex.raw('county,\'a\' as period')).from('companies').groupByRaw('county').count('id')
         .whereIn('county',Object.keys(top3ByDensity)).where('meal_lunch',true).andWhere('is_closed',false).union(function() {
-          this.select(knex.raw('county,\'d\' as period')).from('companies').count('id')
+          this.select(knex.raw('county,\'d\' as period')).from('companies').groupByRaw('county').count('id')
           .whereIn('county',Object.keys(top3ByDensity)).where('meal_dinner',true).andWhere('is_closed',false);
         });
       });
